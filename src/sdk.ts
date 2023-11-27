@@ -417,6 +417,10 @@ export type Mutations = {
   resetPassword?: Maybe<ResetPassword>;
   /** Obtain a JSON Web Token (JWT) */
   signin?: Maybe<Signin>;
+  /** Login an active user account.  */
+  signinOrRegisterRequestForCode?: Maybe<SigninOrRegisterRequestForCode>;
+  /** Login an active user account.  */
+  signinOrRegisterWithCode?: Maybe<SigninOrRegisterWithCode>;
   /** Create a new user */
   signup?: Maybe<Signup>;
   /** Obtain JSON Web Token mutation */
@@ -563,6 +567,17 @@ export type MutationsResetPasswordArgs = {
 export type MutationsSigninArgs = {
   emailAddress: Scalars['String']['input'];
   password: Scalars['String']['input'];
+};
+
+
+export type MutationsSigninOrRegisterRequestForCodeArgs = {
+  emailAddress: Scalars['String']['input'];
+};
+
+
+export type MutationsSigninOrRegisterWithCodeArgs = {
+  code: Scalars['String']['input'];
+  emailAddress: Scalars['String']['input'];
 };
 
 
@@ -1061,6 +1076,20 @@ export type ResetPassword = {
 /** Login an active user account.  */
 export type Signin = {
   __typename?: 'Signin';
+  data?: Maybe<Scalars['String']['output']>;
+  errors?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
+/** Login an active user account.  */
+export type SigninOrRegisterRequestForCode = {
+  __typename?: 'SigninOrRegisterRequestForCode';
+  data?: Maybe<Scalars['String']['output']>;
+  errors?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
+/** Login an active user account.  */
+export type SigninOrRegisterWithCode = {
+  __typename?: 'SigninOrRegisterWithCode';
   data?: Maybe<Scalars['String']['output']>;
   errors?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
 };
@@ -1580,6 +1609,21 @@ export type SigninMutationVariables = Exact<{
 
 export type SigninMutation = { __typename?: 'Mutations', signin?: { __typename?: 'Signin', errors?: Array<string | null> | null, data?: string | null } | null };
 
+export type SigninOrRegisterRequestForCodeMutationVariables = Exact<{
+  emailAddress: Scalars['String']['input'];
+}>;
+
+
+export type SigninOrRegisterRequestForCodeMutation = { __typename?: 'Mutations', signinOrRegisterRequestForCode?: { __typename?: 'SigninOrRegisterRequestForCode', errors?: Array<string | null> | null, data?: string | null } | null };
+
+export type SigninOrRegisterWithCodeMutationVariables = Exact<{
+  code: Scalars['String']['input'];
+  emailAddress: Scalars['String']['input'];
+}>;
+
+
+export type SigninOrRegisterWithCodeMutation = { __typename?: 'Mutations', signinOrRegisterWithCode?: { __typename?: 'SigninOrRegisterWithCode', errors?: Array<string | null> | null, data?: string | null } | null };
+
 export type SignupMutationVariables = Exact<{
   baseUrl?: InputMaybe<Scalars['String']['input']>;
   emailAddress: Scalars['String']['input'];
@@ -1887,6 +1931,8 @@ export type ResolversTypes = {
   ResendActivationEmail: ResolverTypeWrapper<ResendActivationEmail>;
   ResetPassword: ResolverTypeWrapper<ResetPassword>;
   Signin: ResolverTypeWrapper<Signin>;
+  SigninOrRegisterRequestForCode: ResolverTypeWrapper<SigninOrRegisterRequestForCode>;
+  SigninOrRegisterWithCode: ResolverTypeWrapper<SigninOrRegisterWithCode>;
   Signup: ResolverTypeWrapper<Signup>;
   ObtainJSONWebToken: ResolverTypeWrapper<ObtainJsonWebToken>;
   TokenOAuthLogin: ResolverTypeWrapper<TokenOAuthLogin>;
@@ -1961,6 +2007,8 @@ export type ResolversParentTypes = {
   ResendActivationEmail: ResendActivationEmail;
   ResetPassword: ResetPassword;
   Signin: Signin;
+  SigninOrRegisterRequestForCode: SigninOrRegisterRequestForCode;
+  SigninOrRegisterWithCode: SigninOrRegisterWithCode;
   Signup: Signup;
   ObtainJSONWebToken: ObtainJsonWebToken;
   TokenOAuthLogin: TokenOAuthLogin;
@@ -2220,6 +2268,8 @@ export type MutationsResolvers<ContextType = any, ParentType extends ResolversPa
   resendActivationEmail?: Resolver<Maybe<ResolversTypes['ResendActivationEmail']>, ParentType, ContextType, RequireFields<MutationsResendActivationEmailArgs, 'emailAddress'>>;
   resetPassword?: Resolver<Maybe<ResolversTypes['ResetPassword']>, ParentType, ContextType, RequireFields<MutationsResetPasswordArgs, 'emailAddress'>>;
   signin?: Resolver<Maybe<ResolversTypes['Signin']>, ParentType, ContextType, RequireFields<MutationsSigninArgs, 'emailAddress' | 'password'>>;
+  signinOrRegisterRequestForCode?: Resolver<Maybe<ResolversTypes['SigninOrRegisterRequestForCode']>, ParentType, ContextType, RequireFields<MutationsSigninOrRegisterRequestForCodeArgs, 'emailAddress'>>;
+  signinOrRegisterWithCode?: Resolver<Maybe<ResolversTypes['SigninOrRegisterWithCode']>, ParentType, ContextType, RequireFields<MutationsSigninOrRegisterWithCodeArgs, 'code' | 'emailAddress'>>;
   signup?: Resolver<Maybe<ResolversTypes['Signup']>, ParentType, ContextType, RequireFields<MutationsSignupArgs, 'emailAddress' | 'password'>>;
   tokenAuth?: Resolver<Maybe<ResolversTypes['ObtainJSONWebToken']>, ParentType, ContextType, RequireFields<MutationsTokenAuthArgs, 'password' | 'username'>>;
   tokenOauthLogin?: Resolver<Maybe<ResolversTypes['TokenOAuthLogin']>, ParentType, ContextType, Partial<MutationsTokenOauthLoginArgs>>;
@@ -2387,6 +2437,18 @@ export type SigninResolvers<ContextType = any, ParentType extends ResolversParen
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type SigninOrRegisterRequestForCodeResolvers<ContextType = any, ParentType extends ResolversParentTypes['SigninOrRegisterRequestForCode'] = ResolversParentTypes['SigninOrRegisterRequestForCode']> = {
+  data?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  errors?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type SigninOrRegisterWithCodeResolvers<ContextType = any, ParentType extends ResolversParentTypes['SigninOrRegisterWithCode'] = ResolversParentTypes['SigninOrRegisterWithCode']> = {
+  data?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  errors?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type SignupResolvers<ContextType = any, ParentType extends ResolversParentTypes['Signup'] = ResolversParentTypes['Signup']> = {
   data?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   errors?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
@@ -2534,6 +2596,8 @@ export type Resolvers<ContextType = any> = {
   ResendActivationEmail?: ResendActivationEmailResolvers<ContextType>;
   ResetPassword?: ResetPasswordResolvers<ContextType>;
   Signin?: SigninResolvers<ContextType>;
+  SigninOrRegisterRequestForCode?: SigninOrRegisterRequestForCodeResolvers<ContextType>;
+  SigninOrRegisterWithCode?: SigninOrRegisterWithCodeResolvers<ContextType>;
   Signup?: SignupResolvers<ContextType>;
   ObtainJSONWebToken?: ObtainJsonWebTokenResolvers<ContextType>;
   TokenOAuthLogin?: TokenOAuthLoginResolvers<ContextType>;
@@ -9414,6 +9478,22 @@ export const ResetPasswordDocument = gql`
 export const SigninDocument = gql`
     mutation signin($emailAddress: String!, $password: String!) {
   signin(emailAddress: $emailAddress, password: $password) {
+    errors
+    data
+  }
+}
+    `;
+export const SigninOrRegisterRequestForCodeDocument = gql`
+    mutation signinOrRegisterRequestForCode($emailAddress: String!) {
+  signinOrRegisterRequestForCode(emailAddress: $emailAddress) {
+    errors
+    data
+  }
+}
+    `;
+export const SigninOrRegisterWithCodeDocument = gql`
+    mutation signinOrRegisterWithCode($code: String!, $emailAddress: String!) {
+  signinOrRegisterWithCode(code: $code, emailAddress: $emailAddress) {
     errors
     data
   }
@@ -23438,6 +23518,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     signin(variables: SigninMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<SigninMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<SigninMutation>(SigninDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'signin', 'mutation');
+    },
+    signinOrRegisterRequestForCode(variables: SigninOrRegisterRequestForCodeMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<SigninOrRegisterRequestForCodeMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SigninOrRegisterRequestForCodeMutation>(SigninOrRegisterRequestForCodeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'signinOrRegisterRequestForCode', 'mutation');
+    },
+    signinOrRegisterWithCode(variables: SigninOrRegisterWithCodeMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<SigninOrRegisterWithCodeMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SigninOrRegisterWithCodeMutation>(SigninOrRegisterWithCodeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'signinOrRegisterWithCode', 'mutation');
     },
     signup(variables: SignupMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<SignupMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<SignupMutation>(SignupDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'signup', 'mutation');
