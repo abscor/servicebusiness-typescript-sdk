@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/abscor/servicebusiness-typescript-sdk/issues"
   },
-  "homepage": "https://github.com/abscor/servicebusiness-typescript-sdk#readme"
+  "homepage": "https://github.com/abscor/servicebusiness-typescript-sdk#readme",
+  "dependencies": {
+    "create-react-app": "^5.0.1"
+  }
 }
