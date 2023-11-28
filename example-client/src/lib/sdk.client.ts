@@ -25,7 +25,7 @@ const saveItem = (key: string, value: string) => {
 }
 
 const config = {
-    API_URL: 'http://localhost:8000/api/graph/',
+    API_URL: 'https://servicebusiness.co/api/graph/',
     AUTH_TOKEN_STORAGE_KEY_NAME: 'token',
 }
 
