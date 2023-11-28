@@ -7,6 +7,7 @@ function App() {
   const [email, setEmail] = React.useState<string>('')
   const [code, setCode] = React.useState<string>('')
   const [token, setToken] = React.useState<string>('')
+  const [preview, setPreview] = React.useState<string>('')
 
   const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -37,6 +38,25 @@ function App() {
         <input type="text" placeholder="code" onChange={(e) => setCode(e.target.value)} value={code} />
         <button type="submit">Login</button>
       </form>
+
+      // image upload example below, upon selecting a file set the image preview with the base64 encoded image
+      <h3>Image upload</h3>
+      <input type="file" onChange={(e) => {
+        const file = e.target.files?.[0]
+        if (file) {
+          const reader = new FileReader()
+          reader.onload = (e) => {
+            const result = e.target?.result
+            if (typeof result === 'string') {
+              setPreview(result)
+            }
+          }
+          reader.readAsDataURL(file)
+        }
+      }} />
+      <img src={preview} alt="preview" style={{width: 100}}/>
+      
+      <button onClick={() => setPreview('')}>Remove preview</button>
     </div>
   );
 }
