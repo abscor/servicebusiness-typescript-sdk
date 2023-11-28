@@ -392,7 +392,7 @@ export type Mutations = {
   createReview?: Maybe<CreateReview>;
   /** Create a Service. */
   createService?: Maybe<CreateService>;
-  /** Create Website. */
+  /** Create a Website. */
   createWebsite?: Maybe<CreateWebsite>;
   /** Delete a Area. */
   deleteArea?: Maybe<DeleteArea>;
@@ -987,7 +987,7 @@ export type WebsiteCreateObject = {
   zipCode?: InputMaybe<Scalars['String']['input']>;
 };
 
-/** Create Website. */
+/** Create a Website. */
 export type CreateWebsite = {
   __typename?: 'CreateWebsite';
   data?: Maybe<WebsiteObject>;
