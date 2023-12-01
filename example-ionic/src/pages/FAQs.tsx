@@ -1,25 +1,19 @@
-// an ionic login page with a username and password field
-// and a login button
 import React, { useState } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonButton, IonLabel, IonIcon, IonItem, IonBadge, IonNote, IonList, IonText, IonRadioGroup, IonRadio, IonCheckbox, IonImg, IonTabs, IonTabButton, IonRouterOutlet, IonTabBar, IonSelect, IonSelectOption } from '@ionic/react';
-import { Redirect, Route } from 'react-router-dom';
-import { add, book, build, business, chevronBack, chevronForward, help, listCircle, location, logoApple, logoGoogle, person, personCircleOutline, star, starHalf } from 'ionicons/icons';
-import LoginOTP from './LoginOTP';
-import WebsiteGeneral from './WebsiteGeneral';
-import WebsiteDesign from './WebsiteDesign';
-import WebsiteAvailability from './WebsiteAvailability';
-import WebsiteIntegrations from './WebsiteIntegrations';
+import { IonContent, IonPage, IonRouterOutlet } from '@ionic/react';
+import { Route } from 'react-router-dom';
+import { business } from 'ionicons/icons';
 import SectionHeader from '../components/SectionHeader';
-import InputCheckbox from '../components/InputCheckbox';
-import InputText from '../components/InputText';
-import InputTextarea from '../components/InputTextarea';
-import InputImage from '../components/InputImage';
-import Service from './Service';
-import Area from './Area';
-import FAQ from './FAQ';
+import ItemList from '../components/ItemList';
+import FormBuilder from '../components/FormBuilder';
 
 const FAQs: React.FC = () => {
   const loggedIn = false;
+  const [active, setActive] = useState(true)
+  const [name, setName] = useState('How to clean your carpets')
+  const [questions, setQuestions] = useState([
+    { id: 1, question: 'How long does it take to clean my carpets?', answer: 'It takes about 2 hours to clean your carpets' },
+    { id: 2, question: 'Do you clean carpets?', answer: 'Yes, we clean carpets' },
+  ])
 
   return (
     <IonPage>
@@ -28,32 +22,44 @@ const FAQs: React.FC = () => {
         <IonRouterOutlet>
           <Route path="/faqs/:faqId">
 
-          <FAQ />
-
-
+          <FormBuilder fields={[
+            {
+              name: 'Active',
+              type: 'checkbox',
+              value: active,
+              setValue: setActive,
+            },
+            {
+              name: 'Name',
+              type: 'text',
+              value: name,
+              setValue: setName,
+            },
+            {
+              name: 'Questions',
+              type: 'list',
+              value: questions,
+              setValue: setQuestions,
+            },
+          ]} />
           </Route>
           <Route exact path="/faqs">
-            <IonList inset={true}>
-              <IonItem button={true} detail={true} href="/faqs/1">
-                <IonIcon slot="start" icon={business} />
-                <IonLabel>
-                  <strong>Carpet cleaning FAQ</strong>
-                </IonLabel>
-              </IonItem>
 
-              <IonItem button={true} detail={true} href="/faqs/2">
-                <IonIcon slot="start" icon={business} />
-                <IonLabel>
-                  <strong>Landscaping FAQ</strong>
-                </IonLabel>
-              </IonItem>
-            </IonList>
+            <ItemList items={[
+              {
+                icon: business,
+                name: 'Carpet cleaning FAQ',
+                href: '/faqs/1'
+              },
+              {
+                icon: business,
+                name: 'Landscaping FAQ',
+                href: '/faqs/2'
+              },
+            ]} />
+
           </Route>
           </IonRouterOutlet>
-          
-
-         
-
       </IonContent>
     </IonPage>
   );

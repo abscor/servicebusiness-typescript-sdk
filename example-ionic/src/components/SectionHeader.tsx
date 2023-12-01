@@ -1,18 +1,23 @@
-// a Section header component
-
 import React, { useState } from 'react';
-import { IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, IonItem, IonLabel, IonSelect, IonSelectOption } from '@ionic/react';
-import { add, chevronBack, chevronForward } from 'ionicons/icons';
+import { IonHeader, IonToolbar, IonTitle, IonButton, IonIcon, IonCardTitle } from '@ionic/react';
+import { addCircleOutline, chevronBack } from 'ionicons/icons';
 
 interface ContainerProps {
   title: string;
+  newLink?: string;
 }
 
-const SectionHeader: React.FC<ContainerProps> = ({ title }) => {
+const SectionHeader: React.FC<ContainerProps> = ({ title, newLink }) => {
     const [website, setWebsite] = useState('myhvaccompany.com');
   return (
+    
     <IonHeader>
-    <IonToolbar>
+    <IonToolbar
+      style={{
+        '--background': '#3880ff',
+        '--ion-color-primary': '#fff'
+      }}
+    >
       <IonButton
         slot="start"
         fill="clear"
@@ -20,25 +25,25 @@ const SectionHeader: React.FC<ContainerProps> = ({ title }) => {
           window.history.back();
         }}
       >
-        <IonIcon icon={chevronBack} />
+        <IonIcon icon={chevronBack} /> Back
       </IonButton>
       
-      <IonItem>
-        <IonLabel>Website</IonLabel>
-        <IonSelect value={website} placeholder="Select One" onIonChange={e => {
-          setWebsite(e.detail.value)
-          document.location.href = '/websites/general';
-        }}>
-          <IonSelectOption value="myhvaccompany.com">myhvaccompany.com</IonSelectOption>
-          <IonSelectOption value="land-scaper.com">land-scaper.com</IonSelectOption>
-        </IonSelect>
-      </IonItem>
+      <IonCardTitle
+        style={{
+          margin: 'auto',
+          width: '100%',
+          fontSize: '20px',
+          color: 'white',
+        }}
+      >
+        {title}
+      </IonCardTitle>
       <IonButton
         slot="end"
         fill="clear"
-        href="/websites/general?new=true"
+        href={newLink ? newLink : '/dashboard-home'}
       >
-        <IonIcon icon={add} />
+        <IonIcon icon={addCircleOutline} />
       </IonButton>
     </IonToolbar>
     <IonTitle style={{

@@ -1,24 +1,3 @@
-// A simple input image component with preview and remove button
-// Props:
-// - label: string
-// - value: string
-// - onChange: function
-// - required: boolean
-// - placeholder: string
-// - disabled: boolean
-// - preview: boolean
-// - previewWidth: string
-// - previewHeight: string
-// - previewStyle: any
-// - previewClass: string
-// - previewLabel: string
-// - removeLabel: string
-// - removeButton: boolean
-// - removeButtonStyle: any
-// - removeButtonClass: string
-// - removeButtonLabel: string
-// - removeButtonIcon: any
-
 import React from 'react';
 import { IonItem, IonLabel, IonImg, IonButton } from '@ionic/react';
 

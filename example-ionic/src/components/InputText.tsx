@@ -1,14 +1,3 @@
-// A simple input text component
-// Props:
-// - label: string
-// - value: string
-// - onChange: function
-// - required: boolean
-// - type: string
-// - placeholder: string
-// - disabled: boolean
-// - helpText: string
-
 import React from 'react';
 import { IonItem, IonLabel, IonInput } from '@ionic/react';
 
@@ -27,7 +16,12 @@ const InputText: React.FC<ContainerProps> = ({ label, value, onChange, required,
   return (
     <IonItem>
       <IonLabel position="floating">{label}</IonLabel>
-      <IonInput value={value} onIonChange={onChange} required={required} type={type} placeholder={placeholder} disabled={disabled}></IonInput>
+      <IonInput value={value} onIonChange={
+        (event) => {
+          let val = event.detail.value ? event.detail.value : '';
+          onChange(val);
+        }
+      } required={required} type={type} placeholder={placeholder} disabled={disabled}></IonInput>
       <small>{helpText}</small>
     </IonItem>
   );

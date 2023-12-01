@@ -1,13 +1,3 @@
-// A simple input textarea component
-// Props:
-// - label: string
-// - value: string
-// - onChange: function
-// - required: boolean
-// - placeholder: string
-// - disabled: boolean
-// - helpText: string
-
 import React from 'react';
 import { IonItem, IonLabel, IonTextarea } from '@ionic/react';
 
@@ -25,7 +15,12 @@ const InputTextarea: React.FC<ContainerProps> = ({ label, value, onChange, requi
   return (
     <IonItem>
       <IonLabel position="floating">{label}</IonLabel>
-      <IonTextarea value={value} onIonChange={onChange} required={required} placeholder={placeholder} disabled={disabled}></IonTextarea>
+      <IonTextarea value={value} onIonChange={
+        (event) => {
+          let val = event.detail.value ? event.detail.value : '';
+          onChange(val);
+        }
+      } required={required} placeholder={placeholder} disabled={disabled}></IonTextarea>
       <small>{helpText}</small>
     </IonItem>
   );

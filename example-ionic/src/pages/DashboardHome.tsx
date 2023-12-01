@@ -1,13 +1,11 @@
-// an ionic login page with a username and password field
-// and a login button
 import React, { useState } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonButton, IonLabel, IonIcon, IonItem, IonBadge, IonNote, IonList, IonText } from '@ionic/react';
-import { Redirect } from 'react-router-dom';
-import { book, build, business, chevronForward, help, listCircle, location, logoApple, logoGoogle, person, personCircleOutline, star, starHalf } from 'ionicons/icons';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonLabel, IonIcon, IonItem, IonBadge, IonList, IonText, IonCardSubtitle, IonItemDivider, IonCard, IonCardHeader, IonCardContent } from '@ionic/react';
+import { book, build, business, chevronForward, help, location, person, star } from 'ionicons/icons';
+import AppInfo from '../components/AppInfo';
+import { removeItem } from '../lib/storage';
+import { LOCAL_STORAGE_TOKEN_KEY_NAME } from '../lib/config';
 
 const DashboardHome: React.FC = () => {
-  const loggedIn = false;
-  const [otp, setOtp] = useState('');
   const [resendCodeTimer, setResendCodeTimer] = useState(4);
 
   // start the timer
@@ -15,7 +13,6 @@ const DashboardHome: React.FC = () => {
     if (resendCodeTimer < 1) {
       setResendCodeTimer(<a href='/login-password'>Resend code</a>);
     } else {
-      // if is number
       if (!isNaN(resendCodeTimer)) {
         setResendCodeTimer(resendCodeTimer - 1);
       }
@@ -25,36 +22,51 @@ const DashboardHome: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle
-            style={{
-              textAlign: 'center'
-            }}
-          >Account</IonTitle>
+      <IonToolbar
+          style={{
+            '--background': '#3880ff',
+            '--ion-toolbar-background': '#3880ff',
+            '--color': 'white',
+          }}
+        >
+          <IonTitle>Account</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding">
+      <IonContent>
+        <IonCard
+            style={{
+              boxShadow: 'none',
+              textAlign: 'center',
+          }}
+        >
         <IonText
             style={{
                 marginBottom: '20px',
                 fontWeight: 'bold',
                 fontSize: '20px',
+                textAlign: 'left'
             }}
         >Hi, ASAF</IonText>
-        <br />
-        <br />
-        <IonLabel>discobeta@gmail.com</IonLabel>
+        <IonItemDivider style={{ '--background': 'none' }} />
+        <IonItem>
+          <IonLabel>discobeta@gmail.com</IonLabel>
         <IonBadge 
           style={{
             right: '0px',
             float: 'right',
           }}
           color="primary">Verified</IonBadge>
+        </IonItem>
+        <IonItem>
+        <IonCardSubtitle>Current website: myhvaccompany.com <IonIcon icon={chevronForward} color='primary' /></IonCardSubtitle>
+
+        </IonItem>
+        <IonItemDivider style={{ '--background': 'none' }} />
 
           <IonList inset={true}
             style={{
               marginLeft: '-20px',
-              marginRight: '-20px',
+              marginRight: '-10px',
             }}
           >
           <IonItem button={true} detail={true} href="/profile">
@@ -69,12 +81,7 @@ const DashboardHome: React.FC = () => {
             <IonLabel>
               <strong>Business Websites</strong>
             </IonLabel>
-            <IonBadge 
-              style={{
-                right: '0px',
-                float: 'right',
-              }}
-              color="light">2</IonBadge>
+            <IonBadge color="light">2</IonBadge>
           </IonItem>
 
           <IonItem button={true} detail={true} href="/services">
@@ -82,12 +89,7 @@ const DashboardHome: React.FC = () => {
             <IonLabel>
               <strong>Services</strong>
             </IonLabel>
-            <IonBadge 
-              style={{
-                right: '0px',
-                float: 'right',
-              }}
-              color="light">3</IonBadge>
+            <IonBadge color="light">3</IonBadge>
 
           </IonItem>
 
@@ -96,12 +98,7 @@ const DashboardHome: React.FC = () => {
             <IonLabel>
               <strong>Locations</strong>
             </IonLabel>
-            <IonBadge
-              style={{
-                right: '0px',
-                float: 'right',
-              }}
-              color="light">1</IonBadge>
+            <IonBadge color="light">1</IonBadge>
           </IonItem>
 
           <IonItem button={true} detail={true} href="/reviews">
@@ -109,12 +106,7 @@ const DashboardHome: React.FC = () => {
             <IonLabel>
               <strong>Reviews</strong>
             </IonLabel>
-            <IonBadge
-              style={{
-                right: '0px',
-                float: 'right',
-              }}
-              color="light">3</IonBadge>
+            <IonBadge color="light">3</IonBadge>
           </IonItem>
 
           <IonItem button={true} detail={true} href="/pages">
@@ -122,12 +114,7 @@ const DashboardHome: React.FC = () => {
             <IonLabel>
               <strong>Articles</strong>
             </IonLabel>
-            <IonBadge
-              style={{
-                right: '0px',
-                float: 'right',
-              }}
-              color="light">3</IonBadge>
+            <IonBadge color="light">3</IonBadge>
           </IonItem>
 
           <IonItem button={true} detail={true} href="/faqs">
@@ -135,56 +122,30 @@ const DashboardHome: React.FC = () => {
             <IonLabel>
               <strong>FAQs</strong>
             </IonLabel>
-            <IonBadge
-              style={{
-                right: '0px',
-                float: 'right',
-              }}
-              color="light">9</IonBadge>
+            <IonBadge color="light">9</IonBadge>
           </IonItem>
 
           </IonList>
 
-        <div style={{
-            marginTop: '20px',
-            marginBottom: '20px',
-            textAlign: 'center'
-        }}>
-          <a href='/login'>Sign out</a>
-        </div>
-        <div style={{
-            marginTop: '20px',
-            marginBottom: '20px',
-            textAlign: 'center'
-        }}>
-          <img src="/public/plummy_logo.png" alt="Plummy logo"
+        <IonCardContent
             style={{
-              width: '150px',
-              
+                textAlign: 'center',
             }}
-          />
-        </div>
-        <div style={{
-            marginTop: '20px',
-            marginBottom: '20px',
-            textAlign: 'center',
-            fontWeight: 'bold',
-            fontSize: '12px',
-        }}>
-          Version: Plummy 2023.45 Build 4038
-        </div>
-
-        <div style={{
-            marginTop: '20px',
-            marginBottom: '20px',
-            textAlign: 'center',
-            fontWeight: 'bold',
-            fontSize: '12px',
-        }}>
-          © Copyright 2023 American Business Software.
-          <br/>
-          All rights reserved.
-        </div>
+        >
+        <IonCardHeader>
+          <a 
+          href='/login'
+          onClick={() => {
+            removeItem(LOCAL_STORAGE_TOKEN_KEY_NAME);
+          }}
+          
+          >Sign out</a>
+        </IonCardHeader>
+        
+        
+        </IonCardContent>
+        <AppInfo />
+        </IonCard>
       </IonContent>
     </IonPage>
   );

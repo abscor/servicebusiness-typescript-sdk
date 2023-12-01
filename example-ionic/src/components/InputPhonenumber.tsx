@@ -1,12 +1,3 @@
-// A simple input formatted phonenumber component
-// Props:
-// - label: string
-// - value: string
-// - onChange: function
-// - required: boolean
-// - placeholder: string
-// - disabled: boolean
-
 import React from 'react';
 import { IonItem, IonLabel, IonInput } from '@ionic/react';
 

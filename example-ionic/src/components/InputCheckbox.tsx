@@ -1,12 +1,3 @@
-// A simple input checkbox component
-// Props:
-// - label: string
-// - value: string
-// - onChange: function
-// - placeholder: string
-// - disabled: boolean
-// - helpText: string
-
 import React from 'react';
 import { IonItem, IonLabel, IonCheckbox } from '@ionic/react';
 
@@ -22,8 +13,13 @@ interface ContainerProps {
 const InputCheckbox: React.FC<ContainerProps> = ({ label, value, onChange, placeholder, disabled, helpText }) => {
   return (
     <IonItem>
-      <IonLabel>{label} <small>({helpText})</small></IonLabel>
-      <IonCheckbox checked={value} onIonChange={onChange} placeholder={placeholder} disabled={disabled}></IonCheckbox>
+      <IonLabel>{label} <small>{helpText ? `(${helpText})` : ''}</small></IonLabel>
+      <IonCheckbox checked={value} onIonChange={
+        (event) => {
+          let val = event.detail.checked ? true : false;
+          onChange(val);
+        }
+      } placeholder={placeholder} disabled={disabled}></IonCheckbox>
     </IonItem>
   );
 };
