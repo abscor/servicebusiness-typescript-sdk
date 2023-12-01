@@ -1,64 +1,51 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonButton, IonLabel, IonIcon, IonCard, IonItemDivider, IonCardSubtitle, IonCardHeader, IonToast } from '@ionic/react';
 import AppInfo from '../../components/AppInfo';
 import { getItem, setItem } from '../../lib/storage';
 import { sdk } from '../../lib/sdk.client';
 import { LOCAL_STORAGE_EMAIL_KEY_NAME, LOCAL_STORAGE_TOKEN_KEY_NAME } from '../../lib/config';
-
+import Countdown from '../../components/Countdown';
 const LoginOTP: React.FC = () => {
+  const emailAddress = new URLSearchParams(document.location.search).get('email');
+  const [email, setEmail] = useState<any>(emailAddress);
   const [otp, setOtp] = useState<any>('');
-  const [resendCodeTimer, setResendCodeTimer] = useState<any>(4);
-  const [email, setEmail] = useState<string>();
   const [showErrorToast, setShowErrorToast] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  // get email from local storage
-  useEffect(() => {
-    const email = getItem(LOCAL_STORAGE_EMAIL_KEY_NAME);
-    if (email) {
-      setEmail(email);
-    }
-  }, []);
-
-  // start the timer
-  setTimeout(() => {
-    if (resendCodeTimer < 1) {
-      setResendCodeTimer(<a 
-        onClick={() => {
-          if (email) {
-            sdk.signinOrRegisterRequestForCode({emailAddress: email}).then((response) => {
-              if (response.signinOrRegisterRequestForCode?.data) {
-                setItem(LOCAL_STORAGE_EMAIL_KEY_NAME, email);
-                document.location.href = '/login-otp';
-              } else {
-                console.error('No data returned from signinOrRegisterRequestForCode');
-                setShowErrorToast(true);
-                setErrorMessage('No data returned from signinOrRegisterRequestForCode');
-              }
-            }).catch((error) => {
-              console.error(error);
+  const getResendCodeLink = () => {
+    return (<a 
+      style={{
+        cursor: 'pointer',
+      }}
+      onClick={() => {
+        if (email) {
+          sdk.signinOrRegisterRequestForCode({emailAddress: email}).then((response) => {
+            if (response.signinOrRegisterRequestForCode?.data) {
+              setItem(LOCAL_STORAGE_EMAIL_KEY_NAME, email);
+              document.location.href = '/login-otp?email=' + email;
+            } else {
+              console.error('No data returned from signinOrRegisterRequestForCode');
               setShowErrorToast(true);
-              setErrorMessage("Unable to send code");
+              setErrorMessage('No data returned from signinOrRegisterRequestForCode');
             }
-
-            );    
-          } else {
-            console.error('No email address provided');
+          }).catch((error) => {
+            console.error(error);
             setShowErrorToast(true);
-            setErrorMessage('No email address provided');
+            setErrorMessage("Unable to send code");
           }
-      }
-      }
-      >Resend code</a>);
-    } else {
-      if (!isNaN(resendCodeTimer)) {
-        setResendCodeTimer(resendCodeTimer - 1);
-      }
+  
+          );    
+        } else {
+          console.error('No email address provided');
+          setShowErrorToast(true);
+          setErrorMessage('No email address provided');
+        }
     }
-  }, 1000);
+    }
+    >Resend code</a>)
+  }
 
   const sendCode = () => {
-    console.log("sendCode");
     if (email && otp) {
       sdk.signinOrRegisterWithCode({code: otp, emailAddress: email}).then((response) => {
         // check for errors
@@ -91,8 +78,6 @@ const LoginOTP: React.FC = () => {
     }
   }
   
-   
-
   return (
     <IonPage>
       <IonHeader>
@@ -116,6 +101,8 @@ const LoginOTP: React.FC = () => {
         <IonCardHeader>Let's confirm it's you</IonCardHeader>
         <IonCardSubtitle>Enter the secure code we sent to your email. Check junk mail if it's not in your inbox.</IonCardSubtitle>
         <IonItemDivider style={{ '--background': 'none' }} />
+        <IonCardSubtitle>Email address: {email}</IonCardSubtitle>
+        <IonItemDivider style={{ '--background': 'none' }} />
         <IonInput 
           inputMode="numeric"
           maxlength={6}
@@ -127,7 +114,8 @@ const LoginOTP: React.FC = () => {
           onClick={sendCode}
         >Continue</IonButton>
         <IonItemDivider style={{ '--background': 'none' }} />
-        <IonCardSubtitle>{!isNaN(resendCodeTimer) ? "Resend code in " : ""} {resendCodeTimer} </IonCardSubtitle>
+        <Countdown seconds={5} renderComponent={getResendCodeLink} />
+
         <IonItemDivider style={{ '--background': 'none' }} />
         <IonCardSubtitle>
           <a href='/login-password'>Enter password instead</a>  

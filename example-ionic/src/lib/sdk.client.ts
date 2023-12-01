@@ -8,7 +8,7 @@ export const HOME_URL = '/dashboard-home' // redirect after login
 export const AUTH_ERROR_STRING = 'Authentication Error'
 
 const config = {
-    API_URL: 'http://localhost:8000/api/graph/',
+    API_URL: 'https://servicebusiness.co/api/graph/',
     AUTH_TOKEN_STORAGE_KEY_NAME: 'token',
 }
 
@@ -38,9 +38,9 @@ const defaultWrapper: SdkFunctionWrapper = (
 ) => {
   return action()
   .catch((e: any) => {
-    alert(
-      JSON.stringify(options) + '-1-' + _operationName + '-2-' + action
-    )
+    // alert(
+    //   JSON.stringify(options) + '-1-' + _operationName + '-2-' + action
+    // )
     console.log('wrapper error',e)
     // failures++
     // if (failures > 3) {

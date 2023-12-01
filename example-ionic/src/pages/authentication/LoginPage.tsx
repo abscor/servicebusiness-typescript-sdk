@@ -9,7 +9,7 @@ import { LOCAL_STORAGE_EMAIL_KEY_NAME, LOCAL_STORAGE_TOKEN_KEY_NAME } from '../.
 
 const LoginPage: React.FC = () => {
 
-  const [email, setEmail] = useState<string>('discobeta@gmail.com');
+  const [email, setEmail] = useState<string>();
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
   const [showErrorToast, setShowErrorToast] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -22,19 +22,19 @@ const LoginPage: React.FC = () => {
   }, []);
 
   const login = () => {
+    // alert(document.location.href)
     if (email) {
       sdk.signinOrRegisterRequestForCode({emailAddress: email}).then((response) => {
-        alert('response' + JSON.stringify(response));
+        // alert('response' + JSON.stringify(response));
         if (response?.signinOrRegisterRequestForCode?.data) {
           setItem(LOCAL_STORAGE_EMAIL_KEY_NAME, email);
-          document.location.href = '/login-otp';
+          document.location.href = '/login-otp?email=' + email;
         } else {
-          console.error('No data returned from signinOrRegisterRequestForCode');
           setShowErrorToast(true);
-          setErrorMessage('No data returned from signinOrRegisterRequestForCode');
+          setErrorMessage('Invalid email address');
         }
       }).catch((error) => {
-        alert(error)
+        // alert(error)
         console.error(email);
         setShowErrorToast(true);
         setErrorMessage("Unable to send email");
