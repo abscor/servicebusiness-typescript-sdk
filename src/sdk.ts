@@ -19,8 +19,8 @@ export type Scalars = {
   Float: { input: number; output: number; }
   DateTime: { input: any; output: any; }
   JSONString: { input: any; output: any; }
-  GenericScalar: { input: any; output: any; }
   FileUploadField: { input: any; output: any; }
+  GenericScalar: { input: any; output: any; }
 };
 
 export type Query = {
@@ -31,7 +31,7 @@ export type Query = {
   faqs?: Maybe<Array<Maybe<FaqObject>>>;
   page?: Maybe<PageObject>;
   pages?: Maybe<Array<Maybe<PageObject>>>;
-  profile?: Maybe<Scalars['GenericScalar']['output']>;
+  profile?: Maybe<ProfileObject>;
   question?: Maybe<QuestionObject>;
   questions?: Maybe<Array<Maybe<QuestionObject>>>;
   review?: Maybe<ReviewObject>;
@@ -390,6 +390,21 @@ export type ServiceObject = {
   slug?: Maybe<Scalars['String']['output']>;
   updated: Scalars['DateTime']['output'];
   website: WebsiteObject;
+};
+
+export type ProfileObject = {
+  __typename?: 'ProfileObject';
+  created: Scalars['DateTime']['output'];
+  dailySummary: Scalars['Boolean']['output'];
+  emailAddress?: Maybe<Scalars['String']['output']>;
+  firstName?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  lastName?: Maybe<Scalars['String']['output']>;
+  metadata?: Maybe<Scalars['JSONString']['output']>;
+  phoneNumber: Scalars['String']['output'];
+  pk?: Maybe<Scalars['ID']['output']>;
+  updated: Scalars['DateTime']['output'];
+  weeklySummary: Scalars['Boolean']['output'];
 };
 
 export type Mutations = {
@@ -1206,16 +1221,16 @@ export type UpdatePage = {
 };
 
 export type ProfileUpdateObject = {
-  /**  max length 500 */
-  emailAddress?: InputMaybe<Scalars['String']['input']>;
-  /**  max length 500 */
+  /** Receive daily summary emails. */
+  dailySummary?: InputMaybe<Scalars['Boolean']['input']>;
+  /** The first name of the user. */
   firstName?: InputMaybe<Scalars['String']['input']>;
-  /**  max length 500 */
+  /** The last name of the user. */
   lastName?: InputMaybe<Scalars['String']['input']>;
-  /**  max length 500 */
+  /** The phone number of the user. */
   phoneNumber?: InputMaybe<Scalars['String']['input']>;
-  /**  max length 30 */
-  zipCode?: InputMaybe<Scalars['String']['input']>;
+  /** Receive weekly summary emails. */
+  weeklySummary?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** Update a Profile. */
@@ -1224,20 +1239,6 @@ export type UpdateProfile = {
   data?: Maybe<ProfileObject>;
   message?: Maybe<Scalars['String']['output']>;
   success?: Maybe<Scalars['Boolean']['output']>;
-};
-
-export type ProfileObject = {
-  __typename?: 'ProfileObject';
-  created: Scalars['DateTime']['output'];
-  emailAddress: Scalars['String']['output'];
-  firstName: Scalars['String']['output'];
-  id: Scalars['ID']['output'];
-  lastName: Scalars['String']['output'];
-  metadata?: Maybe<Scalars['JSONString']['output']>;
-  phoneNumber: Scalars['String']['output'];
-  pk?: Maybe<Scalars['ID']['output']>;
-  updated: Scalars['DateTime']['output'];
-  zipCode: Scalars['String']['output'];
 };
 
 export type QuestionUpdateObject = {
@@ -1689,7 +1690,7 @@ export type UpdateProfileMutationVariables = Exact<{
 }>;
 
 
-export type UpdateProfileMutation = { __typename?: 'Mutations', updateProfile?: { __typename?: 'UpdateProfile', success?: boolean | null, message?: string | null, data?: { __typename?: 'ProfileObject', id: string, created: any, updated: any, metadata?: any | null, firstName: string, lastName: string, emailAddress: string, phoneNumber: string, zipCode: string, pk?: string | null } | null } | null };
+export type UpdateProfileMutation = { __typename?: 'Mutations', updateProfile?: { __typename?: 'UpdateProfile', success?: boolean | null, message?: string | null, data?: { __typename?: 'ProfileObject', id: string, created: any, updated: any, metadata?: any | null, firstName?: string | null, lastName?: string | null, phoneNumber: string, dailySummary: boolean, weeklySummary: boolean, pk?: string | null, emailAddress?: string | null } | null } | null };
 
 export type UpdateQuestionMutationVariables = Exact<{
   input: QuestionUpdateObject;
@@ -1776,7 +1777,7 @@ export type PagesQuery = { __typename?: 'Query', pages?: Array<{ __typename?: 'P
 export type ProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ProfileQuery = { __typename?: 'Query', profile?: any | null };
+export type ProfileQuery = { __typename?: 'Query', profile?: { __typename?: 'ProfileObject', id: string, created: any, updated: any, metadata?: any | null, firstName?: string | null, lastName?: string | null, phoneNumber: string, dailySummary: boolean, weeklySummary: boolean, pk?: string | null, emailAddress?: string | null } | null };
 
 export type QuestionQueryVariables = Exact<{
   id?: InputMaybe<Scalars['Int']['input']>;
@@ -1925,7 +1926,7 @@ export type ResolversTypes = {
   PageObject: ResolverTypeWrapper<PageObject>;
   ReviewObject: ResolverTypeWrapper<ReviewObject>;
   ServiceObject: ResolverTypeWrapper<ServiceObject>;
-  GenericScalar: ResolverTypeWrapper<Scalars['GenericScalar']['output']>;
+  ProfileObject: ResolverTypeWrapper<ProfileObject>;
   Mutations: ResolverTypeWrapper<{}>;
   ActivateAccount: ResolverTypeWrapper<ActivateAccount>;
   ChangeEmailAddress: ResolverTypeWrapper<ChangeEmailAddress>;
@@ -1953,6 +1954,7 @@ export type ResolversTypes = {
   DeleteReview: ResolverTypeWrapper<DeleteReview>;
   DeleteService: ResolverTypeWrapper<DeleteService>;
   DeleteWebsite: ResolverTypeWrapper<DeleteWebsite>;
+  GenericScalar: ResolverTypeWrapper<Scalars['GenericScalar']['output']>;
   ImportWebsite: ResolverTypeWrapper<ImportWebsite>;
   Refresh: ResolverTypeWrapper<Refresh>;
   ResendActivationEmail: ResolverTypeWrapper<ResendActivationEmail>;
@@ -1973,7 +1975,6 @@ export type ResolversTypes = {
   UpdatePage: ResolverTypeWrapper<UpdatePage>;
   ProfileUpdateObject: ProfileUpdateObject;
   UpdateProfile: ResolverTypeWrapper<UpdateProfile>;
-  ProfileObject: ResolverTypeWrapper<ProfileObject>;
   QuestionUpdateObject: QuestionUpdateObject;
   UpdateQuestion: ResolverTypeWrapper<UpdateQuestion>;
   ReviewUpdateObject: ReviewUpdateObject;
@@ -2001,7 +2002,7 @@ export type ResolversParentTypes = {
   PageObject: PageObject;
   ReviewObject: ReviewObject;
   ServiceObject: ServiceObject;
-  GenericScalar: Scalars['GenericScalar']['output'];
+  ProfileObject: ProfileObject;
   Mutations: {};
   ActivateAccount: ActivateAccount;
   ChangeEmailAddress: ChangeEmailAddress;
@@ -2029,6 +2030,7 @@ export type ResolversParentTypes = {
   DeleteReview: DeleteReview;
   DeleteService: DeleteService;
   DeleteWebsite: DeleteWebsite;
+  GenericScalar: Scalars['GenericScalar']['output'];
   ImportWebsite: ImportWebsite;
   Refresh: Refresh;
   ResendActivationEmail: ResendActivationEmail;
@@ -2049,7 +2051,6 @@ export type ResolversParentTypes = {
   UpdatePage: UpdatePage;
   ProfileUpdateObject: ProfileUpdateObject;
   UpdateProfile: UpdateProfile;
-  ProfileObject: ProfileObject;
   QuestionUpdateObject: QuestionUpdateObject;
   UpdateQuestion: UpdateQuestion;
   ReviewUpdateObject: ReviewUpdateObject;
@@ -2074,7 +2075,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   faqs?: Resolver<Maybe<Array<Maybe<ResolversTypes['FaqObject']>>>, ParentType, ContextType, Partial<QueryFaqsArgs>>;
   page?: Resolver<Maybe<ResolversTypes['PageObject']>, ParentType, ContextType, Partial<QueryPageArgs>>;
   pages?: Resolver<Maybe<Array<Maybe<ResolversTypes['PageObject']>>>, ParentType, ContextType, Partial<QueryPagesArgs>>;
-  profile?: Resolver<Maybe<ResolversTypes['GenericScalar']>, ParentType, ContextType>;
+  profile?: Resolver<Maybe<ResolversTypes['ProfileObject']>, ParentType, ContextType>;
   question?: Resolver<Maybe<ResolversTypes['QuestionObject']>, ParentType, ContextType, Partial<QueryQuestionArgs>>;
   questions?: Resolver<Maybe<Array<Maybe<ResolversTypes['QuestionObject']>>>, ParentType, ContextType, Partial<QueryQuestionsArgs>>;
   review?: Resolver<Maybe<ResolversTypes['ReviewObject']>, ParentType, ContextType, Partial<QueryReviewArgs>>;
@@ -2268,9 +2269,20 @@ export type ServiceObjectResolvers<ContextType = any, ParentType extends Resolve
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export interface GenericScalarScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['GenericScalar'], any> {
-  name: 'GenericScalar';
-}
+export type ProfileObjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProfileObject'] = ResolversParentTypes['ProfileObject']> = {
+  created?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  dailySummary?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  emailAddress?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  firstName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  lastName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  metadata?: Resolver<Maybe<ResolversTypes['JSONString']>, ParentType, ContextType>;
+  phoneNumber?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  pk?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  updated?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  weeklySummary?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
 
 export type MutationsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutations'] = ResolversParentTypes['Mutations']> = {
   activateAccount?: Resolver<Maybe<ResolversTypes['ActivateAccount']>, ParentType, ContextType, RequireFields<MutationsActivateAccountArgs, 'emailAddress' | 'verificationCode'>>;
@@ -2433,6 +2445,10 @@ export type DeleteWebsiteResolvers<ContextType = any, ParentType extends Resolve
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export interface GenericScalarScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['GenericScalar'], any> {
+  name: 'GenericScalar';
+}
+
 export type ImportWebsiteResolvers<ContextType = any, ParentType extends ResolversParentTypes['ImportWebsite'] = ResolversParentTypes['ImportWebsite']> = {
   importedWebsite?: Resolver<Maybe<ResolversTypes['WebsiteObject']>, ParentType, ContextType>;
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2540,20 +2556,6 @@ export type UpdateProfileResolvers<ContextType = any, ParentType extends Resolve
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type ProfileObjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProfileObject'] = ResolversParentTypes['ProfileObject']> = {
-  created?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  emailAddress?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  firstName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  lastName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  metadata?: Resolver<Maybe<ResolversTypes['JSONString']>, ParentType, ContextType>;
-  phoneNumber?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  pk?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  updated?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  zipCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
 export type UpdateQuestionResolvers<ContextType = any, ParentType extends ResolversParentTypes['UpdateQuestion'] = ResolversParentTypes['UpdateQuestion']> = {
   data?: Resolver<Maybe<ResolversTypes['QuestionObject']>, ParentType, ContextType>;
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2598,7 +2600,7 @@ export type Resolvers<ContextType = any> = {
   PageObject?: PageObjectResolvers<ContextType>;
   ReviewObject?: ReviewObjectResolvers<ContextType>;
   ServiceObject?: ServiceObjectResolvers<ContextType>;
-  GenericScalar?: GraphQLScalarType;
+  ProfileObject?: ProfileObjectResolvers<ContextType>;
   Mutations?: MutationsResolvers<ContextType>;
   ActivateAccount?: ActivateAccountResolvers<ContextType>;
   ChangeEmailAddress?: ChangeEmailAddressResolvers<ContextType>;
@@ -2619,6 +2621,7 @@ export type Resolvers<ContextType = any> = {
   DeleteReview?: DeleteReviewResolvers<ContextType>;
   DeleteService?: DeleteServiceResolvers<ContextType>;
   DeleteWebsite?: DeleteWebsiteResolvers<ContextType>;
+  GenericScalar?: GraphQLScalarType;
   ImportWebsite?: ImportWebsiteResolvers<ContextType>;
   Refresh?: RefreshResolvers<ContextType>;
   ResendActivationEmail?: ResendActivationEmailResolvers<ContextType>;
@@ -2635,7 +2638,6 @@ export type Resolvers<ContextType = any> = {
   UpdateFaq?: UpdateFaqResolvers<ContextType>;
   UpdatePage?: UpdatePageResolvers<ContextType>;
   UpdateProfile?: UpdateProfileResolvers<ContextType>;
-  ProfileObject?: ProfileObjectResolvers<ContextType>;
   UpdateQuestion?: UpdateQuestionResolvers<ContextType>;
   UpdateReview?: UpdateReviewResolvers<ContextType>;
   UpdateService?: UpdateServiceResolvers<ContextType>;
@@ -9645,10 +9647,11 @@ export const UpdateProfileDocument = gql`
       metadata
       firstName
       lastName
-      emailAddress
       phoneNumber
-      zipCode
+      dailySummary
+      weeklySummary
       pk
+      emailAddress
     }
     success
     message
@@ -15516,7 +15519,19 @@ export const PagesDocument = gql`
     `;
 export const ProfileDocument = gql`
     query profile {
-  profile
+  profile {
+    id
+    created
+    updated
+    metadata
+    firstName
+    lastName
+    phoneNumber
+    dailySummary
+    weeklySummary
+    pk
+    emailAddress
+  }
 }
     `;
 export const QuestionDocument = gql`
