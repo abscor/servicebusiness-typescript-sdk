@@ -1414,7 +1414,7 @@ export type WebsiteUpdateObject = {
   navbarShowCtaButton?: InputMaybe<Scalars['Boolean']['input']>;
   /** The number of services to show in the navigation bar component. max length 200 */
   navbarShowServices?: InputMaybe<Scalars['Int']['input']>;
-  /** The phone number of the business max length 200 */
+  /** The phone number of the business */
   phoneNumber?: InputMaybe<Scalars['String']['input']>;
   /** The primary color of the website. max length 5000 */
   primaryColor?: InputMaybe<Scalars['String']['input']>;
