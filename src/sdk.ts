@@ -1389,7 +1389,7 @@ export type WebsiteUpdateObject = {
   footerShowServices?: InputMaybe<Scalars['Int']['input']>;
   /** The Google Analytics ID to use with this website. For example IX-123213-923s max length 200 */
   googleAnalytics?: InputMaybe<Scalars['String']['input']>;
-  /** The phone number of the business max length 200 */
+  /** The google verification file content max length 200 */
   googleVerificationFileContent?: InputMaybe<Scalars['String']['input']>;
   /** The google verification file name max length 200 */
   googleVerificationFileName?: InputMaybe<Scalars['String']['input']>;
