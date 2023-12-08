@@ -1420,7 +1420,7 @@ export type WebsiteUpdateObject = {
   primaryColor?: InputMaybe<Scalars['String']['input']>;
   /** The secondary color of the website. max length 5000 */
   secondaryColor?: InputMaybe<Scalars['String']['input']>;
-  /** The slug of the business max length 200 */
+  /** The slug of the business max length 200. */
   slug?: InputMaybe<Scalars['String']['input']>;
   /** The state where the business is located max length 200 */
   state?: InputMaybe<Scalars['String']['input']>;
