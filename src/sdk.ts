@@ -1355,7 +1355,7 @@ export type WebsiteUpdateObject = {
   customHeaderCode?: InputMaybe<Scalars['String']['input']>;
   /** A list of emails that are allowed to edit this website */
   editor?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** The email address of the business max length 200 */
+  /** The email address of the business */
   emailAddress?: InputMaybe<Scalars['String']['input']>;
   /** This indicates whether Google SiteMaps is available. */
   enableGoogleSitemaps?: InputMaybe<Scalars['Boolean']['input']>;
