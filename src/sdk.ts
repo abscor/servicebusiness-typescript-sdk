@@ -1391,7 +1391,7 @@ export type WebsiteUpdateObject = {
   googleAnalytics?: InputMaybe<Scalars['String']['input']>;
   /** The phone number of the business max length 200 */
   googleVerificationFileContent?: InputMaybe<Scalars['String']['input']>;
-  /** The phone number of the business max length 200 */
+  /** The google verification file name max length 200 */
   googleVerificationFileName?: InputMaybe<Scalars['String']['input']>;
   /** Min size (450 x 300)px max length 100 */
   homepageBackground?: InputMaybe<Scalars['String']['input']>;
