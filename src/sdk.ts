@@ -273,16 +273,16 @@ export type WebsiteObject = {
 
 export type FaqObject = {
   __typename?: 'FaqObject';
-  /** This indicates whether this faq is active and available */
+  /** Boolean: Indicates if the faq is currently active and available for display or use. */
   active: Scalars['Boolean']['output'];
   created: Scalars['DateTime']['output'];
   id: Scalars['ID']['output'];
   metadata?: Maybe<Scalars['JSONString']['output']>;
-  /** The name of the faq that the business provides. */
+  /** String: The name of the faq that the business provides. */
   name: Scalars['String']['output'];
   pk?: Maybe<Scalars['ID']['output']>;
   questions: Array<QuestionObject>;
-  /** The URL slug of the faq */
+  /** String: URL-friendly identifier for the faq, used in web addresses. */
   slug?: Maybe<Scalars['String']['output']>;
   updated: Scalars['DateTime']['output'];
   website: WebsiteObject;
@@ -290,19 +290,19 @@ export type FaqObject = {
 
 export type QuestionObject = {
   __typename?: 'QuestionObject';
-  /** This indicates whether this question is active and available */
+  /** Boolean: Indicates if the question is currently active and available for display or use. */
   active: Scalars['Boolean']['output'];
-  /** The answer that the business provides. */
+  /** String: The answer that the business provides. */
   answer: Scalars['String']['output'];
   created: Scalars['DateTime']['output'];
-  /** The order in which the question should be displayed. */
+  /** Integer: The display priority of this question. Higher values indicate higher priority for display. */
   displayOrder?: Maybe<Scalars['Int']['output']>;
   faq?: Maybe<FaqObject>;
   faqId?: Maybe<Scalars['ID']['output']>;
   id: Scalars['ID']['output'];
   metadata?: Maybe<Scalars['JSONString']['output']>;
   pk?: Maybe<Scalars['ID']['output']>;
-  /** The question that the business provides. */
+  /** String: The question that the business provides. */
   question: Scalars['String']['output'];
   updated: Scalars['DateTime']['output'];
   website: WebsiteObject;
@@ -310,28 +310,28 @@ export type QuestionObject = {
 
 export type PageObject = {
   __typename?: 'PageObject';
-  /** This indicates whether this page is active and available */
+  /** Boolean: Indicates if the page is currently active and available for viewing. */
   active: Scalars['Boolean']['output'];
-  /** The HTML markup of the page */
+  /** Text: The full HTML content of the page. */
   body: Scalars['String']['output'];
   created: Scalars['DateTime']['output'];
-  /** A brief text description of the page */
+  /** Text: A brief text description of the page's content and purpose. */
   description: Scalars['String']['output'];
-  /** The order of displaying this service. Higher priority means it will be displayed first. */
+  /** Integer: The display priority of this page. Higher values indicate higher priority for display. */
   displayOrder: Scalars['Int']['output'];
-  /** This indicates whether this page will use the Article object. */
+  /** Boolean: Specifies if Schema.org Article object tags are used for this page. */
   enableSchemaOrgArticleObject: Scalars['Boolean']['output'];
   id: Scalars['ID']['output'];
-  /** Min size (450 x 300)px */
+  /** Image: The primary image for the page. Recommended minimum size is 450x300 pixels. */
   image: Scalars['String']['output'];
   keywordTargeting?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   metadata?: Maybe<Scalars['JSONString']['output']>;
-  /** The name of the page that the business provides. */
+  /** String: The title or name of the page. */
   name: Scalars['String']['output'];
   pk?: Maybe<Scalars['ID']['output']>;
-  /** This indicates whether this page will display the Insurance company widget. */
+  /** Boolean: Indicates whether an insurance company widget is displayed on this page. */
   showInsuranceCompanyWidget: Scalars['Boolean']['output'];
-  /** The URL slug of the page */
+  /** String: URL-friendly identifier for the page, used in web addresses. */
   slug?: Maybe<Scalars['String']['output']>;
   updated: Scalars['DateTime']['output'];
   website: WebsiteObject;
@@ -339,27 +339,27 @@ export type PageObject = {
 
 export type ReviewObject = {
   __typename?: 'ReviewObject';
-  /** This indicates whether this review is active and visible to users */
+  /** Boolean: Indicates if the review is currently active and visible to users. */
   active: Scalars['Boolean']['output'];
-  /** The body of the review. */
+  /** Text: The full text of the review, detailing the user's experience or opinion. */
   body?: Maybe<Scalars['String']['output']>;
   created: Scalars['DateTime']['output'];
-  /** The order of displaying this review. Higher priority means it will be displayed first. */
+  /** Integer: The display priority of this review. Higher values indicate higher priority for display. */
   displayOrder: Scalars['Int']['output'];
   id: Scalars['ID']['output'];
   metadata?: Maybe<Scalars['JSONString']['output']>;
-  /** Min size (450 x 300)px */
+  /** Image: An image of the person who wrote the review. Recommended minimum size is 450x300 pixels. */
   personImage?: Maybe<Scalars['String']['output']>;
-  /** The name of the person that wrote the review. */
+  /** String: The name of the person who wrote the review. */
   personName: Scalars['String']['output'];
-  /** The zip code of the person location. */
+  /** String: The postal code of the reviewer's location. */
   personZipCode: Scalars['String']['output'];
   pk?: Maybe<Scalars['ID']['output']>;
-  /** The rating of this review. (from 1 to 4.5 to 5) */
+  /** Integer: The rating given in the review, on a scale from 1 to 5, with half-step increments allowed (e.g., 4.5). */
   rating: Scalars['Int']['output'];
-  /** The URL slug of the review */
+  /** String: URL-friendly identifier for the review, used in web addresses. */
   slug?: Maybe<Scalars['String']['output']>;
-  /** A brief description of the review. */
+  /** String: A concise title or summary of the review. */
   title: Scalars['String']['output'];
   updated: Scalars['DateTime']['output'];
   website: WebsiteObject;
@@ -367,30 +367,30 @@ export type ReviewObject = {
 
 export type ServiceObject = {
   __typename?: 'ServiceObject';
-  /** This indicates whether this service is active and available */
+  /** Boolean: Indicates if the service is currently active and available for display or use. */
   active: Scalars['Boolean']['output'];
   created: Scalars['DateTime']['output'];
-  /** The description of the service */
+  /** Text: A detailed description of the service, including its features and benefits. */
   description: Scalars['String']['output'];
-  /** The order of displaying this service. Higher priority means it will be displayed first. */
+  /** Integer: The display priority of this service. Higher values indicate higher priority for display. */
   displayOrder: Scalars['Int']['output'];
-  /** This indicates whether this site will use the Service object. */
+  /** Boolean: Determines if Schema.org Service object tags are used for this service. */
   enableSchemaOrgServiceObject: Scalars['Boolean']['output'];
-  /** HTML (markup) block 1) */
+  /** Text: First customizable HTML content block for additional information or markup related to the service. */
   htmlBlock1?: Maybe<Scalars['String']['output']>;
-  /** HTML (markup) block 2) */
+  /** Text: Second customizable HTML content block for additional information or markup related to the service. */
   htmlBlock2?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
-  /** Min size (450 x 300)px */
+  /** String: URL or path to the image representing the service. Recommended minimum size is 450x300 pixels. */
   image?: Maybe<Scalars['String']['output']>;
   keywordTargeting?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   metadata?: Maybe<Scalars['JSONString']['output']>;
-  /** The name of the service that the business provides. */
+  /** String: The name of the service provided by the business. */
   name: Scalars['String']['output'];
   pk?: Maybe<Scalars['ID']['output']>;
-  /** This indicates whether this service will display the Insurance company widget. */
+  /** Boolean: Specifies whether to display an insurance company widget on the service page. */
   showInsuranceCompanyWidget: Scalars['Boolean']['output'];
-  /** The slug of the service */
+  /** String: URL-friendly identifier for the service, used in web addresses. */
   slug?: Maybe<Scalars['String']['output']>;
   updated: Scalars['DateTime']['output'];
   website: WebsiteObject;
@@ -399,15 +399,21 @@ export type ServiceObject = {
 export type ProfileObject = {
   __typename?: 'ProfileObject';
   created: Scalars['DateTime']['output'];
+  /** Boolean: Indicates whether the user opts in for daily summary notifications. */
   dailySummary: Scalars['Boolean']['output'];
+  /** String: The email address of the user. Maximum length of 500 characters. */
   emailAddress?: Maybe<Scalars['String']['output']>;
+  /** String: The first name of the user. Maximum length of 500 characters. */
   firstName?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
+  /** String: The last name of the user. Maximum length of 500 characters. */
   lastName?: Maybe<Scalars['String']['output']>;
   metadata?: Maybe<Scalars['JSONString']['output']>;
+  /** String: Contact phone number of the user. Maximum length of 500 characters. */
   phoneNumber: Scalars['String']['output'];
   pk?: Maybe<Scalars['ID']['output']>;
   updated: Scalars['DateTime']['output'];
+  /** Boolean: Indicates whether the user opts in for weekly summary notifications. */
   weeklySummary: Scalars['Boolean']['output'];
 };
 
@@ -726,29 +732,31 @@ export type CompleteResetPassword = {
 };
 
 export type AreaCreateObject = {
-  /** This indicates whether this area is active and available */
+  /** Boolean: Indicates if the area is currently active and available for display or use. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The description of the area max length 7500 */
+  /** Text: A detailed description of the area and its characteristics. */
   description?: InputMaybe<Scalars['String']['input']>;
-  /** The order of displaying this area. Higher priority means it will be displayed first */
+  /** Integer: The display priority of this area. Higher values indicate higher priority for display. */
   displayOrder?: InputMaybe<Scalars['Int']['input']>;
-  /** This indicates whether this site will use the areaServed object. */
+  /** Boolean: Determines if Schema.org areaServed object tags are used for this area. */
   enableSchemaOrgAreaServedObject?: InputMaybe<Scalars['Boolean']['input']>;
-  /** HTML (markup) block 1) max length 15500 */
+  /** Text: First customizable HTML content block for additional information or markup related to the area. */
   htmlBlock1?: InputMaybe<Scalars['String']['input']>;
-  /** HTML (markup) block 2) max length 15500 */
+  /** Text: Second customizable HTML content block for additional information or markup related to the area. */
   htmlBlock2?: InputMaybe<Scalars['String']['input']>;
-  /** Min size (450 x 300)px max length 100 */
+  /** String: URL or path to the image representing the area. Recommended minimum size is 450x300 pixels. */
   image?: InputMaybe<Scalars['String']['input']>;
+  /** Array of Strings: List of search engine keywords targeted for this area. */
   keywordTargeting?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** The name of the area. max length 200 */
+  /** String: The official name of the area. */
   name?: InputMaybe<Scalars['String']['input']>;
-  /** This indicates whether this area will display the Insurance company widget. */
+  /** Boolean: Specifies whether to display an insurance company widget on the area page. */
   showInsuranceCompanyWidget?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The URL slug for the page. max length 200 */
+  /** String: URL-friendly identifier for the area, used in web addresses. */
   slug?: InputMaybe<Scalars['String']['input']>;
+  /** Integer: The ID of the website to which this area belongs. */
   websiteId?: InputMaybe<Scalars['ID']['input']>;
-  /** The zip code of the area. max length 200 */
+  /** String: The postal code associated with the area. */
   zipCode: Scalars['String']['input'];
 };
 
@@ -761,13 +769,14 @@ export type CreateArea = {
 };
 
 export type FaqCreateObject = {
-  /** This indicates whether this faq is active and available */
+  /** Boolean: Indicates if the faq is currently active and available for display or use. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The name of the faq that the business provides. max length 200 */
-  name: Scalars['String']['input'];
-  /** The URL slug for the faq. */
+  /** String: The name of the faq that the business provides. */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** String: URL-friendly identifier for the faq, used in web addresses. */
   slug?: InputMaybe<Scalars['String']['input']>;
-  websiteId: Scalars['ID']['input'];
+  /** Integer: The ID of the website to which this faq belongs. */
+  websiteId?: InputMaybe<Scalars['ID']['input']>;
 };
 
 /** Create a Faq. */
@@ -779,25 +788,27 @@ export type CreateFaq = {
 };
 
 export type PageCreateObject = {
-  /** This indicates whether this page is active and available */
+  /** Boolean: Indicates if the page is currently active and available for viewing. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The body of the page max length 7500 */
+  /** Text: The full HTML content of the page. */
   body?: InputMaybe<Scalars['String']['input']>;
-  /** The description of the page max length 7500 */
+  /** Text: A brief text description of the page's content and purpose. */
   description?: InputMaybe<Scalars['String']['input']>;
-  /** The order of displaying this page. Higher priority means it will be displayed first */
+  /** Integer: The display priority of this page. Higher values indicate higher priority for display. */
   displayOrder?: InputMaybe<Scalars['Int']['input']>;
-  /** This indicates whether this page will use the Article object. */
+  /** Boolean: Specifies if Schema.org Article object tags are used for this page. */
   enableSchemaOrgArticleObject?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Min size (450 x 300)px max length 100 */
+  /** Image: The primary image for the page. Recommended minimum size is 450x300 pixels. */
   image?: InputMaybe<Scalars['FileUploadField']['input']>;
+  /** Array of Strings: List of search engine keywords targeted for this page. */
   keywordTargeting?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** The name of the page that the business provides. max length 200 */
-  name: Scalars['String']['input'];
-  /** This indicates whether this page will display the Insurance company widget. */
+  /** String: The title or name of the page. */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Boolean: Indicates whether an insurance company widget is displayed on this page. */
   showInsuranceCompanyWidget?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The URL slug for the page page. max length 200 */
+  /** String: URL-friendly identifier for the page, used in web addresses. */
   slug?: InputMaybe<Scalars['String']['input']>;
+  /** Integer: The ID of the website to which this page belongs. */
   websiteId?: InputMaybe<Scalars['ID']['input']>;
 };
 
@@ -810,16 +821,18 @@ export type CreatePage = {
 };
 
 export type QuestionCreateObject = {
-  /** This indicates whether this question is active and available */
+  /** Boolean: Indicates if the question is currently active and available for display or use. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The answer that the business provides. max length 15500 */
-  answer: Scalars['String']['input'];
-  /** The order in which the question should be displayed. */
+  /** String: The answer that the business provides. */
+  answer?: InputMaybe<Scalars['String']['input']>;
+  /** Integer: The display priority of this question. Higher values indicate higher priority for display. */
   displayOrder?: InputMaybe<Scalars['Int']['input']>;
+  /** Integer: The ID of the faq to which this question belongs. */
   faqId?: InputMaybe<Scalars['ID']['input']>;
-  /** The question that the business provides. max length 200 */
-  question: Scalars['String']['input'];
-  websiteId: Scalars['ID']['input'];
+  /** String: The question that the business provides. */
+  question?: InputMaybe<Scalars['String']['input']>;
+  /** Integer: The ID of the website to which this question belongs. */
+  websiteId?: InputMaybe<Scalars['ID']['input']>;
 };
 
 /** Create a Question. */
@@ -831,25 +844,26 @@ export type CreateQuestion = {
 };
 
 export type ReviewCreateObject = {
-  /** This indicates whether this review is active and visible to users */
+  /** Boolean: Indicates if the review is currently active and visible to users. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The body of the review. max length 7500 */
+  /** Text: The full text of the review, detailing the user's experience or opinion. */
   body?: InputMaybe<Scalars['String']['input']>;
-  /** The order of displaying this review. Higher priority means it will be displayed first */
+  /** Integer: The display priority of this review. Higher values indicate higher priority for display. */
   displayOrder?: InputMaybe<Scalars['Int']['input']>;
-  /** Min size (450 x 300)px max length 100 */
+  /** Image: An image of the person who wrote the review. Recommended minimum size is 450x300 pixels. */
   personImage?: InputMaybe<Scalars['String']['input']>;
-  /** The name of the person that wrote the review. max length 200 */
-  personName: Scalars['String']['input'];
-  /** The zip code of the person location. max length 5 */
+  /** String: The name of the person who wrote the review. */
+  personName?: InputMaybe<Scalars['String']['input']>;
+  /** String: The postal code of the reviewer's location. */
   personZipCode?: InputMaybe<Scalars['String']['input']>;
-  /** The rating of this review. (from 1 to 4.5 to 5) */
+  /** Integer: The rating given in the review, on a scale from 1 to 5, with half-step increments allowed (e.g., 4.5). */
   rating?: InputMaybe<Scalars['Int']['input']>;
-  /** The URL slug for the review. */
+  /** String: URL-friendly identifier for the review, used in web addresses. */
   slug?: InputMaybe<Scalars['String']['input']>;
-  /** A brief description of the review. max length 200 */
-  title: Scalars['String']['input'];
-  websiteId: Scalars['ID']['input'];
+  /** String: A concise title or summary of the review. */
+  title?: InputMaybe<Scalars['String']['input']>;
+  /** Integer: The ID of the website to which this review belongs. */
+  websiteId?: InputMaybe<Scalars['ID']['input']>;
 };
 
 /** Create a Review. */
@@ -861,27 +875,29 @@ export type CreateReview = {
 };
 
 export type ServiceCreateObject = {
-  /** This indicates whether this service is active and available */
+  /** Boolean: Indicates if the service is currently active and available for display or use. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The description of the service max length 15500 */
+  /** Text: A detailed description of the service, including its features and benefits. */
   description: Scalars['String']['input'];
-  /** The order of displaying this service. Higher priority means it will be displayed first. max length 200 */
+  /** Integer: The display priority of this service. Higher values indicate higher priority for display. */
   displayOrder?: InputMaybe<Scalars['Int']['input']>;
-  /** This indicates whether this site will use the Service object. */
+  /** Boolean: Determines if Schema.org Service object tags are used for this service. */
   enableSchemaOrgServiceObject?: InputMaybe<Scalars['Boolean']['input']>;
-  /** HTML (markup) block 1) max length 15500 */
+  /** Text: First customizable HTML content block for additional information or markup related to the service. */
   htmlBlock1?: InputMaybe<Scalars['String']['input']>;
-  /** HTML (markup) block 2) max length 15500 */
+  /** Text: Second customizable HTML content block for additional information or markup related to the service. */
   htmlBlock2?: InputMaybe<Scalars['String']['input']>;
-  /** Min size (450 x 300)px max length 5000 */
+  /** String: URL or path to the image representing the service. Recommended minimum size is 450x300 pixels. */
   image?: InputMaybe<Scalars['String']['input']>;
+  /** Array of Strings: List of search engine keywords targeted for this service. */
   keywordTargeting?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** The name of the service that the business provides. max length 200 */
+  /** String: The name of the service provided by the business. */
   name: Scalars['String']['input'];
-  /** This indicates whether this service will display the Insurance company widget. */
+  /** Boolean: Specifies whether to display an insurance company widget on the service page. */
   showInsuranceCompanyWidget?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The slug of the service max length 200 */
+  /** String: URL-friendly identifier for the service, used in web addresses. */
   slug?: InputMaybe<Scalars['String']['input']>;
+  /** Integer: The ID of the website to which this service belongs. */
   websiteId?: InputMaybe<Scalars['ID']['input']>;
 };
 
@@ -1137,30 +1153,32 @@ export type TokenOAuthSignup = {
 };
 
 export type AreaUpdateObject = {
-  /** This indicates whether this area is active and available */
+  /** Boolean: Indicates if the area is currently active and available for display or use. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The description of the area max length 7500 */
+  /** Text: A detailed description of the area and its characteristics. */
   description?: InputMaybe<Scalars['String']['input']>;
-  /** The order of displaying this area. Higher priority means it will be displayed first */
+  /** Integer: The display priority of this area. Higher values indicate higher priority for display. */
   displayOrder?: InputMaybe<Scalars['Int']['input']>;
-  /** This indicates whether this site will use the areaServed object. */
+  /** Boolean: Determines if Schema.org areaServed object tags are used for this area. */
   enableSchemaOrgAreaServedObject?: InputMaybe<Scalars['Boolean']['input']>;
-  /** HTML (markup) block 1) max length 15500 */
+  /** Text: First customizable HTML content block for additional information or markup related to the area. */
   htmlBlock1?: InputMaybe<Scalars['String']['input']>;
-  /** HTML (markup) block 2) max length 15500 */
+  /** Text: Second customizable HTML content block for additional information or markup related to the area. */
   htmlBlock2?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['ID']['input'];
-  /** Min size (450 x 300)px max length 100 */
+  /** String: URL or path to the image representing the area. Recommended minimum size is 450x300 pixels. */
   image?: InputMaybe<Scalars['String']['input']>;
+  /** Array of Strings: List of search engine keywords targeted for this area. */
   keywordTargeting?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** The name of the area. max length 200 */
+  /** String: The official name of the area. */
   name?: InputMaybe<Scalars['String']['input']>;
-  /** This indicates whether this area will display the Insurance company widget. */
+  /** Boolean: Specifies whether to display an insurance company widget on the area page. */
   showInsuranceCompanyWidget?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The URL slug for the page. max length 200 */
+  /** String: URL-friendly identifier for the area, used in web addresses. */
   slug?: InputMaybe<Scalars['String']['input']>;
+  /** Integer: The ID of the website to which this area belongs. */
   websiteId?: InputMaybe<Scalars['ID']['input']>;
-  /** The zip code of the area. max length 200 */
+  /** String: The postal code associated with the area. */
   zipCode: Scalars['String']['input'];
 };
 
@@ -1180,13 +1198,14 @@ export type UpdateEmailSubscription = {
 };
 
 export type FaqUpdateObject = {
-  /** This indicates whether this faq is active and available */
+  /** Boolean: Indicates if the faq is currently active and available for display or use. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
   id: Scalars['ID']['input'];
-  /** The name of the faq that the business provides. max length 200 */
+  /** String: The name of the faq that the business provides. */
   name?: InputMaybe<Scalars['String']['input']>;
-  /** The URL slug for the faq. */
+  /** String: URL-friendly identifier for the faq, used in web addresses. */
   slug?: InputMaybe<Scalars['String']['input']>;
+  /** Integer: The ID of the website to which this faq belongs. */
   websiteId?: InputMaybe<Scalars['ID']['input']>;
 };
 
@@ -1199,26 +1218,28 @@ export type UpdateFaq = {
 };
 
 export type PageUpdateObject = {
-  /** This indicates whether this page is active and available */
+  /** Boolean: Indicates if the page is currently active and available for viewing. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The body of the page max length 7500 */
+  /** Text: The full HTML content of the page. */
   body?: InputMaybe<Scalars['String']['input']>;
-  /** The description of the page max length 7500 */
+  /** Text: A brief text description of the page's content and purpose. */
   description?: InputMaybe<Scalars['String']['input']>;
-  /** The order of displaying this page. Higher priority means it will be displayed first */
+  /** Integer: The display priority of this page. Higher values indicate higher priority for display. */
   displayOrder?: InputMaybe<Scalars['Int']['input']>;
-  /** This indicates whether this page will use the Article object. */
+  /** Boolean: Specifies if Schema.org Article object tags are used for this page. */
   enableSchemaOrgArticleObject?: InputMaybe<Scalars['Boolean']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
-  /** Min size (450 x 300)px max length 100 */
+  /** Image: The primary image for the page. Recommended minimum size is 450x300 pixels. */
   image?: InputMaybe<Scalars['FileUploadField']['input']>;
+  /** Array of Strings: List of search engine keywords targeted for this page. */
   keywordTargeting?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** The name of the page. max length 200 */
+  /** String: The title or name of the page. */
   name?: InputMaybe<Scalars['String']['input']>;
-  /** This indicates whether this page will display the Insurance company widget. */
+  /** Boolean: Indicates whether an insurance company widget is displayed on this page. */
   showInsuranceCompanyWidget?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The URL slug for the page. max length 200 */
+  /** String: URL-friendly identifier for the page, used in web addresses. */
   slug?: InputMaybe<Scalars['String']['input']>;
+  /** Integer: The ID of the website to which this page belongs. */
   websiteId?: InputMaybe<Scalars['ID']['input']>;
 };
 
@@ -1231,15 +1252,15 @@ export type UpdatePage = {
 };
 
 export type ProfileUpdateObject = {
-  /** Receive daily summary emails. */
+  /** Boolean: Indicates whether the user opts in for daily summary notifications. */
   dailySummary?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The first name of the user. */
+  /** String: The first name of the user. Maximum length of 500 characters. */
   firstName?: InputMaybe<Scalars['String']['input']>;
-  /** The last name of the user. */
+  /** String: The last name of the user. Maximum length of 500 characters. */
   lastName?: InputMaybe<Scalars['String']['input']>;
-  /** The phone number of the user. */
+  /** String: Contact phone number of the user. Maximum length of 500 characters. */
   phoneNumber?: InputMaybe<Scalars['String']['input']>;
-  /** Receive weekly summary emails. */
+  /** Boolean: Indicates whether the user opts in for weekly summary notifications. */
   weeklySummary?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
@@ -1252,16 +1273,18 @@ export type UpdateProfile = {
 };
 
 export type QuestionUpdateObject = {
-  /** This indicates whether this question is active and available */
+  /** Boolean: Indicates if the question is currently active and available for display or use. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The answer that the business provides. max length 15500 */
+  /** String: The answer that the business provides. */
   answer?: InputMaybe<Scalars['String']['input']>;
-  /** The order in which the question should be displayed. */
+  /** Integer: The display priority of this question. Higher values indicate higher priority for display. */
   displayOrder?: InputMaybe<Scalars['Int']['input']>;
+  /** Integer: The ID of the faq to which this question belongs. */
   faqId?: InputMaybe<Scalars['ID']['input']>;
   id: Scalars['ID']['input'];
-  /** The question that the business provides. max length 200 */
+  /** String: The question that the business provides. */
   question?: InputMaybe<Scalars['String']['input']>;
+  /** Integer: The ID of the website to which this question belongs. */
   websiteId?: InputMaybe<Scalars['ID']['input']>;
 };
 
@@ -1274,25 +1297,26 @@ export type UpdateQuestion = {
 };
 
 export type ReviewUpdateObject = {
-  /** This indicates whether this review is active and visible to users */
+  /** Boolean: Indicates if the review is currently active and visible to users. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The body of the review. max length 7500 */
+  /** Text: The full text of the review, detailing the user's experience or opinion. */
   body?: InputMaybe<Scalars['String']['input']>;
-  /** The order of displaying this review. Higher priority means it will be displayed first */
+  /** Integer: The display priority of this review. Higher values indicate higher priority for display. */
   displayOrder?: InputMaybe<Scalars['Int']['input']>;
   id: Scalars['ID']['input'];
-  /** Min size (450 x 300)px max length 100 */
+  /** Image: An image of the person who wrote the review. Recommended minimum size is 450x300 pixels. */
   personImage?: InputMaybe<Scalars['String']['input']>;
-  /** The name of the person that wrote the review. max length 200 */
+  /** String: The name of the person who wrote the review. */
   personName?: InputMaybe<Scalars['String']['input']>;
-  /** The zip code of the person location. max length 5 */
+  /** String: The postal code of the reviewer's location. */
   personZipCode?: InputMaybe<Scalars['String']['input']>;
-  /** The rating of this review. (from 1 to 4.5 to 5) */
+  /** Integer: The rating given in the review, on a scale from 1 to 5, with half-step increments allowed (e.g., 4.5). */
   rating?: InputMaybe<Scalars['Int']['input']>;
-  /** The URL slug for the review. */
+  /** String: URL-friendly identifier for the review, used in web addresses. */
   slug?: InputMaybe<Scalars['String']['input']>;
-  /** A brief description of the review. max length 200 */
+  /** String: A concise title or summary of the review. */
   title?: InputMaybe<Scalars['String']['input']>;
+  /** Integer: The ID of the website to which this review belongs. */
   websiteId?: InputMaybe<Scalars['ID']['input']>;
 };
 
@@ -1305,28 +1329,30 @@ export type UpdateReview = {
 };
 
 export type ServiceUpdateObject = {
-  /** This indicates whether this service is active and available */
+  /** Boolean: Indicates if the service is currently active and available for display or use. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The description of the service max length 15500 */
+  /** Text: A detailed description of the service, including its features and benefits. */
   description: Scalars['String']['input'];
-  /** The order of displaying this service. Higher priority means it will be displayed first. max length 200 */
+  /** Integer: The display priority of this service. Higher values indicate higher priority for display. */
   displayOrder?: InputMaybe<Scalars['Int']['input']>;
-  /** This indicates whether this site will use the Service object. */
+  /** Boolean: Determines if Schema.org Service object tags are used for this service. */
   enableSchemaOrgServiceObject?: InputMaybe<Scalars['Boolean']['input']>;
-  /** HTML (markup) block 1) max length 15500 */
+  /** Text: First customizable HTML content block for additional information or markup related to the service. */
   htmlBlock1?: InputMaybe<Scalars['String']['input']>;
-  /** HTML (markup) block 2) max length 15500 */
+  /** Text: Second customizable HTML content block for additional information or markup related to the service. */
   htmlBlock2?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['ID']['input'];
-  /** Min size (450 x 300)px max length 5000 */
+  /** String: URL or path to the image representing the service. Recommended minimum size is 450x300 pixels. */
   image?: InputMaybe<Scalars['String']['input']>;
+  /** Array of Strings: List of search engine keywords targeted for this service. */
   keywordTargeting?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** The name of the service that the business provides. max length 200 */
+  /** String: The name of the service provided by the business. */
   name: Scalars['String']['input'];
-  /** This indicates whether this service will display the Insurance company widget. */
+  /** Boolean: Specifies whether to display an insurance company widget on the service page. */
   showInsuranceCompanyWidget?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The slug of the service max length 200 */
+  /** String: URL-friendly identifier for the service, used in web addresses. */
   slug?: InputMaybe<Scalars['String']['input']>;
+  /** Integer: The ID of the website to which this service belongs. */
   websiteId?: InputMaybe<Scalars['ID']['input']>;
 };
 
