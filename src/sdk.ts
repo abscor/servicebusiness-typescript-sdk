@@ -125,149 +125,149 @@ export type QueryWebsitesArgs = {
 
 export type AreaObject = {
   __typename?: 'AreaObject';
-  /** This indicates whether this area is active and available */
+  /** Boolean: Indicates if the area is currently active and available for display or use. */
   active: Scalars['Boolean']['output'];
   created: Scalars['DateTime']['output'];
-  /** The description of the area */
+  /** Text: A detailed description of the area and its characteristics. */
   description?: Maybe<Scalars['String']['output']>;
-  /** The order of displaying this area. Higher priority means it will be displayed first. */
+  /** Integer: The display priority of this area. Higher values indicate higher priority for display. */
   displayOrder: Scalars['Int']['output'];
-  /** This indicates whether this area page will use the areaServed object. */
+  /** Boolean: Determines if Schema.org areaServed object tags are used for this area. */
   enableSchemaOrgAreaServedObject: Scalars['Boolean']['output'];
-  /** HTML (markup) block 1) */
+  /** Text: First customizable HTML content block for additional information or markup related to the area. */
   htmlBlock1?: Maybe<Scalars['String']['output']>;
-  /** HTML (markup) block 2) */
+  /** Text: Second customizable HTML content block for additional information or markup related to the area. */
   htmlBlock2?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
-  /** Min size (450 x 300)px */
+  /** String: URL or path to the image representing the area. Recommended minimum size is 450x300 pixels. */
   image?: Maybe<Scalars['String']['output']>;
   keywordTargeting?: Maybe<Array<Scalars['String']['output']>>;
   metadata?: Maybe<Scalars['JSONString']['output']>;
-  /** The name of the area. */
+  /** String: The official name of the area. */
   name?: Maybe<Scalars['String']['output']>;
   pk?: Maybe<Scalars['ID']['output']>;
-  /** This indicates whether this area page will display the Insurance company widget. */
+  /** Boolean: Specifies whether to display an insurance company widget on the area page. */
   showInsuranceCompanyWidget: Scalars['Boolean']['output'];
-  /** The slug of the area */
+  /** String: URL-friendly identifier for the area, used in web addresses. */
   slug?: Maybe<Scalars['String']['output']>;
   updated: Scalars['DateTime']['output'];
   website: WebsiteObject;
-  /** The zip code of the area. */
+  /** String: The postal code associated with the area. */
   zipCode: Scalars['String']['output'];
 };
 
 export type WebsiteObject = {
   __typename?: 'WebsiteObject';
-  /** This indicates whether this website is active at the moment. */
+  /** Boolean: Specifies if the website is currently active. */
   active: Scalars['Boolean']['output'];
-  /** The address of the business */
+  /** String: Primary street address of the business. */
   address1?: Maybe<Scalars['String']['output']>;
-  /** The second address line of address */
+  /** String: Secondary address line, if any. */
   address2?: Maybe<Scalars['String']['output']>;
   areas: Array<AreaObject>;
-  /** The description of the business */
+  /** Text: Detailed description of the business's activities and services. */
   businessDescription?: Maybe<Scalars['String']['output']>;
-  /** The business EIN (corporation) number. */
+  /** String: Employer Identification Number (EIN) of the business. */
   businessEinNumber?: Maybe<Scalars['String']['output']>;
-  /** The logo of the business Min size (450 x 300)px */
+  /** Image: Logo of the business. Recommended minimum size is 450x300 pixels. */
   businessLogo?: Maybe<Scalars['String']['output']>;
-  /** The business manager name. */
+  /** String: Name of the business manager. */
   businessManagerPersonName?: Maybe<Scalars['String']['output']>;
-  /** The name of the business */
+  /** String: The official name of the business. */
   businessName: Scalars['String']['output'];
-  /** The city where the business is located */
+  /** String: City where the business is located. */
   city?: Maybe<Scalars['String']['output']>;
   created: Scalars['DateTime']['output'];
-  /** The markup to use with the button call-to-action. */
+  /** Text: HTML markup for the call-to-action button. */
   ctaButtonHtml?: Maybe<Scalars['String']['output']>;
-  /** The markup to use with the main call-to-action. */
+  /** Text: HTML markup for the main call-to-action on the website. */
   ctaHtml?: Maybe<Scalars['String']['output']>;
-  /** The custom footer HTML code. This will be used right before the closing </BODY> tag. */
+  /** Text: Custom HTML code for the website's footer section. */
   customFooterCode?: Maybe<Scalars['String']['output']>;
-  /** The custom header HTML code. This will be used in the <HEAD> section of the website markup. */
+  /** Text: Custom HTML code for the website's header section. */
   customHeaderCode?: Maybe<Scalars['String']['output']>;
-  /** A list of emails that are allowed to edit this website */
+  /** Array of Email Addresses: List of email addresses authorized to edit the website. */
   editor?: Maybe<Array<Scalars['String']['output']>>;
-  /** The email address of the business */
+  /** String: Email address for business correspondence. */
   emailAddress?: Maybe<Scalars['String']['output']>;
-  /** This indicates whether Google SiteMaps is available. */
+  /** Boolean: Determines if Google SiteMaps is enabled for the website. */
   enableGoogleSitemaps: Scalars['Boolean']['output'];
-  /** This indicates whether this site will use the LocalBusiness object. */
+  /** Boolean: Indicates if Schema.org LocalBusiness object tags are used. */
   enableSchemaOrgLocalbusinessObject: Scalars['Boolean']['output'];
-  /** This indicates whether this site will use the Organization object. */
+  /** Boolean: Indicates if Schema.org Organization object tags are used. */
   enableSchemaOrgOrganizationObject: Scalars['Boolean']['output'];
-  /** This indicates whether this site will use the WebPage object. */
+  /** Boolean: Indicates if Schema.org WebPage object tags are used. */
   enableSchemaOrgWebpageObject: Scalars['Boolean']['output'];
   faqs: Array<FaqObject>;
-  /** The footer first link markup. */
+  /** Text: HTML markup for the first link in the footer. */
   footerLink1Html?: Maybe<Scalars['String']['output']>;
-  /** The footer second link markup. */
+  /** Text: HTML markup for the second link in the footer. */
   footerLink2Html?: Maybe<Scalars['String']['output']>;
-  /** The footer third link markup. */
+  /** Text: HTML markup for the third link in the footer. */
   footerLink3Html?: Maybe<Scalars['String']['output']>;
-  /** The footer fourth link markup. */
+  /** Text: HTML markup for the fourth link in the footer. */
   footerLink4Html?: Maybe<Scalars['String']['output']>;
-  /** The footer fifth link markup. */
+  /** Text: HTML markup for the fifth link in the footer. */
   footerLink5Html?: Maybe<Scalars['String']['output']>;
-  /** The footer message markup. */
+  /** Text: HTML markup for the message in the footer. */
   footerMessageHtml?: Maybe<Scalars['String']['output']>;
-  /** The number of areas to show in the footer component. */
+  /** Integer: Number of service areas to display in the footer. */
   footerShowAreas: Scalars['Int']['output'];
-  /** This indicates whether the email address will be visible in the footer component. */
+  /** Boolean: Indicates if the business email address is visible in the footer. */
   footerShowEmailAddress: Scalars['Boolean']['output'];
-  /** This indicates whether the business license number will be visible in the footer component. */
+  /** Boolean: Indicates if the business license number is visible in the footer. */
   footerShowLicenseNumber: Scalars['Boolean']['output'];
-  /** The number of reviews to show in the footer component. */
+  /** Integer: Number of reviews to display in the footer. */
   footerShowReviews: Scalars['Int']['output'];
-  /** The number of services to show in the footer component. */
+  /** Integer: Number of services to display in the footer. */
   footerShowServices: Scalars['Int']['output'];
-  /** The Google Analytics ID to use with this website. For example IX-123213-923s */
+  /** String: Google Analytics ID for tracking website traffic, e.g., 'IX-123213-923s'. */
   googleAnalytics?: Maybe<Scalars['String']['output']>;
-  /** The phone number of the business */
+  /** String: Content of the file used for Google site verification. */
   googleVerificationFileContent?: Maybe<Scalars['String']['output']>;
-  /** The phone number of the business */
+  /** String: File name used for Google site verification. */
   googleVerificationFileName?: Maybe<Scalars['String']['output']>;
-  /** The background image of the homepage */
+  /** Image: Background image for the homepage. */
   homepageBackground?: Maybe<Scalars['String']['output']>;
-  /** The custom CSS used in the homepage jumobotron. */
+  /** Text: Custom CSS for the homepage jumbotron. */
   homepageJumbotronCustomCss?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
-  /** The insurance number of the business */
+  /** String: Insurance policy number of the business. */
   insuranceNumber?: Maybe<Scalars['String']['output']>;
-  /** The license number of the business */
+  /** String: Official license number of the business. */
   licenseNumber?: Maybe<Scalars['String']['output']>;
   metadata?: Maybe<Scalars['JSONString']['output']>;
-  /** The navigation bar first link markup. */
+  /** Text: HTML markup for the first link in the navigation bar. */
   navbarLink1Html?: Maybe<Scalars['String']['output']>;
-  /** The navigation bar second link markup. */
+  /** Text: HTML markup for the second link in the navigation bar. */
   navbarLink2Html?: Maybe<Scalars['String']['output']>;
-  /** The navigation bar message markup. */
+  /** Text: HTML markup for the message in the navigation bar. */
   navbarMessageHtml?: Maybe<Scalars['String']['output']>;
-  /** The number of areas to show in the navigation bar component. */
+  /** Integer: Number of service areas to display in the navigation bar. */
   navbarShowAreas: Scalars['Int']['output'];
-  /** This indicates whether the button CTA will be visible in the navigation bar component. */
+  /** Boolean: Indicates if the call-to-action button is visible in the navigation bar. */
   navbarShowCtaButton: Scalars['Boolean']['output'];
-  /** The number of services to show in the navigation bar component. */
+  /** Integer: Number of services to display in the navigation bar. */
   navbarShowServices: Scalars['Int']['output'];
   pages: Array<PageObject>;
-  /** The phone number of the business */
+  /** String: Contact phone number of the business. */
   phoneNumber?: Maybe<Scalars['String']['output']>;
   pk?: Maybe<Scalars['ID']['output']>;
-  /** The primary color of the website */
+  /** String: Primary color theme of the website. */
   primaryColor?: Maybe<Scalars['String']['output']>;
   questions: Array<QuestionObject>;
   reviews: Array<ReviewObject>;
-  /** The secondary color of the website */
+  /** String: Secondary color theme of the website. */
   secondaryColor?: Maybe<Scalars['String']['output']>;
   services: Array<ServiceObject>;
-  /** The slug of the business */
+  /** String: URL-friendly identifier for the business, used in web addresses. */
   slug?: Maybe<Scalars['String']['output']>;
-  /** The state where the business is located */
+  /** String: State or region where the business is located. */
   state?: Maybe<Scalars['String']['output']>;
-  /** The top level domain to use with this website. Example: my-local-business.com */
+  /** Array of Strings: List of top-level domains for the website, e.g., 'my-local-business.com'. */
   tld?: Maybe<Array<Scalars['String']['output']>>;
   updated: Scalars['DateTime']['output'];
-  /** The zip code where the business is located */
+  /** String: Postal code of the business's location. */
   zipCode?: Maybe<Scalars['String']['output']>;
 };
 
@@ -894,105 +894,105 @@ export type CreateService = {
 };
 
 export type WebsiteCreateObject = {
-  /** This indicates whether this website is active at the moment. */
+  /** Boolean: Specifies if the website is currently active. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The address of the business */
+  /** String: Primary street address of the business. */
   address1?: InputMaybe<Scalars['String']['input']>;
-  /** The second address line of address */
+  /** String: Secondary address line, if any. */
   address2?: InputMaybe<Scalars['String']['input']>;
-  /** The description of the business */
+  /** Text: Detailed description of the business's activities and services. */
   businessDescription?: InputMaybe<Scalars['String']['input']>;
-  /** The business EIN (corporation) number. */
+  /** String: Employer Identification Number (EIN) of the business. */
   businessEinNumber?: InputMaybe<Scalars['String']['input']>;
-  /** The logo of the business Min size (450 x 300)px */
+  /** Image: Logo of the business. Recommended minimum size is 450x300 pixels. */
   businessLogo?: InputMaybe<Scalars['String']['input']>;
-  /** The business manager name. */
+  /** String: Name of the business manager. */
   businessManagerPersonName?: InputMaybe<Scalars['String']['input']>;
-  /** The name of the business */
+  /** String: The official name of the business. */
   businessName: Scalars['String']['input'];
-  /** The city where the business is located */
+  /** String: City where the business is located. */
   city?: InputMaybe<Scalars['String']['input']>;
-  /** The markup to use with the button call-to-action. */
+  /** Text: HTML markup for the call-to-action button. */
   ctaButtonHtml?: InputMaybe<Scalars['String']['input']>;
-  /** The markup to use with the main call-to-action. */
+  /** Text: HTML markup for the main call-to-action on the website. */
   ctaHtml?: InputMaybe<Scalars['String']['input']>;
-  /** The custom footer HTML code. This will be used right before the closing </BODY> tag. */
+  /** Text: Custom HTML code for the website's footer section. */
   customFooterCode?: InputMaybe<Scalars['String']['input']>;
-  /** The custom header HTML code. This will be used in the <HEAD> section of the website markup. */
+  /** Text: Custom HTML code for the website's header section. */
   customHeaderCode?: InputMaybe<Scalars['String']['input']>;
-  /** A list of emails that are allowed to edit this website */
+  /** Array of Email Addresses: List of email addresses authorized to edit the website. */
   editor?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** The email address of the business */
+  /** String: Email address for business correspondence. */
   emailAddress?: InputMaybe<Scalars['String']['input']>;
-  /** This indicates whether Google SiteMaps is available. */
+  /** Boolean: Determines if Google SiteMaps is enabled for the website. */
   enableGoogleSitemaps?: InputMaybe<Scalars['Boolean']['input']>;
-  /** This indicates whether this site will use the LocalBusiness object. */
+  /** Boolean: Indicates if Schema.org LocalBusiness object tags are used. */
   enableSchemaOrgLocalbusinessObject?: InputMaybe<Scalars['Boolean']['input']>;
-  /** This indicates whether this site will use the Organization object. */
+  /** Boolean: Indicates if Schema.org Organization object tags are used. */
   enableSchemaOrgOrganizationObject?: InputMaybe<Scalars['Boolean']['input']>;
-  /** This indicates whether this site will use the WebPage object. */
+  /** Boolean: Indicates if Schema.org WebPage object tags are used. */
   enableSchemaOrgWebpageObject?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The footer first link markup. */
+  /** Text: HTML markup for the first link in the footer. */
   footerLink1Html?: InputMaybe<Scalars['String']['input']>;
-  /** The footer second link markup. */
+  /** Text: HTML markup for the second link in the footer. */
   footerLink2Html?: InputMaybe<Scalars['String']['input']>;
-  /** The footer third link markup. */
+  /** Text: HTML markup for the third link in the footer. */
   footerLink3Html?: InputMaybe<Scalars['String']['input']>;
-  /** The footer fourth link markup. */
+  /** Text: HTML markup for the fourth link in the footer. */
   footerLink4Html?: InputMaybe<Scalars['String']['input']>;
-  /** The footer fifth link markup. */
+  /** Text: HTML markup for the fifth link in the footer. */
   footerLink5Html?: InputMaybe<Scalars['String']['input']>;
-  /** The footer message markup. */
+  /** Text: HTML markup for the message in the footer. */
   footerMessageHtml?: InputMaybe<Scalars['String']['input']>;
-  /** The number of areas to show in the footer component. */
+  /** Integer: Number of service areas to display in the footer. */
   footerShowAreas: Scalars['Int']['input'];
-  /** This indicates whether the email address will be visible in the footer component. */
+  /** Boolean: Indicates if the business email address is visible in the footer. */
   footerShowEmailAddress?: InputMaybe<Scalars['Boolean']['input']>;
-  /** This indicates whether the business license number will be visible in the footer component. */
+  /** Boolean: Indicates if the business license number is visible in the footer. */
   footerShowLicenseNumber?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The number of reviews to show in the footer component. */
+  /** Integer: Number of reviews to display in the footer. */
   footerShowReviews: Scalars['Int']['input'];
-  /** The number of services to show in the footer component. */
+  /** Integer: Number of services to display in the footer. */
   footerShowServices: Scalars['Int']['input'];
-  /** The Google Analytics ID to use with this website. For example IX-123213-923s */
+  /** String: Google Analytics ID for tracking website traffic, e.g., 'IX-123213-923s'. */
   googleAnalytics?: InputMaybe<Scalars['String']['input']>;
-  /** The phone number of the business */
+  /** String: Content of the file used for Google site verification. */
   googleVerificationFileContent?: InputMaybe<Scalars['String']['input']>;
-  /** The phone number of the business */
+  /** String: File name used for Google site verification. */
   googleVerificationFileName?: InputMaybe<Scalars['String']['input']>;
-  /** The background image of the homepage */
+  /** Image: Background image for the homepage. */
   homepageBackground?: InputMaybe<Scalars['String']['input']>;
-  /** The custom CSS used in the homepage jumobotron. */
+  /** Text: Custom CSS for the homepage jumbotron. */
   homepageJumbotronCustomCss?: InputMaybe<Scalars['String']['input']>;
-  /** The insurance number of the business */
+  /** String: Insurance policy number of the business. */
   insuranceNumber?: InputMaybe<Scalars['String']['input']>;
-  /** The license number of the business */
+  /** String: Official license number of the business. */
   licenseNumber?: InputMaybe<Scalars['String']['input']>;
-  /** The navigation bar first link markup. */
+  /** Text: HTML markup for the first link in the navigation bar. */
   navbarLink1Html?: InputMaybe<Scalars['String']['input']>;
-  /** The navigation bar second link markup. */
+  /** Text: HTML markup for the second link in the navigation bar. */
   navbarLink2Html?: InputMaybe<Scalars['String']['input']>;
-  /** The navigation bar message markup. */
+  /** Text: HTML markup for the message in the navigation bar. */
   navbarMessageHtml?: InputMaybe<Scalars['String']['input']>;
-  /** The number of areas to show in the navigation bar component. */
+  /** Integer: Number of service areas to display in the navigation bar. */
   navbarShowAreas: Scalars['Int']['input'];
-  /** This indicates whether the button CTA will be visible in the navigation bar component. */
+  /** Boolean: Indicates if the call-to-action button is visible in the navigation bar. */
   navbarShowCtaButton?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The number of services to show in the navigation bar component. */
+  /** Integer: Number of services to display in the navigation bar. */
   navbarShowServices: Scalars['Int']['input'];
-  /** The phone number of the business */
+  /** String: Contact phone number of the business. */
   phoneNumber?: InputMaybe<Scalars['String']['input']>;
-  /** The primary color of the website */
+  /** String: Primary color theme of the website. */
   primaryColor?: InputMaybe<Scalars['String']['input']>;
-  /** The secondary color of the website */
+  /** String: Secondary color theme of the website. */
   secondaryColor?: InputMaybe<Scalars['String']['input']>;
-  /** The slug of the business */
+  /** String: URL-friendly identifier for the business, used in web addresses. */
   slug?: InputMaybe<Scalars['String']['input']>;
-  /** The state where the business is located */
+  /** String: State or region where the business is located. */
   state?: InputMaybe<Scalars['String']['input']>;
-  /** The top level domain to use with this website. Example: my-local-business.com */
+  /** Array of Strings: List of top-level domains for the website, e.g., 'my-local-business.com'. */
   tld?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** The zip code where the business is located */
+  /** String: Postal code of the business's location. */
   zipCode?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1339,106 +1339,106 @@ export type UpdateService = {
 };
 
 export type WebsiteUpdateObject = {
-  /** This indicates whether this website is active at the moment. */
+  /** Boolean: Specifies if the website is currently active. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The address of the business max length 500 */
+  /** String: Primary street address of the business. */
   address1?: InputMaybe<Scalars['String']['input']>;
-  /** The second address line of address max length 500 */
+  /** String: Secondary address line, if any. */
   address2?: InputMaybe<Scalars['String']['input']>;
-  /** The description of the business max length 7500 */
+  /** Text: Detailed description of the business's activities and services. */
   businessDescription?: InputMaybe<Scalars['String']['input']>;
-  /** The business EIN (corporation) number. max length 200 */
+  /** String: Employer Identification Number (EIN) of the business. */
   businessEinNumber?: InputMaybe<Scalars['String']['input']>;
-  /** Min size (450 x 300)px max length 100 */
+  /** Image: Logo of the business. Recommended minimum size is 450x300 pixels. */
   businessLogo?: InputMaybe<Scalars['String']['input']>;
-  /** The business manager name. max length 200 */
+  /** String: Name of the business manager. */
   businessManagerPersonName?: InputMaybe<Scalars['String']['input']>;
-  /** The name of the business max length 200 */
+  /** String: The official name of the business. */
   businessName?: InputMaybe<Scalars['String']['input']>;
-  /** The city where the business is located max length 200 */
+  /** String: City where the business is located. */
   city?: InputMaybe<Scalars['String']['input']>;
-  /** The markup to use with the button call-to-action. max length 2000 */
+  /** Text: HTML markup for the call-to-action button. */
   ctaButtonHtml?: InputMaybe<Scalars['String']['input']>;
-  /** The markup to use with the main call-to-action. max length 2000 */
+  /** Text: HTML markup for the main call-to-action on the website. */
   ctaHtml?: InputMaybe<Scalars['String']['input']>;
-  /** The custom footer HTML code. This will be used right before the closing </BODY> tag. max length 5000 */
+  /** Text: Custom HTML code for the website's footer section. */
   customFooterCode?: InputMaybe<Scalars['String']['input']>;
-  /** The custom header HTML code. This will be used in the <HEAD> section of the website markup. max length 5000 */
+  /** Text: Custom HTML code for the website's header section. */
   customHeaderCode?: InputMaybe<Scalars['String']['input']>;
-  /** A list of emails that are allowed to edit this website */
+  /** Array of Email Addresses: List of email addresses authorized to edit the website. */
   editor?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** The email address of the business */
+  /** String: Email address for business correspondence. */
   emailAddress?: InputMaybe<Scalars['String']['input']>;
-  /** This indicates whether Google SiteMaps is available. */
+  /** Boolean: Determines if Google SiteMaps is enabled for the website. */
   enableGoogleSitemaps?: InputMaybe<Scalars['Boolean']['input']>;
-  /** This indicates whether this site will use the LocalBusiness object. */
+  /** Boolean: Indicates if Schema.org LocalBusiness object tags are used. */
   enableSchemaOrgLocalbusinessObject?: InputMaybe<Scalars['Boolean']['input']>;
-  /** This indicates whether this site will use the Organization object. */
+  /** Boolean: Indicates if Schema.org Organization object tags are used. */
   enableSchemaOrgOrganizationObject?: InputMaybe<Scalars['Boolean']['input']>;
-  /** This indicates whether this site will use the WebPage object. */
+  /** Boolean: Indicates if Schema.org WebPage object tags are used. */
   enableSchemaOrgWebpageObject?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The footer first link markup. max length 2000 */
+  /** Text: HTML markup for the first link in the footer. */
   footerLink1Html?: InputMaybe<Scalars['String']['input']>;
-  /** The footer second link markup. max length 2000 */
+  /** Text: HTML markup for the second link in the footer. */
   footerLink2Html?: InputMaybe<Scalars['String']['input']>;
-  /** The footer third link markup. max length 2000 */
+  /** Text: HTML markup for the third link in the footer. */
   footerLink3Html?: InputMaybe<Scalars['String']['input']>;
-  /** The footer fourth link markup. max length 2000 */
+  /** Text: HTML markup for the fourth link in the footer. */
   footerLink4Html?: InputMaybe<Scalars['String']['input']>;
-  /** The footer fifth link markup. max length 2000 */
+  /** Text: HTML markup for the fifth link in the footer. */
   footerLink5Html?: InputMaybe<Scalars['String']['input']>;
-  /** The footer message markup. max length 2000 */
+  /** Text: HTML markup for the message in the footer. */
   footerMessageHtml?: InputMaybe<Scalars['String']['input']>;
-  /** The number of areas to show in the footer component. max length 200 */
+  /** Integer: Number of service areas to display in the footer. */
   footerShowAreas?: InputMaybe<Scalars['Int']['input']>;
-  /** This indicates whether the email address will be visible in the footer component. */
+  /** Boolean: Indicates if the business email address is visible in the footer. */
   footerShowEmailAddress?: InputMaybe<Scalars['Boolean']['input']>;
-  /** This indicates whether the business license number will be visible in the footer component. */
+  /** Boolean: Indicates if the business license number is visible in the footer. */
   footerShowLicenseNumber?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The number of reviews to show in the footer component. max length 200 */
+  /** Integer: Number of reviews to display in the footer. */
   footerShowReviews?: InputMaybe<Scalars['Int']['input']>;
-  /** The number of services to show in the footer component. max length 200 */
+  /** Integer: Number of services to display in the footer. */
   footerShowServices?: InputMaybe<Scalars['Int']['input']>;
-  /** The Google Analytics ID to use with this website. For example IX-123213-923s max length 200 */
+  /** String: Google Analytics ID for tracking website traffic, e.g., 'IX-123213-923s'. */
   googleAnalytics?: InputMaybe<Scalars['String']['input']>;
-  /** The google verification file content max length 200 */
+  /** String: Content of the file used for Google site verification. */
   googleVerificationFileContent?: InputMaybe<Scalars['String']['input']>;
-  /** The google verification file name max length 200 */
+  /** String: File name used for Google site verification. */
   googleVerificationFileName?: InputMaybe<Scalars['String']['input']>;
-  /** Min size (450 x 300)px max length 100 */
+  /** Image: Background image for the homepage. */
   homepageBackground?: InputMaybe<Scalars['String']['input']>;
-  /** The custom CSS used in the homepage jumobotron. max length 5000 */
+  /** Text: Custom CSS for the homepage jumbotron. */
   homepageJumbotronCustomCss?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['ID']['input'];
-  /** The insurance number of the business max length 200 */
+  /** String: Insurance policy number of the business. */
   insuranceNumber?: InputMaybe<Scalars['String']['input']>;
-  /** The license number of the business max length 200 */
+  /** String: Official license number of the business. */
   licenseNumber?: InputMaybe<Scalars['String']['input']>;
-  /** The navigation bar first link markup. max length 2000 */
+  /** Text: HTML markup for the first link in the navigation bar. */
   navbarLink1Html?: InputMaybe<Scalars['String']['input']>;
-  /** The navigation bar second link markup. max length 2000 */
+  /** Text: HTML markup for the second link in the navigation bar. */
   navbarLink2Html?: InputMaybe<Scalars['String']['input']>;
-  /** The navigation bar message markup. max length 2000 */
+  /** Text: HTML markup for the message in the navigation bar. */
   navbarMessageHtml?: InputMaybe<Scalars['String']['input']>;
-  /** The number of areas to show in the navigation bar component. max length 200 */
+  /** Integer: Number of service areas to display in the navigation bar. */
   navbarShowAreas?: InputMaybe<Scalars['Int']['input']>;
-  /** This indicates whether the button CTA will be visible in the navigation bar component. */
+  /** Boolean: Indicates if the call-to-action button is visible in the navigation bar. */
   navbarShowCtaButton?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The number of services to show in the navigation bar component. max length 200 */
+  /** Integer: Number of services to display in the navigation bar. */
   navbarShowServices?: InputMaybe<Scalars['Int']['input']>;
-  /** The phone number of the business */
+  /** String: Contact phone number of the business. */
   phoneNumber?: InputMaybe<Scalars['String']['input']>;
-  /** The primary color of the website. max length 5000 */
+  /** String: Primary color theme of the website. */
   primaryColor?: InputMaybe<Scalars['String']['input']>;
-  /** The secondary color of the website. max length 5000 */
+  /** String: Secondary color theme of the website. */
   secondaryColor?: InputMaybe<Scalars['String']['input']>;
-  /** The slug of the business max length 200. */
+  /** String: URL-friendly identifier for the business, used in web addresses. */
   slug?: InputMaybe<Scalars['String']['input']>;
-  /** The state where the business is located max length 200 */
+  /** String: State or region where the business is located. */
   state?: InputMaybe<Scalars['String']['input']>;
-  /** The top level domain to use with this website. Example: my-local-business.com */
+  /** Array of Strings: List of top-level domains for the website, e.g., 'my-local-business.com'. */
   tld?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** The zip code where the business is located max length 200 */
+  /** String: Postal code of the business's location. */
   zipCode?: InputMaybe<Scalars['String']['input']>;
 };
 
