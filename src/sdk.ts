@@ -896,33 +896,33 @@ export type CreateService = {
 export type WebsiteCreateObject = {
   /** This indicates whether this website is active at the moment. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The address of the business max length 500 */
+  /** The address of the business */
   address1?: InputMaybe<Scalars['String']['input']>;
-  /** The second address line of address max length 500 */
+  /** The second address line of address */
   address2?: InputMaybe<Scalars['String']['input']>;
-  /** The description of the business max length 7500 */
+  /** The description of the business */
   businessDescription?: InputMaybe<Scalars['String']['input']>;
-  /** The business EIN (corporation) number. max length 200 */
+  /** The business EIN (corporation) number. */
   businessEinNumber?: InputMaybe<Scalars['String']['input']>;
-  /** Min size (450 x 300)px max length 100 */
+  /** The logo of the business Min size (450 x 300)px */
   businessLogo?: InputMaybe<Scalars['String']['input']>;
-  /** The business manager name. max length 200 */
+  /** The business manager name. */
   businessManagerPersonName?: InputMaybe<Scalars['String']['input']>;
-  /** The name of the business max length 200 */
+  /** The name of the business */
   businessName: Scalars['String']['input'];
-  /** The city where the business is located max length 200 */
+  /** The city where the business is located */
   city?: InputMaybe<Scalars['String']['input']>;
-  /** The markup to use with the button call-to-action. max length 2000 */
+  /** The markup to use with the button call-to-action. */
   ctaButtonHtml?: InputMaybe<Scalars['String']['input']>;
-  /** The markup to use with the main call-to-action. max length 2000 */
+  /** The markup to use with the main call-to-action. */
   ctaHtml?: InputMaybe<Scalars['String']['input']>;
-  /** The custom footer HTML code. This will be used right before the closing </BODY> tag. max length 5000 */
+  /** The custom footer HTML code. This will be used right before the closing </BODY> tag. */
   customFooterCode?: InputMaybe<Scalars['String']['input']>;
-  /** The custom header HTML code. This will be used in the <HEAD> section of the website markup. max length 5000 */
+  /** The custom header HTML code. This will be used in the <HEAD> section of the website markup. */
   customHeaderCode?: InputMaybe<Scalars['String']['input']>;
   /** A list of emails that are allowed to edit this website */
   editor?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** The email address of the business max length 200 */
+  /** The email address of the business */
   emailAddress?: InputMaybe<Scalars['String']['input']>;
   /** This indicates whether Google SiteMaps is available. */
   enableGoogleSitemaps?: InputMaybe<Scalars['Boolean']['input']>;
@@ -932,67 +932,67 @@ export type WebsiteCreateObject = {
   enableSchemaOrgOrganizationObject?: InputMaybe<Scalars['Boolean']['input']>;
   /** This indicates whether this site will use the WebPage object. */
   enableSchemaOrgWebpageObject?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The footer first link markup. max length 2000 */
+  /** The footer first link markup. */
   footerLink1Html?: InputMaybe<Scalars['String']['input']>;
-  /** The footer second link markup. max length 2000 */
+  /** The footer second link markup. */
   footerLink2Html?: InputMaybe<Scalars['String']['input']>;
-  /** The footer third link markup. max length 2000 */
+  /** The footer third link markup. */
   footerLink3Html?: InputMaybe<Scalars['String']['input']>;
-  /** The footer fourth link markup. max length 2000 */
+  /** The footer fourth link markup. */
   footerLink4Html?: InputMaybe<Scalars['String']['input']>;
-  /** The footer fifth link markup. max length 2000 */
+  /** The footer fifth link markup. */
   footerLink5Html?: InputMaybe<Scalars['String']['input']>;
-  /** The footer message markup. max length 2000 */
+  /** The footer message markup. */
   footerMessageHtml?: InputMaybe<Scalars['String']['input']>;
-  /** The number of areas to show in the footer component. max length 200 */
+  /** The number of areas to show in the footer component. */
   footerShowAreas: Scalars['Int']['input'];
   /** This indicates whether the email address will be visible in the footer component. */
   footerShowEmailAddress?: InputMaybe<Scalars['Boolean']['input']>;
   /** This indicates whether the business license number will be visible in the footer component. */
   footerShowLicenseNumber?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The number of reviews to show in the footer component. max length 200 */
+  /** The number of reviews to show in the footer component. */
   footerShowReviews: Scalars['Int']['input'];
-  /** The number of services to show in the footer component. max length 200 */
+  /** The number of services to show in the footer component. */
   footerShowServices: Scalars['Int']['input'];
-  /** The Google Analytics ID to use with this website. For example IX-123213-923s max length 200 */
+  /** The Google Analytics ID to use with this website. For example IX-123213-923s */
   googleAnalytics?: InputMaybe<Scalars['String']['input']>;
-  /** The google verification file content max length 200 */
+  /** The phone number of the business */
   googleVerificationFileContent?: InputMaybe<Scalars['String']['input']>;
-  /** The google verification file name max length 200 */
+  /** The phone number of the business */
   googleVerificationFileName?: InputMaybe<Scalars['String']['input']>;
-  /** Min size (450 x 300)px max length 100 */
+  /** The background image of the homepage */
   homepageBackground?: InputMaybe<Scalars['String']['input']>;
-  /** The custom CSS used in the homepage jumobotron. max length 5000 */
+  /** The custom CSS used in the homepage jumobotron. */
   homepageJumbotronCustomCss?: InputMaybe<Scalars['String']['input']>;
-  /** The insurance number of the business max length 200 */
+  /** The insurance number of the business */
   insuranceNumber?: InputMaybe<Scalars['String']['input']>;
-  /** The license number of the business max length 200 */
+  /** The license number of the business */
   licenseNumber?: InputMaybe<Scalars['String']['input']>;
-  /** The navigation bar first link markup. max length 2000 */
+  /** The navigation bar first link markup. */
   navbarLink1Html?: InputMaybe<Scalars['String']['input']>;
-  /** The navigation bar second link markup. max length 2000 */
+  /** The navigation bar second link markup. */
   navbarLink2Html?: InputMaybe<Scalars['String']['input']>;
-  /** The navigation bar message markup. max length 2000 */
+  /** The navigation bar message markup. */
   navbarMessageHtml?: InputMaybe<Scalars['String']['input']>;
-  /** The number of areas to show in the navigation bar component. max length 200 */
+  /** The number of areas to show in the navigation bar component. */
   navbarShowAreas: Scalars['Int']['input'];
   /** This indicates whether the button CTA will be visible in the navigation bar component. */
   navbarShowCtaButton?: InputMaybe<Scalars['Boolean']['input']>;
-  /** The number of services to show in the navigation bar component. max length 200 */
+  /** The number of services to show in the navigation bar component. */
   navbarShowServices: Scalars['Int']['input'];
-  /** The phone number of the business max length 200 */
+  /** The phone number of the business */
   phoneNumber?: InputMaybe<Scalars['String']['input']>;
-  /** The primary color of the website. max length 5000 */
+  /** The primary color of the website */
   primaryColor?: InputMaybe<Scalars['String']['input']>;
-  /** The secondary color of the website. max length 5000 */
+  /** The secondary color of the website */
   secondaryColor?: InputMaybe<Scalars['String']['input']>;
-  /** The slug of the business max length 200 */
+  /** The slug of the business */
   slug?: InputMaybe<Scalars['String']['input']>;
-  /** The state where the business is located max length 200 */
+  /** The state where the business is located */
   state?: InputMaybe<Scalars['String']['input']>;
   /** The top level domain to use with this website. Example: my-local-business.com */
   tld?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** The zip code where the business is located max length 200 */
+  /** The zip code where the business is located */
   zipCode?: InputMaybe<Scalars['String']['input']>;
 };
 
