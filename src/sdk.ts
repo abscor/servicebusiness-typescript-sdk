@@ -169,7 +169,7 @@ export type WebsiteObject = {
   businessDescription?: Maybe<Scalars['String']['output']>;
   /** The business EIN (corporation) number. */
   businessEinNumber?: Maybe<Scalars['String']['output']>;
-  /** Min size (450 x 300)px */
+  /** The logo of the business Min size (450 x 300)px */
   businessLogo?: Maybe<Scalars['String']['output']>;
   /** The business manager name. */
   businessManagerPersonName?: Maybe<Scalars['String']['output']>;
@@ -227,7 +227,7 @@ export type WebsiteObject = {
   googleVerificationFileContent?: Maybe<Scalars['String']['output']>;
   /** The phone number of the business */
   googleVerificationFileName?: Maybe<Scalars['String']['output']>;
-  /** Min size (450 x 300)px */
+  /** The background image of the homepage */
   homepageBackground?: Maybe<Scalars['String']['output']>;
   /** The custom CSS used in the homepage jumobotron. */
   homepageJumbotronCustomCss?: Maybe<Scalars['String']['output']>;
