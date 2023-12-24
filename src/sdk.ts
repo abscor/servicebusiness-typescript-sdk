@@ -20,8 +20,8 @@ export type Scalars = {
   DateTime: { input: any; output: any; }
   JSONString: { input: any; output: any; }
   Decimal: { input: any; output: any; }
-  FileUploadField: { input: any; output: any; }
   GenericScalar: { input: any; output: any; }
+  FileUploadField: { input: any; output: any; }
 };
 
 export type Query = {
@@ -32,6 +32,8 @@ export type Query = {
   faqs?: Maybe<Array<Maybe<FaqObject>>>;
   page?: Maybe<PageObject>;
   pages?: Maybe<Array<Maybe<PageObject>>>;
+  postdata?: Maybe<DataObject>;
+  postdatas?: Maybe<Array<Maybe<DataObject>>>;
   profile?: Maybe<ProfileObject>;
   question?: Maybe<QuestionObject>;
   questions?: Maybe<Array<Maybe<QuestionObject>>>;
@@ -73,6 +75,18 @@ export type QueryPageArgs = {
 
 
 export type QueryPagesArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  websiteId?: InputMaybe<Scalars['ID']['input']>;
+};
+
+
+export type QueryPostdataArgs = {
+  id?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryPostdatasArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   websiteId?: InputMaybe<Scalars['ID']['input']>;
@@ -187,6 +201,7 @@ export type WebsiteObject = {
   customFooterCode?: Maybe<Scalars['String']['output']>;
   /** Text: Custom HTML code for the website's header section. */
   customHeaderCode?: Maybe<Scalars['String']['output']>;
+  datas: Array<DataObject>;
   /** Array of Email Addresses: List of email addresses authorized to edit the website. */
   editor?: Maybe<Array<Scalars['String']['output']>>;
   /** String: Email address for business correspondence. */
@@ -270,6 +285,20 @@ export type WebsiteObject = {
   updated: Scalars['DateTime']['output'];
   /** String: Postal code of the business's location. */
   zipCode?: Maybe<Scalars['String']['output']>;
+};
+
+export type DataObject = {
+  __typename?: 'DataObject';
+  created: Scalars['DateTime']['output'];
+  /** JSON: The data of the post. */
+  data?: Maybe<Scalars['JSONString']['output']>;
+  id: Scalars['ID']['output'];
+  /** String: The ip address of the user. */
+  ipAddress: Scalars['String']['output'];
+  metadata?: Maybe<Scalars['JSONString']['output']>;
+  pk?: Maybe<Scalars['ID']['output']>;
+  updated: Scalars['DateTime']['output'];
+  website?: Maybe<WebsiteObject>;
 };
 
 export type FaqObject = {
@@ -430,6 +459,8 @@ export type Mutations = {
   completeResetPassword?: Maybe<CompleteResetPassword>;
   /** Create a Area. */
   createArea?: Maybe<CreateArea>;
+  /** Create a Data. */
+  createData?: Maybe<CreateData>;
   /** Create a Faq. */
   createFaq?: Maybe<CreateFaq>;
   /** Create a Page. */
@@ -523,6 +554,11 @@ export type MutationsCompleteResetPasswordArgs = {
 
 export type MutationsCreateAreaArgs = {
   input: AreaCreateObject;
+};
+
+
+export type MutationsCreateDataArgs = {
+  input: DataCreateObject;
 };
 
 
@@ -765,6 +801,19 @@ export type AreaCreateObject = {
 export type CreateArea = {
   __typename?: 'CreateArea';
   data?: Maybe<AreaObject>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type DataCreateObject = {
+  /** JSON: The data of the post. */
+  data?: InputMaybe<Scalars['GenericScalar']['input']>;
+};
+
+/** Create a Data. */
+export type CreateData = {
+  __typename?: 'CreateData';
+  data?: Maybe<DataObject>;
   message?: Maybe<Scalars['String']['output']>;
   success?: Maybe<Scalars['Boolean']['output']>;
 };
@@ -1519,6 +1568,13 @@ export type CreateAreaMutationVariables = Exact<{
 
 export type CreateAreaMutation = { __typename?: 'Mutations', createArea?: { __typename?: 'CreateArea', success?: boolean | null, message?: string | null, data?: { __typename?: 'AreaObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, name?: string | null, slug?: string | null, zipCode: string, description?: string | null, image?: string | null, enableSchemaOrgAreaServedObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string> | null, displayOrder: number, pk?: string | null } | null } | null };
 
+export type CreateDataMutationVariables = Exact<{
+  input: DataCreateObject;
+}>;
+
+
+export type CreateDataMutation = { __typename?: 'Mutations', createData?: { __typename?: 'CreateData', success?: boolean | null, message?: string | null, data?: { __typename?: 'DataObject', id: string, created: any, updated: any, metadata?: any | null, data?: any | null, ipAddress: string, pk?: string | null } | null } | null };
+
 export type CreateFaqMutationVariables = Exact<{
   input: FaqCreateObject;
 }>;
@@ -1813,6 +1869,22 @@ export type PagesQueryVariables = Exact<{
 
 export type PagesQuery = { __typename?: 'Query', pages?: Array<{ __typename?: 'PageObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, body: string, image: string, keywordTargeting?: Array<string | null> | null, displayOrder: number, enableSchemaOrgArticleObject: boolean, showInsuranceCompanyWidget: boolean, pk?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, homepageJumbotronCustomCss?: string | null, pk?: string | null } } | null> | null };
 
+export type PostdataQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type PostdataQuery = { __typename?: 'Query', postdata?: { __typename?: 'DataObject', id: string, created: any, updated: any, metadata?: any | null, data?: any | null, ipAddress: string, pk?: string | null, website?: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, homepageJumbotronCustomCss?: string | null, pk?: string | null } | null } | null };
+
+export type PostdatasQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  websiteId?: InputMaybe<Scalars['ID']['input']>;
+}>;
+
+
+export type PostdatasQuery = { __typename?: 'Query', postdatas?: Array<{ __typename?: 'DataObject', id: string, created: any, updated: any, metadata?: any | null, data?: any | null, ipAddress: string, pk?: string | null, website?: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, homepageJumbotronCustomCss?: string | null, pk?: string | null } | null } | null> | null };
+
 export type ProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1870,7 +1942,7 @@ export type WebsiteQueryVariables = Exact<{
 }>;
 
 
-export type WebsiteQuery = { __typename?: 'Query', website?: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, homepageJumbotronCustomCss?: string | null, pk?: string | null, areas: Array<{ __typename?: 'AreaObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, name?: string | null, slug?: string | null, zipCode: string, description?: string | null, image?: string | null, enableSchemaOrgAreaServedObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string> | null, displayOrder: number, pk?: string | null }>, faqs: Array<{ __typename?: 'FaqObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name: string, pk?: string | null }>, pages: Array<{ __typename?: 'PageObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, body: string, image: string, keywordTargeting?: Array<string | null> | null, displayOrder: number, enableSchemaOrgArticleObject: boolean, showInsuranceCompanyWidget: boolean, pk?: string | null }>, questions: Array<{ __typename?: 'QuestionObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, question: string, answer: string, displayOrder?: number | null, pk?: string | null, faqId?: string | null }>, services: Array<{ __typename?: 'ServiceObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, image?: string | null, enableSchemaOrgServiceObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string | null> | null, displayOrder: number, pk?: string | null }>, reviews: Array<{ __typename?: 'ReviewObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, title: string, body?: string | null, personImage?: string | null, personName: string, personZipCode: string, rating: any, displayOrder: number, pk?: string | null }> } | null };
+export type WebsiteQuery = { __typename?: 'Query', website?: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, homepageJumbotronCustomCss?: string | null, pk?: string | null, areas: Array<{ __typename?: 'AreaObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, name?: string | null, slug?: string | null, zipCode: string, description?: string | null, image?: string | null, enableSchemaOrgAreaServedObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string> | null, displayOrder: number, pk?: string | null }>, datas: Array<{ __typename?: 'DataObject', id: string, created: any, updated: any, metadata?: any | null, data?: any | null, ipAddress: string, pk?: string | null }>, faqs: Array<{ __typename?: 'FaqObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name: string, pk?: string | null }>, pages: Array<{ __typename?: 'PageObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, body: string, image: string, keywordTargeting?: Array<string | null> | null, displayOrder: number, enableSchemaOrgArticleObject: boolean, showInsuranceCompanyWidget: boolean, pk?: string | null }>, questions: Array<{ __typename?: 'QuestionObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, question: string, answer: string, displayOrder?: number | null, pk?: string | null, faqId?: string | null }>, services: Array<{ __typename?: 'ServiceObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, image?: string | null, enableSchemaOrgServiceObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string | null> | null, displayOrder: number, pk?: string | null }>, reviews: Array<{ __typename?: 'ReviewObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, title: string, body?: string | null, personImage?: string | null, personName: string, personZipCode: string, rating: any, displayOrder: number, pk?: string | null }> } | null };
 
 export type WebsitesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -1878,7 +1950,7 @@ export type WebsitesQueryVariables = Exact<{
 }>;
 
 
-export type WebsitesQuery = { __typename?: 'Query', websites?: Array<{ __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, homepageJumbotronCustomCss?: string | null, pk?: string | null, areas: Array<{ __typename?: 'AreaObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, name?: string | null, slug?: string | null, zipCode: string, description?: string | null, image?: string | null, enableSchemaOrgAreaServedObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string> | null, displayOrder: number, pk?: string | null }>, faqs: Array<{ __typename?: 'FaqObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name: string, pk?: string | null }>, pages: Array<{ __typename?: 'PageObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, body: string, image: string, keywordTargeting?: Array<string | null> | null, displayOrder: number, enableSchemaOrgArticleObject: boolean, showInsuranceCompanyWidget: boolean, pk?: string | null }>, questions: Array<{ __typename?: 'QuestionObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, question: string, answer: string, displayOrder?: number | null, pk?: string | null, faqId?: string | null }>, services: Array<{ __typename?: 'ServiceObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, image?: string | null, enableSchemaOrgServiceObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string | null> | null, displayOrder: number, pk?: string | null }>, reviews: Array<{ __typename?: 'ReviewObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, title: string, body?: string | null, personImage?: string | null, personName: string, personZipCode: string, rating: any, displayOrder: number, pk?: string | null }> } | null> | null };
+export type WebsitesQuery = { __typename?: 'Query', websites?: Array<{ __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, homepageJumbotronCustomCss?: string | null, pk?: string | null, areas: Array<{ __typename?: 'AreaObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, name?: string | null, slug?: string | null, zipCode: string, description?: string | null, image?: string | null, enableSchemaOrgAreaServedObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string> | null, displayOrder: number, pk?: string | null }>, datas: Array<{ __typename?: 'DataObject', id: string, created: any, updated: any, metadata?: any | null, data?: any | null, ipAddress: string, pk?: string | null }>, faqs: Array<{ __typename?: 'FaqObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name: string, pk?: string | null }>, pages: Array<{ __typename?: 'PageObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, body: string, image: string, keywordTargeting?: Array<string | null> | null, displayOrder: number, enableSchemaOrgArticleObject: boolean, showInsuranceCompanyWidget: boolean, pk?: string | null }>, questions: Array<{ __typename?: 'QuestionObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, question: string, answer: string, displayOrder?: number | null, pk?: string | null, faqId?: string | null }>, services: Array<{ __typename?: 'ServiceObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, image?: string | null, enableSchemaOrgServiceObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string | null> | null, displayOrder: number, pk?: string | null }>, reviews: Array<{ __typename?: 'ReviewObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, title: string, body?: string | null, personImage?: string | null, personName: string, personZipCode: string, rating: any, displayOrder: number, pk?: string | null }> } | null> | null };
 
 
 
@@ -1960,6 +2032,7 @@ export type ResolversTypes = {
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   JSONString: ResolverTypeWrapper<Scalars['JSONString']['output']>;
   WebsiteObject: ResolverTypeWrapper<WebsiteObject>;
+  DataObject: ResolverTypeWrapper<DataObject>;
   FaqObject: ResolverTypeWrapper<FaqObject>;
   QuestionObject: ResolverTypeWrapper<QuestionObject>;
   PageObject: ResolverTypeWrapper<PageObject>;
@@ -1974,6 +2047,9 @@ export type ResolversTypes = {
   CompleteResetPassword: ResolverTypeWrapper<CompleteResetPassword>;
   AreaCreateObject: AreaCreateObject;
   CreateArea: ResolverTypeWrapper<CreateArea>;
+  DataCreateObject: DataCreateObject;
+  GenericScalar: ResolverTypeWrapper<Scalars['GenericScalar']['output']>;
+  CreateData: ResolverTypeWrapper<CreateData>;
   FaqCreateObject: FaqCreateObject;
   CreateFaq: ResolverTypeWrapper<CreateFaq>;
   PageCreateObject: PageCreateObject;
@@ -1994,7 +2070,6 @@ export type ResolversTypes = {
   DeleteReview: ResolverTypeWrapper<DeleteReview>;
   DeleteService: ResolverTypeWrapper<DeleteService>;
   DeleteWebsite: ResolverTypeWrapper<DeleteWebsite>;
-  GenericScalar: ResolverTypeWrapper<Scalars['GenericScalar']['output']>;
   ImportWebsite: ResolverTypeWrapper<ImportWebsite>;
   Refresh: ResolverTypeWrapper<Refresh>;
   ResendActivationEmail: ResolverTypeWrapper<ResendActivationEmail>;
@@ -2037,6 +2112,7 @@ export type ResolversParentTypes = {
   ID: Scalars['ID']['output'];
   JSONString: Scalars['JSONString']['output'];
   WebsiteObject: WebsiteObject;
+  DataObject: DataObject;
   FaqObject: FaqObject;
   QuestionObject: QuestionObject;
   PageObject: PageObject;
@@ -2051,6 +2127,9 @@ export type ResolversParentTypes = {
   CompleteResetPassword: CompleteResetPassword;
   AreaCreateObject: AreaCreateObject;
   CreateArea: CreateArea;
+  DataCreateObject: DataCreateObject;
+  GenericScalar: Scalars['GenericScalar']['output'];
+  CreateData: CreateData;
   FaqCreateObject: FaqCreateObject;
   CreateFaq: CreateFaq;
   PageCreateObject: PageCreateObject;
@@ -2071,7 +2150,6 @@ export type ResolversParentTypes = {
   DeleteReview: DeleteReview;
   DeleteService: DeleteService;
   DeleteWebsite: DeleteWebsite;
-  GenericScalar: Scalars['GenericScalar']['output'];
   ImportWebsite: ImportWebsite;
   Refresh: Refresh;
   ResendActivationEmail: ResendActivationEmail;
@@ -2116,6 +2194,8 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   faqs?: Resolver<Maybe<Array<Maybe<ResolversTypes['FaqObject']>>>, ParentType, ContextType, Partial<QueryFaqsArgs>>;
   page?: Resolver<Maybe<ResolversTypes['PageObject']>, ParentType, ContextType, Partial<QueryPageArgs>>;
   pages?: Resolver<Maybe<Array<Maybe<ResolversTypes['PageObject']>>>, ParentType, ContextType, Partial<QueryPagesArgs>>;
+  postdata?: Resolver<Maybe<ResolversTypes['DataObject']>, ParentType, ContextType, Partial<QueryPostdataArgs>>;
+  postdatas?: Resolver<Maybe<Array<Maybe<ResolversTypes['DataObject']>>>, ParentType, ContextType, Partial<QueryPostdatasArgs>>;
   profile?: Resolver<Maybe<ResolversTypes['ProfileObject']>, ParentType, ContextType>;
   question?: Resolver<Maybe<ResolversTypes['QuestionObject']>, ParentType, ContextType, Partial<QueryQuestionArgs>>;
   questions?: Resolver<Maybe<Array<Maybe<ResolversTypes['QuestionObject']>>>, ParentType, ContextType, Partial<QueryQuestionsArgs>>;
@@ -2173,6 +2253,7 @@ export type WebsiteObjectResolvers<ContextType = any, ParentType extends Resolve
   ctaHtml?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   customFooterCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   customHeaderCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  datas?: Resolver<Array<ResolversTypes['DataObject']>, ParentType, ContextType>;
   editor?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
   emailAddress?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   enableGoogleSitemaps?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
@@ -2219,6 +2300,18 @@ export type WebsiteObjectResolvers<ContextType = any, ParentType extends Resolve
   tld?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
   updated?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   zipCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DataObjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['DataObject'] = ResolversParentTypes['DataObject']> = {
+  created?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  data?: Resolver<Maybe<ResolversTypes['JSONString']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  ipAddress?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  metadata?: Resolver<Maybe<ResolversTypes['JSONString']>, ParentType, ContextType>;
+  pk?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  updated?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  website?: Resolver<Maybe<ResolversTypes['WebsiteObject']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -2337,6 +2430,7 @@ export type MutationsResolvers<ContextType = any, ParentType extends ResolversPa
   changePassword?: Resolver<Maybe<ResolversTypes['ChangePassword']>, ParentType, ContextType, RequireFields<MutationsChangePasswordArgs, 'password'>>;
   completeResetPassword?: Resolver<Maybe<ResolversTypes['CompleteResetPassword']>, ParentType, ContextType, RequireFields<MutationsCompleteResetPasswordArgs, 'emailAddress' | 'verificationCode'>>;
   createArea?: Resolver<Maybe<ResolversTypes['CreateArea']>, ParentType, ContextType, RequireFields<MutationsCreateAreaArgs, 'input'>>;
+  createData?: Resolver<Maybe<ResolversTypes['CreateData']>, ParentType, ContextType, RequireFields<MutationsCreateDataArgs, 'input'>>;
   createFaq?: Resolver<Maybe<ResolversTypes['CreateFaq']>, ParentType, ContextType, RequireFields<MutationsCreateFaqArgs, 'input'>>;
   createPage?: Resolver<Maybe<ResolversTypes['CreatePage']>, ParentType, ContextType, RequireFields<MutationsCreatePageArgs, 'input'>>;
   createQuestion?: Resolver<Maybe<ResolversTypes['CreateQuestion']>, ParentType, ContextType, RequireFields<MutationsCreateQuestionArgs, 'input'>>;
@@ -2399,6 +2493,17 @@ export type CompleteResetPasswordResolvers<ContextType = any, ParentType extends
 
 export type CreateAreaResolvers<ContextType = any, ParentType extends ResolversParentTypes['CreateArea'] = ResolversParentTypes['CreateArea']> = {
   data?: Resolver<Maybe<ResolversTypes['AreaObject']>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export interface GenericScalarScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['GenericScalar'], any> {
+  name: 'GenericScalar';
+}
+
+export type CreateDataResolvers<ContextType = any, ParentType extends ResolversParentTypes['CreateData'] = ResolversParentTypes['CreateData']> = {
+  data?: Resolver<Maybe<ResolversTypes['DataObject']>, ParentType, ContextType>;
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -2491,10 +2596,6 @@ export type DeleteWebsiteResolvers<ContextType = any, ParentType extends Resolve
   success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
-
-export interface GenericScalarScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['GenericScalar'], any> {
-  name: 'GenericScalar';
-}
 
 export type ImportWebsiteResolvers<ContextType = any, ParentType extends ResolversParentTypes['ImportWebsite'] = ResolversParentTypes['ImportWebsite']> = {
   importedWebsite?: Resolver<Maybe<ResolversTypes['WebsiteObject']>, ParentType, ContextType>;
@@ -2642,6 +2743,7 @@ export type Resolvers<ContextType = any> = {
   DateTime?: GraphQLScalarType;
   JSONString?: GraphQLScalarType;
   WebsiteObject?: WebsiteObjectResolvers<ContextType>;
+  DataObject?: DataObjectResolvers<ContextType>;
   FaqObject?: FaqObjectResolvers<ContextType>;
   QuestionObject?: QuestionObjectResolvers<ContextType>;
   PageObject?: PageObjectResolvers<ContextType>;
@@ -2655,6 +2757,8 @@ export type Resolvers<ContextType = any> = {
   ChangePassword?: ChangePasswordResolvers<ContextType>;
   CompleteResetPassword?: CompleteResetPasswordResolvers<ContextType>;
   CreateArea?: CreateAreaResolvers<ContextType>;
+  GenericScalar?: GraphQLScalarType;
+  CreateData?: CreateDataResolvers<ContextType>;
   CreateFaq?: CreateFaqResolvers<ContextType>;
   FileUploadField?: GraphQLScalarType;
   CreatePage?: CreatePageResolvers<ContextType>;
@@ -2669,7 +2773,6 @@ export type Resolvers<ContextType = any> = {
   DeleteReview?: DeleteReviewResolvers<ContextType>;
   DeleteService?: DeleteServiceResolvers<ContextType>;
   DeleteWebsite?: DeleteWebsiteResolvers<ContextType>;
-  GenericScalar?: GraphQLScalarType;
   ImportWebsite?: ImportWebsiteResolvers<ContextType>;
   Refresh?: RefreshResolvers<ContextType>;
   ResendActivationEmail?: ResendActivationEmailResolvers<ContextType>;
@@ -2750,6 +2853,23 @@ export const CreateAreaDocument = gql`
       htmlBlock2
       keywordTargeting
       displayOrder
+      pk
+    }
+    success
+    message
+  }
+}
+    `;
+export const CreateDataDocument = gql`
+    mutation createData($input: DataCreateObject!) {
+  createData(input: $input) {
+    data {
+      id
+      created
+      updated
+      metadata
+      data
+      ipAddress
       pk
     }
     success
@@ -3865,6 +3985,146 @@ export const PagesDocument = gql`
   }
 }
     `;
+export const PostdataDocument = gql`
+    query postdata($id: Int) {
+  postdata(id: $id) {
+    id
+    created
+    updated
+    metadata
+    data
+    ipAddress
+    website {
+      id
+      created
+      updated
+      metadata
+      active
+      tld
+      businessName
+      slug
+      businessDescription
+      businessLogo
+      licenseNumber
+      insuranceNumber
+      address1
+      address2
+      city
+      state
+      zipCode
+      phoneNumber
+      emailAddress
+      editor
+      googleAnalytics
+      googleVerificationFileName
+      googleVerificationFileContent
+      enableGoogleSitemaps
+      enableSchemaOrgWebpageObject
+      enableSchemaOrgOrganizationObject
+      enableSchemaOrgLocalbusinessObject
+      primaryColor
+      secondaryColor
+      homepageBackground
+      businessManagerPersonName
+      businessEinNumber
+      customHeaderCode
+      customFooterCode
+      ctaHtml
+      ctaButtonHtml
+      navbarMessageHtml
+      navbarLink1Html
+      navbarLink2Html
+      navbarShowServices
+      navbarShowAreas
+      navbarShowCtaButton
+      footerMessageHtml
+      footerShowServices
+      footerShowAreas
+      footerShowReviews
+      footerShowLicenseNumber
+      footerShowEmailAddress
+      footerLink1Html
+      footerLink2Html
+      footerLink3Html
+      footerLink4Html
+      footerLink5Html
+      homepageJumbotronCustomCss
+      pk
+    }
+    pk
+  }
+}
+    `;
+export const PostdatasDocument = gql`
+    query postdatas($first: Int, $skip: Int, $websiteId: ID) {
+  postdatas(first: $first, skip: $skip, websiteId: $websiteId) {
+    id
+    created
+    updated
+    metadata
+    data
+    ipAddress
+    website {
+      id
+      created
+      updated
+      metadata
+      active
+      tld
+      businessName
+      slug
+      businessDescription
+      businessLogo
+      licenseNumber
+      insuranceNumber
+      address1
+      address2
+      city
+      state
+      zipCode
+      phoneNumber
+      emailAddress
+      editor
+      googleAnalytics
+      googleVerificationFileName
+      googleVerificationFileContent
+      enableGoogleSitemaps
+      enableSchemaOrgWebpageObject
+      enableSchemaOrgOrganizationObject
+      enableSchemaOrgLocalbusinessObject
+      primaryColor
+      secondaryColor
+      homepageBackground
+      businessManagerPersonName
+      businessEinNumber
+      customHeaderCode
+      customFooterCode
+      ctaHtml
+      ctaButtonHtml
+      navbarMessageHtml
+      navbarLink1Html
+      navbarLink2Html
+      navbarShowServices
+      navbarShowAreas
+      navbarShowCtaButton
+      footerMessageHtml
+      footerShowServices
+      footerShowAreas
+      footerShowReviews
+      footerShowLicenseNumber
+      footerShowEmailAddress
+      footerLink1Html
+      footerLink2Html
+      footerLink3Html
+      footerLink4Html
+      footerLink5Html
+      homepageJumbotronCustomCss
+      pk
+    }
+    pk
+  }
+}
+    `;
 export const ProfileDocument = gql`
     query profile {
   profile {
@@ -4436,6 +4696,15 @@ export const WebsiteDocument = gql`
       displayOrder
       pk
     }
+    datas {
+      id
+      created
+      updated
+      metadata
+      data
+      ipAddress
+      pk
+    }
     faqs {
       id
       created
@@ -4589,6 +4858,15 @@ export const WebsitesDocument = gql`
       displayOrder
       pk
     }
+    datas {
+      id
+      created
+      updated
+      metadata
+      data
+      ipAddress
+      pk
+    }
     faqs {
       id
       created
@@ -4688,6 +4966,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     createArea(variables: CreateAreaMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateAreaMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<CreateAreaMutation>(CreateAreaDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createArea', 'mutation');
+    },
+    createData(variables: CreateDataMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateDataMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateDataMutation>(CreateDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createData', 'mutation');
     },
     createFaq(variables: CreateFaqMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateFaqMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<CreateFaqMutation>(CreateFaqDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createFaq', 'mutation');
@@ -4808,6 +5089,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     pages(variables?: PagesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PagesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<PagesQuery>(PagesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'pages', 'query');
+    },
+    postdata(variables?: PostdataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PostdataQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<PostdataQuery>(PostdataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'postdata', 'query');
+    },
+    postdatas(variables?: PostdatasQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PostdatasQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<PostdatasQuery>(PostdatasDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'postdatas', 'query');
     },
     profile(variables?: ProfileQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ProfileQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ProfileQuery>(ProfileDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'profile', 'query');
