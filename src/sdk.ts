@@ -685,6 +685,7 @@ export type MutationsTokenAuthArgs = {
 
 
 export type MutationsTokenOauthLoginArgs = {
+  oauthPayload?: InputMaybe<Scalars['GenericScalar']['input']>;
   oauthToken?: InputMaybe<Scalars['String']['input']>;
   provider?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1750,6 +1751,7 @@ export type TokenAuthMutationVariables = Exact<{
 export type TokenAuthMutation = { __typename?: 'Mutations', tokenAuth?: { __typename?: 'ObtainJSONWebToken', payload: any, refreshExpiresIn: number, token: string } | null };
 
 export type TokenOauthLoginMutationVariables = Exact<{
+  oauthPayload?: InputMaybe<Scalars['GenericScalar']['input']>;
   oauthToken?: InputMaybe<Scalars['String']['input']>;
   provider?: InputMaybe<Scalars['String']['input']>;
 }>;
@@ -3266,8 +3268,8 @@ export const TokenAuthDocument = gql`
 }
     `;
 export const TokenOauthLoginDocument = gql`
-    mutation tokenOauthLogin($oauthToken: String, $provider: String) {
-  tokenOauthLogin(oauthToken: $oauthToken, provider: $provider) {
+    mutation tokenOauthLogin($oauthPayload: GenericScalar, $oauthToken: String, $provider: String) {
+  tokenOauthLogin(oauthPayload: $oauthPayload, oauthToken: $oauthToken, provider: $provider) {
     success
     message
     token
