@@ -496,6 +496,8 @@ export type Mutations = {
   /** Import a Website. */
   importWebsite?: Maybe<ImportWebsite>;
   refreshToken?: Maybe<Refresh>;
+  /** Register a mobile Device. */
+  registerMobileDevice?: Maybe<RegisterMobileDevice>;
   /** Resend an activation email */
   resendActivationEmail?: Maybe<ResendActivationEmail>;
   /** Send the provided email_address a password reset link. One can provide a `baseUrl` argument to set the URL base that will be sent to the user email address. */
@@ -640,6 +642,11 @@ export type MutationsImportWebsiteArgs = {
 
 export type MutationsRefreshTokenArgs = {
   token?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type MutationsRegisterMobileDeviceArgs = {
+  input: MobileDeviceRegistrationCreateObject;
 };
 
 
@@ -1143,6 +1150,19 @@ export type Refresh = {
   payload: Scalars['GenericScalar']['output'];
   refreshExpiresIn: Scalars['Int']['output'];
   token: Scalars['String']['output'];
+};
+
+export type MobileDeviceRegistrationCreateObject = {
+  active?: InputMaybe<Scalars['Boolean']['input']>;
+  deviceId: Scalars['String']['input'];
+  registrationId: Scalars['String']['input'];
+};
+
+/** Register a mobile Device. */
+export type RegisterMobileDevice = {
+  __typename?: 'RegisterMobileDevice';
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
 };
 
 /** Resend an activation email.  */
@@ -1695,6 +1715,13 @@ export type RefreshTokenMutationVariables = Exact<{
 
 export type RefreshTokenMutation = { __typename?: 'Mutations', refreshToken?: { __typename?: 'Refresh', payload: any, refreshExpiresIn: number, token: string } | null };
 
+export type RegisterMobileDeviceMutationVariables = Exact<{
+  input: MobileDeviceRegistrationCreateObject;
+}>;
+
+
+export type RegisterMobileDeviceMutation = { __typename?: 'Mutations', registerMobileDevice?: { __typename?: 'RegisterMobileDevice', success?: boolean | null, message?: string | null } | null };
+
 export type ResendActivationEmailMutationVariables = Exact<{
   emailAddress: Scalars['String']['input'];
 }>;
@@ -2088,6 +2115,8 @@ export type ResolversTypes = {
   DeleteWebsite: ResolverTypeWrapper<DeleteWebsite>;
   ImportWebsite: ResolverTypeWrapper<ImportWebsite>;
   Refresh: ResolverTypeWrapper<Refresh>;
+  MobileDeviceRegistrationCreateObject: MobileDeviceRegistrationCreateObject;
+  RegisterMobileDevice: ResolverTypeWrapper<RegisterMobileDevice>;
   ResendActivationEmail: ResolverTypeWrapper<ResendActivationEmail>;
   ResetPassword: ResolverTypeWrapper<ResetPassword>;
   Signin: ResolverTypeWrapper<Signin>;
@@ -2168,6 +2197,8 @@ export type ResolversParentTypes = {
   DeleteWebsite: DeleteWebsite;
   ImportWebsite: ImportWebsite;
   Refresh: Refresh;
+  MobileDeviceRegistrationCreateObject: MobileDeviceRegistrationCreateObject;
+  RegisterMobileDevice: RegisterMobileDevice;
   ResendActivationEmail: ResendActivationEmail;
   ResetPassword: ResetPassword;
   Signin: Signin;
@@ -2465,6 +2496,7 @@ export type MutationsResolvers<ContextType = any, ParentType extends ResolversPa
   deleteWebsite?: Resolver<Maybe<ResolversTypes['DeleteWebsite']>, ParentType, ContextType, RequireFields<MutationsDeleteWebsiteArgs, 'id'>>;
   importWebsite?: Resolver<Maybe<ResolversTypes['ImportWebsite']>, ParentType, ContextType, RequireFields<MutationsImportWebsiteArgs, 'input'>>;
   refreshToken?: Resolver<Maybe<ResolversTypes['Refresh']>, ParentType, ContextType, Partial<MutationsRefreshTokenArgs>>;
+  registerMobileDevice?: Resolver<Maybe<ResolversTypes['RegisterMobileDevice']>, ParentType, ContextType, RequireFields<MutationsRegisterMobileDeviceArgs, 'input'>>;
   resendActivationEmail?: Resolver<Maybe<ResolversTypes['ResendActivationEmail']>, ParentType, ContextType, RequireFields<MutationsResendActivationEmailArgs, 'emailAddress'>>;
   resetPassword?: Resolver<Maybe<ResolversTypes['ResetPassword']>, ParentType, ContextType, RequireFields<MutationsResetPasswordArgs, 'emailAddress'>>;
   signin?: Resolver<Maybe<ResolversTypes['Signin']>, ParentType, ContextType, RequireFields<MutationsSigninArgs, 'emailAddress' | 'password'>>;
@@ -2627,6 +2659,12 @@ export type RefreshResolvers<ContextType = any, ParentType extends ResolversPare
   payload?: Resolver<ResolversTypes['GenericScalar'], ParentType, ContextType>;
   refreshExpiresIn?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type RegisterMobileDeviceResolvers<ContextType = any, ParentType extends ResolversParentTypes['RegisterMobileDevice'] = ResolversParentTypes['RegisterMobileDevice']> = {
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -2794,6 +2832,7 @@ export type Resolvers<ContextType = any> = {
   DeleteWebsite?: DeleteWebsiteResolvers<ContextType>;
   ImportWebsite?: ImportWebsiteResolvers<ContextType>;
   Refresh?: RefreshResolvers<ContextType>;
+  RegisterMobileDevice?: RegisterMobileDeviceResolvers<ContextType>;
   ResendActivationEmail?: ResendActivationEmailResolvers<ContextType>;
   ResetPassword?: ResetPasswordResolvers<ContextType>;
   Signin?: SigninResolvers<ContextType>;
@@ -3207,6 +3246,14 @@ export const RefreshTokenDocument = gql`
     payload
     refreshExpiresIn
     token
+  }
+}
+    `;
+export const RegisterMobileDeviceDocument = gql`
+    mutation registerMobileDevice($input: MobileDeviceRegistrationCreateObject!) {
+  registerMobileDevice(input: $input) {
+    success
+    message
   }
 }
     `;
@@ -5090,6 +5137,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     refreshToken(variables?: RefreshTokenMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<RefreshTokenMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<RefreshTokenMutation>(RefreshTokenDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'refreshToken', 'mutation');
+    },
+    registerMobileDevice(variables: RegisterMobileDeviceMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<RegisterMobileDeviceMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RegisterMobileDeviceMutation>(RegisterMobileDeviceDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'registerMobileDevice', 'mutation');
     },
     resendActivationEmail(variables: ResendActivationEmailMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ResendActivationEmailMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<ResendActivationEmailMutation>(ResendActivationEmailDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'resendActivationEmail', 'mutation');
