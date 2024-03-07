@@ -157,6 +157,7 @@ export type AreaObject = {
   /** String: URL or path to the image representing the area. Recommended minimum size is 450x300 pixels. */
   image?: Maybe<Scalars['String']['output']>;
   keywordTargeting?: Maybe<Array<Scalars['String']['output']>>;
+  /** Metadata for the area. */
   metadata?: Maybe<Scalars['JSONString']['output']>;
   /** String: The official name of the area. */
   name?: Maybe<Scalars['String']['output']>;
@@ -1601,7 +1602,7 @@ export type CreateAreaMutationVariables = Exact<{
 }>;
 
 
-export type CreateAreaMutation = { __typename?: 'Mutations', createArea?: { __typename?: 'CreateArea', success?: boolean | null, message?: string | null, data?: { __typename?: 'AreaObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, name?: string | null, slug?: string | null, zipCode: string, description?: string | null, image?: string | null, enableSchemaOrgAreaServedObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string> | null, displayOrder: number, pk?: string | null } | null } | null };
+export type CreateAreaMutation = { __typename?: 'Mutations', createArea?: { __typename?: 'CreateArea', success?: boolean | null, message?: string | null, data?: { __typename?: 'AreaObject', id: string, created: any, updated: any, active: boolean, name?: string | null, slug?: string | null, zipCode: string, description?: string | null, image?: string | null, enableSchemaOrgAreaServedObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string> | null, displayOrder: number, metadata?: any | null, pk?: string | null } | null } | null };
 
 export type CreateDataMutationVariables = Exact<{
   input: DataCreateObject;
@@ -1799,7 +1800,7 @@ export type UpdateAreaMutationVariables = Exact<{
 }>;
 
 
-export type UpdateAreaMutation = { __typename?: 'Mutations', updateArea?: { __typename?: 'UpdateArea', success?: boolean | null, message?: string | null, data?: { __typename?: 'AreaObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, name?: string | null, slug?: string | null, zipCode: string, description?: string | null, image?: string | null, enableSchemaOrgAreaServedObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string> | null, displayOrder: number, pk?: string | null } | null } | null };
+export type UpdateAreaMutation = { __typename?: 'Mutations', updateArea?: { __typename?: 'UpdateArea', success?: boolean | null, message?: string | null, data?: { __typename?: 'AreaObject', id: string, created: any, updated: any, active: boolean, name?: string | null, slug?: string | null, zipCode: string, description?: string | null, image?: string | null, enableSchemaOrgAreaServedObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string> | null, displayOrder: number, metadata?: any | null, pk?: string | null } | null } | null };
 
 export type UpdateEmailSubscriptionMutationVariables = Exact<{
   dailySummary: Scalars['Boolean']['input'];
@@ -1870,7 +1871,7 @@ export type AreaQueryVariables = Exact<{
 }>;
 
 
-export type AreaQuery = { __typename?: 'Query', area?: { __typename?: 'AreaObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, name?: string | null, slug?: string | null, zipCode: string, description?: string | null, image?: string | null, enableSchemaOrgAreaServedObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string> | null, displayOrder: number, pk?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, homepageJumbotronCustomCss?: string | null, pk?: string | null, defaultSubdomainName?: string | null } } | null };
+export type AreaQuery = { __typename?: 'Query', area?: { __typename?: 'AreaObject', id: string, created: any, updated: any, active: boolean, name?: string | null, slug?: string | null, zipCode: string, description?: string | null, image?: string | null, enableSchemaOrgAreaServedObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string> | null, displayOrder: number, metadata?: any | null, pk?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, homepageJumbotronCustomCss?: string | null, pk?: string | null, defaultSubdomainName?: string | null } } | null };
 
 export type AreasQueryVariables = Exact<{
   websiteId?: InputMaybe<Scalars['ID']['input']>;
@@ -1879,7 +1880,7 @@ export type AreasQueryVariables = Exact<{
 }>;
 
 
-export type AreasQuery = { __typename?: 'Query', areas?: Array<{ __typename?: 'AreaObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, name?: string | null, slug?: string | null, zipCode: string, description?: string | null, image?: string | null, enableSchemaOrgAreaServedObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string> | null, displayOrder: number, pk?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, homepageJumbotronCustomCss?: string | null, pk?: string | null, defaultSubdomainName?: string | null } } | null> | null };
+export type AreasQuery = { __typename?: 'Query', areas?: Array<{ __typename?: 'AreaObject', id: string, created: any, updated: any, active: boolean, name?: string | null, slug?: string | null, zipCode: string, description?: string | null, image?: string | null, enableSchemaOrgAreaServedObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string> | null, displayOrder: number, metadata?: any | null, pk?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, homepageJumbotronCustomCss?: string | null, pk?: string | null, defaultSubdomainName?: string | null } } | null> | null };
 
 export type FaqQueryVariables = Exact<{
   id?: InputMaybe<Scalars['Int']['input']>;
@@ -1985,7 +1986,7 @@ export type WebsiteQueryVariables = Exact<{
 }>;
 
 
-export type WebsiteQuery = { __typename?: 'Query', website?: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, homepageJumbotronCustomCss?: string | null, pk?: string | null, defaultSubdomainName?: string | null, pages: Array<{ __typename?: 'PageObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, body: string, image: string, keywordTargeting?: Array<string | null> | null, displayOrder: number, enableSchemaOrgArticleObject: boolean, showInsuranceCompanyWidget: boolean, pk?: string | null }>, areas: Array<{ __typename?: 'AreaObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, name?: string | null, slug?: string | null, zipCode: string, description?: string | null, image?: string | null, enableSchemaOrgAreaServedObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string> | null, displayOrder: number, pk?: string | null }>, datas: Array<{ __typename?: 'DataObject', id: string, created: any, updated: any, metadata?: any | null, data?: any | null, ipAddress: string, pk?: string | null }>, faqs: Array<{ __typename?: 'FaqObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name: string, pk?: string | null }>, questions: Array<{ __typename?: 'QuestionObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, question: string, answer: string, displayOrder?: number | null, pk?: string | null, faqId?: string | null }>, services: Array<{ __typename?: 'ServiceObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, image?: string | null, enableSchemaOrgServiceObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string | null> | null, displayOrder: number, pk?: string | null }>, reviews: Array<{ __typename?: 'ReviewObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, title: string, body?: string | null, personImage?: string | null, personName: string, personZipCode: string, rating: any, displayOrder: number, pk?: string | null }> } | null };
+export type WebsiteQuery = { __typename?: 'Query', website?: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, homepageJumbotronCustomCss?: string | null, pk?: string | null, defaultSubdomainName?: string | null, pages: Array<{ __typename?: 'PageObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, body: string, image: string, keywordTargeting?: Array<string | null> | null, displayOrder: number, enableSchemaOrgArticleObject: boolean, showInsuranceCompanyWidget: boolean, pk?: string | null }>, areas: Array<{ __typename?: 'AreaObject', id: string, created: any, updated: any, active: boolean, name?: string | null, slug?: string | null, zipCode: string, description?: string | null, image?: string | null, enableSchemaOrgAreaServedObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string> | null, displayOrder: number, metadata?: any | null, pk?: string | null }>, datas: Array<{ __typename?: 'DataObject', id: string, created: any, updated: any, metadata?: any | null, data?: any | null, ipAddress: string, pk?: string | null }>, faqs: Array<{ __typename?: 'FaqObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name: string, pk?: string | null }>, questions: Array<{ __typename?: 'QuestionObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, question: string, answer: string, displayOrder?: number | null, pk?: string | null, faqId?: string | null }>, services: Array<{ __typename?: 'ServiceObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, image?: string | null, enableSchemaOrgServiceObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string | null> | null, displayOrder: number, pk?: string | null }>, reviews: Array<{ __typename?: 'ReviewObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, title: string, body?: string | null, personImage?: string | null, personName: string, personZipCode: string, rating: any, displayOrder: number, pk?: string | null }> } | null };
 
 export type WebsitesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -1993,7 +1994,7 @@ export type WebsitesQueryVariables = Exact<{
 }>;
 
 
-export type WebsitesQuery = { __typename?: 'Query', websites?: Array<{ __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, homepageJumbotronCustomCss?: string | null, pk?: string | null, defaultSubdomainName?: string | null, pages: Array<{ __typename?: 'PageObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, body: string, image: string, keywordTargeting?: Array<string | null> | null, displayOrder: number, enableSchemaOrgArticleObject: boolean, showInsuranceCompanyWidget: boolean, pk?: string | null }>, areas: Array<{ __typename?: 'AreaObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, name?: string | null, slug?: string | null, zipCode: string, description?: string | null, image?: string | null, enableSchemaOrgAreaServedObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string> | null, displayOrder: number, pk?: string | null }>, datas: Array<{ __typename?: 'DataObject', id: string, created: any, updated: any, metadata?: any | null, data?: any | null, ipAddress: string, pk?: string | null }>, faqs: Array<{ __typename?: 'FaqObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name: string, pk?: string | null }>, questions: Array<{ __typename?: 'QuestionObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, question: string, answer: string, displayOrder?: number | null, pk?: string | null, faqId?: string | null }>, services: Array<{ __typename?: 'ServiceObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, image?: string | null, enableSchemaOrgServiceObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string | null> | null, displayOrder: number, pk?: string | null }>, reviews: Array<{ __typename?: 'ReviewObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, title: string, body?: string | null, personImage?: string | null, personName: string, personZipCode: string, rating: any, displayOrder: number, pk?: string | null }> } | null> | null };
+export type WebsitesQuery = { __typename?: 'Query', websites?: Array<{ __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, homepageJumbotronCustomCss?: string | null, pk?: string | null, defaultSubdomainName?: string | null, pages: Array<{ __typename?: 'PageObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, body: string, image: string, keywordTargeting?: Array<string | null> | null, displayOrder: number, enableSchemaOrgArticleObject: boolean, showInsuranceCompanyWidget: boolean, pk?: string | null }>, areas: Array<{ __typename?: 'AreaObject', id: string, created: any, updated: any, active: boolean, name?: string | null, slug?: string | null, zipCode: string, description?: string | null, image?: string | null, enableSchemaOrgAreaServedObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string> | null, displayOrder: number, metadata?: any | null, pk?: string | null }>, datas: Array<{ __typename?: 'DataObject', id: string, created: any, updated: any, metadata?: any | null, data?: any | null, ipAddress: string, pk?: string | null }>, faqs: Array<{ __typename?: 'FaqObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name: string, pk?: string | null }>, questions: Array<{ __typename?: 'QuestionObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, question: string, answer: string, displayOrder?: number | null, pk?: string | null, faqId?: string | null }>, services: Array<{ __typename?: 'ServiceObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, image?: string | null, enableSchemaOrgServiceObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string | null> | null, displayOrder: number, pk?: string | null }>, reviews: Array<{ __typename?: 'ReviewObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, title: string, body?: string | null, personImage?: string | null, personName: string, personZipCode: string, rating: any, displayOrder: number, pk?: string | null }> } | null> | null };
 
 
 
@@ -2898,7 +2899,6 @@ export const CreateAreaDocument = gql`
       id
       created
       updated
-      metadata
       active
       name
       slug
@@ -2911,6 +2911,7 @@ export const CreateAreaDocument = gql`
       htmlBlock2
       keywordTargeting
       displayOrder
+      metadata
       pk
     }
     success
@@ -3341,7 +3342,6 @@ export const UpdateAreaDocument = gql`
       id
       created
       updated
-      metadata
       active
       name
       slug
@@ -3354,6 +3354,7 @@ export const UpdateAreaDocument = gql`
       htmlBlock2
       keywordTargeting
       displayOrder
+      metadata
       pk
     }
     success
@@ -3584,7 +3585,6 @@ export const AreaDocument = gql`
     id
     created
     updated
-    metadata
     active
     name
     slug
@@ -3657,6 +3657,7 @@ export const AreaDocument = gql`
       pk
       defaultSubdomainName
     }
+    metadata
     pk
   }
 }
@@ -3667,7 +3668,6 @@ export const AreasDocument = gql`
     id
     created
     updated
-    metadata
     active
     name
     slug
@@ -3740,6 +3740,7 @@ export const AreasDocument = gql`
       pk
       defaultSubdomainName
     }
+    metadata
     pk
   }
 }
@@ -4817,7 +4818,6 @@ export const WebsiteDocument = gql`
       id
       created
       updated
-      metadata
       active
       name
       slug
@@ -4830,6 +4830,7 @@ export const WebsiteDocument = gql`
       htmlBlock2
       keywordTargeting
       displayOrder
+      metadata
       pk
     }
     datas {
@@ -4982,7 +4983,6 @@ export const WebsitesDocument = gql`
       id
       created
       updated
-      metadata
       active
       name
       slug
@@ -4995,6 +4995,7 @@ export const WebsitesDocument = gql`
       htmlBlock2
       keywordTargeting
       displayOrder
+      metadata
       pk
     }
     datas {
