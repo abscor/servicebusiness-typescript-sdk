@@ -454,9 +454,36 @@ export type ProfileObject = {
   /** String: Contact phone number of the user. Maximum length of 500 characters. */
   phoneNumber: Scalars['String']['output'];
   pk?: Maybe<Scalars['ID']['output']>;
+  /** A reference to the associated Subscription object. This field links each profile to a specific subscription. */
+  subscription?: Maybe<SubscriptionObject>;
   updated: Scalars['DateTime']['output'];
   /** Boolean: Indicates whether the user opts in for weekly summary notifications. */
   weeklySummary: Scalars['Boolean']['output'];
+};
+
+export type SubscriptionObject = {
+  __typename?: 'SubscriptionObject';
+  created: Scalars['DateTime']['output'];
+  id: Scalars['ID']['output'];
+  /** Integer: The length of the subscription in days. */
+  lengthDays?: Maybe<Scalars['Int']['output']>;
+  metadata?: Maybe<Scalars['JSONString']['output']>;
+  pk?: Maybe<Scalars['ID']['output']>;
+  /** JSON: A JSON object containing the program options selected for this subscription. */
+  programOptions?: Maybe<Scalars['GenericScalar']['output']>;
+  /** DateTime: The date and time the subscription started. */
+  startDate?: Maybe<Scalars['DateTime']['output']>;
+  /** String: The status of the subscription. See SubscriptionStatus for possible values. */
+  status?: Maybe<Scalars['String']['output']>;
+  /** String: The Stripe checkout session ID for this subscription. */
+  stripeCheckoutSessionId?: Maybe<Scalars['String']['output']>;
+  /** String: The Stripe customer ID for this subscription. */
+  stripeCustomerId?: Maybe<Scalars['String']['output']>;
+  /** String: The Stripe subscription ID for this subscription. */
+  stripeSubscriptionId?: Maybe<Scalars['String']['output']>;
+  updated: Scalars['DateTime']['output'];
+  /** ForeignKey: A reference to the associated User object. This field links each subscription to a specific user. */
+  userId?: Maybe<Scalars['ID']['output']>;
 };
 
 export type Mutations = {
@@ -1949,7 +1976,7 @@ export type PostdatasQuery = { __typename?: 'Query', postdatas?: Array<{ __typen
 export type ProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ProfileQuery = { __typename?: 'Query', profile?: { __typename?: 'ProfileObject', id: string, created: any, updated: any, metadata?: any | null, firstName?: string | null, lastName?: string | null, phoneNumber: string, dailySummary: boolean, weeklySummary: boolean, pk?: string | null, emailAddress?: string | null } | null };
+export type ProfileQuery = { __typename?: 'Query', profile?: { __typename?: 'ProfileObject', id: string, created: any, updated: any, metadata?: any | null, firstName?: string | null, lastName?: string | null, phoneNumber: string, dailySummary: boolean, weeklySummary: boolean, pk?: string | null, emailAddress?: string | null, subscription?: { __typename?: 'SubscriptionObject', id: string, created: any, updated: any, metadata?: any | null, startDate?: any | null, lengthDays?: number | null, programOptions?: any | null, stripeSubscriptionId?: string | null, stripeCustomerId?: string | null, stripeCheckoutSessionId?: string | null, status?: string | null, pk?: string | null, userId?: string | null } | null } | null };
 
 export type QuestionQueryVariables = Exact<{
   id?: InputMaybe<Scalars['Int']['input']>;
@@ -2101,6 +2128,8 @@ export type ResolversTypes = {
   Decimal: ResolverTypeWrapper<Scalars['Decimal']['output']>;
   ServiceObject: ResolverTypeWrapper<ServiceObject>;
   ProfileObject: ResolverTypeWrapper<ProfileObject>;
+  SubscriptionObject: ResolverTypeWrapper<SubscriptionObject>;
+  GenericScalar: ResolverTypeWrapper<Scalars['GenericScalar']['output']>;
   Mutations: ResolverTypeWrapper<{}>;
   ActivateAccount: ResolverTypeWrapper<ActivateAccount>;
   ChangeEmailAddress: ResolverTypeWrapper<ChangeEmailAddress>;
@@ -2109,7 +2138,6 @@ export type ResolversTypes = {
   AreaCreateObject: AreaCreateObject;
   CreateArea: ResolverTypeWrapper<CreateArea>;
   DataCreateObject: DataCreateObject;
-  GenericScalar: ResolverTypeWrapper<Scalars['GenericScalar']['output']>;
   CreateData: ResolverTypeWrapper<CreateData>;
   FaqCreateObject: FaqCreateObject;
   CreateFaq: ResolverTypeWrapper<CreateFaq>;
@@ -2183,6 +2211,8 @@ export type ResolversParentTypes = {
   Decimal: Scalars['Decimal']['output'];
   ServiceObject: ServiceObject;
   ProfileObject: ProfileObject;
+  SubscriptionObject: SubscriptionObject;
+  GenericScalar: Scalars['GenericScalar']['output'];
   Mutations: {};
   ActivateAccount: ActivateAccount;
   ChangeEmailAddress: ChangeEmailAddress;
@@ -2191,7 +2221,6 @@ export type ResolversParentTypes = {
   AreaCreateObject: AreaCreateObject;
   CreateArea: CreateArea;
   DataCreateObject: DataCreateObject;
-  GenericScalar: Scalars['GenericScalar']['output'];
   CreateData: CreateData;
   FaqCreateObject: FaqCreateObject;
   CreateFaq: CreateFaq;
@@ -2490,10 +2519,32 @@ export type ProfileObjectResolvers<ContextType = any, ParentType extends Resolve
   metadata?: Resolver<Maybe<ResolversTypes['JSONString']>, ParentType, ContextType>;
   phoneNumber?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   pk?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  subscription?: Resolver<Maybe<ResolversTypes['SubscriptionObject']>, ParentType, ContextType>;
   updated?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   weeklySummary?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
+
+export type SubscriptionObjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['SubscriptionObject'] = ResolversParentTypes['SubscriptionObject']> = {
+  created?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  lengthDays?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  metadata?: Resolver<Maybe<ResolversTypes['JSONString']>, ParentType, ContextType>;
+  pk?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  programOptions?: Resolver<Maybe<ResolversTypes['GenericScalar']>, ParentType, ContextType>;
+  startDate?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  stripeCheckoutSessionId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  stripeCustomerId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  stripeSubscriptionId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  updated?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  userId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export interface GenericScalarScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['GenericScalar'], any> {
+  name: 'GenericScalar';
+}
 
 export type MutationsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutations'] = ResolversParentTypes['Mutations']> = {
   activateAccount?: Resolver<Maybe<ResolversTypes['ActivateAccount']>, ParentType, ContextType, RequireFields<MutationsActivateAccountArgs, 'emailAddress' | 'verificationCode'>>;
@@ -2569,10 +2620,6 @@ export type CreateAreaResolvers<ContextType = any, ParentType extends ResolversP
   success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
-
-export interface GenericScalarScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['GenericScalar'], any> {
-  name: 'GenericScalar';
-}
 
 export type CreateDataResolvers<ContextType = any, ParentType extends ResolversParentTypes['CreateData'] = ResolversParentTypes['CreateData']> = {
   data?: Resolver<Maybe<ResolversTypes['DataObject']>, ParentType, ContextType>;
@@ -2829,13 +2876,14 @@ export type Resolvers<ContextType = any> = {
   Decimal?: GraphQLScalarType;
   ServiceObject?: ServiceObjectResolvers<ContextType>;
   ProfileObject?: ProfileObjectResolvers<ContextType>;
+  SubscriptionObject?: SubscriptionObjectResolvers<ContextType>;
+  GenericScalar?: GraphQLScalarType;
   Mutations?: MutationsResolvers<ContextType>;
   ActivateAccount?: ActivateAccountResolvers<ContextType>;
   ChangeEmailAddress?: ChangeEmailAddressResolvers<ContextType>;
   ChangePassword?: ChangePasswordResolvers<ContextType>;
   CompleteResetPassword?: CompleteResetPasswordResolvers<ContextType>;
   CreateArea?: CreateAreaResolvers<ContextType>;
-  GenericScalar?: GraphQLScalarType;
   CreateData?: CreateDataResolvers<ContextType>;
   CreateFaq?: CreateFaqResolvers<ContextType>;
   FileUploadField?: GraphQLScalarType;
@@ -4292,6 +4340,21 @@ export const ProfileDocument = gql`
     weeklySummary
     pk
     emailAddress
+    subscription {
+      id
+      created
+      updated
+      metadata
+      startDate
+      lengthDays
+      programOptions
+      stripeSubscriptionId
+      stripeCustomerId
+      stripeCheckoutSessionId
+      status
+      pk
+      userId
+    }
   }
 }
     `;
