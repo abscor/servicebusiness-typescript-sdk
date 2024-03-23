@@ -496,6 +496,8 @@ export type Mutations = {
   changePassword?: Maybe<ChangePassword>;
   /** Complete Verification Code for both Password Reset or Activating a new account */
   completeResetPassword?: Maybe<CompleteResetPassword>;
+  /** Crawl a Website. */
+  crawlWebsite?: Maybe<CrawlWebsite>;
   /** Create a Area. */
   createArea?: Maybe<CreateArea>;
   /** Create a Data. */
@@ -590,6 +592,11 @@ export type MutationsChangePasswordArgs = {
 export type MutationsCompleteResetPasswordArgs = {
   emailAddress: Scalars['String']['input'];
   verificationCode: Scalars['String']['input'];
+};
+
+
+export type MutationsCrawlWebsiteArgs = {
+  input: CrawlWebsiteCreateObject;
 };
 
 
@@ -813,6 +820,18 @@ export type CompleteResetPassword = {
   __typename?: 'CompleteResetPassword';
   data?: Maybe<Scalars['String']['output']>;
   errors?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
+export type CrawlWebsiteCreateObject = {
+  webAddress?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Crawl a Website. */
+export type CrawlWebsite = {
+  __typename?: 'CrawlWebsite';
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+  taskId?: Maybe<Scalars['String']['output']>;
 };
 
 export type AreaCreateObject = {
@@ -1641,6 +1660,13 @@ export type CompleteResetPasswordMutationVariables = Exact<{
 
 export type CompleteResetPasswordMutation = { __typename?: 'Mutations', completeResetPassword?: { __typename?: 'CompleteResetPassword', data?: string | null, errors?: Array<string | null> | null } | null };
 
+export type CrawlWebsiteMutationVariables = Exact<{
+  input: CrawlWebsiteCreateObject;
+}>;
+
+
+export type CrawlWebsiteMutation = { __typename?: 'Mutations', crawlWebsite?: { __typename?: 'CrawlWebsite', success?: boolean | null, taskId?: string | null, message?: string | null } | null };
+
 export type CreateAreaMutationVariables = Exact<{
   input: AreaCreateObject;
 }>;
@@ -2135,6 +2161,8 @@ export type ResolversTypes = {
   ChangeEmailAddress: ResolverTypeWrapper<ChangeEmailAddress>;
   ChangePassword: ResolverTypeWrapper<ChangePassword>;
   CompleteResetPassword: ResolverTypeWrapper<CompleteResetPassword>;
+  CrawlWebsiteCreateObject: CrawlWebsiteCreateObject;
+  CrawlWebsite: ResolverTypeWrapper<CrawlWebsite>;
   AreaCreateObject: AreaCreateObject;
   CreateArea: ResolverTypeWrapper<CreateArea>;
   DataCreateObject: DataCreateObject;
@@ -2218,6 +2246,8 @@ export type ResolversParentTypes = {
   ChangeEmailAddress: ChangeEmailAddress;
   ChangePassword: ChangePassword;
   CompleteResetPassword: CompleteResetPassword;
+  CrawlWebsiteCreateObject: CrawlWebsiteCreateObject;
+  CrawlWebsite: CrawlWebsite;
   AreaCreateObject: AreaCreateObject;
   CreateArea: CreateArea;
   DataCreateObject: DataCreateObject;
@@ -2551,6 +2581,7 @@ export type MutationsResolvers<ContextType = any, ParentType extends ResolversPa
   changeEmailAddress?: Resolver<Maybe<ResolversTypes['ChangeEmailAddress']>, ParentType, ContextType, RequireFields<MutationsChangeEmailAddressArgs, 'newEmailAddress'>>;
   changePassword?: Resolver<Maybe<ResolversTypes['ChangePassword']>, ParentType, ContextType, RequireFields<MutationsChangePasswordArgs, 'password'>>;
   completeResetPassword?: Resolver<Maybe<ResolversTypes['CompleteResetPassword']>, ParentType, ContextType, RequireFields<MutationsCompleteResetPasswordArgs, 'emailAddress' | 'verificationCode'>>;
+  crawlWebsite?: Resolver<Maybe<ResolversTypes['CrawlWebsite']>, ParentType, ContextType, RequireFields<MutationsCrawlWebsiteArgs, 'input'>>;
   createArea?: Resolver<Maybe<ResolversTypes['CreateArea']>, ParentType, ContextType, RequireFields<MutationsCreateAreaArgs, 'input'>>;
   createData?: Resolver<Maybe<ResolversTypes['CreateData']>, ParentType, ContextType, RequireFields<MutationsCreateDataArgs, 'input'>>;
   createFaq?: Resolver<Maybe<ResolversTypes['CreateFaq']>, ParentType, ContextType, RequireFields<MutationsCreateFaqArgs, 'input'>>;
@@ -2611,6 +2642,13 @@ export type ChangePasswordResolvers<ContextType = any, ParentType extends Resolv
 export type CompleteResetPasswordResolvers<ContextType = any, ParentType extends ResolversParentTypes['CompleteResetPassword'] = ResolversParentTypes['CompleteResetPassword']> = {
   data?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   errors?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CrawlWebsiteResolvers<ContextType = any, ParentType extends ResolversParentTypes['CrawlWebsite'] = ResolversParentTypes['CrawlWebsite']> = {
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  taskId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -2883,6 +2921,7 @@ export type Resolvers<ContextType = any> = {
   ChangeEmailAddress?: ChangeEmailAddressResolvers<ContextType>;
   ChangePassword?: ChangePasswordResolvers<ContextType>;
   CompleteResetPassword?: CompleteResetPasswordResolvers<ContextType>;
+  CrawlWebsite?: CrawlWebsiteResolvers<ContextType>;
   CreateArea?: CreateAreaResolvers<ContextType>;
   CreateData?: CreateDataResolvers<ContextType>;
   CreateFaq?: CreateFaqResolvers<ContextType>;
@@ -2957,6 +2996,15 @@ export const CompleteResetPasswordDocument = gql`
   completeResetPassword(emailAddress: $emailAddress, verificationCode: $verificationCode) {
     data
     errors
+  }
+}
+    `;
+export const CrawlWebsiteDocument = gql`
+    mutation crawlWebsite($input: CrawlWebsiteCreateObject!) {
+  crawlWebsite(input: $input) {
+    success
+    taskId
+    message
   }
 }
     `;
@@ -5227,6 +5275,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     completeResetPassword(variables: CompleteResetPasswordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CompleteResetPasswordMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<CompleteResetPasswordMutation>(CompleteResetPasswordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'completeResetPassword', 'mutation');
+    },
+    crawlWebsite(variables: CrawlWebsiteMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CrawlWebsiteMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CrawlWebsiteMutation>(CrawlWebsiteDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'crawlWebsite', 'mutation');
     },
     createArea(variables: CreateAreaMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateAreaMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<CreateAreaMutation>(CreateAreaDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createArea', 'mutation');
