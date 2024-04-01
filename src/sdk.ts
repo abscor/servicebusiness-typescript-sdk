@@ -30,6 +30,7 @@ export type Query = {
   areas?: Maybe<Array<Maybe<AreaObject>>>;
   faq?: Maybe<FaqObject>;
   faqs?: Maybe<Array<Maybe<FaqObject>>>;
+  ipAddress?: Maybe<IpAddress>;
   page?: Maybe<PageObject>;
   pages?: Maybe<Array<Maybe<PageObject>>>;
   postdata?: Maybe<DataObject>;
@@ -43,6 +44,7 @@ export type Query = {
   services?: Maybe<Array<Maybe<ServiceObject>>>;
   website?: Maybe<WebsiteObject>;
   websites?: Maybe<Array<Maybe<WebsiteObject>>>;
+  zipCode?: Maybe<ZipCode>;
 };
 
 
@@ -66,6 +68,11 @@ export type QueryFaqArgs = {
 export type QueryFaqsArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryIpAddressArgs = {
+  ipAddress?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -136,6 +143,11 @@ export type QueryWebsiteArgs = {
 export type QueryWebsitesArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryZipCodeArgs = {
+  zipCode?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type AreaObject = {
@@ -438,6 +450,23 @@ export type ServiceObject = {
   website: WebsiteObject;
 };
 
+export type IpAddress = {
+  __typename?: 'IPAddress';
+  /** The city name */
+  city?: Maybe<Scalars['String']['output']>;
+  /** The country code */
+  countryCode?: Maybe<Scalars['String']['output']>;
+  /** The country name */
+  countryName?: Maybe<Scalars['String']['output']>;
+  location?: Maybe<Scalars['GenericScalar']['output']>;
+  /** The state code */
+  stateCode?: Maybe<Scalars['String']['output']>;
+  /** The state name */
+  stateName?: Maybe<Scalars['String']['output']>;
+  /** The zip code */
+  zipCode?: Maybe<Scalars['String']['output']>;
+};
+
 export type ProfileObject = {
   __typename?: 'ProfileObject';
   created: Scalars['DateTime']['output'];
@@ -484,6 +513,22 @@ export type SubscriptionObject = {
   updated: Scalars['DateTime']['output'];
   /** ForeignKey: A reference to the associated User object. This field links each subscription to a specific user. */
   userId?: Maybe<Scalars['ID']['output']>;
+};
+
+export type ZipCode = {
+  __typename?: 'ZipCode';
+  /** The city */
+  city?: Maybe<Scalars['String']['output']>;
+  /** The latitude */
+  latitude?: Maybe<Scalars['String']['output']>;
+  /** The longitude */
+  longitude?: Maybe<Scalars['String']['output']>;
+  /** Additional metadata about this zip code */
+  metadata?: Maybe<Scalars['GenericScalar']['output']>;
+  /** The state */
+  state?: Maybe<Scalars['String']['output']>;
+  /** The zip code */
+  zipCode?: Maybe<Scalars['String']['output']>;
 };
 
 export type Mutations = {
@@ -1967,6 +2012,13 @@ export type FaqsQueryVariables = Exact<{
 
 export type FaqsQuery = { __typename?: 'Query', faqs?: Array<{ __typename?: 'FaqObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name: string, pk?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, homepageJumbotronCustomCss?: string | null, buttonColor?: string | null, buttonTextColor?: string | null, buttonBorderColor?: string | null, pk?: string | null, defaultSubdomainName?: string | null }, questions: Array<{ __typename?: 'QuestionObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, question: string, answer: string, displayOrder?: number | null, pk?: string | null, faqId?: string | null }> } | null> | null };
 
+export type IpAddressQueryVariables = Exact<{
+  ipAddress?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type IpAddressQuery = { __typename?: 'Query', ipAddress?: { __typename?: 'IPAddress', zipCode?: string | null, city?: string | null, stateName?: string | null, stateCode?: string | null, countryName?: string | null, countryCode?: string | null, location?: any | null } | null };
+
 export type PageQueryVariables = Exact<{
   id?: InputMaybe<Scalars['Int']['input']>;
 }>;
@@ -2066,6 +2118,13 @@ export type WebsitesQueryVariables = Exact<{
 
 export type WebsitesQuery = { __typename?: 'Query', websites?: Array<{ __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, homepageJumbotronCustomCss?: string | null, buttonColor?: string | null, buttonTextColor?: string | null, buttonBorderColor?: string | null, pk?: string | null, defaultSubdomainName?: string | null, pages: Array<{ __typename?: 'PageObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, body: string, image: string, keywordTargeting?: Array<string | null> | null, displayOrder: number, enableSchemaOrgArticleObject: boolean, showInsuranceCompanyWidget: boolean, pk?: string | null }>, areas: Array<{ __typename?: 'AreaObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, name?: string | null, slug?: string | null, zipCode: string, description?: string | null, image?: string | null, enableSchemaOrgAreaServedObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string> | null, displayOrder: number, pk?: string | null }>, datas: Array<{ __typename?: 'DataObject', id: string, created: any, updated: any, metadata?: any | null, data?: any | null, ipAddress: string, pk?: string | null }>, faqs: Array<{ __typename?: 'FaqObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name: string, pk?: string | null }>, questions: Array<{ __typename?: 'QuestionObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, question: string, answer: string, displayOrder?: number | null, pk?: string | null, faqId?: string | null }>, services: Array<{ __typename?: 'ServiceObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, image?: string | null, enableSchemaOrgServiceObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string | null> | null, displayOrder: number, pk?: string | null }>, reviews: Array<{ __typename?: 'ReviewObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, title: string, body?: string | null, personImage?: string | null, personName: string, personZipCode: string, rating: any, displayOrder: number, pk?: string | null }> } | null> | null };
 
+export type ZipCodeQueryVariables = Exact<{
+  zipCode?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type ZipCodeQuery = { __typename?: 'Query', zipCode?: { __typename?: 'ZipCode', zipCode?: string | null, city?: string | null, state?: string | null, latitude?: string | null, longitude?: string | null, metadata?: any | null } | null };
+
 
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -2153,9 +2212,11 @@ export type ResolversTypes = {
   ReviewObject: ResolverTypeWrapper<ReviewObject>;
   Decimal: ResolverTypeWrapper<Scalars['Decimal']['output']>;
   ServiceObject: ResolverTypeWrapper<ServiceObject>;
+  IPAddress: ResolverTypeWrapper<IpAddress>;
+  GenericScalar: ResolverTypeWrapper<Scalars['GenericScalar']['output']>;
   ProfileObject: ResolverTypeWrapper<ProfileObject>;
   SubscriptionObject: ResolverTypeWrapper<SubscriptionObject>;
-  GenericScalar: ResolverTypeWrapper<Scalars['GenericScalar']['output']>;
+  ZipCode: ResolverTypeWrapper<ZipCode>;
   Mutations: ResolverTypeWrapper<{}>;
   ActivateAccount: ResolverTypeWrapper<ActivateAccount>;
   ChangeEmailAddress: ResolverTypeWrapper<ChangeEmailAddress>;
@@ -2238,9 +2299,11 @@ export type ResolversParentTypes = {
   ReviewObject: ReviewObject;
   Decimal: Scalars['Decimal']['output'];
   ServiceObject: ServiceObject;
+  IPAddress: IpAddress;
+  GenericScalar: Scalars['GenericScalar']['output'];
   ProfileObject: ProfileObject;
   SubscriptionObject: SubscriptionObject;
-  GenericScalar: Scalars['GenericScalar']['output'];
+  ZipCode: ZipCode;
   Mutations: {};
   ActivateAccount: ActivateAccount;
   ChangeEmailAddress: ChangeEmailAddress;
@@ -2316,6 +2379,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   areas?: Resolver<Maybe<Array<Maybe<ResolversTypes['AreaObject']>>>, ParentType, ContextType, Partial<QueryAreasArgs>>;
   faq?: Resolver<Maybe<ResolversTypes['FaqObject']>, ParentType, ContextType, Partial<QueryFaqArgs>>;
   faqs?: Resolver<Maybe<Array<Maybe<ResolversTypes['FaqObject']>>>, ParentType, ContextType, Partial<QueryFaqsArgs>>;
+  ipAddress?: Resolver<Maybe<ResolversTypes['IPAddress']>, ParentType, ContextType, Partial<QueryIpAddressArgs>>;
   page?: Resolver<Maybe<ResolversTypes['PageObject']>, ParentType, ContextType, Partial<QueryPageArgs>>;
   pages?: Resolver<Maybe<Array<Maybe<ResolversTypes['PageObject']>>>, ParentType, ContextType, Partial<QueryPagesArgs>>;
   postdata?: Resolver<Maybe<ResolversTypes['DataObject']>, ParentType, ContextType, Partial<QueryPostdataArgs>>;
@@ -2329,6 +2393,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   services?: Resolver<Maybe<Array<Maybe<ResolversTypes['ServiceObject']>>>, ParentType, ContextType, Partial<QueryServicesArgs>>;
   website?: Resolver<Maybe<ResolversTypes['WebsiteObject']>, ParentType, ContextType, Partial<QueryWebsiteArgs>>;
   websites?: Resolver<Maybe<Array<Maybe<ResolversTypes['WebsiteObject']>>>, ParentType, ContextType, Partial<QueryWebsitesArgs>>;
+  zipCode?: Resolver<Maybe<ResolversTypes['ZipCode']>, ParentType, ContextType, Partial<QueryZipCodeArgs>>;
 };
 
 export type AreaObjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['AreaObject'] = ResolversParentTypes['AreaObject']> = {
@@ -2539,6 +2604,21 @@ export type ServiceObjectResolvers<ContextType = any, ParentType extends Resolve
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type IpAddressResolvers<ContextType = any, ParentType extends ResolversParentTypes['IPAddress'] = ResolversParentTypes['IPAddress']> = {
+  city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  countryCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  countryName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  location?: Resolver<Maybe<ResolversTypes['GenericScalar']>, ParentType, ContextType>;
+  stateCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  stateName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  zipCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export interface GenericScalarScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['GenericScalar'], any> {
+  name: 'GenericScalar';
+}
+
 export type ProfileObjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProfileObject'] = ResolversParentTypes['ProfileObject']> = {
   created?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   dailySummary?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
@@ -2572,9 +2652,15 @@ export type SubscriptionObjectResolvers<ContextType = any, ParentType extends Re
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export interface GenericScalarScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['GenericScalar'], any> {
-  name: 'GenericScalar';
-}
+export type ZipCodeResolvers<ContextType = any, ParentType extends ResolversParentTypes['ZipCode'] = ResolversParentTypes['ZipCode']> = {
+  city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  latitude?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  longitude?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  metadata?: Resolver<Maybe<ResolversTypes['GenericScalar']>, ParentType, ContextType>;
+  state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  zipCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
 
 export type MutationsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutations'] = ResolversParentTypes['Mutations']> = {
   activateAccount?: Resolver<Maybe<ResolversTypes['ActivateAccount']>, ParentType, ContextType, RequireFields<MutationsActivateAccountArgs, 'emailAddress' | 'verificationCode'>>;
@@ -2913,9 +2999,11 @@ export type Resolvers<ContextType = any> = {
   ReviewObject?: ReviewObjectResolvers<ContextType>;
   Decimal?: GraphQLScalarType;
   ServiceObject?: ServiceObjectResolvers<ContextType>;
+  IPAddress?: IpAddressResolvers<ContextType>;
+  GenericScalar?: GraphQLScalarType;
   ProfileObject?: ProfileObjectResolvers<ContextType>;
   SubscriptionObject?: SubscriptionObjectResolvers<ContextType>;
-  GenericScalar?: GraphQLScalarType;
+  ZipCode?: ZipCodeResolvers<ContextType>;
   Mutations?: MutationsResolvers<ContextType>;
   ActivateAccount?: ActivateAccountResolvers<ContextType>;
   ChangeEmailAddress?: ChangeEmailAddressResolvers<ContextType>;
@@ -4051,6 +4139,19 @@ export const FaqsDocument = gql`
       faqId
     }
     pk
+  }
+}
+    `;
+export const IpAddressDocument = gql`
+    query ipAddress($ipAddress: String) {
+  ipAddress(ipAddress: $ipAddress) {
+    zipCode
+    city
+    stateName
+    stateCode
+    countryName
+    countryCode
+    location
   }
 }
     `;
@@ -5256,6 +5357,18 @@ export const WebsitesDocument = gql`
   }
 }
     `;
+export const ZipCodeDocument = gql`
+    query zipCode($zipCode: String) {
+  zipCode(zipCode: $zipCode) {
+    zipCode
+    city
+    state
+    latitude
+    longitude
+    metadata
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -5402,6 +5515,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     faqs(variables?: FaqsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<FaqsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<FaqsQuery>(FaqsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'faqs', 'query');
     },
+    ipAddress(variables?: IpAddressQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<IpAddressQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<IpAddressQuery>(IpAddressDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ipAddress', 'query');
+    },
     page(variables?: PageQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PageQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<PageQuery>(PageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'page', 'query');
     },
@@ -5440,6 +5556,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     websites(variables?: WebsitesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<WebsitesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<WebsitesQuery>(WebsitesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'websites', 'query');
+    },
+    zipCode(variables?: ZipCodeQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ZipCodeQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ZipCodeQuery>(ZipCodeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'zipCode', 'query');
     }
   };
 }
