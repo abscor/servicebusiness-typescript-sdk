@@ -1119,6 +1119,10 @@ export type WebsiteCreateObject = {
   enableSchemaOrgOrganizationObject?: InputMaybe<Scalars['Boolean']['input']>;
   /** Boolean: Indicates if Schema.org WebPage object tags are used. */
   enableSchemaOrgWebpageObject?: InputMaybe<Scalars['Boolean']['input']>;
+  /** String: Font family for the body text. */
+  fontBody?: InputMaybe<Scalars['String']['input']>;
+  /** String: Font family for the heading text. */
+  fontHeading?: InputMaybe<Scalars['String']['input']>;
   /** Text: HTML markup for the first link in the footer. */
   footerLink1Html?: InputMaybe<Scalars['String']['input']>;
   /** Text: HTML markup for the second link in the footer. */
@@ -1597,6 +1601,10 @@ export type WebsiteUpdateObject = {
   enableSchemaOrgOrganizationObject?: InputMaybe<Scalars['Boolean']['input']>;
   /** Boolean: Indicates if Schema.org WebPage object tags are used. */
   enableSchemaOrgWebpageObject?: InputMaybe<Scalars['Boolean']['input']>;
+  /** String: Font family for the body text. */
+  fontBody?: InputMaybe<Scalars['String']['input']>;
+  /** String: Font family for the heading text. */
+  fontHeading?: InputMaybe<Scalars['String']['input']>;
   /** Text: HTML markup for the first link in the footer. */
   footerLink1Html?: InputMaybe<Scalars['String']['input']>;
   /** Text: HTML markup for the second link in the footer. */
