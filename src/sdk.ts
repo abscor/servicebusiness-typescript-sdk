@@ -30,6 +30,8 @@ export type Query = {
   areas?: Maybe<Array<Maybe<AreaObject>>>;
   faq?: Maybe<FaqObject>;
   faqs?: Maybe<Array<Maybe<FaqObject>>>;
+  invitationsReceived?: Maybe<Array<Maybe<CollaboratorObject>>>;
+  invitationsSent?: Maybe<Array<Maybe<CollaboratorObject>>>;
   ipAddress?: Maybe<IpAddress>;
   page?: Maybe<PageObject>;
   pages?: Maybe<Array<Maybe<PageObject>>>;
@@ -68,6 +70,20 @@ export type QueryFaqArgs = {
 export type QueryFaqsArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+  websiteId?: InputMaybe<Scalars['ID']['input']>;
+};
+
+
+export type QueryInvitationsReceivedArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryInvitationsSentArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  websiteId?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -454,6 +470,18 @@ export type ServiceObject = {
   website: WebsiteObject;
 };
 
+export type CollaboratorObject = {
+  __typename?: 'CollaboratorObject';
+  collaboratorEmail?: Maybe<Scalars['String']['output']>;
+  collaboratorUser?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  invitationAccepted?: Maybe<Scalars['String']['output']>;
+  invitationSent?: Maybe<Scalars['String']['output']>;
+  user?: Maybe<Scalars['String']['output']>;
+  websiteBusinessName?: Maybe<Scalars['String']['output']>;
+  websiteId?: Maybe<Scalars['Int']['output']>;
+};
+
 export type IpAddress = {
   __typename?: 'IPAddress';
   /** The city name */
@@ -537,6 +565,8 @@ export type ZipCode = {
 
 export type Mutations = {
   __typename?: 'Mutations';
+  /** Accept an Invite. */
+  acceptInvite?: Maybe<AcceptInvite>;
   /** Complete Verification Code for both Password Reset or Activating a new account */
   activateAccount?: Maybe<ActivateAccount>;
   /** Change a user's email address. The user must be logged into their account in order to preform this action.  */
@@ -565,6 +595,8 @@ export type Mutations = {
   createWebsite?: Maybe<CreateWebsite>;
   /** Delete a Area. */
   deleteArea?: Maybe<DeleteArea>;
+  /** Delete a Collaborator. */
+  deleteCollaborator?: Maybe<DeleteCollaborator>;
   /** Delete a Faq. */
   deleteFaq?: Maybe<DeleteFaq>;
   /** Delete a Page. */
@@ -579,6 +611,8 @@ export type Mutations = {
   deleteWebsite?: Maybe<DeleteWebsite>;
   /** Import a Website. */
   importWebsite?: Maybe<ImportWebsite>;
+  /** Invite a Collaborator. */
+  inviteCollaborator?: Maybe<InviteCollaborator>;
   refreshToken?: Maybe<Refresh>;
   /** Register a mobile Device. */
   registerMobileDevice?: Maybe<RegisterMobileDevice>;
@@ -619,6 +653,11 @@ export type Mutations = {
   /** Update a Website. */
   updateWebsite?: Maybe<UpdateWebsite>;
   verifyToken?: Maybe<Verify>;
+};
+
+
+export type MutationsAcceptInviteArgs = {
+  id: Scalars['ID']['input'];
 };
 
 
@@ -694,6 +733,11 @@ export type MutationsDeleteAreaArgs = {
 };
 
 
+export type MutationsDeleteCollaboratorArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
 export type MutationsDeleteFaqArgs = {
   id: Scalars['ID']['input'];
 };
@@ -726,6 +770,12 @@ export type MutationsDeleteWebsiteArgs = {
 
 export type MutationsImportWebsiteArgs = {
   input: Scalars['GenericScalar']['input'];
+};
+
+
+export type MutationsInviteCollaboratorArgs = {
+  emailAddress: Scalars['String']['input'];
+  websiteId: Scalars['ID']['input'];
 };
 
 
@@ -841,6 +891,13 @@ export type MutationsUpdateWebsiteArgs = {
 
 export type MutationsVerifyTokenArgs = {
   token?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Accept an Invite. */
+export type AcceptInvite = {
+  __typename?: 'AcceptInvite';
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
 };
 
 /** Complete Verification Code for both Password Reset or Activating a new account */
@@ -1206,6 +1263,13 @@ export type DeleteArea = {
   success?: Maybe<Scalars['Boolean']['output']>;
 };
 
+/** Delete a Collaborator. */
+export type DeleteCollaborator = {
+  __typename?: 'DeleteCollaborator';
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
 /** Delete a Faq. */
 export type DeleteFaq = {
   __typename?: 'DeleteFaq';
@@ -1252,6 +1316,13 @@ export type DeleteWebsite = {
 export type ImportWebsite = {
   __typename?: 'ImportWebsite';
   importedWebsite?: Maybe<WebsiteObject>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** Invite a Collaborator. */
+export type InviteCollaborator = {
+  __typename?: 'InviteCollaborator';
   message?: Maybe<Scalars['String']['output']>;
   success?: Maybe<Scalars['Boolean']['output']>;
 };
@@ -1687,6 +1758,13 @@ export type Verify = {
   payload: Scalars['GenericScalar']['output'];
 };
 
+export type AcceptInviteMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type AcceptInviteMutation = { __typename?: 'Mutations', acceptInvite?: { __typename?: 'AcceptInvite', success?: boolean | null, message?: string | null } | null };
+
 export type ActivateAccountMutationVariables = Exact<{
   emailAddress: Scalars['String']['input'];
   verificationCode: Scalars['String']['input'];
@@ -1787,6 +1865,13 @@ export type DeleteAreaMutationVariables = Exact<{
 
 export type DeleteAreaMutation = { __typename?: 'Mutations', deleteArea?: { __typename?: 'DeleteArea', success?: boolean | null, message?: string | null } | null };
 
+export type DeleteCollaboratorMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type DeleteCollaboratorMutation = { __typename?: 'Mutations', deleteCollaborator?: { __typename?: 'DeleteCollaborator', success?: boolean | null, message?: string | null } | null };
+
 export type DeleteFaqMutationVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
@@ -1835,6 +1920,14 @@ export type ImportWebsiteMutationVariables = Exact<{
 
 
 export type ImportWebsiteMutation = { __typename?: 'Mutations', importWebsite?: { __typename?: 'ImportWebsite', success?: boolean | null, message?: string | null, importedWebsite?: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, customCss?: string | null, buttonColor?: string | null, buttonTextColor?: string | null, buttonBorderColor?: string | null, fontBody?: string | null, fontHeading?: string | null, pk?: string | null, defaultSubdomainName?: string | null } | null } | null };
+
+export type InviteCollaboratorMutationVariables = Exact<{
+  emailAddress: Scalars['String']['input'];
+  websiteId: Scalars['ID']['input'];
+}>;
+
+
+export type InviteCollaboratorMutation = { __typename?: 'Mutations', inviteCollaborator?: { __typename?: 'InviteCollaborator', success?: boolean | null, message?: string | null } | null };
 
 export type RefreshTokenMutationVariables = Exact<{
   token?: InputMaybe<Scalars['String']['input']>;
@@ -2019,10 +2112,28 @@ export type FaqQuery = { __typename?: 'Query', faq?: { __typename?: 'FaqObject',
 export type FaqsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+  websiteId?: InputMaybe<Scalars['ID']['input']>;
 }>;
 
 
 export type FaqsQuery = { __typename?: 'Query', faqs?: Array<{ __typename?: 'FaqObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name: string, pk?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, customCss?: string | null, buttonColor?: string | null, buttonTextColor?: string | null, buttonBorderColor?: string | null, fontBody?: string | null, fontHeading?: string | null, pk?: string | null, defaultSubdomainName?: string | null }, questions: Array<{ __typename?: 'QuestionObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, question: string, answer: string, displayOrder?: number | null, pk?: string | null, faqId?: string | null }> } | null> | null };
+
+export type InvitationsReceivedQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type InvitationsReceivedQuery = { __typename?: 'Query', invitationsReceived?: Array<{ __typename?: 'CollaboratorObject', id?: number | null, user?: string | null, websiteId?: number | null, websiteBusinessName?: string | null, collaboratorEmail?: string | null, collaboratorUser?: string | null, invitationSent?: string | null, invitationAccepted?: string | null } | null> | null };
+
+export type InvitationsSentQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  websiteId?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type InvitationsSentQuery = { __typename?: 'Query', invitationsSent?: Array<{ __typename?: 'CollaboratorObject', id?: number | null, user?: string | null, websiteId?: number | null, websiteBusinessName?: string | null, collaboratorEmail?: string | null, collaboratorUser?: string | null, invitationSent?: string | null, invitationAccepted?: string | null } | null> | null };
 
 export type IpAddressQueryVariables = Exact<{
   ipAddress?: InputMaybe<Scalars['String']['input']>;
@@ -2224,12 +2335,14 @@ export type ResolversTypes = {
   ReviewObject: ResolverTypeWrapper<ReviewObject>;
   Decimal: ResolverTypeWrapper<Scalars['Decimal']['output']>;
   ServiceObject: ResolverTypeWrapper<ServiceObject>;
+  CollaboratorObject: ResolverTypeWrapper<CollaboratorObject>;
   IPAddress: ResolverTypeWrapper<IpAddress>;
   GenericScalar: ResolverTypeWrapper<Scalars['GenericScalar']['output']>;
   ProfileObject: ResolverTypeWrapper<ProfileObject>;
   SubscriptionObject: ResolverTypeWrapper<SubscriptionObject>;
   ZipCode: ResolverTypeWrapper<ZipCode>;
   Mutations: ResolverTypeWrapper<{}>;
+  AcceptInvite: ResolverTypeWrapper<AcceptInvite>;
   ActivateAccount: ResolverTypeWrapper<ActivateAccount>;
   ChangeEmailAddress: ResolverTypeWrapper<ChangeEmailAddress>;
   ChangePassword: ResolverTypeWrapper<ChangePassword>;
@@ -2254,6 +2367,7 @@ export type ResolversTypes = {
   WebsiteCreateObject: WebsiteCreateObject;
   CreateWebsite: ResolverTypeWrapper<CreateWebsite>;
   DeleteArea: ResolverTypeWrapper<DeleteArea>;
+  DeleteCollaborator: ResolverTypeWrapper<DeleteCollaborator>;
   DeleteFaq: ResolverTypeWrapper<DeleteFaq>;
   DeletePage: ResolverTypeWrapper<DeletePage>;
   DeleteQuestion: ResolverTypeWrapper<DeleteQuestion>;
@@ -2261,6 +2375,7 @@ export type ResolversTypes = {
   DeleteService: ResolverTypeWrapper<DeleteService>;
   DeleteWebsite: ResolverTypeWrapper<DeleteWebsite>;
   ImportWebsite: ResolverTypeWrapper<ImportWebsite>;
+  InviteCollaborator: ResolverTypeWrapper<InviteCollaborator>;
   Refresh: ResolverTypeWrapper<Refresh>;
   MobileDeviceRegistrationCreateObject: MobileDeviceRegistrationCreateObject;
   RegisterMobileDevice: ResolverTypeWrapper<RegisterMobileDevice>;
@@ -2311,12 +2426,14 @@ export type ResolversParentTypes = {
   ReviewObject: ReviewObject;
   Decimal: Scalars['Decimal']['output'];
   ServiceObject: ServiceObject;
+  CollaboratorObject: CollaboratorObject;
   IPAddress: IpAddress;
   GenericScalar: Scalars['GenericScalar']['output'];
   ProfileObject: ProfileObject;
   SubscriptionObject: SubscriptionObject;
   ZipCode: ZipCode;
   Mutations: {};
+  AcceptInvite: AcceptInvite;
   ActivateAccount: ActivateAccount;
   ChangeEmailAddress: ChangeEmailAddress;
   ChangePassword: ChangePassword;
@@ -2341,6 +2458,7 @@ export type ResolversParentTypes = {
   WebsiteCreateObject: WebsiteCreateObject;
   CreateWebsite: CreateWebsite;
   DeleteArea: DeleteArea;
+  DeleteCollaborator: DeleteCollaborator;
   DeleteFaq: DeleteFaq;
   DeletePage: DeletePage;
   DeleteQuestion: DeleteQuestion;
@@ -2348,6 +2466,7 @@ export type ResolversParentTypes = {
   DeleteService: DeleteService;
   DeleteWebsite: DeleteWebsite;
   ImportWebsite: ImportWebsite;
+  InviteCollaborator: InviteCollaborator;
   Refresh: Refresh;
   MobileDeviceRegistrationCreateObject: MobileDeviceRegistrationCreateObject;
   RegisterMobileDevice: RegisterMobileDevice;
@@ -2391,6 +2510,8 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   areas?: Resolver<Maybe<Array<Maybe<ResolversTypes['AreaObject']>>>, ParentType, ContextType, Partial<QueryAreasArgs>>;
   faq?: Resolver<Maybe<ResolversTypes['FaqObject']>, ParentType, ContextType, Partial<QueryFaqArgs>>;
   faqs?: Resolver<Maybe<Array<Maybe<ResolversTypes['FaqObject']>>>, ParentType, ContextType, Partial<QueryFaqsArgs>>;
+  invitationsReceived?: Resolver<Maybe<Array<Maybe<ResolversTypes['CollaboratorObject']>>>, ParentType, ContextType, Partial<QueryInvitationsReceivedArgs>>;
+  invitationsSent?: Resolver<Maybe<Array<Maybe<ResolversTypes['CollaboratorObject']>>>, ParentType, ContextType, Partial<QueryInvitationsSentArgs>>;
   ipAddress?: Resolver<Maybe<ResolversTypes['IPAddress']>, ParentType, ContextType, Partial<QueryIpAddressArgs>>;
   page?: Resolver<Maybe<ResolversTypes['PageObject']>, ParentType, ContextType, Partial<QueryPageArgs>>;
   pages?: Resolver<Maybe<Array<Maybe<ResolversTypes['PageObject']>>>, ParentType, ContextType, Partial<QueryPagesArgs>>;
@@ -2618,6 +2739,18 @@ export type ServiceObjectResolvers<ContextType = any, ParentType extends Resolve
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type CollaboratorObjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['CollaboratorObject'] = ResolversParentTypes['CollaboratorObject']> = {
+  collaboratorEmail?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  collaboratorUser?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  invitationAccepted?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  invitationSent?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  user?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  websiteBusinessName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  websiteId?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type IpAddressResolvers<ContextType = any, ParentType extends ResolversParentTypes['IPAddress'] = ResolversParentTypes['IPAddress']> = {
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   countryCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2677,6 +2810,7 @@ export type ZipCodeResolvers<ContextType = any, ParentType extends ResolversPare
 };
 
 export type MutationsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutations'] = ResolversParentTypes['Mutations']> = {
+  acceptInvite?: Resolver<Maybe<ResolversTypes['AcceptInvite']>, ParentType, ContextType, RequireFields<MutationsAcceptInviteArgs, 'id'>>;
   activateAccount?: Resolver<Maybe<ResolversTypes['ActivateAccount']>, ParentType, ContextType, RequireFields<MutationsActivateAccountArgs, 'emailAddress' | 'verificationCode'>>;
   changeEmailAddress?: Resolver<Maybe<ResolversTypes['ChangeEmailAddress']>, ParentType, ContextType, RequireFields<MutationsChangeEmailAddressArgs, 'newEmailAddress'>>;
   changePassword?: Resolver<Maybe<ResolversTypes['ChangePassword']>, ParentType, ContextType, RequireFields<MutationsChangePasswordArgs, 'password'>>;
@@ -2691,6 +2825,7 @@ export type MutationsResolvers<ContextType = any, ParentType extends ResolversPa
   createService?: Resolver<Maybe<ResolversTypes['CreateService']>, ParentType, ContextType, RequireFields<MutationsCreateServiceArgs, 'input'>>;
   createWebsite?: Resolver<Maybe<ResolversTypes['CreateWebsite']>, ParentType, ContextType, RequireFields<MutationsCreateWebsiteArgs, 'input'>>;
   deleteArea?: Resolver<Maybe<ResolversTypes['DeleteArea']>, ParentType, ContextType, RequireFields<MutationsDeleteAreaArgs, 'id'>>;
+  deleteCollaborator?: Resolver<Maybe<ResolversTypes['DeleteCollaborator']>, ParentType, ContextType, RequireFields<MutationsDeleteCollaboratorArgs, 'id'>>;
   deleteFaq?: Resolver<Maybe<ResolversTypes['DeleteFaq']>, ParentType, ContextType, RequireFields<MutationsDeleteFaqArgs, 'id'>>;
   deletePage?: Resolver<Maybe<ResolversTypes['DeletePage']>, ParentType, ContextType, RequireFields<MutationsDeletePageArgs, 'id'>>;
   deleteQuestion?: Resolver<Maybe<ResolversTypes['DeleteQuestion']>, ParentType, ContextType, RequireFields<MutationsDeleteQuestionArgs, 'id'>>;
@@ -2698,6 +2833,7 @@ export type MutationsResolvers<ContextType = any, ParentType extends ResolversPa
   deleteService?: Resolver<Maybe<ResolversTypes['DeleteService']>, ParentType, ContextType, RequireFields<MutationsDeleteServiceArgs, 'id'>>;
   deleteWebsite?: Resolver<Maybe<ResolversTypes['DeleteWebsite']>, ParentType, ContextType, RequireFields<MutationsDeleteWebsiteArgs, 'id'>>;
   importWebsite?: Resolver<Maybe<ResolversTypes['ImportWebsite']>, ParentType, ContextType, RequireFields<MutationsImportWebsiteArgs, 'input'>>;
+  inviteCollaborator?: Resolver<Maybe<ResolversTypes['InviteCollaborator']>, ParentType, ContextType, RequireFields<MutationsInviteCollaboratorArgs, 'emailAddress' | 'websiteId'>>;
   refreshToken?: Resolver<Maybe<ResolversTypes['Refresh']>, ParentType, ContextType, Partial<MutationsRefreshTokenArgs>>;
   registerMobileDevice?: Resolver<Maybe<ResolversTypes['RegisterMobileDevice']>, ParentType, ContextType, RequireFields<MutationsRegisterMobileDeviceArgs, 'input'>>;
   resendActivationEmail?: Resolver<Maybe<ResolversTypes['ResendActivationEmail']>, ParentType, ContextType, RequireFields<MutationsResendActivationEmailArgs, 'emailAddress'>>;
@@ -2719,6 +2855,12 @@ export type MutationsResolvers<ContextType = any, ParentType extends ResolversPa
   updateService?: Resolver<Maybe<ResolversTypes['UpdateService']>, ParentType, ContextType, RequireFields<MutationsUpdateServiceArgs, 'input'>>;
   updateWebsite?: Resolver<Maybe<ResolversTypes['UpdateWebsite']>, ParentType, ContextType, RequireFields<MutationsUpdateWebsiteArgs, 'input'>>;
   verifyToken?: Resolver<Maybe<ResolversTypes['Verify']>, ParentType, ContextType, Partial<MutationsVerifyTokenArgs>>;
+};
+
+export type AcceptInviteResolvers<ContextType = any, ParentType extends ResolversParentTypes['AcceptInvite'] = ResolversParentTypes['AcceptInvite']> = {
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ActivateAccountResolvers<ContextType = any, ParentType extends ResolversParentTypes['ActivateAccount'] = ResolversParentTypes['ActivateAccount']> = {
@@ -2818,6 +2960,12 @@ export type DeleteAreaResolvers<ContextType = any, ParentType extends ResolversP
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type DeleteCollaboratorResolvers<ContextType = any, ParentType extends ResolversParentTypes['DeleteCollaborator'] = ResolversParentTypes['DeleteCollaborator']> = {
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type DeleteFaqResolvers<ContextType = any, ParentType extends ResolversParentTypes['DeleteFaq'] = ResolversParentTypes['DeleteFaq']> = {
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
@@ -2856,6 +3004,12 @@ export type DeleteWebsiteResolvers<ContextType = any, ParentType extends Resolve
 
 export type ImportWebsiteResolvers<ContextType = any, ParentType extends ResolversParentTypes['ImportWebsite'] = ResolversParentTypes['ImportWebsite']> = {
   importedWebsite?: Resolver<Maybe<ResolversTypes['WebsiteObject']>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type InviteCollaboratorResolvers<ContextType = any, ParentType extends ResolversParentTypes['InviteCollaborator'] = ResolversParentTypes['InviteCollaborator']> = {
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -3013,12 +3167,14 @@ export type Resolvers<ContextType = any> = {
   ReviewObject?: ReviewObjectResolvers<ContextType>;
   Decimal?: GraphQLScalarType;
   ServiceObject?: ServiceObjectResolvers<ContextType>;
+  CollaboratorObject?: CollaboratorObjectResolvers<ContextType>;
   IPAddress?: IpAddressResolvers<ContextType>;
   GenericScalar?: GraphQLScalarType;
   ProfileObject?: ProfileObjectResolvers<ContextType>;
   SubscriptionObject?: SubscriptionObjectResolvers<ContextType>;
   ZipCode?: ZipCodeResolvers<ContextType>;
   Mutations?: MutationsResolvers<ContextType>;
+  AcceptInvite?: AcceptInviteResolvers<ContextType>;
   ActivateAccount?: ActivateAccountResolvers<ContextType>;
   ChangeEmailAddress?: ChangeEmailAddressResolvers<ContextType>;
   ChangePassword?: ChangePasswordResolvers<ContextType>;
@@ -3034,6 +3190,7 @@ export type Resolvers<ContextType = any> = {
   CreateService?: CreateServiceResolvers<ContextType>;
   CreateWebsite?: CreateWebsiteResolvers<ContextType>;
   DeleteArea?: DeleteAreaResolvers<ContextType>;
+  DeleteCollaborator?: DeleteCollaboratorResolvers<ContextType>;
   DeleteFaq?: DeleteFaqResolvers<ContextType>;
   DeletePage?: DeletePageResolvers<ContextType>;
   DeleteQuestion?: DeleteQuestionResolvers<ContextType>;
@@ -3041,6 +3198,7 @@ export type Resolvers<ContextType = any> = {
   DeleteService?: DeleteServiceResolvers<ContextType>;
   DeleteWebsite?: DeleteWebsiteResolvers<ContextType>;
   ImportWebsite?: ImportWebsiteResolvers<ContextType>;
+  InviteCollaborator?: InviteCollaboratorResolvers<ContextType>;
   Refresh?: RefreshResolvers<ContextType>;
   RegisterMobileDevice?: RegisterMobileDeviceResolvers<ContextType>;
   ResendActivationEmail?: ResendActivationEmailResolvers<ContextType>;
@@ -3069,6 +3227,14 @@ export type DirectiveResolvers<ContextType = any> = {
 };
 
 
+export const AcceptInviteDocument = gql`
+    mutation acceptInvite($id: ID!) {
+  acceptInvite(id: $id) {
+    success
+    message
+  }
+}
+    `;
 export const ActivateAccountDocument = gql`
     mutation activateAccount($emailAddress: String!, $verificationCode: String!) {
   activateAccount(emailAddress: $emailAddress, verificationCode: $verificationCode) {
@@ -3348,6 +3514,14 @@ export const DeleteAreaDocument = gql`
   }
 }
     `;
+export const DeleteCollaboratorDocument = gql`
+    mutation deleteCollaborator($id: ID!) {
+  deleteCollaborator(id: $id) {
+    success
+    message
+  }
+}
+    `;
 export const DeleteFaqDocument = gql`
     mutation deleteFaq($id: ID!) {
   deleteFaq(id: $id) {
@@ -3464,6 +3638,14 @@ export const ImportWebsiteDocument = gql`
       pk
       defaultSubdomainName
     }
+    success
+    message
+  }
+}
+    `;
+export const InviteCollaboratorDocument = gql`
+    mutation inviteCollaborator($emailAddress: String!, $websiteId: ID!) {
+  inviteCollaborator(emailAddress: $emailAddress, websiteId: $websiteId) {
     success
     message
   }
@@ -4080,8 +4262,8 @@ export const FaqDocument = gql`
 }
     `;
 export const FaqsDocument = gql`
-    query faqs($first: Int, $skip: Int) {
-  faqs(first: $first, skip: $skip) {
+    query faqs($first: Int, $skip: Int, $websiteId: ID) {
+  faqs(first: $first, skip: $skip, websiteId: $websiteId) {
     id
     created
     updated
@@ -4167,6 +4349,34 @@ export const FaqsDocument = gql`
       faqId
     }
     pk
+  }
+}
+    `;
+export const InvitationsReceivedDocument = gql`
+    query invitationsReceived($first: Int, $skip: Int) {
+  invitationsReceived(first: $first, skip: $skip) {
+    id
+    user
+    websiteId
+    websiteBusinessName
+    collaboratorEmail
+    collaboratorUser
+    invitationSent
+    invitationAccepted
+  }
+}
+    `;
+export const InvitationsSentDocument = gql`
+    query invitationsSent($first: Int, $skip: Int, $websiteId: Int) {
+  invitationsSent(first: $first, skip: $skip, websiteId: $websiteId) {
+    id
+    user
+    websiteId
+    websiteBusinessName
+    collaboratorEmail
+    collaboratorUser
+    invitationSent
+    invitationAccepted
   }
 }
     `;
@@ -5429,6 +5639,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    acceptInvite(variables: AcceptInviteMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<AcceptInviteMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AcceptInviteMutation>(AcceptInviteDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'acceptInvite', 'mutation');
+    },
     activateAccount(variables: ActivateAccountMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ActivateAccountMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<ActivateAccountMutation>(ActivateAccountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'activateAccount', 'mutation');
     },
@@ -5471,6 +5684,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     deleteArea(variables: DeleteAreaMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteAreaMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<DeleteAreaMutation>(DeleteAreaDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteArea', 'mutation');
     },
+    deleteCollaborator(variables: DeleteCollaboratorMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteCollaboratorMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteCollaboratorMutation>(DeleteCollaboratorDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteCollaborator', 'mutation');
+    },
     deleteFaq(variables: DeleteFaqMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteFaqMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<DeleteFaqMutation>(DeleteFaqDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteFaq', 'mutation');
     },
@@ -5491,6 +5707,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     importWebsite(variables: ImportWebsiteMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ImportWebsiteMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<ImportWebsiteMutation>(ImportWebsiteDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'importWebsite', 'mutation');
+    },
+    inviteCollaborator(variables: InviteCollaboratorMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<InviteCollaboratorMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<InviteCollaboratorMutation>(InviteCollaboratorDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'inviteCollaborator', 'mutation');
     },
     refreshToken(variables?: RefreshTokenMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<RefreshTokenMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<RefreshTokenMutation>(RefreshTokenDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'refreshToken', 'mutation');
@@ -5566,6 +5785,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     faqs(variables?: FaqsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<FaqsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<FaqsQuery>(FaqsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'faqs', 'query');
+    },
+    invitationsReceived(variables?: InvitationsReceivedQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<InvitationsReceivedQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<InvitationsReceivedQuery>(InvitationsReceivedDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'invitationsReceived', 'query');
+    },
+    invitationsSent(variables?: InvitationsSentQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<InvitationsSentQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<InvitationsSentQuery>(InvitationsSentDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'invitationsSent', 'query');
     },
     ipAddress(variables?: IpAddressQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<IpAddressQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<IpAddressQuery>(IpAddressDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ipAddress', 'query');
