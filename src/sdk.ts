@@ -124,6 +124,7 @@ export type QueryQuestionArgs = {
 export type QueryQuestionsArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+  websiteId?: InputMaybe<Scalars['ID']['input']>;
 };
 
 
@@ -2187,6 +2188,7 @@ export type QuestionQueryVariables = Exact<{
 export type QuestionQuery = { __typename?: 'Query', question?: { __typename?: 'QuestionObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, question: string, answer: string, displayOrder?: number | null, pk?: string | null, faqId?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, customCss?: string | null, buttonColor?: string | null, buttonTextColor?: string | null, buttonBorderColor?: string | null, fontBody?: string | null, fontHeading?: string | null, pk?: string | null, defaultSubdomainName?: string | null }, faq?: { __typename?: 'FaqObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name: string, pk?: string | null } | null } | null };
 
 export type QuestionsQueryVariables = Exact<{
+  websiteId?: InputMaybe<Scalars['ID']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
 }>;
@@ -4845,8 +4847,8 @@ export const QuestionDocument = gql`
 }
     `;
 export const QuestionsDocument = gql`
-    query questions($first: Int, $skip: Int) {
-  questions(first: $first, skip: $skip) {
+    query questions($websiteId: ID, $first: Int, $skip: Int) {
+  questions(websiteId: $websiteId, first: $first, skip: $skip) {
     id
     created
     updated
