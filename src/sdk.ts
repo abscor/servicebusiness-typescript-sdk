@@ -644,6 +644,8 @@ export type Mutations = {
   updateEmailSubscription?: Maybe<UpdateEmailSubscription>;
   /** Update a Faq. */
   updateFaq?: Maybe<UpdateFaq>;
+  /** Update or Create a Base FAQ. */
+  updateOrCreateBaseFaq?: Maybe<UpdateOrCreateBaseFaq>;
   /** Update a Page. */
   updatePage?: Maybe<UpdatePage>;
   /** Update a Profile. */
@@ -860,6 +862,11 @@ export type MutationsUpdateEmailSubscriptionArgs = {
 
 export type MutationsUpdateFaqArgs = {
   input: FaqUpdateObject;
+};
+
+
+export type MutationsUpdateOrCreateBaseFaqArgs = {
+  websiteId: Scalars['ID']['input'];
 };
 
 
@@ -1488,6 +1495,13 @@ export type UpdateFaq = {
   success?: Maybe<Scalars['Boolean']['output']>;
 };
 
+/** Update or Create a Base FAQ. */
+export type UpdateOrCreateBaseFaq = {
+  __typename?: 'UpdateOrCreateBaseFAQ';
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
 export type PageUpdateObject = {
   /** Boolean: Indicates if the page is currently active and available for viewing. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
@@ -2049,6 +2063,13 @@ export type UpdateFaqMutationVariables = Exact<{
 
 export type UpdateFaqMutation = { __typename?: 'Mutations', updateFaq?: { __typename?: 'UpdateFaq', success?: boolean | null, message?: string | null, data?: { __typename?: 'FaqObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name: string, pk?: string | null } | null } | null };
 
+export type UpdateOrCreateBaseFaqMutationVariables = Exact<{
+  websiteId: Scalars['ID']['input'];
+}>;
+
+
+export type UpdateOrCreateBaseFaqMutation = { __typename?: 'Mutations', updateOrCreateBaseFaq?: { __typename?: 'UpdateOrCreateBaseFAQ', success?: boolean | null, message?: string | null } | null };
+
 export type UpdatePageMutationVariables = Exact<{
   input: PageUpdateObject;
 }>;
@@ -2406,6 +2427,7 @@ export type ResolversTypes = {
   UpdateEmailSubscription: ResolverTypeWrapper<UpdateEmailSubscription>;
   FaqUpdateObject: FaqUpdateObject;
   UpdateFaq: ResolverTypeWrapper<UpdateFaq>;
+  UpdateOrCreateBaseFAQ: ResolverTypeWrapper<UpdateOrCreateBaseFaq>;
   PageUpdateObject: PageUpdateObject;
   UpdatePage: ResolverTypeWrapper<UpdatePage>;
   ProfileUpdateObject: ProfileUpdateObject;
@@ -2497,6 +2519,7 @@ export type ResolversParentTypes = {
   UpdateEmailSubscription: UpdateEmailSubscription;
   FaqUpdateObject: FaqUpdateObject;
   UpdateFaq: UpdateFaq;
+  UpdateOrCreateBaseFAQ: UpdateOrCreateBaseFaq;
   PageUpdateObject: PageUpdateObject;
   UpdatePage: UpdatePage;
   ProfileUpdateObject: ProfileUpdateObject;
@@ -2863,6 +2886,7 @@ export type MutationsResolvers<ContextType = any, ParentType extends ResolversPa
   updateArea?: Resolver<Maybe<ResolversTypes['UpdateArea']>, ParentType, ContextType, RequireFields<MutationsUpdateAreaArgs, 'input'>>;
   updateEmailSubscription?: Resolver<Maybe<ResolversTypes['UpdateEmailSubscription']>, ParentType, ContextType, RequireFields<MutationsUpdateEmailSubscriptionArgs, 'dailySummary' | 'weeklySummary'>>;
   updateFaq?: Resolver<Maybe<ResolversTypes['UpdateFaq']>, ParentType, ContextType, RequireFields<MutationsUpdateFaqArgs, 'input'>>;
+  updateOrCreateBaseFaq?: Resolver<Maybe<ResolversTypes['UpdateOrCreateBaseFAQ']>, ParentType, ContextType, RequireFields<MutationsUpdateOrCreateBaseFaqArgs, 'websiteId'>>;
   updatePage?: Resolver<Maybe<ResolversTypes['UpdatePage']>, ParentType, ContextType, RequireFields<MutationsUpdatePageArgs, 'input'>>;
   updateProfile?: Resolver<Maybe<ResolversTypes['UpdateProfile']>, ParentType, ContextType, RequireFields<MutationsUpdateProfileArgs, 'input'>>;
   updateQuestion?: Resolver<Maybe<ResolversTypes['UpdateQuestion']>, ParentType, ContextType, RequireFields<MutationsUpdateQuestionArgs, 'input'>>;
@@ -3122,6 +3146,12 @@ export type UpdateFaqResolvers<ContextType = any, ParentType extends ResolversPa
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type UpdateOrCreateBaseFaqResolvers<ContextType = any, ParentType extends ResolversParentTypes['UpdateOrCreateBaseFAQ'] = ResolversParentTypes['UpdateOrCreateBaseFAQ']> = {
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type UpdatePageResolvers<ContextType = any, ParentType extends ResolversParentTypes['UpdatePage'] = ResolversParentTypes['UpdatePage']> = {
   data?: Resolver<Maybe<ResolversTypes['PageObject']>, ParentType, ContextType>;
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -3228,6 +3258,7 @@ export type Resolvers<ContextType = any> = {
   UpdateArea?: UpdateAreaResolvers<ContextType>;
   UpdateEmailSubscription?: UpdateEmailSubscriptionResolvers<ContextType>;
   UpdateFaq?: UpdateFaqResolvers<ContextType>;
+  UpdateOrCreateBaseFAQ?: UpdateOrCreateBaseFaqResolvers<ContextType>;
   UpdatePage?: UpdatePageResolvers<ContextType>;
   UpdateProfile?: UpdateProfileResolvers<ContextType>;
   UpdateQuestion?: UpdateQuestionResolvers<ContextType>;
@@ -3811,6 +3842,14 @@ export const UpdateFaqDocument = gql`
       name
       pk
     }
+    success
+    message
+  }
+}
+    `;
+export const UpdateOrCreateBaseFaqDocument = gql`
+    mutation updateOrCreateBaseFaq($websiteId: ID!) {
+  updateOrCreateBaseFaq(websiteId: $websiteId) {
     success
     message
   }
@@ -5792,6 +5831,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     updateFaq(variables: UpdateFaqMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateFaqMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<UpdateFaqMutation>(UpdateFaqDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateFaq', 'mutation');
+    },
+    updateOrCreateBaseFaq(variables: UpdateOrCreateBaseFaqMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateOrCreateBaseFaqMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateOrCreateBaseFaqMutation>(UpdateOrCreateBaseFaqDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateOrCreateBaseFaq', 'mutation');
     },
     updatePage(variables: UpdatePageMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdatePageMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<UpdatePageMutation>(UpdatePageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updatePage', 'mutation');
