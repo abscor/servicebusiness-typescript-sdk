@@ -17,36 +17,155 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  GenericScalar: { input: any; output: any; }
   DateTime: { input: any; output: any; }
   JSONString: { input: any; output: any; }
   Decimal: { input: any; output: any; }
-  GenericScalar: { input: any; output: any; }
-  FileUploadField: { input: any; output: any; }
+  BigInt: { input: any; output: any; }
 };
 
 export type Query = {
   __typename?: 'Query';
+  /** add_negative_keywords_to_shared_set(refresh_token, campaign_id, customer_id, unique_identifier, keywords, use_login_id): */
+  addNegativeKeywordsToCampaign?: Maybe<AddNegativeKeywordsToCampaign>;
+  appVersion?: Maybe<Scalars['String']['output']>;
   area?: Maybe<AreaObject>;
   areas?: Maybe<Array<Maybe<AreaObject>>>;
+  createGadsAdGroup?: Maybe<CreateGadsAdGroup>;
+  /**
+   * def create_call_ad(
+   * refresh_token,
+   * customer_id,
+   * ad_group_id,
+   * final_urls,
+   * business_name,
+   * headline1,
+   * headline2,
+   * description1,
+   * description2,
+   * phone_country,
+   * phone_number,
+   * phone_number_verification_url,
+   * call_tracked,
+   * disable_call_conversion,
+   * path1,
+   * path2,
+   * use_login_id):
+   */
+  createGadsCallAd?: Maybe<CreateCallAd>;
+  /**
+   * def create_campaign(
+   * refresh_token,
+   * customer_id,
+   * campaign_name,
+   * budget,
+   * language_code,
+   * country_code,
+   * use_login_id):
+   */
+  createGadsCampaign?: Maybe<CreateGadsCampaign>;
+  createGadsCustomer?: Maybe<CreateGadsCustomer>;
+  /**
+   * def create_responsive_search_ad(
+   * refresh_token,
+   * customer_id,
+   * ad_group_id,
+   * headlines,
+   * descriptions,
+   * final_urls,
+   * path1,
+   * path2,
+   * tracking_url,
+   * use_login_id):
+   */
+  createGadsResponsiveSearchAd?: Maybe<CreateResponsiveSearchAd>;
+  /**
+   * def create_keyword(
+   * refresh_token,
+   * customer_id,
+   * ad_group_id,
+   * keyword_text,
+   * match_type,
+   * use_login_id):
+   */
+  createKeyword?: Maybe<CreateKeyword>;
+  deleteKeyword?: Maybe<DeleteKeyword>;
+  deleteNegativeKeyword?: Maybe<DeleteNegativeKeyword>;
+  enableAd?: Maybe<EnableAd>;
+  enableCampaign?: Maybe<EnableGadsCampaign>;
+  enableGadsAdGroup?: Maybe<EnableGadsAdGroup>;
+  enableKeyword?: Maybe<EnableKeyword>;
   faq?: Maybe<FaqObject>;
   faqs?: Maybe<Array<Maybe<FaqObject>>>;
+  geminiKeywordSuggestions?: Maybe<GadsResponseList>;
+  googleAdsAccounts?: Maybe<GadsResponseList>;
+  googleAdsAdGroupMetrics?: Maybe<GadsResponseList>;
+  googleAdsAdgroups?: Maybe<GadsResponseList>;
+  googleAdsAds?: Maybe<GadsResponseList>;
+  googleAdsCampaigns?: Maybe<GadsResponseList>;
+  googleAdsCampaignsMetrics?: Maybe<GadsResponseList>;
+  googleAdsKeywords?: Maybe<GadsResponseList>;
   invitationsReceived?: Maybe<Array<Maybe<CollaboratorObject>>>;
   invitationsSent?: Maybe<Array<Maybe<CollaboratorObject>>>;
   ipAddress?: Maybe<IpAddress>;
+  listNegativeKeywordsForCampaign?: Maybe<GadsResponseList>;
+  listReviews?: Maybe<GadsResponseList>;
   page?: Maybe<PageObject>;
   pages?: Maybe<Array<Maybe<PageObject>>>;
+  pauseAd?: Maybe<PauseAd>;
+  pauseCampaign?: Maybe<PauseGadsCampaign>;
+  pauseGadsAdGroup?: Maybe<PauseGadsAdGroup>;
+  pauseKeyword?: Maybe<PauseKeyword>;
   postdata?: Maybe<DataObject>;
   postdatas?: Maybe<Array<Maybe<DataObject>>>;
   profile?: Maybe<ProfileObject>;
   question?: Maybe<QuestionObject>;
   questions?: Maybe<Array<Maybe<QuestionObject>>>;
+  removeAd?: Maybe<RemoveAd>;
   review?: Maybe<ReviewObject>;
   reviews?: Maybe<Array<Maybe<ReviewObject>>>;
+  searchTermsReport?: Maybe<GadsResponseList>;
   service?: Maybe<ServiceObject>;
   services?: Maybe<Array<Maybe<ServiceObject>>>;
+  suggestedServices?: Maybe<GadsResponseList>;
+  /**
+   * def update_call_ad(
+   * refresh_token,
+   * customer_id,
+   * ad_group_id,
+   * ad_id,
+   * headline1,
+   * headline2,
+   * description1,
+   * description2,
+   * phone_number,
+   * use_login_id):
+   */
+  updateCallAd?: Maybe<UpdateCallAd>;
+  /**
+   * def update_responsive_search_ad(
+   * refresh_token,
+   * customer_id,
+   * ad_group_id,
+   * ad_id,
+   * headlines,
+   * descriptions,
+   * use_login_id):
+   */
+  updateResponseSearchAd?: Maybe<UpdateResponsiveSearchAd>;
   website?: Maybe<WebsiteObject>;
   websites?: Maybe<Array<Maybe<WebsiteObject>>>;
   zipCode?: Maybe<ZipCode>;
+  zipCodesByRadius?: Maybe<Array<Maybe<ZipCode>>>;
+};
+
+
+export type QueryAddNegativeKeywordsToCampaignArgs = {
+  campaignId: Scalars['String']['input'];
+  customerId: Scalars['String']['input'];
+  keywords: Array<InputMaybe<Scalars['GenericScalar']['input']>>;
+  uniqueIdentifier: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
 };
 
 
@@ -62,6 +181,125 @@ export type QueryAreasArgs = {
 };
 
 
+export type QueryCreateGadsAdGroupArgs = {
+  accountId: Scalars['String']['input'];
+  campaignId: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+};
+
+
+export type QueryCreateGadsCallAdArgs = {
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  businessName: Scalars['String']['input'];
+  callTracked: Scalars['Boolean']['input'];
+  description1: Scalars['String']['input'];
+  description2: Scalars['String']['input'];
+  disableCallConversion: Scalars['Boolean']['input'];
+  finalUrls: Array<InputMaybe<Scalars['String']['input']>>;
+  headline1: Scalars['String']['input'];
+  headline2: Scalars['String']['input'];
+  path1: Scalars['String']['input'];
+  path2: Scalars['String']['input'];
+  phoneCountry: Scalars['String']['input'];
+  phoneNumber: Scalars['String']['input'];
+  phoneNumberVerificationUrl?: InputMaybe<Scalars['String']['input']>;
+  websiteId: Scalars['String']['input'];
+};
+
+
+export type QueryCreateGadsCampaignArgs = {
+  budget: Scalars['BigInt']['input'];
+  campaignName: Scalars['String']['input'];
+  countryCode: Scalars['String']['input'];
+  customerId: Scalars['String']['input'];
+  durationDays?: InputMaybe<Scalars['Int']['input']>;
+  languageCode: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+};
+
+
+export type QueryCreateGadsCustomerArgs = {
+  accountId?: InputMaybe<Scalars['String']['input']>;
+  accountName: Scalars['String']['input'];
+  currencyCode: Scalars['String']['input'];
+  emailAddress: Scalars['String']['input'];
+  timeZone: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+};
+
+
+export type QueryCreateGadsResponsiveSearchAdArgs = {
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  descriptions: Array<InputMaybe<Scalars['String']['input']>>;
+  finalUrls: Array<InputMaybe<Scalars['String']['input']>>;
+  headlines: Array<InputMaybe<Scalars['String']['input']>>;
+  path1: Scalars['String']['input'];
+  path2: Scalars['String']['input'];
+  trackingUrl: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+};
+
+
+export type QueryCreateKeywordArgs = {
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  keywordText: Scalars['String']['input'];
+  matchType: Scalars['String']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  websiteId: Scalars['String']['input'];
+};
+
+
+export type QueryDeleteKeywordArgs = {
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  criterionId: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+};
+
+
+export type QueryDeleteNegativeKeywordArgs = {
+  campaignId: Scalars['String']['input'];
+  criterionId: Scalars['String']['input'];
+  customerId: Scalars['String']['input'];
+  uniqueIdentifier: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+};
+
+
+export type QueryEnableAdArgs = {
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  adId: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+};
+
+
+export type QueryEnableCampaignArgs = {
+  accountId: Scalars['String']['input'];
+  campaignId: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+};
+
+
+export type QueryEnableGadsAdGroupArgs = {
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+};
+
+
+export type QueryEnableKeywordArgs = {
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  criterionId: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+};
+
+
 export type QueryFaqArgs = {
   id?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -71,6 +309,79 @@ export type QueryFaqsArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   websiteId?: InputMaybe<Scalars['ID']['input']>;
+};
+
+
+export type QueryGeminiKeywordSuggestionsArgs = {
+  adgroupId?: InputMaybe<Scalars['String']['input']>;
+  customerId?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  geminiApiKey?: InputMaybe<Scalars['String']['input']>;
+  prompt?: InputMaybe<Scalars['String']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  websiteId?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryGoogleAdsAccountsArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  websiteId?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryGoogleAdsAdGroupMetricsArgs = {
+  adGroupId?: InputMaybe<Scalars['String']['input']>;
+  customerId?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  useLoginId?: InputMaybe<Scalars['Boolean']['input']>;
+  websiteId?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryGoogleAdsAdgroupsArgs = {
+  accountId?: InputMaybe<Scalars['String']['input']>;
+  campaignId?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  websiteId?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryGoogleAdsAdsArgs = {
+  accountId?: InputMaybe<Scalars['String']['input']>;
+  adgroupId?: InputMaybe<Scalars['String']['input']>;
+  campaignId?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  websiteId?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryGoogleAdsCampaignsArgs = {
+  accountId?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  websiteId?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryGoogleAdsCampaignsMetricsArgs = {
+  customerId?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  useLoginId?: InputMaybe<Scalars['Boolean']['input']>;
+  websiteId?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryGoogleAdsKeywordsArgs = {
+  accountId?: InputMaybe<Scalars['String']['input']>;
+  adgroupId?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  websiteId?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -92,6 +403,22 @@ export type QueryIpAddressArgs = {
 };
 
 
+export type QueryListNegativeKeywordsForCampaignArgs = {
+  campaignId?: InputMaybe<Scalars['String']['input']>;
+  customerId?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  uniqueIdentifier?: InputMaybe<Scalars['String']['input']>;
+  websiteId?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryListReviewsArgs = {
+  customerId?: InputMaybe<Scalars['String']['input']>;
+  websiteId?: InputMaybe<Scalars['String']['input']>;
+};
+
+
 export type QueryPageArgs = {
   id?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -101,6 +428,36 @@ export type QueryPagesArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   websiteId?: InputMaybe<Scalars['ID']['input']>;
+};
+
+
+export type QueryPauseAdArgs = {
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  adId: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+};
+
+
+export type QueryPauseCampaignArgs = {
+  accountId: Scalars['String']['input'];
+  campaignId: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+};
+
+
+export type QueryPauseGadsAdGroupArgs = {
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+};
+
+
+export type QueryPauseKeywordArgs = {
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  criterionId: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
 };
 
 
@@ -128,6 +485,14 @@ export type QueryQuestionsArgs = {
 };
 
 
+export type QueryRemoveAdArgs = {
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  adId: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+};
+
+
 export type QueryReviewArgs = {
   id?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -140,6 +505,18 @@ export type QueryReviewsArgs = {
 };
 
 
+export type QuerySearchTermsReportArgs = {
+  adGroupId?: InputMaybe<Scalars['String']['input']>;
+  campaignId?: InputMaybe<Scalars['String']['input']>;
+  customerId?: InputMaybe<Scalars['String']['input']>;
+  dateRange?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  keywords?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  websiteId?: InputMaybe<Scalars['String']['input']>;
+};
+
+
 export type QueryServiceArgs = {
   id?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -149,6 +526,34 @@ export type QueryServicesArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   websiteId?: InputMaybe<Scalars['ID']['input']>;
+};
+
+
+export type QuerySuggestedServicesArgs = {
+  companyDescription?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryUpdateCallAdArgs = {
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  adId: Scalars['String']['input'];
+  description1: Scalars['String']['input'];
+  description2: Scalars['String']['input'];
+  headline1: Scalars['String']['input'];
+  headline2: Scalars['String']['input'];
+  phoneNumber: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+};
+
+
+export type QueryUpdateResponseSearchAdArgs = {
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  adId: Scalars['String']['input'];
+  descriptions: Array<InputMaybe<Scalars['String']['input']>>;
+  headlines: Array<InputMaybe<Scalars['String']['input']>>;
+  websiteId: Scalars['String']['input'];
 };
 
 
@@ -167,325 +572,443 @@ export type QueryZipCodeArgs = {
   zipCode?: InputMaybe<Scalars['String']['input']>;
 };
 
+
+export type QueryZipCodesByRadiusArgs = {
+  radius?: InputMaybe<Scalars['Decimal']['input']>;
+  zipCode?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** add_negative_keywords_to_shared_set(refresh_token, campaign_id, customer_id, unique_identifier, keywords, use_login_id): */
+export type AddNegativeKeywordsToCampaign = {
+  __typename?: 'AddNegativeKeywordsToCampaign';
+  data?: Maybe<GadsResponse>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type GadsResponse = {
+  __typename?: 'GadsResponse';
+  data?: Maybe<Scalars['GenericScalar']['output']>;
+  errors?: Maybe<Array<Maybe<Scalars['GenericScalar']['output']>>>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
 export type AreaObject = {
   __typename?: 'AreaObject';
-  /** Boolean: Indicates if the area is currently active and available for display or use. */
+  absoluteUrl?: Maybe<Scalars['String']['output']>;
+  /** Is this item active? */
   active: Scalars['Boolean']['output'];
+  /** String: The city name for this area. */
+  city?: Maybe<Scalars['String']['output']>;
   created: Scalars['DateTime']['output'];
-  /** Text: A detailed description of the area and its characteristics. */
+  customFooterJs?: Maybe<Scalars['String']['output']>;
+  customHeaderCode?: Maybe<Scalars['String']['output']>;
+  customHtmlBlock?: Maybe<Scalars['String']['output']>;
+  /** A description of the item. */
   description?: Maybe<Scalars['String']['output']>;
-  /** Integer: The display priority of this area. Higher values indicate higher priority for display. */
+  /** The order in which this item should be displayed. */
   displayOrder: Scalars['Int']['output'];
-  /** Boolean: Determines if Schema.org areaServed object tags are used for this area. */
-  enableSchemaOrgAreaServedObject: Scalars['Boolean']['output'];
-  /** Text: First customizable HTML content block for additional information or markup related to the area. */
-  htmlBlock1?: Maybe<Scalars['String']['output']>;
-  /** Text: Second customizable HTML content block for additional information or markup related to the area. */
-  htmlBlock2?: Maybe<Scalars['String']['output']>;
-  id: Scalars['ID']['output'];
-  /** String: URL or path to the image representing the area. Recommended minimum size is 450x300 pixels. */
+  id?: Maybe<Scalars['ID']['output']>;
+  /** An image URL for the item. */
   image?: Maybe<Scalars['String']['output']>;
-  keywordTargeting?: Maybe<Array<Scalars['String']['output']>>;
+  images?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  includeInGads: Scalars['Boolean']['output'];
+  /** Float: The latitude for this area. */
+  latitude?: Maybe<Scalars['Float']['output']>;
+  /** Float: The longitude for this area. */
+  longitude?: Maybe<Scalars['Float']['output']>;
   metadata?: Maybe<Scalars['JSONString']['output']>;
-  /** String: The official name of the area. */
+  /** The name of the item. */
   name?: Maybe<Scalars['String']['output']>;
   pk?: Maybe<Scalars['ID']['output']>;
-  /** Boolean: Specifies whether to display an insurance company widget on the area page. */
-  showInsuranceCompanyWidget: Scalars['Boolean']['output'];
-  /** String: URL-friendly identifier for the area, used in web addresses. */
+  /** The slug is the URL-friendly version of the name. */
   slug?: Maybe<Scalars['String']['output']>;
+  /** String: The state name for this area. */
+  state?: Maybe<Scalars['String']['output']>;
   updated: Scalars['DateTime']['output'];
+  /** A video URL for the item. */
+  video?: Maybe<Scalars['String']['output']>;
   website: WebsiteObject;
-  /** String: The postal code associated with the area. */
+  /** String: The ZIP code for this area. */
   zipCode: Scalars['String']['output'];
 };
 
 export type WebsiteObject = {
   __typename?: 'WebsiteObject';
-  /** Boolean: Specifies if the website is currently active. */
+  /** Is this item active? */
   active: Scalars['Boolean']['output'];
   /** String: Primary street address of the business. */
   address1?: Maybe<Scalars['String']['output']>;
   /** String: Secondary address line, if any. */
   address2?: Maybe<Scalars['String']['output']>;
-  areas: Array<AreaObject>;
-  /** Text: Detailed description of the business's activities and services. */
-  businessDescription?: Maybe<Scalars['String']['output']>;
+  areas?: Maybe<Array<Maybe<AreaObject>>>;
   /** String: Employer Identification Number (EIN) of the business. */
   businessEinNumber?: Maybe<Scalars['String']['output']>;
-  /** Image: Logo of the business. Recommended minimum size is 450x300 pixels. */
-  businessLogo?: Maybe<Scalars['String']['output']>;
   /** String: Name of the business manager. */
-  businessManagerPersonName?: Maybe<Scalars['String']['output']>;
-  /** String: The official name of the business. */
-  businessName: Scalars['String']['output'];
-  /** String: Color of the button border. */
-  buttonBorderColor?: Maybe<Scalars['String']['output']>;
-  /** String: Color of the button. */
-  buttonColor?: Maybe<Scalars['String']['output']>;
-  /** String: Color of the button text. */
-  buttonTextColor?: Maybe<Scalars['String']['output']>;
-  carouselImages?: Maybe<Array<Maybe<Scalars['JSONString']['output']>>>;
+  businessManager?: Maybe<Scalars['String']['output']>;
   /** String: City where the business is located. */
   city?: Maybe<Scalars['String']['output']>;
   created: Scalars['DateTime']['output'];
-  /** Text: HTML markup for the call-to-action button. */
-  ctaButtonHtml?: Maybe<Scalars['String']['output']>;
-  /** Text: HTML markup for the main call-to-action on the website. */
-  ctaHtml?: Maybe<Scalars['String']['output']>;
-  /** Text: Custom CSS code for the website. */
-  customCss?: Maybe<Scalars['String']['output']>;
-  /** Text: Custom HTML code for the website's footer section. */
-  customFooterCode?: Maybe<Scalars['String']['output']>;
-  /** Text: Custom HTML code for the website's header section. */
-  customHeaderCode?: Maybe<Scalars['String']['output']>;
-  datas: Array<DataObject>;
-  /** String: Default subdomain name for the website. */
   defaultSubdomainName?: Maybe<Scalars['String']['output']>;
-  /** Array of Email Addresses: List of email addresses authorized to edit the website. */
-  editor?: Maybe<Array<Scalars['String']['output']>>;
+  /** Text: Detailed description of the business's activities and services. */
+  description?: Maybe<Scalars['String']['output']>;
+  /** The order in which this item should be displayed. */
+  displayOrder: Scalars['Int']['output'];
+  /** Array of Strings: List of top-level domains for the website, e.g., 'my-local-business.com'. */
+  domains?: Maybe<Array<Scalars['String']['output']>>;
   /** String: Email address for business correspondence. */
   emailAddress?: Maybe<Scalars['String']['output']>;
-  /** Boolean: Determines if Google SiteMaps is enabled for the website. */
-  enableGoogleSitemaps: Scalars['Boolean']['output'];
-  /** Boolean: Indicates if Schema.org LocalBusiness object tags are used. */
-  enableSchemaOrgLocalbusinessObject: Scalars['Boolean']['output'];
-  /** Boolean: Indicates if Schema.org Organization object tags are used. */
-  enableSchemaOrgOrganizationObject: Scalars['Boolean']['output'];
-  /** Boolean: Indicates if Schema.org WebPage object tags are used. */
-  enableSchemaOrgWebpageObject: Scalars['Boolean']['output'];
-  faqs: Array<FaqObject>;
-  /** String: Font family for the body text. */
-  fontBody?: Maybe<Scalars['String']['output']>;
-  /** String: Font family for the heading text. */
-  fontHeading?: Maybe<Scalars['String']['output']>;
-  /** Text: HTML markup for the first link in the footer. */
-  footerLink1Html?: Maybe<Scalars['String']['output']>;
-  /** Text: HTML markup for the second link in the footer. */
-  footerLink2Html?: Maybe<Scalars['String']['output']>;
-  /** Text: HTML markup for the third link in the footer. */
-  footerLink3Html?: Maybe<Scalars['String']['output']>;
-  /** Text: HTML markup for the fourth link in the footer. */
-  footerLink4Html?: Maybe<Scalars['String']['output']>;
-  /** Text: HTML markup for the fifth link in the footer. */
-  footerLink5Html?: Maybe<Scalars['String']['output']>;
-  /** Text: HTML markup for the message in the footer. */
-  footerMessageHtml?: Maybe<Scalars['String']['output']>;
-  /** Boolean: Indicates if the business address is visible in the footer. */
-  footerShowAddress: Scalars['Boolean']['output'];
-  /** Integer: Number of service areas to display in the footer. */
-  footerShowAreas: Scalars['Int']['output'];
-  /** Boolean: Indicates if the business email address is visible in the footer. */
-  footerShowEmailAddress: Scalars['Boolean']['output'];
-  /** Boolean: Indicates if the business insurance number is visible in the footer. */
-  footerShowInsuranceNumber: Scalars['Boolean']['output'];
-  /** Boolean: Indicates if the business license number is visible in the footer. */
-  footerShowLicenseNumber: Scalars['Boolean']['output'];
-  /** Integer: Number of reviews to display in the footer. */
-  footerShowReviews: Scalars['Int']['output'];
-  /** Integer: Number of services to display in the footer. */
-  footerShowServices: Scalars['Int']['output'];
+  faqs?: Maybe<Array<Maybe<FaqObject>>>;
+  /** String: Google Ads account ID */
+  gadsAccountId?: Maybe<Scalars['String']['output']>;
+  /** String: Google Ads campaign ID */
+  gadsCampaignId?: Maybe<Scalars['String']['output']>;
   /** String: Google Analytics ID for tracking website traffic, e.g., 'IX-123213-923s'. */
   googleAnalytics?: Maybe<Scalars['String']['output']>;
-  /** String: Content of the file used for Google site verification. */
-  googleVerificationFileContent?: Maybe<Scalars['String']['output']>;
-  /** String: File name used for Google site verification. */
-  googleVerificationFileName?: Maybe<Scalars['String']['output']>;
-  /** Image: Background image for the homepage. */
-  homepageBackground?: Maybe<Scalars['String']['output']>;
-  /** Video: Background video for the homepage. */
-  homepageVideo?: Maybe<Scalars['String']['output']>;
+  /** String: Google Tag Manager ID */
+  googleTagManager?: Maybe<Scalars['String']['output']>;
+  hashId?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
+  /** An image URL for the item. */
+  image?: Maybe<Scalars['String']['output']>;
+  images?: Maybe<Array<Maybe<Scalars['JSONString']['output']>>>;
   /** String: Insurance policy number of the business. */
   insuranceNumber?: Maybe<Scalars['String']['output']>;
   /** String: Official license number of the business. */
   licenseNumber?: Maybe<Scalars['String']['output']>;
+  /** The logo of the business. Recommended minimum size is 450x300 pixels. */
+  logo?: Maybe<Scalars['String']['output']>;
   metadata?: Maybe<Scalars['JSONString']['output']>;
-  /** Text: HTML markup for the first link in the navigation bar. */
-  navbarLink1Html?: Maybe<Scalars['String']['output']>;
-  /** Text: HTML markup for the second link in the navigation bar. */
-  navbarLink2Html?: Maybe<Scalars['String']['output']>;
-  /** Text: HTML markup for the message in the navigation bar. */
-  navbarMessageHtml?: Maybe<Scalars['String']['output']>;
-  /** Integer: Number of service areas to display in the navigation bar. */
-  navbarShowAreas: Scalars['Int']['output'];
-  /** Boolean: Indicates if the call-to-action button is visible in the navigation bar. */
-  navbarShowCtaButton: Scalars['Boolean']['output'];
-  /** Integer: Number of services to display in the navigation bar. */
-  navbarShowServices: Scalars['Int']['output'];
-  pages: Array<PageObject>;
+  /** Message of the day */
+  motd?: Maybe<Scalars['String']['output']>;
+  /** String: The official name of the business. */
+  name: Scalars['String']['output'];
+  pages?: Maybe<Array<Maybe<PageObject>>>;
   /** String: Contact phone number of the business. */
   phoneNumber?: Maybe<Scalars['String']['output']>;
   pk?: Maybe<Scalars['ID']['output']>;
   /** String: Primary color theme of the website. */
   primaryColor?: Maybe<Scalars['String']['output']>;
-  questions: Array<QuestionObject>;
-  reviews: Array<ReviewObject>;
+  primaryColorContrast?: Maybe<Scalars['String']['output']>;
+  reviews?: Maybe<Array<Maybe<ReviewObject>>>;
   /** String: Secondary color theme of the website. */
   secondaryColor?: Maybe<Scalars['String']['output']>;
-  services: Array<ServiceObject>;
-  /** String: URL-friendly identifier for the business, used in web addresses. */
+  secondaryColorContrast?: Maybe<Scalars['String']['output']>;
+  services?: Maybe<Array<Maybe<ServiceObject>>>;
+  /** The slug is the URL-friendly version of the name. */
   slug?: Maybe<Scalars['String']['output']>;
   /** String: State or region where the business is located. */
   state?: Maybe<Scalars['String']['output']>;
   /** The theme of the website. Portfolio, Services or Emergency. */
-  theme: AppWebsiteThemeChoices;
-  /** Array of Strings: List of top-level domains for the website, e.g., 'my-local-business.com'. */
-  tld?: Maybe<Array<Scalars['String']['output']>>;
+  theme: Scalars['String']['output'];
   updated: Scalars['DateTime']['output'];
+  /** A video URL for the item. */
+  video?: Maybe<Scalars['String']['output']>;
   /** String: Postal code of the business's location. */
   zipCode?: Maybe<Scalars['String']['output']>;
 };
 
-export type DataObject = {
-  __typename?: 'DataObject';
-  created: Scalars['DateTime']['output'];
-  /** JSON: The data of the post. */
-  data?: Maybe<Scalars['JSONString']['output']>;
-  id: Scalars['ID']['output'];
-  /** String: The ip address of the user. */
-  ipAddress: Scalars['String']['output'];
-  metadata?: Maybe<Scalars['JSONString']['output']>;
-  pk?: Maybe<Scalars['ID']['output']>;
-  updated: Scalars['DateTime']['output'];
-  website?: Maybe<WebsiteObject>;
-};
-
 export type FaqObject = {
   __typename?: 'FaqObject';
-  /** Boolean: Indicates if the faq is currently active and available for display or use. */
+  absoluteUrl?: Maybe<Scalars['String']['output']>;
+  /** Is this item active? */
   active: Scalars['Boolean']['output'];
   created: Scalars['DateTime']['output'];
-  id: Scalars['ID']['output'];
+  customFooterJs?: Maybe<Scalars['String']['output']>;
+  customHeaderCode?: Maybe<Scalars['String']['output']>;
+  customHtmlBlock?: Maybe<Scalars['String']['output']>;
+  /** A description of the item. */
+  description?: Maybe<Scalars['String']['output']>;
+  /** The order in which this item should be displayed. */
+  displayOrder: Scalars['Int']['output'];
+  id?: Maybe<Scalars['ID']['output']>;
+  /** An image URL for the item. */
+  image?: Maybe<Scalars['String']['output']>;
+  images?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   metadata?: Maybe<Scalars['JSONString']['output']>;
-  /** String: The name of the faq that the business provides. */
-  name: Scalars['String']['output'];
+  /** The name of the item. */
+  name?: Maybe<Scalars['String']['output']>;
   pk?: Maybe<Scalars['ID']['output']>;
-  questions: Array<QuestionObject>;
-  /** String: URL-friendly identifier for the faq, used in web addresses. */
+  question?: Maybe<Array<Maybe<QuestionObject>>>;
+  /** The slug is the URL-friendly version of the name. */
   slug?: Maybe<Scalars['String']['output']>;
   updated: Scalars['DateTime']['output'];
+  /** A video URL for the item. */
+  video?: Maybe<Scalars['String']['output']>;
   website: WebsiteObject;
 };
 
 export type QuestionObject = {
   __typename?: 'QuestionObject';
-  /** Boolean: Indicates if the question is currently active and available for display or use. */
+  absoluteUrl?: Maybe<Scalars['String']['output']>;
+  /** Is this item active? */
   active: Scalars['Boolean']['output'];
   /** String: The answer that the business provides. */
   answer: Scalars['String']['output'];
   created: Scalars['DateTime']['output'];
-  /** Integer: The display priority of this question. Higher values indicate higher priority for display. */
-  displayOrder?: Maybe<Scalars['Int']['output']>;
+  customFooterJs?: Maybe<Scalars['String']['output']>;
+  customHeaderCode?: Maybe<Scalars['String']['output']>;
+  customHtmlBlock?: Maybe<Scalars['String']['output']>;
+  /** A description of the item. */
+  description?: Maybe<Scalars['String']['output']>;
+  /** The order in which this item should be displayed. */
+  displayOrder: Scalars['Int']['output'];
   faq?: Maybe<FaqObject>;
-  faqId?: Maybe<Scalars['ID']['output']>;
-  id: Scalars['ID']['output'];
+  id?: Maybe<Scalars['ID']['output']>;
+  /** An image URL for the item. */
+  image?: Maybe<Scalars['String']['output']>;
+  images?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   metadata?: Maybe<Scalars['JSONString']['output']>;
+  /** The name of the item. */
+  name?: Maybe<Scalars['String']['output']>;
   pk?: Maybe<Scalars['ID']['output']>;
   /** String: The question that the business provides. */
   question: Scalars['String']['output'];
+  /** The slug is the URL-friendly version of the name. */
+  slug?: Maybe<Scalars['String']['output']>;
   updated: Scalars['DateTime']['output'];
+  /** A video URL for the item. */
+  video?: Maybe<Scalars['String']['output']>;
   website: WebsiteObject;
 };
 
 export type PageObject = {
   __typename?: 'PageObject';
-  /** Boolean: Indicates if the page is currently active and available for viewing. */
+  absoluteUrl?: Maybe<Scalars['String']['output']>;
+  /** Is this item active? */
   active: Scalars['Boolean']['output'];
-  /** Text: The full HTML content of the page. */
+  /** Text: The main content of the page, including text, images, and other media. */
   body: Scalars['String']['output'];
   created: Scalars['DateTime']['output'];
-  /** Text: A brief text description of the page's content and purpose. */
+  customFooterJs?: Maybe<Scalars['String']['output']>;
+  customHeaderCode?: Maybe<Scalars['String']['output']>;
+  customHtmlBlock?: Maybe<Scalars['String']['output']>;
+  /** A description of the item. */
   description?: Maybe<Scalars['String']['output']>;
-  /** Integer: The display priority of this page. Higher values indicate higher priority for display. */
+  /** The order in which this item should be displayed. */
   displayOrder: Scalars['Int']['output'];
-  /** Boolean: Specifies if Schema.org Article object tags are used for this page. */
-  enableSchemaOrgArticleObject: Scalars['Boolean']['output'];
-  id: Scalars['ID']['output'];
-  /** Image: The primary image for the page. Recommended minimum size is 450x300 pixels. */
+  id?: Maybe<Scalars['ID']['output']>;
+  /** An image URL for the item. */
   image?: Maybe<Scalars['String']['output']>;
-  keywordTargeting?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  images?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   metadata?: Maybe<Scalars['JSONString']['output']>;
-  /** String: The title or name of the page. */
-  name: Scalars['String']['output'];
+  /** The name of the item. */
+  name?: Maybe<Scalars['String']['output']>;
   pk?: Maybe<Scalars['ID']['output']>;
-  /** Boolean: Indicates whether an insurance company widget is displayed on this page. */
-  showInsuranceCompanyWidget: Scalars['Boolean']['output'];
-  /** String: URL-friendly identifier for the page, used in web addresses. */
+  /** The slug is the URL-friendly version of the name. */
   slug?: Maybe<Scalars['String']['output']>;
   updated: Scalars['DateTime']['output'];
+  /** A video URL for the item. */
+  video?: Maybe<Scalars['String']['output']>;
   website: WebsiteObject;
 };
 
 export type ReviewObject = {
   __typename?: 'ReviewObject';
-  /** Boolean: Indicates if the review is currently active and visible to users. */
+  absoluteUrl?: Maybe<Scalars['String']['output']>;
+  /** Is this item active? */
   active: Scalars['Boolean']['output'];
-  /** Text: The full text of the review, detailing the user's experience or opinion. */
-  body?: Maybe<Scalars['String']['output']>;
   created: Scalars['DateTime']['output'];
-  /** Integer: The display priority of this review. Higher values indicate higher priority for display. */
+  customFooterJs?: Maybe<Scalars['String']['output']>;
+  customHeaderCode?: Maybe<Scalars['String']['output']>;
+  customHtmlBlock?: Maybe<Scalars['String']['output']>;
+  /** A description of the item. */
+  description?: Maybe<Scalars['String']['output']>;
+  /** The order in which this item should be displayed. */
   displayOrder: Scalars['Int']['output'];
-  id: Scalars['ID']['output'];
+  id?: Maybe<Scalars['ID']['output']>;
+  /** An image URL for the item. */
+  image?: Maybe<Scalars['String']['output']>;
+  images?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   metadata?: Maybe<Scalars['JSONString']['output']>;
-  /** Image: An image of the person who wrote the review. Recommended minimum size is 450x300 pixels. */
-  personImage?: Maybe<Scalars['String']['output']>;
+  /** The name of the item. */
+  name?: Maybe<Scalars['String']['output']>;
   /** String: The name of the person who wrote the review. */
   personName: Scalars['String']['output'];
-  /** String: The postal code of the reviewer's location. */
-  personZipCode: Scalars['String']['output'];
   pk?: Maybe<Scalars['ID']['output']>;
-  /** Integer: The rating given in the review, on a scale from 1 to 5, with half-step increments allowed (e.g., 4.5). */
+  /** Decimal: The rating of the review. */
   rating: Scalars['Decimal']['output'];
-  /** String: URL-friendly identifier for the review, used in web addresses. */
+  /** The slug is the URL-friendly version of the name. */
   slug?: Maybe<Scalars['String']['output']>;
-  /** String: A concise title or summary of the review. */
-  title: Scalars['String']['output'];
   updated: Scalars['DateTime']['output'];
+  /** A video URL for the item. */
+  video?: Maybe<Scalars['String']['output']>;
   website: WebsiteObject;
+  /** String: The ZIP code of the person who wrote the review. */
+  zipCode: Scalars['String']['output'];
 };
 
 export type ServiceObject = {
   __typename?: 'ServiceObject';
-  /** Boolean: Indicates if the service is currently active and available for display or use. */
+  absoluteUrl?: Maybe<Scalars['String']['output']>;
+  /** Is this item active? */
   active: Scalars['Boolean']['output'];
-  carouselImages?: Maybe<Array<Maybe<Scalars['JSONString']['output']>>>;
   created: Scalars['DateTime']['output'];
-  /** Text: A detailed description of the service, including its features and benefits. */
-  description: Scalars['String']['output'];
-  /** Integer: The display priority of this service. Higher values indicate higher priority for display. */
+  customFooterJs?: Maybe<Scalars['String']['output']>;
+  customHeaderCode?: Maybe<Scalars['String']['output']>;
+  customHtmlBlock?: Maybe<Scalars['String']['output']>;
+  /** A description of the item. */
+  description?: Maybe<Scalars['String']['output']>;
+  /** The order in which this item should be displayed. */
   displayOrder: Scalars['Int']['output'];
-  /** Boolean: Determines if Schema.org Service object tags are used for this service. */
-  enableSchemaOrgServiceObject: Scalars['Boolean']['output'];
-  /** Text: First customizable HTML content block for additional information or markup related to the service. */
-  htmlBlock1?: Maybe<Scalars['String']['output']>;
-  /** Text: Second customizable HTML content block for additional information or markup related to the service. */
-  htmlBlock2?: Maybe<Scalars['String']['output']>;
-  id: Scalars['ID']['output'];
-  /** String: URL or path to the image representing the service. Recommended minimum size is 450x300 pixels. */
+  gadsAdGroupId?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  /** An image URL for the item. */
   image?: Maybe<Scalars['String']['output']>;
-  keywordTargeting?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  images?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   metadata?: Maybe<Scalars['JSONString']['output']>;
-  /** String: The name of the service provided by the business. */
-  name: Scalars['String']['output'];
+  /** The name of the item. */
+  name?: Maybe<Scalars['String']['output']>;
   pk?: Maybe<Scalars['ID']['output']>;
-  /** Boolean: Specifies whether to display an insurance company widget on the service page. */
-  showInsuranceCompanyWidget: Scalars['Boolean']['output'];
-  /** String: URL-friendly identifier for the service, used in web addresses. */
+  /** The slug is the URL-friendly version of the name. */
   slug?: Maybe<Scalars['String']['output']>;
   updated: Scalars['DateTime']['output'];
+  /** A video URL for the item. */
+  video?: Maybe<Scalars['String']['output']>;
   website: WebsiteObject;
 };
 
-/** An enumeration. */
-export enum AppWebsiteThemeChoices {
-  /** Emergency */
-  Emergency = 'EMERGENCY',
-  /** Portfolio */
-  Portfolio = 'PORTFOLIO',
-  /** Services */
-  Services = 'SERVICES'
-}
+export type CreateGadsAdGroup = {
+  __typename?: 'CreateGADSAdGroup';
+  data?: Maybe<GadsResponse>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/**
+ * def create_call_ad(
+ * refresh_token,
+ * customer_id,
+ * ad_group_id,
+ * final_urls,
+ * business_name,
+ * headline1,
+ * headline2,
+ * description1,
+ * description2,
+ * phone_country,
+ * phone_number,
+ * phone_number_verification_url,
+ * call_tracked,
+ * disable_call_conversion,
+ * path1,
+ * path2,
+ * use_login_id):
+ */
+export type CreateCallAd = {
+  __typename?: 'CreateCallAd';
+  data?: Maybe<GadsResponseList>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type GadsResponseList = {
+  __typename?: 'GadsResponseList';
+  data?: Maybe<Array<Maybe<Scalars['GenericScalar']['output']>>>;
+};
+
+/**
+ * def create_campaign(
+ * refresh_token,
+ * customer_id,
+ * campaign_name,
+ * budget,
+ * language_code,
+ * country_code,
+ * use_login_id):
+ */
+export type CreateGadsCampaign = {
+  __typename?: 'CreateGADSCampaign';
+  data?: Maybe<GadsResponseList>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type CreateGadsCustomer = {
+  __typename?: 'CreateGADSCustomer';
+  data?: Maybe<GadsResponseList>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/**
+ * def create_responsive_search_ad(
+ * refresh_token,
+ * customer_id,
+ * ad_group_id,
+ * headlines,
+ * descriptions,
+ * final_urls,
+ * path1,
+ * path2,
+ * tracking_url,
+ * use_login_id):
+ */
+export type CreateResponsiveSearchAd = {
+  __typename?: 'CreateResponsiveSearchAd';
+  data?: Maybe<GadsResponseList>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/**
+ * def create_keyword(
+ * refresh_token,
+ * customer_id,
+ * ad_group_id,
+ * keyword_text,
+ * match_type,
+ * use_login_id):
+ */
+export type CreateKeyword = {
+  __typename?: 'CreateKeyword';
+  data?: Maybe<GadsResponseList>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type DeleteKeyword = {
+  __typename?: 'DeleteKeyword';
+  data?: Maybe<GadsResponseList>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type DeleteNegativeKeyword = {
+  __typename?: 'DeleteNegativeKeyword';
+  data?: Maybe<GadsResponse>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type EnableAd = {
+  __typename?: 'EnableAd';
+  data?: Maybe<GadsResponseList>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type EnableGadsCampaign = {
+  __typename?: 'EnableGADSCampaign';
+  data?: Maybe<GadsResponseList>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type EnableGadsAdGroup = {
+  __typename?: 'EnableGADSAdGroup';
+  data?: Maybe<GadsResponseList>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type EnableKeyword = {
+  __typename?: 'EnableKeyword';
+  data?: Maybe<GadsResponseList>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
 
 export type CollaboratorObject = {
   __typename?: 'CollaboratorObject';
@@ -516,39 +1039,127 @@ export type IpAddress = {
   zipCode?: Maybe<Scalars['String']['output']>;
 };
 
+export type PauseAd = {
+  __typename?: 'PauseAd';
+  data?: Maybe<GadsResponseList>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type PauseGadsCampaign = {
+  __typename?: 'PauseGADSCampaign';
+  data?: Maybe<GadsResponseList>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type PauseGadsAdGroup = {
+  __typename?: 'PauseGADSAdGroup';
+  data?: Maybe<GadsResponseList>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type PauseKeyword = {
+  __typename?: 'PauseKeyword';
+  data?: Maybe<GadsResponseList>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type DataObject = {
+  __typename?: 'DataObject';
+  /** Is this item active? */
+  active: Scalars['Boolean']['output'];
+  created: Scalars['DateTime']['output'];
+  /** JSON: The data of the post. */
+  data?: Maybe<Scalars['JSONString']['output']>;
+  /** A description of the item. */
+  description?: Maybe<Scalars['String']['output']>;
+  /** The order in which this item should be displayed. */
+  displayOrder: Scalars['Int']['output'];
+  id: Scalars['ID']['output'];
+  /** An image URL for the item. */
+  image?: Maybe<Scalars['String']['output']>;
+  /** A list of image URLs for the item. */
+  images?: Maybe<Scalars['JSONString']['output']>;
+  /** String: The ip address of the user. */
+  ipAddress: Scalars['String']['output'];
+  metadata?: Maybe<Scalars['JSONString']['output']>;
+  /** The name of the item. */
+  name?: Maybe<Scalars['String']['output']>;
+  pk?: Maybe<Scalars['ID']['output']>;
+  /** The slug is the URL-friendly version of the name. */
+  slug?: Maybe<Scalars['String']['output']>;
+  updated: Scalars['DateTime']['output'];
+  /** A video URL for the item. */
+  video?: Maybe<Scalars['String']['output']>;
+  website?: Maybe<WebsiteObject>;
+};
+
 export type ProfileObject = {
   __typename?: 'ProfileObject';
+  /** Is this item active? */
+  active: Scalars['Boolean']['output'];
   created: Scalars['DateTime']['output'];
   /** Boolean: Indicates whether the user opts in for daily summary notifications. */
   dailySummary: Scalars['Boolean']['output'];
+  /** A description of the item. */
+  description?: Maybe<Scalars['String']['output']>;
+  /** The order in which this item should be displayed. */
+  displayOrder: Scalars['Int']['output'];
   /** String: The email address of the user. Maximum length of 500 characters. */
   emailAddress?: Maybe<Scalars['String']['output']>;
   /** String: The first name of the user. Maximum length of 500 characters. */
   firstName?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
+  /** An image URL for the item. */
+  image?: Maybe<Scalars['String']['output']>;
+  /** A list of image URLs for the item. */
+  images?: Maybe<Scalars['JSONString']['output']>;
   /** String: The last name of the user. Maximum length of 500 characters. */
   lastName?: Maybe<Scalars['String']['output']>;
   metadata?: Maybe<Scalars['JSONString']['output']>;
+  /** The name of the item. */
+  name?: Maybe<Scalars['String']['output']>;
   /** String: Contact phone number of the user. Maximum length of 500 characters. */
   phoneNumber: Scalars['String']['output'];
   pk?: Maybe<Scalars['ID']['output']>;
+  /** The slug is the URL-friendly version of the name. */
+  slug?: Maybe<Scalars['String']['output']>;
   /** A reference to the associated Subscription object. This field links each profile to a specific subscription. */
   subscription?: Maybe<SubscriptionObject>;
   updated: Scalars['DateTime']['output'];
+  /** A video URL for the item. */
+  video?: Maybe<Scalars['String']['output']>;
   /** Boolean: Indicates whether the user opts in for weekly summary notifications. */
   weeklySummary: Scalars['Boolean']['output'];
 };
 
 export type SubscriptionObject = {
   __typename?: 'SubscriptionObject';
+  /** Is this item active? */
+  active: Scalars['Boolean']['output'];
   created: Scalars['DateTime']['output'];
+  /** A description of the item. */
+  description?: Maybe<Scalars['String']['output']>;
+  /** The order in which this item should be displayed. */
+  displayOrder: Scalars['Int']['output'];
   id: Scalars['ID']['output'];
+  /** An image URL for the item. */
+  image?: Maybe<Scalars['String']['output']>;
+  /** A list of image URLs for the item. */
+  images?: Maybe<Scalars['JSONString']['output']>;
   /** Integer: The length of the subscription in days. */
   lengthDays?: Maybe<Scalars['Int']['output']>;
   metadata?: Maybe<Scalars['JSONString']['output']>;
+  /** The name of the item. */
+  name?: Maybe<Scalars['String']['output']>;
   pk?: Maybe<Scalars['ID']['output']>;
   /** JSON: A JSON object containing the program options selected for this subscription. */
   programOptions?: Maybe<Scalars['GenericScalar']['output']>;
+  /** The slug is the URL-friendly version of the name. */
+  slug?: Maybe<Scalars['String']['output']>;
   /** DateTime: The date and time the subscription started. */
   startDate?: Maybe<Scalars['DateTime']['output']>;
   /** String: The status of the subscription. See SubscriptionStatus for possible values. */
@@ -562,6 +1173,52 @@ export type SubscriptionObject = {
   updated: Scalars['DateTime']['output'];
   /** ForeignKey: A reference to the associated User object. This field links each subscription to a specific user. */
   userId?: Maybe<Scalars['ID']['output']>;
+  /** A video URL for the item. */
+  video?: Maybe<Scalars['String']['output']>;
+};
+
+export type RemoveAd = {
+  __typename?: 'RemoveAd';
+  data?: Maybe<GadsResponseList>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/**
+ * def update_call_ad(
+ * refresh_token,
+ * customer_id,
+ * ad_group_id,
+ * ad_id,
+ * headline1,
+ * headline2,
+ * description1,
+ * description2,
+ * phone_number,
+ * use_login_id):
+ */
+export type UpdateCallAd = {
+  __typename?: 'UpdateCallAd';
+  data?: Maybe<GadsResponseList>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/**
+ * def update_responsive_search_ad(
+ * refresh_token,
+ * customer_id,
+ * ad_group_id,
+ * ad_id,
+ * headlines,
+ * descriptions,
+ * use_login_id):
+ */
+export type UpdateResponsiveSearchAd = {
+  __typename?: 'UpdateResponsiveSearchAd';
+  data?: Maybe<GadsResponseList>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
 };
 
 export type ZipCode = {
@@ -586,6 +1243,8 @@ export type Mutations = {
   acceptInvite?: Maybe<AcceptInvite>;
   /** Complete Verification Code for both Password Reset or Activating a new account */
   activateAccount?: Maybe<ActivateAccount>;
+  /** Takes a user token and adds it to a website */
+  addTokenToWebsite?: Maybe<AddTokenToWebsite>;
   /** Change a user's email address. The user must be logged into their account in order to preform this action.  */
   changeEmailAddress?: Maybe<ChangeEmailAddress>;
   /** Update a user password. The user must be logged into their account in order to preform this action.  */
@@ -610,6 +1269,8 @@ export type Mutations = {
   createService?: Maybe<CreateService>;
   /** Create a Website. */
   createWebsite?: Maybe<CreateWebsite>;
+  /** Create a Website Wizard. */
+  createWebsiteWizard?: Maybe<CreateWebsiteWizard>;
   /** Delete a Area. */
   deleteArea?: Maybe<DeleteArea>;
   /** Delete a Collaborator. */
@@ -647,10 +1308,12 @@ export type Mutations = {
   signup?: Maybe<Signup>;
   /** Obtain JSON Web Token mutation */
   tokenAuth?: Maybe<ObtainJsonWebToken>;
+  /** Authorize the App to access Google Ads API */
+  tokenOauthGoogleAds?: Maybe<TokenOAuthGoogleAds>;
   /** Login using an external OAuth provider */
-  tokenOauthLogin?: Maybe<TokenOAuthLogin>;
+  tokenOauthGoogleMobileClientLogin?: Maybe<TokenOAuthGoogleMobileClientLogin>;
   /** Signup using an external OAuth provider */
-  tokenOauthSignup?: Maybe<TokenOAuthSignup>;
+  tokenOauthGoogleMobileClientSignup?: Maybe<TokenOAuthGoogleMobileClienSignup>;
   /** Update a Area. */
   updateArea?: Maybe<UpdateArea>;
   /** Change a user's email subscription. The user must be logged into their account in order to preform  */
@@ -683,6 +1346,11 @@ export type MutationsAcceptInviteArgs = {
 export type MutationsActivateAccountArgs = {
   emailAddress: Scalars['String']['input'];
   verificationCode: Scalars['String']['input'];
+};
+
+
+export type MutationsAddTokenToWebsiteArgs = {
+  websiteId: Scalars['Int']['input'];
 };
 
 
@@ -744,6 +1412,11 @@ export type MutationsCreateServiceArgs = {
 
 export type MutationsCreateWebsiteArgs = {
   input: WebsiteCreateObject;
+};
+
+
+export type MutationsCreateWebsiteWizardArgs = {
+  input: WebsiteWizardCreateObject;
 };
 
 
@@ -849,14 +1522,24 @@ export type MutationsTokenAuthArgs = {
 };
 
 
-export type MutationsTokenOauthLoginArgs = {
-  oauthPayload?: InputMaybe<Scalars['GenericScalar']['input']>;
+export type MutationsTokenOauthGoogleAdsArgs = {
   oauthToken?: InputMaybe<Scalars['String']['input']>;
   provider?: InputMaybe<Scalars['String']['input']>;
+  websiteId: Scalars['Int']['input'];
 };
 
 
-export type MutationsTokenOauthSignupArgs = {
+export type MutationsTokenOauthGoogleMobileClientLoginArgs = {
+  accessToken?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  oauthPayload?: InputMaybe<Scalars['GenericScalar']['input']>;
+  oauthToken?: InputMaybe<Scalars['String']['input']>;
+  provider?: InputMaybe<Scalars['String']['input']>;
+  refreshToken?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type MutationsTokenOauthGoogleMobileClientSignupArgs = {
   oauthToken?: InputMaybe<Scalars['String']['input']>;
   provider?: InputMaybe<Scalars['String']['input']>;
 };
@@ -931,6 +1614,13 @@ export type ActivateAccount = {
   errors?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
 };
 
+/** Takes a user token and adds it to a website */
+export type AddTokenToWebsite = {
+  __typename?: 'AddTokenToWebsite';
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
 /** Change a user's email address. The user must be logged into their account in order to preform this action.  */
 export type ChangeEmailAddress = {
   __typename?: 'ChangeEmailAddress';
@@ -965,32 +1655,28 @@ export type CrawlWebsite = {
 };
 
 export type AreaCreateObject = {
-  /** Boolean: Indicates if the area is currently active and available for display or use. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Text: A detailed description of the area and its characteristics. */
+  city?: InputMaybe<Scalars['String']['input']>;
+  created?: InputMaybe<Scalars['DateTime']['input']>;
+  customFooterJs?: InputMaybe<Scalars['String']['input']>;
+  customHeaderCode?: InputMaybe<Scalars['String']['input']>;
+  customHtmlBlock?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
-  /** Integer: The display priority of this area. Higher values indicate higher priority for display. */
   displayOrder?: InputMaybe<Scalars['Int']['input']>;
-  /** Boolean: Determines if Schema.org areaServed object tags are used for this area. */
-  enableSchemaOrgAreaServedObject?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Text: First customizable HTML content block for additional information or markup related to the area. */
-  htmlBlock1?: InputMaybe<Scalars['String']['input']>;
-  /** Text: Second customizable HTML content block for additional information or markup related to the area. */
-  htmlBlock2?: InputMaybe<Scalars['String']['input']>;
-  /** String: URL or path to the image representing the area. Recommended minimum size is 450x300 pixels. */
+  id?: InputMaybe<Scalars['ID']['input']>;
   image?: InputMaybe<Scalars['String']['input']>;
-  /** Array of Strings: List of search engine keywords targeted for this area. */
-  keywordTargeting?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** String: The official name of the area. */
+  images?: InputMaybe<Scalars['GenericScalar']['input']>;
+  includeInGads?: InputMaybe<Scalars['Boolean']['input']>;
+  latitude?: InputMaybe<Scalars['Float']['input']>;
+  longitude?: InputMaybe<Scalars['Float']['input']>;
+  metadata?: InputMaybe<Scalars['GenericScalar']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-  /** Boolean: Specifies whether to display an insurance company widget on the area page. */
-  showInsuranceCompanyWidget?: InputMaybe<Scalars['Boolean']['input']>;
-  /** String: URL-friendly identifier for the area, used in web addresses. */
   slug?: InputMaybe<Scalars['String']['input']>;
-  /** Integer: The ID of the website to which this area belongs. */
+  state?: InputMaybe<Scalars['String']['input']>;
+  updated?: InputMaybe<Scalars['DateTime']['input']>;
+  video?: InputMaybe<Scalars['String']['input']>;
   websiteId?: InputMaybe<Scalars['ID']['input']>;
-  /** String: The postal code associated with the area. */
-  zipCode: Scalars['String']['input'];
+  zipCode?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Create a Area. */
@@ -1015,13 +1701,21 @@ export type CreateData = {
 };
 
 export type FaqCreateObject = {
-  /** Boolean: Indicates if the faq is currently active and available for display or use. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** String: The name of the faq that the business provides. */
+  created?: InputMaybe<Scalars['DateTime']['input']>;
+  customFooterJs?: InputMaybe<Scalars['String']['input']>;
+  customHeaderCode?: InputMaybe<Scalars['String']['input']>;
+  customHtmlBlock?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  displayOrder?: InputMaybe<Scalars['Int']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<Scalars['GenericScalar']['input']>;
+  metadata?: InputMaybe<Scalars['GenericScalar']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-  /** String: URL-friendly identifier for the faq, used in web addresses. */
   slug?: InputMaybe<Scalars['String']['input']>;
-  /** Integer: The ID of the website to which this faq belongs. */
+  updated?: InputMaybe<Scalars['DateTime']['input']>;
+  video?: InputMaybe<Scalars['String']['input']>;
   websiteId?: InputMaybe<Scalars['ID']['input']>;
 };
 
@@ -1034,27 +1728,22 @@ export type CreateFaq = {
 };
 
 export type PageCreateObject = {
-  /** Boolean: Indicates if the page is currently active and available for viewing. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Text: The full HTML content of the page. */
   body?: InputMaybe<Scalars['String']['input']>;
-  /** Text: A brief text description of the page's content and purpose. */
+  created?: InputMaybe<Scalars['DateTime']['input']>;
+  customFooterJs?: InputMaybe<Scalars['String']['input']>;
+  customHeaderCode?: InputMaybe<Scalars['String']['input']>;
+  customHtmlBlock?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
-  /** Integer: The display priority of this page. Higher values indicate higher priority for display. */
   displayOrder?: InputMaybe<Scalars['Int']['input']>;
-  /** Boolean: Specifies if Schema.org Article object tags are used for this page. */
-  enableSchemaOrgArticleObject?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Image: The primary image for the page. Recommended minimum size is 450x300 pixels. */
-  image?: InputMaybe<Scalars['FileUploadField']['input']>;
-  /** Array of Strings: List of search engine keywords targeted for this page. */
-  keywordTargeting?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** String: The title or name of the page. */
+  id?: InputMaybe<Scalars['ID']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<Scalars['GenericScalar']['input']>;
+  metadata?: InputMaybe<Scalars['GenericScalar']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-  /** Boolean: Indicates whether an insurance company widget is displayed on this page. */
-  showInsuranceCompanyWidget?: InputMaybe<Scalars['Boolean']['input']>;
-  /** String: URL-friendly identifier for the page, used in web addresses. */
   slug?: InputMaybe<Scalars['String']['input']>;
-  /** Integer: The ID of the website to which this page belongs. */
+  updated?: InputMaybe<Scalars['DateTime']['input']>;
+  video?: InputMaybe<Scalars['String']['input']>;
   websiteId?: InputMaybe<Scalars['ID']['input']>;
 };
 
@@ -1067,17 +1756,24 @@ export type CreatePage = {
 };
 
 export type QuestionCreateObject = {
-  /** Boolean: Indicates if the question is currently active and available for display or use. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** String: The answer that the business provides. */
   answer?: InputMaybe<Scalars['String']['input']>;
-  /** Integer: The display priority of this question. Higher values indicate higher priority for display. */
+  created?: InputMaybe<Scalars['DateTime']['input']>;
+  customFooterJs?: InputMaybe<Scalars['String']['input']>;
+  customHeaderCode?: InputMaybe<Scalars['String']['input']>;
+  customHtmlBlock?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
   displayOrder?: InputMaybe<Scalars['Int']['input']>;
-  /** Integer: The ID of the faq to which this question belongs. */
   faqId?: InputMaybe<Scalars['ID']['input']>;
-  /** String: The question that the business provides. */
+  id?: InputMaybe<Scalars['ID']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<Scalars['GenericScalar']['input']>;
+  metadata?: InputMaybe<Scalars['GenericScalar']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   question?: InputMaybe<Scalars['String']['input']>;
-  /** Integer: The ID of the website to which this question belongs. */
+  slug?: InputMaybe<Scalars['String']['input']>;
+  updated?: InputMaybe<Scalars['DateTime']['input']>;
+  video?: InputMaybe<Scalars['String']['input']>;
   websiteId?: InputMaybe<Scalars['ID']['input']>;
 };
 
@@ -1090,26 +1786,25 @@ export type CreateQuestion = {
 };
 
 export type ReviewCreateObject = {
-  /** Boolean: Indicates if the review is currently active and visible to users. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Text: The full text of the review, detailing the user's experience or opinion. */
-  body?: InputMaybe<Scalars['String']['input']>;
-  /** Integer: The display priority of this review. Higher values indicate higher priority for display. */
+  created?: InputMaybe<Scalars['DateTime']['input']>;
+  customFooterJs?: InputMaybe<Scalars['String']['input']>;
+  customHeaderCode?: InputMaybe<Scalars['String']['input']>;
+  customHtmlBlock?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
   displayOrder?: InputMaybe<Scalars['Int']['input']>;
-  /** Image: An image of the person who wrote the review. Recommended minimum size is 450x300 pixels. */
-  personImage?: InputMaybe<Scalars['String']['input']>;
-  /** String: The name of the person who wrote the review. */
+  id?: InputMaybe<Scalars['ID']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<Scalars['GenericScalar']['input']>;
+  metadata?: InputMaybe<Scalars['GenericScalar']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   personName?: InputMaybe<Scalars['String']['input']>;
-  /** String: The postal code of the reviewer's location. */
-  personZipCode?: InputMaybe<Scalars['String']['input']>;
-  /** Integer: The rating given in the review, on a scale from 1 to 5, with half-step increments allowed (e.g., 4.5). */
   rating?: InputMaybe<Scalars['Decimal']['input']>;
-  /** String: URL-friendly identifier for the review, used in web addresses. */
   slug?: InputMaybe<Scalars['String']['input']>;
-  /** String: A concise title or summary of the review. */
-  title?: InputMaybe<Scalars['String']['input']>;
-  /** Integer: The ID of the website to which this review belongs. */
+  updated?: InputMaybe<Scalars['DateTime']['input']>;
+  video?: InputMaybe<Scalars['String']['input']>;
   websiteId?: InputMaybe<Scalars['ID']['input']>;
+  zipCode?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Create a Review. */
@@ -1121,31 +1816,22 @@ export type CreateReview = {
 };
 
 export type ServiceCreateObject = {
-  /** Boolean: Indicates if the service is currently active and available for display or use. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Array of Image objects: A list of images to display in a carousel on the service page. */
-  carouselImages?: InputMaybe<Scalars['GenericScalar']['input']>;
-  /** Text: A detailed description of the service, including its features and benefits. */
-  description: Scalars['String']['input'];
-  /** Integer: The display priority of this service. Higher values indicate higher priority for display. */
+  created?: InputMaybe<Scalars['DateTime']['input']>;
+  customFooterJs?: InputMaybe<Scalars['String']['input']>;
+  customHeaderCode?: InputMaybe<Scalars['String']['input']>;
+  customHtmlBlock?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
   displayOrder?: InputMaybe<Scalars['Int']['input']>;
-  /** Boolean: Determines if Schema.org Service object tags are used for this service. */
-  enableSchemaOrgServiceObject?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Text: First customizable HTML content block for additional information or markup related to the service. */
-  htmlBlock1?: InputMaybe<Scalars['String']['input']>;
-  /** Text: Second customizable HTML content block for additional information or markup related to the service. */
-  htmlBlock2?: InputMaybe<Scalars['String']['input']>;
-  /** String: URL or path to the image representing the service. Recommended minimum size is 450x300 pixels. */
+  gadsAdGroupId?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
   image?: InputMaybe<Scalars['String']['input']>;
-  /** Array of Strings: List of search engine keywords targeted for this service. */
-  keywordTargeting?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** String: The name of the service provided by the business. */
-  name: Scalars['String']['input'];
-  /** Boolean: Specifies whether to display an insurance company widget on the service page. */
-  showInsuranceCompanyWidget?: InputMaybe<Scalars['Boolean']['input']>;
-  /** String: URL-friendly identifier for the service, used in web addresses. */
+  images?: InputMaybe<Scalars['GenericScalar']['input']>;
+  metadata?: InputMaybe<Scalars['GenericScalar']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
-  /** Integer: The ID of the website to which this service belongs. */
+  updated?: InputMaybe<Scalars['DateTime']['input']>;
+  video?: InputMaybe<Scalars['String']['input']>;
   websiteId?: InputMaybe<Scalars['ID']['input']>;
 };
 
@@ -1158,126 +1844,62 @@ export type CreateService = {
 };
 
 export type WebsiteCreateObject = {
-  /** Boolean: Specifies if the website is currently active. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
   /** String: Primary street address of the business. */
   address1?: InputMaybe<Scalars['String']['input']>;
   /** String: Secondary address line, if any. */
   address2?: InputMaybe<Scalars['String']['input']>;
-  /** Text: Detailed description of the business's activities and services. */
-  businessDescription?: InputMaybe<Scalars['String']['input']>;
   /** String: Employer Identification Number (EIN) of the business. */
   businessEinNumber?: InputMaybe<Scalars['String']['input']>;
-  /** Image: Logo of the business. Recommended minimum size is 450x300 pixels. */
-  businessLogo?: InputMaybe<Scalars['String']['input']>;
   /** String: Name of the business manager. */
-  businessManagerPersonName?: InputMaybe<Scalars['String']['input']>;
-  /** String: The official name of the business. */
-  businessName: Scalars['String']['input'];
-  /** String: Color of the button border. */
-  buttonBorderColor?: InputMaybe<Scalars['String']['input']>;
-  /** String: Color of the button. */
-  buttonColor?: InputMaybe<Scalars['String']['input']>;
-  /** String: Color of the button text. */
-  buttonTextColor?: InputMaybe<Scalars['String']['input']>;
-  /** Array of Image objects: A list of images to display in a carousel on the homepage. */
-  carouselImages?: InputMaybe<Scalars['GenericScalar']['input']>;
+  businessManager?: InputMaybe<Scalars['String']['input']>;
   /** String: City where the business is located. */
   city?: InputMaybe<Scalars['String']['input']>;
-  /** Text: HTML markup for the call-to-action button. */
-  ctaButtonHtml?: InputMaybe<Scalars['String']['input']>;
-  /** Text: HTML markup for the main call-to-action on the website. */
-  ctaHtml?: InputMaybe<Scalars['String']['input']>;
-  /** Text: Custom CSS code for the website. */
-  customCss?: InputMaybe<Scalars['String']['input']>;
-  /** Text: Custom HTML code for the website's footer section. */
-  customFooterCode?: InputMaybe<Scalars['String']['input']>;
-  /** Text: Custom HTML code for the website's header section. */
-  customHeaderCode?: InputMaybe<Scalars['String']['input']>;
-  /** Array of Email Addresses: List of email addresses authorized to edit the website. */
-  editor?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  created?: InputMaybe<Scalars['DateTime']['input']>;
+  defaultSubdomainName?: InputMaybe<Scalars['String']['input']>;
+  /** Text: Detailed description of the business's activities and services. */
+  description?: InputMaybe<Scalars['String']['input']>;
+  displayOrder?: InputMaybe<Scalars['Int']['input']>;
+  /** Array of Strings: List of top-level domains for the website, e.g., 'my-local-business.com'. */
+  domains?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** String: Email address for business correspondence. */
   emailAddress?: InputMaybe<Scalars['String']['input']>;
-  /** Boolean: Determines if Google SiteMaps is enabled for the website. */
-  enableGoogleSitemaps?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Boolean: Indicates if Schema.org LocalBusiness object tags are used. */
-  enableSchemaOrgLocalbusinessObject?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Boolean: Indicates if Schema.org Organization object tags are used. */
-  enableSchemaOrgOrganizationObject?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Boolean: Indicates if Schema.org WebPage object tags are used. */
-  enableSchemaOrgWebpageObject?: InputMaybe<Scalars['Boolean']['input']>;
-  /** String: Font family for the body text. */
-  fontBody?: InputMaybe<Scalars['String']['input']>;
-  /** String: Font family for the heading text. */
-  fontHeading?: InputMaybe<Scalars['String']['input']>;
-  /** Text: HTML markup for the first link in the footer. */
-  footerLink1Html?: InputMaybe<Scalars['String']['input']>;
-  /** Text: HTML markup for the second link in the footer. */
-  footerLink2Html?: InputMaybe<Scalars['String']['input']>;
-  /** Text: HTML markup for the third link in the footer. */
-  footerLink3Html?: InputMaybe<Scalars['String']['input']>;
-  /** Text: HTML markup for the fourth link in the footer. */
-  footerLink4Html?: InputMaybe<Scalars['String']['input']>;
-  /** Text: HTML markup for the fifth link in the footer. */
-  footerLink5Html?: InputMaybe<Scalars['String']['input']>;
-  /** Text: HTML markup for the message in the footer. */
-  footerMessageHtml?: InputMaybe<Scalars['String']['input']>;
-  /** Boolean: Indicates if the business address is visible in the footer. */
-  footerShowAddress?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Integer: Number of service areas to display in the footer. */
-  footerShowAreas: Scalars['Int']['input'];
-  /** Boolean: Indicates if the business email address is visible in the footer. */
-  footerShowEmailAddress?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Boolean: Indicates if the business insurance number is visible in the footer. */
-  footerShowInsuranceNumber?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Boolean: Indicates if the business license number is visible in the footer. */
-  footerShowLicenseNumber?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Integer: Number of reviews to display in the footer. */
-  footerShowReviews: Scalars['Int']['input'];
-  /** Integer: Number of services to display in the footer. */
-  footerShowServices: Scalars['Int']['input'];
+  gadsAccountId?: InputMaybe<Scalars['String']['input']>;
+  gadsCampaignId?: InputMaybe<Scalars['String']['input']>;
   /** String: Google Analytics ID for tracking website traffic, e.g., 'IX-123213-923s'. */
   googleAnalytics?: InputMaybe<Scalars['String']['input']>;
-  /** String: Content of the file used for Google site verification. */
-  googleVerificationFileContent?: InputMaybe<Scalars['String']['input']>;
-  /** String: File name used for Google site verification. */
-  googleVerificationFileName?: InputMaybe<Scalars['String']['input']>;
-  /** Image: Background image for the homepage. */
-  homepageBackground?: InputMaybe<Scalars['String']['input']>;
-  /** Video: Background video for the homepage. */
-  homepageVideo?: InputMaybe<Scalars['String']['input']>;
+  /** Google Tag Manager ID */
+  googleTagManager?: InputMaybe<Scalars['String']['input']>;
+  hashId?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** String: Insurance policy number of the business. */
   insuranceNumber?: InputMaybe<Scalars['String']['input']>;
   /** String: Official license number of the business. */
   licenseNumber?: InputMaybe<Scalars['String']['input']>;
-  /** Object: Metadata for the website, including title, description, and keywords. */
+  /** Image: Logo of the business. Recommended minimum size is 450x300 pixels. */
+  logo?: InputMaybe<Scalars['String']['input']>;
   metadata?: InputMaybe<Scalars['GenericScalar']['input']>;
-  /** Text: HTML markup for the first link in the navigation bar. */
-  navbarLink1Html?: InputMaybe<Scalars['String']['input']>;
-  /** Text: HTML markup for the second link in the navigation bar. */
-  navbarLink2Html?: InputMaybe<Scalars['String']['input']>;
-  /** Text: HTML markup for the message in the navigation bar. */
-  navbarMessageHtml?: InputMaybe<Scalars['String']['input']>;
-  /** Integer: Number of service areas to display in the navigation bar. */
-  navbarShowAreas: Scalars['Int']['input'];
-  /** Boolean: Indicates if the call-to-action button is visible in the navigation bar. */
-  navbarShowCtaButton?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Integer: Number of services to display in the navigation bar. */
-  navbarShowServices: Scalars['Int']['input'];
+  /** Message of the day */
+  motd?: InputMaybe<Scalars['String']['input']>;
+  /** String: The official name of the business. */
+  name?: InputMaybe<Scalars['String']['input']>;
   /** String: Contact phone number of the business. */
   phoneNumber?: InputMaybe<Scalars['String']['input']>;
   /** String: Primary color theme of the website. */
   primaryColor?: InputMaybe<Scalars['String']['input']>;
+  primaryColorContrast?: InputMaybe<Scalars['String']['input']>;
   /** String: Secondary color theme of the website. */
   secondaryColor?: InputMaybe<Scalars['String']['input']>;
-  /** String: URL-friendly identifier for the business, used in web addresses. */
+  secondaryColorContrast?: InputMaybe<Scalars['String']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
   /** String: State or region where the business is located. */
   state?: InputMaybe<Scalars['String']['input']>;
-  /** String: The theme of the website. Options are 'portfolio', 'services', or 'emergency'. */
+  /** String: The theme of the website. Portfolio, Services, or Emergency. */
   theme?: InputMaybe<Scalars['String']['input']>;
-  /** Array of Strings: List of top-level domains for the website, e.g., 'my-local-business.com'. */
-  tld?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  updated?: InputMaybe<Scalars['DateTime']['input']>;
+  video?: InputMaybe<Scalars['String']['input']>;
   /** String: Postal code of the business's location. */
   zipCode?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1288,6 +1910,36 @@ export type CreateWebsite = {
   data?: Maybe<WebsiteObject>;
   message?: Maybe<Scalars['String']['output']>;
   success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type WebsiteWizardCreateObject = {
+  address1?: InputMaybe<Scalars['String']['input']>;
+  address2?: InputMaybe<Scalars['String']['input']>;
+  city?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  logo?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
+  services?: InputMaybe<Array<InputMaybe<ServiceCreateObject>>>;
+  state?: InputMaybe<Scalars['String']['input']>;
+  zipCode?: InputMaybe<Scalars['String']['input']>;
+  zipCodes?: InputMaybe<Array<InputMaybe<ZipCodeCreateObject>>>;
+};
+
+export type ZipCodeCreateObject = {
+  city?: InputMaybe<Scalars['String']['input']>;
+  latitude?: InputMaybe<Scalars['String']['input']>;
+  longitude?: InputMaybe<Scalars['String']['input']>;
+  state?: InputMaybe<Scalars['String']['input']>;
+  zipCode?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Create a Website Wizard. */
+export type CreateWebsiteWizard = {
+  __typename?: 'CreateWebsiteWizard';
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+  website?: Maybe<WebsiteObject>;
 };
 
 /** Delete a Area. */
@@ -1431,9 +2083,18 @@ export type ObtainJsonWebToken = {
   token: Scalars['String']['output'];
 };
 
+/** Signup using an external OAuth provider */
+export type TokenOAuthGoogleAds = {
+  __typename?: 'TokenOAuthGoogleAds';
+  message?: Maybe<Scalars['String']['output']>;
+  payload?: Maybe<Scalars['GenericScalar']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+  token?: Maybe<Scalars['String']['output']>;
+};
+
 /** Login using an external OAuth provider */
-export type TokenOAuthLogin = {
-  __typename?: 'TokenOAuthLogin';
+export type TokenOAuthGoogleMobileClientLogin = {
+  __typename?: 'TokenOAuthGoogleMobileClientLogin';
   message?: Maybe<Scalars['String']['output']>;
   payload?: Maybe<Scalars['GenericScalar']['output']>;
   success?: Maybe<Scalars['Boolean']['output']>;
@@ -1441,8 +2102,8 @@ export type TokenOAuthLogin = {
 };
 
 /** Signup using an external OAuth provider */
-export type TokenOAuthSignup = {
-  __typename?: 'TokenOAuthSignup';
+export type TokenOAuthGoogleMobileClienSignup = {
+  __typename?: 'TokenOAuthGoogleMobileClienSignup';
   message?: Maybe<Scalars['String']['output']>;
   payload?: Maybe<Scalars['GenericScalar']['output']>;
   success?: Maybe<Scalars['Boolean']['output']>;
@@ -1450,33 +2111,27 @@ export type TokenOAuthSignup = {
 };
 
 export type AreaUpdateObject = {
-  /** Boolean: Indicates if the area is currently active and available for display or use. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Text: A detailed description of the area and its characteristics. */
+  city?: InputMaybe<Scalars['String']['input']>;
+  created?: InputMaybe<Scalars['DateTime']['input']>;
+  customFooterJs?: InputMaybe<Scalars['String']['input']>;
+  customHeaderCode?: InputMaybe<Scalars['String']['input']>;
+  customHtmlBlock?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
-  /** Integer: The display priority of this area. Higher values indicate higher priority for display. */
   displayOrder?: InputMaybe<Scalars['Int']['input']>;
-  /** Boolean: Determines if Schema.org areaServed object tags are used for this area. */
-  enableSchemaOrgAreaServedObject?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Text: First customizable HTML content block for additional information or markup related to the area. */
-  htmlBlock1?: InputMaybe<Scalars['String']['input']>;
-  /** Text: Second customizable HTML content block for additional information or markup related to the area. */
-  htmlBlock2?: InputMaybe<Scalars['String']['input']>;
-  id: Scalars['ID']['input'];
-  /** String: URL or path to the image representing the area. Recommended minimum size is 450x300 pixels. */
+  id?: InputMaybe<Scalars['ID']['input']>;
   image?: InputMaybe<Scalars['String']['input']>;
-  /** Array of Strings: List of search engine keywords targeted for this area. */
-  keywordTargeting?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** String: The official name of the area. */
+  images?: InputMaybe<Scalars['GenericScalar']['input']>;
+  includeInGads?: InputMaybe<Scalars['Boolean']['input']>;
+  latitude?: InputMaybe<Scalars['Float']['input']>;
+  longitude?: InputMaybe<Scalars['Float']['input']>;
+  metadata?: InputMaybe<Scalars['GenericScalar']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-  /** Boolean: Specifies whether to display an insurance company widget on the area page. */
-  showInsuranceCompanyWidget?: InputMaybe<Scalars['Boolean']['input']>;
-  /** String: URL-friendly identifier for the area, used in web addresses. */
   slug?: InputMaybe<Scalars['String']['input']>;
-  /** Integer: The ID of the website to which this area belongs. */
-  websiteId?: InputMaybe<Scalars['ID']['input']>;
-  /** String: The postal code associated with the area. */
-  zipCode: Scalars['String']['input'];
+  state?: InputMaybe<Scalars['String']['input']>;
+  updated?: InputMaybe<Scalars['DateTime']['input']>;
+  video?: InputMaybe<Scalars['String']['input']>;
+  zipCode?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Update a Area. */
@@ -1495,15 +2150,21 @@ export type UpdateEmailSubscription = {
 };
 
 export type FaqUpdateObject = {
-  /** Boolean: Indicates if the faq is currently active and available for display or use. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  id: Scalars['ID']['input'];
-  /** String: The name of the faq that the business provides. */
+  created?: InputMaybe<Scalars['DateTime']['input']>;
+  customFooterJs?: InputMaybe<Scalars['String']['input']>;
+  customHeaderCode?: InputMaybe<Scalars['String']['input']>;
+  customHtmlBlock?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  displayOrder?: InputMaybe<Scalars['Int']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<Scalars['GenericScalar']['input']>;
+  metadata?: InputMaybe<Scalars['GenericScalar']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-  /** String: URL-friendly identifier for the faq, used in web addresses. */
   slug?: InputMaybe<Scalars['String']['input']>;
-  /** Integer: The ID of the website to which this faq belongs. */
-  websiteId?: InputMaybe<Scalars['ID']['input']>;
+  updated?: InputMaybe<Scalars['DateTime']['input']>;
+  video?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Update a Faq. */
@@ -1522,29 +2183,22 @@ export type UpdateOrCreateBaseFaq = {
 };
 
 export type PageUpdateObject = {
-  /** Boolean: Indicates if the page is currently active and available for viewing. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Text: The full HTML content of the page. */
   body?: InputMaybe<Scalars['String']['input']>;
-  /** Text: A brief text description of the page's content and purpose. */
+  created?: InputMaybe<Scalars['DateTime']['input']>;
+  customFooterJs?: InputMaybe<Scalars['String']['input']>;
+  customHeaderCode?: InputMaybe<Scalars['String']['input']>;
+  customHtmlBlock?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
-  /** Integer: The display priority of this page. Higher values indicate higher priority for display. */
   displayOrder?: InputMaybe<Scalars['Int']['input']>;
-  /** Boolean: Specifies if Schema.org Article object tags are used for this page. */
-  enableSchemaOrgArticleObject?: InputMaybe<Scalars['Boolean']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
-  /** Image: The primary image for the page. Recommended minimum size is 450x300 pixels. */
-  image?: InputMaybe<Scalars['FileUploadField']['input']>;
-  /** Array of Strings: List of search engine keywords targeted for this page. */
-  keywordTargeting?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** String: The title or name of the page. */
+  image?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<Scalars['GenericScalar']['input']>;
+  metadata?: InputMaybe<Scalars['GenericScalar']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-  /** Boolean: Indicates whether an insurance company widget is displayed on this page. */
-  showInsuranceCompanyWidget?: InputMaybe<Scalars['Boolean']['input']>;
-  /** String: URL-friendly identifier for the page, used in web addresses. */
   slug?: InputMaybe<Scalars['String']['input']>;
-  /** Integer: The ID of the website to which this page belongs. */
-  websiteId?: InputMaybe<Scalars['ID']['input']>;
+  updated?: InputMaybe<Scalars['DateTime']['input']>;
+  video?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Update a Page. */
@@ -1577,19 +2231,23 @@ export type UpdateProfile = {
 };
 
 export type QuestionUpdateObject = {
-  /** Boolean: Indicates if the question is currently active and available for display or use. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** String: The answer that the business provides. */
   answer?: InputMaybe<Scalars['String']['input']>;
-  /** Integer: The display priority of this question. Higher values indicate higher priority for display. */
+  created?: InputMaybe<Scalars['DateTime']['input']>;
+  customFooterJs?: InputMaybe<Scalars['String']['input']>;
+  customHeaderCode?: InputMaybe<Scalars['String']['input']>;
+  customHtmlBlock?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
   displayOrder?: InputMaybe<Scalars['Int']['input']>;
-  /** Integer: The ID of the faq to which this question belongs. */
-  faqId?: InputMaybe<Scalars['ID']['input']>;
-  id: Scalars['ID']['input'];
-  /** String: The question that the business provides. */
+  id?: InputMaybe<Scalars['ID']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<Scalars['GenericScalar']['input']>;
+  metadata?: InputMaybe<Scalars['GenericScalar']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   question?: InputMaybe<Scalars['String']['input']>;
-  /** Integer: The ID of the website to which this question belongs. */
-  websiteId?: InputMaybe<Scalars['ID']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  updated?: InputMaybe<Scalars['DateTime']['input']>;
+  video?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Update a Question. */
@@ -1601,27 +2259,24 @@ export type UpdateQuestion = {
 };
 
 export type ReviewUpdateObject = {
-  /** Boolean: Indicates if the review is currently active and visible to users. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Text: The full text of the review, detailing the user's experience or opinion. */
-  body?: InputMaybe<Scalars['String']['input']>;
-  /** Integer: The display priority of this review. Higher values indicate higher priority for display. */
+  created?: InputMaybe<Scalars['DateTime']['input']>;
+  customFooterJs?: InputMaybe<Scalars['String']['input']>;
+  customHeaderCode?: InputMaybe<Scalars['String']['input']>;
+  customHtmlBlock?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
   displayOrder?: InputMaybe<Scalars['Int']['input']>;
-  id: Scalars['ID']['input'];
-  /** Image: An image of the person who wrote the review. Recommended minimum size is 450x300 pixels. */
-  personImage?: InputMaybe<Scalars['String']['input']>;
-  /** String: The name of the person who wrote the review. */
+  id?: InputMaybe<Scalars['ID']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<Scalars['GenericScalar']['input']>;
+  metadata?: InputMaybe<Scalars['GenericScalar']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   personName?: InputMaybe<Scalars['String']['input']>;
-  /** String: The postal code of the reviewer's location. */
-  personZipCode?: InputMaybe<Scalars['String']['input']>;
-  /** Integer: The rating given in the review, on a scale from 1 to 5, with half-step increments allowed (e.g., 4.5). */
   rating?: InputMaybe<Scalars['Decimal']['input']>;
-  /** String: URL-friendly identifier for the review, used in web addresses. */
   slug?: InputMaybe<Scalars['String']['input']>;
-  /** String: A concise title or summary of the review. */
-  title?: InputMaybe<Scalars['String']['input']>;
-  /** Integer: The ID of the website to which this review belongs. */
-  websiteId?: InputMaybe<Scalars['ID']['input']>;
+  updated?: InputMaybe<Scalars['DateTime']['input']>;
+  video?: InputMaybe<Scalars['String']['input']>;
+  zipCode?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Update a Review. */
@@ -1633,33 +2288,22 @@ export type UpdateReview = {
 };
 
 export type ServiceUpdateObject = {
-  /** Boolean: Indicates if the service is currently active and available for display or use. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Array of Image objects: A list of images to display in a carousel on the service page. */
-  carouselImages?: InputMaybe<Scalars['GenericScalar']['input']>;
-  /** Text: A detailed description of the service, including its features and benefits. */
-  description: Scalars['String']['input'];
-  /** Integer: The display priority of this service. Higher values indicate higher priority for display. */
+  created?: InputMaybe<Scalars['DateTime']['input']>;
+  customFooterJs?: InputMaybe<Scalars['String']['input']>;
+  customHeaderCode?: InputMaybe<Scalars['String']['input']>;
+  customHtmlBlock?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
   displayOrder?: InputMaybe<Scalars['Int']['input']>;
-  /** Boolean: Determines if Schema.org Service object tags are used for this service. */
-  enableSchemaOrgServiceObject?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Text: First customizable HTML content block for additional information or markup related to the service. */
-  htmlBlock1?: InputMaybe<Scalars['String']['input']>;
-  /** Text: Second customizable HTML content block for additional information or markup related to the service. */
-  htmlBlock2?: InputMaybe<Scalars['String']['input']>;
-  id: Scalars['ID']['input'];
-  /** String: URL or path to the image representing the service. Recommended minimum size is 450x300 pixels. */
+  gadsAdGroupId?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
   image?: InputMaybe<Scalars['String']['input']>;
-  /** Array of Strings: List of search engine keywords targeted for this service. */
-  keywordTargeting?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** String: The name of the service provided by the business. */
-  name: Scalars['String']['input'];
-  /** Boolean: Specifies whether to display an insurance company widget on the service page. */
-  showInsuranceCompanyWidget?: InputMaybe<Scalars['Boolean']['input']>;
-  /** String: URL-friendly identifier for the service, used in web addresses. */
+  images?: InputMaybe<Scalars['GenericScalar']['input']>;
+  metadata?: InputMaybe<Scalars['GenericScalar']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
-  /** Integer: The ID of the website to which this service belongs. */
-  websiteId?: InputMaybe<Scalars['ID']['input']>;
+  updated?: InputMaybe<Scalars['DateTime']['input']>;
+  video?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Update a Service. */
@@ -1671,127 +2315,62 @@ export type UpdateService = {
 };
 
 export type WebsiteUpdateObject = {
-  /** Boolean: Specifies if the website is currently active. */
   active?: InputMaybe<Scalars['Boolean']['input']>;
   /** String: Primary street address of the business. */
   address1?: InputMaybe<Scalars['String']['input']>;
   /** String: Secondary address line, if any. */
   address2?: InputMaybe<Scalars['String']['input']>;
-  /** Text: Detailed description of the business's activities and services. */
-  businessDescription?: InputMaybe<Scalars['String']['input']>;
   /** String: Employer Identification Number (EIN) of the business. */
   businessEinNumber?: InputMaybe<Scalars['String']['input']>;
-  /** Image: Logo of the business. Recommended minimum size is 450x300 pixels. */
-  businessLogo?: InputMaybe<Scalars['String']['input']>;
   /** String: Name of the business manager. */
-  businessManagerPersonName?: InputMaybe<Scalars['String']['input']>;
-  /** String: The official name of the business. */
-  businessName?: InputMaybe<Scalars['String']['input']>;
-  /** String: Color of the button border. */
-  buttonBorderColor?: InputMaybe<Scalars['String']['input']>;
-  /** String: Color of the button. */
-  buttonColor?: InputMaybe<Scalars['String']['input']>;
-  /** String: Color of the button text. */
-  buttonTextColor?: InputMaybe<Scalars['String']['input']>;
-  /** Array of Image objects: A list of images to display in a carousel on the homepage. */
-  carouselImages?: InputMaybe<Scalars['GenericScalar']['input']>;
+  businessManager?: InputMaybe<Scalars['String']['input']>;
   /** String: City where the business is located. */
   city?: InputMaybe<Scalars['String']['input']>;
-  /** Text: HTML markup for the call-to-action button. */
-  ctaButtonHtml?: InputMaybe<Scalars['String']['input']>;
-  /** Text: HTML markup for the main call-to-action on the website. */
-  ctaHtml?: InputMaybe<Scalars['String']['input']>;
-  /** Text: Custom CSS code for the website. */
-  customCss?: InputMaybe<Scalars['String']['input']>;
-  /** Text: Custom HTML code for the website's footer section. */
-  customFooterCode?: InputMaybe<Scalars['String']['input']>;
-  /** Text: Custom HTML code for the website's header section. */
-  customHeaderCode?: InputMaybe<Scalars['String']['input']>;
-  /** Array of Email Addresses: List of email addresses authorized to edit the website. */
-  editor?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  created?: InputMaybe<Scalars['DateTime']['input']>;
+  defaultSubdomainName?: InputMaybe<Scalars['String']['input']>;
+  /** Text: Detailed description of the business's activities and services. */
+  description?: InputMaybe<Scalars['String']['input']>;
+  displayOrder?: InputMaybe<Scalars['Int']['input']>;
+  /** Array of Strings: List of top-level domains for the website, e.g., 'my-local-business.com'. */
+  domains?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** String: Email address for business correspondence. */
   emailAddress?: InputMaybe<Scalars['String']['input']>;
-  /** Boolean: Determines if Google SiteMaps is enabled for the website. */
-  enableGoogleSitemaps?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Boolean: Indicates if Schema.org LocalBusiness object tags are used. */
-  enableSchemaOrgLocalbusinessObject?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Boolean: Indicates if Schema.org Organization object tags are used. */
-  enableSchemaOrgOrganizationObject?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Boolean: Indicates if Schema.org WebPage object tags are used. */
-  enableSchemaOrgWebpageObject?: InputMaybe<Scalars['Boolean']['input']>;
-  /** String: Font family for the body text. */
-  fontBody?: InputMaybe<Scalars['String']['input']>;
-  /** String: Font family for the heading text. */
-  fontHeading?: InputMaybe<Scalars['String']['input']>;
-  /** Text: HTML markup for the first link in the footer. */
-  footerLink1Html?: InputMaybe<Scalars['String']['input']>;
-  /** Text: HTML markup for the second link in the footer. */
-  footerLink2Html?: InputMaybe<Scalars['String']['input']>;
-  /** Text: HTML markup for the third link in the footer. */
-  footerLink3Html?: InputMaybe<Scalars['String']['input']>;
-  /** Text: HTML markup for the fourth link in the footer. */
-  footerLink4Html?: InputMaybe<Scalars['String']['input']>;
-  /** Text: HTML markup for the fifth link in the footer. */
-  footerLink5Html?: InputMaybe<Scalars['String']['input']>;
-  /** Text: HTML markup for the message in the footer. */
-  footerMessageHtml?: InputMaybe<Scalars['String']['input']>;
-  /** Boolean: Indicates if the business address is visible in the footer. */
-  footerShowAddress?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Integer: Number of service areas to display in the footer. */
-  footerShowAreas?: InputMaybe<Scalars['Int']['input']>;
-  /** Boolean: Indicates if the business email address is visible in the footer. */
-  footerShowEmailAddress?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Boolean: Indicates if the business insurance number is visible in the footer. */
-  footerShowInsuranceNumber?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Boolean: Indicates if the business license number is visible in the footer. */
-  footerShowLicenseNumber?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Integer: Number of reviews to display in the footer. */
-  footerShowReviews?: InputMaybe<Scalars['Int']['input']>;
-  /** Integer: Number of services to display in the footer. */
-  footerShowServices?: InputMaybe<Scalars['Int']['input']>;
+  gadsAccountId?: InputMaybe<Scalars['String']['input']>;
+  gadsCampaignId?: InputMaybe<Scalars['String']['input']>;
   /** String: Google Analytics ID for tracking website traffic, e.g., 'IX-123213-923s'. */
   googleAnalytics?: InputMaybe<Scalars['String']['input']>;
-  /** String: Content of the file used for Google site verification. */
-  googleVerificationFileContent?: InputMaybe<Scalars['String']['input']>;
-  /** String: File name used for Google site verification. */
-  googleVerificationFileName?: InputMaybe<Scalars['String']['input']>;
-  /** Image: Background image for the homepage. */
-  homepageBackground?: InputMaybe<Scalars['String']['input']>;
-  /** Video: Background video for the homepage. */
-  homepageVideo?: InputMaybe<Scalars['String']['input']>;
-  id: Scalars['ID']['input'];
+  /** Google Tag Manager ID */
+  googleTagManager?: InputMaybe<Scalars['String']['input']>;
+  hashId?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** String: Insurance policy number of the business. */
   insuranceNumber?: InputMaybe<Scalars['String']['input']>;
   /** String: Official license number of the business. */
   licenseNumber?: InputMaybe<Scalars['String']['input']>;
-  /** Object: Metadata for the website, including title, description, and keywords. */
+  /** Image: Logo of the business. Recommended minimum size is 450x300 pixels. */
+  logo?: InputMaybe<Scalars['String']['input']>;
   metadata?: InputMaybe<Scalars['GenericScalar']['input']>;
-  /** Text: HTML markup for the first link in the navigation bar. */
-  navbarLink1Html?: InputMaybe<Scalars['String']['input']>;
-  /** Text: HTML markup for the second link in the navigation bar. */
-  navbarLink2Html?: InputMaybe<Scalars['String']['input']>;
-  /** Text: HTML markup for the message in the navigation bar. */
-  navbarMessageHtml?: InputMaybe<Scalars['String']['input']>;
-  /** Integer: Number of service areas to display in the navigation bar. */
-  navbarShowAreas?: InputMaybe<Scalars['Int']['input']>;
-  /** Boolean: Indicates if the call-to-action button is visible in the navigation bar. */
-  navbarShowCtaButton?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Integer: Number of services to display in the navigation bar. */
-  navbarShowServices?: InputMaybe<Scalars['Int']['input']>;
+  /** Message of the day */
+  motd?: InputMaybe<Scalars['String']['input']>;
+  /** String: The official name of the business. */
+  name?: InputMaybe<Scalars['String']['input']>;
   /** String: Contact phone number of the business. */
   phoneNumber?: InputMaybe<Scalars['String']['input']>;
   /** String: Primary color theme of the website. */
   primaryColor?: InputMaybe<Scalars['String']['input']>;
+  primaryColorContrast?: InputMaybe<Scalars['String']['input']>;
   /** String: Secondary color theme of the website. */
   secondaryColor?: InputMaybe<Scalars['String']['input']>;
-  /** String: URL-friendly identifier for the business, used in web addresses. */
+  secondaryColorContrast?: InputMaybe<Scalars['String']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
   /** String: State or region where the business is located. */
   state?: InputMaybe<Scalars['String']['input']>;
-  /** String: The theme of the website. Options are 'portfolio', 'services', or 'emergency'. */
+  /** String: The theme of the website. Portfolio, Services, or Emergency. */
   theme?: InputMaybe<Scalars['String']['input']>;
-  /** Array of Strings: List of top-level domains for the website, e.g., 'my-local-business.com'. */
-  tld?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  updated?: InputMaybe<Scalars['DateTime']['input']>;
+  video?: InputMaybe<Scalars['String']['input']>;
   /** String: Postal code of the business's location. */
   zipCode?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1823,6 +2402,13 @@ export type ActivateAccountMutationVariables = Exact<{
 
 
 export type ActivateAccountMutation = { __typename?: 'Mutations', activateAccount?: { __typename?: 'ActivateAccount', data?: string | null, errors?: Array<string | null> | null } | null };
+
+export type AddTokenToWebsiteMutationVariables = Exact<{
+  websiteId: Scalars['Int']['input'];
+}>;
+
+
+export type AddTokenToWebsiteMutation = { __typename?: 'Mutations', addTokenToWebsite?: { __typename?: 'AddTokenToWebsite', success?: boolean | null, message?: string | null } | null };
 
 export type ChangeEmailAddressMutationVariables = Exact<{
   newEmailAddress: Scalars['String']['input'];
@@ -1858,56 +2444,63 @@ export type CreateAreaMutationVariables = Exact<{
 }>;
 
 
-export type CreateAreaMutation = { __typename?: 'Mutations', createArea?: { __typename?: 'CreateArea', success?: boolean | null, message?: string | null, data?: { __typename?: 'AreaObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, name?: string | null, slug?: string | null, zipCode: string, description?: string | null, image?: string | null, enableSchemaOrgAreaServedObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string> | null, displayOrder: number, pk?: string | null } | null } | null };
+export type CreateAreaMutation = { __typename?: 'Mutations', createArea?: { __typename?: 'CreateArea', success?: boolean | null, message?: string | null, data?: { __typename?: 'AreaObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, includeInGads: boolean, city?: string | null, state?: string | null, zipCode: string, longitude?: number | null, latitude?: number | null, pk?: string | null, absoluteUrl?: string | null } | null } | null };
 
 export type CreateDataMutationVariables = Exact<{
   input: DataCreateObject;
 }>;
 
 
-export type CreateDataMutation = { __typename?: 'Mutations', createData?: { __typename?: 'CreateData', success?: boolean | null, message?: string | null, data?: { __typename?: 'DataObject', id: string, created: any, updated: any, metadata?: any | null, data?: any | null, ipAddress: string, pk?: string | null } | null } | null };
+export type CreateDataMutation = { __typename?: 'Mutations', createData?: { __typename?: 'CreateData', success?: boolean | null, message?: string | null, data?: { __typename?: 'DataObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: any | null, displayOrder: number, data?: any | null, ipAddress: string, pk?: string | null } | null } | null };
 
 export type CreateFaqMutationVariables = Exact<{
   input: FaqCreateObject;
 }>;
 
 
-export type CreateFaqMutation = { __typename?: 'Mutations', createFaq?: { __typename?: 'CreateFaq', success?: boolean | null, message?: string | null, data?: { __typename?: 'FaqObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name: string, pk?: string | null } | null } | null };
+export type CreateFaqMutation = { __typename?: 'Mutations', createFaq?: { __typename?: 'CreateFaq', success?: boolean | null, message?: string | null, data?: { __typename?: 'FaqObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, pk?: string | null, absoluteUrl?: string | null } | null } | null };
 
 export type CreatePageMutationVariables = Exact<{
   input: PageCreateObject;
 }>;
 
 
-export type CreatePageMutation = { __typename?: 'Mutations', createPage?: { __typename?: 'CreatePage', success?: boolean | null, message?: string | null, data?: { __typename?: 'PageObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description?: string | null, body: string, image?: string | null, keywordTargeting?: Array<string | null> | null, displayOrder: number, enableSchemaOrgArticleObject: boolean, showInsuranceCompanyWidget: boolean, pk?: string | null } | null } | null };
+export type CreatePageMutation = { __typename?: 'Mutations', createPage?: { __typename?: 'CreatePage', success?: boolean | null, message?: string | null, data?: { __typename?: 'PageObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, body: string, pk?: string | null, absoluteUrl?: string | null } | null } | null };
 
 export type CreateQuestionMutationVariables = Exact<{
   input: QuestionCreateObject;
 }>;
 
 
-export type CreateQuestionMutation = { __typename?: 'Mutations', createQuestion?: { __typename?: 'CreateQuestion', success?: boolean | null, message?: string | null, data?: { __typename?: 'QuestionObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, question: string, answer: string, displayOrder?: number | null, pk?: string | null, faqId?: string | null } | null } | null };
+export type CreateQuestionMutation = { __typename?: 'Mutations', createQuestion?: { __typename?: 'CreateQuestion', success?: boolean | null, message?: string | null, data?: { __typename?: 'QuestionObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, question: string, answer: string, pk?: string | null, absoluteUrl?: string | null } | null } | null };
 
 export type CreateReviewMutationVariables = Exact<{
   input: ReviewCreateObject;
 }>;
 
 
-export type CreateReviewMutation = { __typename?: 'Mutations', createReview?: { __typename?: 'CreateReview', success?: boolean | null, message?: string | null, data?: { __typename?: 'ReviewObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, title: string, body?: string | null, personImage?: string | null, personName: string, personZipCode: string, rating: any, displayOrder: number, pk?: string | null } | null } | null };
+export type CreateReviewMutation = { __typename?: 'Mutations', createReview?: { __typename?: 'CreateReview', success?: boolean | null, message?: string | null, data?: { __typename?: 'ReviewObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, personName: string, zipCode: string, rating: any, pk?: string | null, absoluteUrl?: string | null } | null } | null };
 
 export type CreateServiceMutationVariables = Exact<{
   input: ServiceCreateObject;
 }>;
 
 
-export type CreateServiceMutation = { __typename?: 'Mutations', createService?: { __typename?: 'CreateService', success?: boolean | null, message?: string | null, data?: { __typename?: 'ServiceObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, image?: string | null, enableSchemaOrgServiceObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string | null> | null, displayOrder: number, carouselImages?: Array<any | null> | null, pk?: string | null } | null } | null };
+export type CreateServiceMutation = { __typename?: 'Mutations', createService?: { __typename?: 'CreateService', success?: boolean | null, message?: string | null, data?: { __typename?: 'ServiceObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, gadsAdGroupId?: string | null, pk?: string | null, absoluteUrl?: string | null } | null } | null };
 
 export type CreateWebsiteMutationVariables = Exact<{
   input: WebsiteCreateObject;
 }>;
 
 
-export type CreateWebsiteMutation = { __typename?: 'Mutations', createWebsite?: { __typename?: 'CreateWebsite', success?: boolean | null, message?: string | null, data?: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, homepageVideo?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, customCss?: string | null, buttonColor?: string | null, buttonTextColor?: string | null, buttonBorderColor?: string | null, fontBody?: string | null, fontHeading?: string | null, carouselImages?: Array<any | null> | null, theme: AppWebsiteThemeChoices, pk?: string | null, defaultSubdomainName?: string | null } | null } | null };
+export type CreateWebsiteMutation = { __typename?: 'Mutations', createWebsite?: { __typename?: 'CreateWebsite', success?: boolean | null, message?: string | null, data?: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, video?: string | null, image?: string | null, displayOrder: number, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, name: string, description?: string | null, logo?: string | null, businessManager?: string | null, images?: Array<any | null> | null, licenseNumber?: string | null, insuranceNumber?: string | null, businessEinNumber?: string | null, googleAnalytics?: string | null, googleTagManager?: string | null, motd?: string | null, primaryColor?: string | null, secondaryColor?: string | null, domains?: Array<string> | null, theme: string, gadsAccountId?: string | null, gadsCampaignId?: string | null, pk?: string | null, hashId?: string | null, defaultSubdomainName?: string | null, primaryColorContrast?: string | null, secondaryColorContrast?: string | null } | null } | null };
+
+export type CreateWebsiteWizardMutationVariables = Exact<{
+  input: WebsiteWizardCreateObject;
+}>;
+
+
+export type CreateWebsiteWizardMutation = { __typename?: 'Mutations', createWebsiteWizard?: { __typename?: 'CreateWebsiteWizard', success?: boolean | null, message?: string | null, website?: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, video?: string | null, image?: string | null, displayOrder: number, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, name: string, description?: string | null, logo?: string | null, businessManager?: string | null, images?: Array<any | null> | null, licenseNumber?: string | null, insuranceNumber?: string | null, businessEinNumber?: string | null, googleAnalytics?: string | null, googleTagManager?: string | null, motd?: string | null, primaryColor?: string | null, secondaryColor?: string | null, domains?: Array<string> | null, theme: string, gadsAccountId?: string | null, gadsCampaignId?: string | null, pk?: string | null, hashId?: string | null, defaultSubdomainName?: string | null, primaryColorContrast?: string | null, secondaryColorContrast?: string | null } | null } | null };
 
 export type DeleteAreaMutationVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -1970,7 +2563,7 @@ export type ImportWebsiteMutationVariables = Exact<{
 }>;
 
 
-export type ImportWebsiteMutation = { __typename?: 'Mutations', importWebsite?: { __typename?: 'ImportWebsite', success?: boolean | null, message?: string | null, importedWebsite?: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, homepageVideo?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, customCss?: string | null, buttonColor?: string | null, buttonTextColor?: string | null, buttonBorderColor?: string | null, fontBody?: string | null, fontHeading?: string | null, carouselImages?: Array<any | null> | null, theme: AppWebsiteThemeChoices, pk?: string | null, defaultSubdomainName?: string | null } | null } | null };
+export type ImportWebsiteMutation = { __typename?: 'Mutations', importWebsite?: { __typename?: 'ImportWebsite', success?: boolean | null, message?: string | null, importedWebsite?: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, video?: string | null, image?: string | null, displayOrder: number, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, name: string, description?: string | null, logo?: string | null, businessManager?: string | null, images?: Array<any | null> | null, licenseNumber?: string | null, insuranceNumber?: string | null, businessEinNumber?: string | null, googleAnalytics?: string | null, googleTagManager?: string | null, motd?: string | null, primaryColor?: string | null, secondaryColor?: string | null, domains?: Array<string> | null, theme: string, gadsAccountId?: string | null, gadsCampaignId?: string | null, pk?: string | null, hashId?: string | null, defaultSubdomainName?: string | null, primaryColorContrast?: string | null, secondaryColorContrast?: string | null } | null } | null };
 
 export type InviteCollaboratorMutationVariables = Exact<{
   emailAddress: Scalars['String']['input'];
@@ -2049,29 +2642,41 @@ export type TokenAuthMutationVariables = Exact<{
 
 export type TokenAuthMutation = { __typename?: 'Mutations', tokenAuth?: { __typename?: 'ObtainJSONWebToken', payload: any, refreshExpiresIn: number, token: string } | null };
 
-export type TokenOauthLoginMutationVariables = Exact<{
+export type TokenOauthGoogleAdsMutationVariables = Exact<{
+  oauthToken?: InputMaybe<Scalars['String']['input']>;
+  provider?: InputMaybe<Scalars['String']['input']>;
+  websiteId: Scalars['Int']['input'];
+}>;
+
+
+export type TokenOauthGoogleAdsMutation = { __typename?: 'Mutations', tokenOauthGoogleAds?: { __typename?: 'TokenOAuthGoogleAds', success?: boolean | null, message?: string | null, token?: string | null, payload?: any | null } | null };
+
+export type TokenOauthGoogleMobileClientLoginMutationVariables = Exact<{
+  accessToken?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
   oauthPayload?: InputMaybe<Scalars['GenericScalar']['input']>;
   oauthToken?: InputMaybe<Scalars['String']['input']>;
   provider?: InputMaybe<Scalars['String']['input']>;
+  refreshToken?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type TokenOauthLoginMutation = { __typename?: 'Mutations', tokenOauthLogin?: { __typename?: 'TokenOAuthLogin', success?: boolean | null, message?: string | null, token?: string | null, payload?: any | null } | null };
+export type TokenOauthGoogleMobileClientLoginMutation = { __typename?: 'Mutations', tokenOauthGoogleMobileClientLogin?: { __typename?: 'TokenOAuthGoogleMobileClientLogin', success?: boolean | null, message?: string | null, token?: string | null, payload?: any | null } | null };
 
-export type TokenOauthSignupMutationVariables = Exact<{
+export type TokenOauthGoogleMobileClientSignupMutationVariables = Exact<{
   oauthToken?: InputMaybe<Scalars['String']['input']>;
   provider?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type TokenOauthSignupMutation = { __typename?: 'Mutations', tokenOauthSignup?: { __typename?: 'TokenOAuthSignup', success?: boolean | null, message?: string | null, token?: string | null, payload?: any | null } | null };
+export type TokenOauthGoogleMobileClientSignupMutation = { __typename?: 'Mutations', tokenOauthGoogleMobileClientSignup?: { __typename?: 'TokenOAuthGoogleMobileClienSignup', success?: boolean | null, message?: string | null, token?: string | null, payload?: any | null } | null };
 
 export type UpdateAreaMutationVariables = Exact<{
   input: AreaUpdateObject;
 }>;
 
 
-export type UpdateAreaMutation = { __typename?: 'Mutations', updateArea?: { __typename?: 'UpdateArea', success?: boolean | null, message?: string | null, data?: { __typename?: 'AreaObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, name?: string | null, slug?: string | null, zipCode: string, description?: string | null, image?: string | null, enableSchemaOrgAreaServedObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string> | null, displayOrder: number, pk?: string | null } | null } | null };
+export type UpdateAreaMutation = { __typename?: 'Mutations', updateArea?: { __typename?: 'UpdateArea', success?: boolean | null, message?: string | null, data?: { __typename?: 'AreaObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, includeInGads: boolean, city?: string | null, state?: string | null, zipCode: string, longitude?: number | null, latitude?: number | null, pk?: string | null, absoluteUrl?: string | null } | null } | null };
 
 export type UpdateEmailSubscriptionMutationVariables = Exact<{
   dailySummary: Scalars['Boolean']['input'];
@@ -2086,7 +2691,7 @@ export type UpdateFaqMutationVariables = Exact<{
 }>;
 
 
-export type UpdateFaqMutation = { __typename?: 'Mutations', updateFaq?: { __typename?: 'UpdateFaq', success?: boolean | null, message?: string | null, data?: { __typename?: 'FaqObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name: string, pk?: string | null } | null } | null };
+export type UpdateFaqMutation = { __typename?: 'Mutations', updateFaq?: { __typename?: 'UpdateFaq', success?: boolean | null, message?: string | null, data?: { __typename?: 'FaqObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, pk?: string | null, absoluteUrl?: string | null } | null } | null };
 
 export type UpdateOrCreateBaseFaqMutationVariables = Exact<{
   websiteId: Scalars['ID']['input'];
@@ -2100,42 +2705,42 @@ export type UpdatePageMutationVariables = Exact<{
 }>;
 
 
-export type UpdatePageMutation = { __typename?: 'Mutations', updatePage?: { __typename?: 'UpdatePage', success?: boolean | null, message?: string | null, data?: { __typename?: 'PageObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description?: string | null, body: string, image?: string | null, keywordTargeting?: Array<string | null> | null, displayOrder: number, enableSchemaOrgArticleObject: boolean, showInsuranceCompanyWidget: boolean, pk?: string | null } | null } | null };
+export type UpdatePageMutation = { __typename?: 'Mutations', updatePage?: { __typename?: 'UpdatePage', success?: boolean | null, message?: string | null, data?: { __typename?: 'PageObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, body: string, pk?: string | null, absoluteUrl?: string | null } | null } | null };
 
 export type UpdateProfileMutationVariables = Exact<{
   input: ProfileUpdateObject;
 }>;
 
 
-export type UpdateProfileMutation = { __typename?: 'Mutations', updateProfile?: { __typename?: 'UpdateProfile', success?: boolean | null, message?: string | null, data?: { __typename?: 'ProfileObject', id: string, created: any, updated: any, metadata?: any | null, firstName?: string | null, lastName?: string | null, phoneNumber: string, dailySummary: boolean, weeklySummary: boolean, pk?: string | null, emailAddress?: string | null } | null } | null };
+export type UpdateProfileMutation = { __typename?: 'Mutations', updateProfile?: { __typename?: 'UpdateProfile', success?: boolean | null, message?: string | null, data?: { __typename?: 'ProfileObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: any | null, displayOrder: number, firstName?: string | null, lastName?: string | null, phoneNumber: string, dailySummary: boolean, weeklySummary: boolean, pk?: string | null, emailAddress?: string | null } | null } | null };
 
 export type UpdateQuestionMutationVariables = Exact<{
   input: QuestionUpdateObject;
 }>;
 
 
-export type UpdateQuestionMutation = { __typename?: 'Mutations', updateQuestion?: { __typename?: 'UpdateQuestion', success?: boolean | null, message?: string | null, data?: { __typename?: 'QuestionObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, question: string, answer: string, displayOrder?: number | null, pk?: string | null, faqId?: string | null } | null } | null };
+export type UpdateQuestionMutation = { __typename?: 'Mutations', updateQuestion?: { __typename?: 'UpdateQuestion', success?: boolean | null, message?: string | null, data?: { __typename?: 'QuestionObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, question: string, answer: string, pk?: string | null, absoluteUrl?: string | null } | null } | null };
 
 export type UpdateReviewMutationVariables = Exact<{
   input: ReviewUpdateObject;
 }>;
 
 
-export type UpdateReviewMutation = { __typename?: 'Mutations', updateReview?: { __typename?: 'UpdateReview', success?: boolean | null, message?: string | null, data?: { __typename?: 'ReviewObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, title: string, body?: string | null, personImage?: string | null, personName: string, personZipCode: string, rating: any, displayOrder: number, pk?: string | null } | null } | null };
+export type UpdateReviewMutation = { __typename?: 'Mutations', updateReview?: { __typename?: 'UpdateReview', success?: boolean | null, message?: string | null, data?: { __typename?: 'ReviewObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, personName: string, zipCode: string, rating: any, pk?: string | null, absoluteUrl?: string | null } | null } | null };
 
 export type UpdateServiceMutationVariables = Exact<{
   input: ServiceUpdateObject;
 }>;
 
 
-export type UpdateServiceMutation = { __typename?: 'Mutations', updateService?: { __typename?: 'UpdateService', success?: boolean | null, message?: string | null, data?: { __typename?: 'ServiceObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, image?: string | null, enableSchemaOrgServiceObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string | null> | null, displayOrder: number, carouselImages?: Array<any | null> | null, pk?: string | null } | null } | null };
+export type UpdateServiceMutation = { __typename?: 'Mutations', updateService?: { __typename?: 'UpdateService', success?: boolean | null, message?: string | null, data?: { __typename?: 'ServiceObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, gadsAdGroupId?: string | null, pk?: string | null, absoluteUrl?: string | null } | null } | null };
 
 export type UpdateWebsiteMutationVariables = Exact<{
   input: WebsiteUpdateObject;
 }>;
 
 
-export type UpdateWebsiteMutation = { __typename?: 'Mutations', updateWebsite?: { __typename?: 'UpdateWebsite', success?: boolean | null, message?: string | null, data?: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, homepageVideo?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, customCss?: string | null, buttonColor?: string | null, buttonTextColor?: string | null, buttonBorderColor?: string | null, fontBody?: string | null, fontHeading?: string | null, carouselImages?: Array<any | null> | null, theme: AppWebsiteThemeChoices, pk?: string | null, defaultSubdomainName?: string | null } | null } | null };
+export type UpdateWebsiteMutation = { __typename?: 'Mutations', updateWebsite?: { __typename?: 'UpdateWebsite', success?: boolean | null, message?: string | null, data?: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, video?: string | null, image?: string | null, displayOrder: number, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, name: string, description?: string | null, logo?: string | null, businessManager?: string | null, images?: Array<any | null> | null, licenseNumber?: string | null, insuranceNumber?: string | null, businessEinNumber?: string | null, googleAnalytics?: string | null, googleTagManager?: string | null, motd?: string | null, primaryColor?: string | null, secondaryColor?: string | null, domains?: Array<string> | null, theme: string, gadsAccountId?: string | null, gadsCampaignId?: string | null, pk?: string | null, hashId?: string | null, defaultSubdomainName?: string | null, primaryColorContrast?: string | null, secondaryColorContrast?: string | null } | null } | null };
 
 export type VerifyTokenMutationVariables = Exact<{
   token?: InputMaybe<Scalars['String']['input']>;
@@ -2144,12 +2749,28 @@ export type VerifyTokenMutationVariables = Exact<{
 
 export type VerifyTokenMutation = { __typename?: 'Mutations', verifyToken?: { __typename?: 'Verify', payload: any } | null };
 
+export type AddNegativeKeywordsToCampaignQueryVariables = Exact<{
+  campaignId: Scalars['String']['input'];
+  customerId: Scalars['String']['input'];
+  keywords: Array<InputMaybe<Scalars['GenericScalar']['input']>> | InputMaybe<Scalars['GenericScalar']['input']>;
+  uniqueIdentifier: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+}>;
+
+
+export type AddNegativeKeywordsToCampaignQuery = { __typename?: 'Query', addNegativeKeywordsToCampaign?: { __typename?: 'AddNegativeKeywordsToCampaign', success?: boolean | null, message?: string | null, data?: { __typename?: 'GadsResponse', success?: boolean | null, errors?: Array<any | null> | null, data?: any | null, message?: string | null } | null } | null };
+
+export type AppVersionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AppVersionQuery = { __typename?: 'Query', appVersion?: string | null };
+
 export type AreaQueryVariables = Exact<{
   id?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type AreaQuery = { __typename?: 'Query', area?: { __typename?: 'AreaObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, name?: string | null, slug?: string | null, zipCode: string, description?: string | null, image?: string | null, enableSchemaOrgAreaServedObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string> | null, displayOrder: number, pk?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, homepageVideo?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, customCss?: string | null, buttonColor?: string | null, buttonTextColor?: string | null, buttonBorderColor?: string | null, fontBody?: string | null, fontHeading?: string | null, carouselImages?: Array<any | null> | null, theme: AppWebsiteThemeChoices, pk?: string | null, defaultSubdomainName?: string | null } } | null };
+export type AreaQuery = { __typename?: 'Query', area?: { __typename?: 'AreaObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, includeInGads: boolean, city?: string | null, state?: string | null, zipCode: string, longitude?: number | null, latitude?: number | null, pk?: string | null, absoluteUrl?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, video?: string | null, image?: string | null, displayOrder: number, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, name: string, description?: string | null, logo?: string | null, businessManager?: string | null, images?: Array<any | null> | null, licenseNumber?: string | null, insuranceNumber?: string | null, businessEinNumber?: string | null, googleAnalytics?: string | null, googleTagManager?: string | null, motd?: string | null, primaryColor?: string | null, secondaryColor?: string | null, domains?: Array<string> | null, theme: string, gadsAccountId?: string | null, gadsCampaignId?: string | null, pk?: string | null, hashId?: string | null, defaultSubdomainName?: string | null, primaryColorContrast?: string | null, secondaryColorContrast?: string | null } } | null };
 
 export type AreasQueryVariables = Exact<{
   websiteId?: InputMaybe<Scalars['ID']['input']>;
@@ -2158,14 +2779,157 @@ export type AreasQueryVariables = Exact<{
 }>;
 
 
-export type AreasQuery = { __typename?: 'Query', areas?: Array<{ __typename?: 'AreaObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, name?: string | null, slug?: string | null, zipCode: string, description?: string | null, image?: string | null, enableSchemaOrgAreaServedObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string> | null, displayOrder: number, pk?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, homepageVideo?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, customCss?: string | null, buttonColor?: string | null, buttonTextColor?: string | null, buttonBorderColor?: string | null, fontBody?: string | null, fontHeading?: string | null, carouselImages?: Array<any | null> | null, theme: AppWebsiteThemeChoices, pk?: string | null, defaultSubdomainName?: string | null } } | null> | null };
+export type AreasQuery = { __typename?: 'Query', areas?: Array<{ __typename?: 'AreaObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, includeInGads: boolean, city?: string | null, state?: string | null, zipCode: string, longitude?: number | null, latitude?: number | null, pk?: string | null, absoluteUrl?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, video?: string | null, image?: string | null, displayOrder: number, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, name: string, description?: string | null, logo?: string | null, businessManager?: string | null, images?: Array<any | null> | null, licenseNumber?: string | null, insuranceNumber?: string | null, businessEinNumber?: string | null, googleAnalytics?: string | null, googleTagManager?: string | null, motd?: string | null, primaryColor?: string | null, secondaryColor?: string | null, domains?: Array<string> | null, theme: string, gadsAccountId?: string | null, gadsCampaignId?: string | null, pk?: string | null, hashId?: string | null, defaultSubdomainName?: string | null, primaryColorContrast?: string | null, secondaryColorContrast?: string | null } } | null> | null };
+
+export type CreateGadsAdGroupQueryVariables = Exact<{
+  accountId: Scalars['String']['input'];
+  campaignId: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+}>;
+
+
+export type CreateGadsAdGroupQuery = { __typename?: 'Query', createGadsAdGroup?: { __typename?: 'CreateGADSAdGroup', success?: boolean | null, message?: string | null, data?: { __typename?: 'GadsResponse', success?: boolean | null, errors?: Array<any | null> | null, data?: any | null, message?: string | null } | null } | null };
+
+export type CreateGadsCallAdQueryVariables = Exact<{
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  businessName: Scalars['String']['input'];
+  callTracked: Scalars['Boolean']['input'];
+  description1: Scalars['String']['input'];
+  description2: Scalars['String']['input'];
+  disableCallConversion: Scalars['Boolean']['input'];
+  finalUrls: Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>;
+  headline1: Scalars['String']['input'];
+  headline2: Scalars['String']['input'];
+  path1: Scalars['String']['input'];
+  path2: Scalars['String']['input'];
+  phoneCountry: Scalars['String']['input'];
+  phoneNumber: Scalars['String']['input'];
+  phoneNumberVerificationUrl?: InputMaybe<Scalars['String']['input']>;
+  websiteId: Scalars['String']['input'];
+}>;
+
+
+export type CreateGadsCallAdQuery = { __typename?: 'Query', createGadsCallAd?: { __typename?: 'CreateCallAd', success?: boolean | null, message?: string | null, data?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null } | null };
+
+export type CreateGadsCampaignQueryVariables = Exact<{
+  budget: Scalars['BigInt']['input'];
+  campaignName: Scalars['String']['input'];
+  countryCode: Scalars['String']['input'];
+  customerId: Scalars['String']['input'];
+  durationDays?: InputMaybe<Scalars['Int']['input']>;
+  languageCode: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+}>;
+
+
+export type CreateGadsCampaignQuery = { __typename?: 'Query', createGadsCampaign?: { __typename?: 'CreateGADSCampaign', success?: boolean | null, message?: string | null, data?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null } | null };
+
+export type CreateGadsCustomerQueryVariables = Exact<{
+  accountId?: InputMaybe<Scalars['String']['input']>;
+  accountName: Scalars['String']['input'];
+  currencyCode: Scalars['String']['input'];
+  emailAddress: Scalars['String']['input'];
+  timeZone: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+}>;
+
+
+export type CreateGadsCustomerQuery = { __typename?: 'Query', createGadsCustomer?: { __typename?: 'CreateGADSCustomer', success?: boolean | null, message?: string | null, data?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null } | null };
+
+export type CreateGadsResponsiveSearchAdQueryVariables = Exact<{
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  descriptions: Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>;
+  finalUrls: Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>;
+  headlines: Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>;
+  path1: Scalars['String']['input'];
+  path2: Scalars['String']['input'];
+  trackingUrl: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+}>;
+
+
+export type CreateGadsResponsiveSearchAdQuery = { __typename?: 'Query', createGadsResponsiveSearchAd?: { __typename?: 'CreateResponsiveSearchAd', success?: boolean | null, message?: string | null, data?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null } | null };
+
+export type CreateKeywordQueryVariables = Exact<{
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  keywordText: Scalars['String']['input'];
+  matchType: Scalars['String']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  websiteId: Scalars['String']['input'];
+}>;
+
+
+export type CreateKeywordQuery = { __typename?: 'Query', createKeyword?: { __typename?: 'CreateKeyword', success?: boolean | null, message?: string | null, data?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null } | null };
+
+export type DeleteKeywordQueryVariables = Exact<{
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  criterionId: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+}>;
+
+
+export type DeleteKeywordQuery = { __typename?: 'Query', deleteKeyword?: { __typename?: 'DeleteKeyword', success?: boolean | null, message?: string | null, data?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null } | null };
+
+export type DeleteNegativeKeywordQueryVariables = Exact<{
+  campaignId: Scalars['String']['input'];
+  criterionId: Scalars['String']['input'];
+  customerId: Scalars['String']['input'];
+  uniqueIdentifier: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+}>;
+
+
+export type DeleteNegativeKeywordQuery = { __typename?: 'Query', deleteNegativeKeyword?: { __typename?: 'DeleteNegativeKeyword', success?: boolean | null, message?: string | null, data?: { __typename?: 'GadsResponse', success?: boolean | null, errors?: Array<any | null> | null, data?: any | null, message?: string | null } | null } | null };
+
+export type EnableAdQueryVariables = Exact<{
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  adId: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+}>;
+
+
+export type EnableAdQuery = { __typename?: 'Query', enableAd?: { __typename?: 'EnableAd', success?: boolean | null, message?: string | null, data?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null } | null };
+
+export type EnableCampaignQueryVariables = Exact<{
+  accountId: Scalars['String']['input'];
+  campaignId: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+}>;
+
+
+export type EnableCampaignQuery = { __typename?: 'Query', enableCampaign?: { __typename?: 'EnableGADSCampaign', success?: boolean | null, message?: string | null, data?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null } | null };
+
+export type EnableGadsAdGroupQueryVariables = Exact<{
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+}>;
+
+
+export type EnableGadsAdGroupQuery = { __typename?: 'Query', enableGadsAdGroup?: { __typename?: 'EnableGADSAdGroup', success?: boolean | null, message?: string | null, data?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null } | null };
+
+export type EnableKeywordQueryVariables = Exact<{
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  criterionId: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+}>;
+
+
+export type EnableKeywordQuery = { __typename?: 'Query', enableKeyword?: { __typename?: 'EnableKeyword', success?: boolean | null, message?: string | null, data?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null } | null };
 
 export type FaqQueryVariables = Exact<{
   id?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type FaqQuery = { __typename?: 'Query', faq?: { __typename?: 'FaqObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name: string, pk?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, homepageVideo?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, customCss?: string | null, buttonColor?: string | null, buttonTextColor?: string | null, buttonBorderColor?: string | null, fontBody?: string | null, fontHeading?: string | null, carouselImages?: Array<any | null> | null, theme: AppWebsiteThemeChoices, pk?: string | null, defaultSubdomainName?: string | null }, questions: Array<{ __typename?: 'QuestionObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, question: string, answer: string, displayOrder?: number | null, pk?: string | null, faqId?: string | null }> } | null };
+export type FaqQuery = { __typename?: 'Query', faq?: { __typename?: 'FaqObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, pk?: string | null, absoluteUrl?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, video?: string | null, image?: string | null, displayOrder: number, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, name: string, description?: string | null, logo?: string | null, businessManager?: string | null, images?: Array<any | null> | null, licenseNumber?: string | null, insuranceNumber?: string | null, businessEinNumber?: string | null, googleAnalytics?: string | null, googleTagManager?: string | null, motd?: string | null, primaryColor?: string | null, secondaryColor?: string | null, domains?: Array<string> | null, theme: string, gadsAccountId?: string | null, gadsCampaignId?: string | null, pk?: string | null, hashId?: string | null, defaultSubdomainName?: string | null, primaryColorContrast?: string | null, secondaryColorContrast?: string | null }, question?: Array<{ __typename?: 'QuestionObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, question: string, answer: string, pk?: string | null, absoluteUrl?: string | null } | null> | null } | null };
 
 export type FaqsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -2174,7 +2938,96 @@ export type FaqsQueryVariables = Exact<{
 }>;
 
 
-export type FaqsQuery = { __typename?: 'Query', faqs?: Array<{ __typename?: 'FaqObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name: string, pk?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, homepageVideo?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, customCss?: string | null, buttonColor?: string | null, buttonTextColor?: string | null, buttonBorderColor?: string | null, fontBody?: string | null, fontHeading?: string | null, carouselImages?: Array<any | null> | null, theme: AppWebsiteThemeChoices, pk?: string | null, defaultSubdomainName?: string | null }, questions: Array<{ __typename?: 'QuestionObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, question: string, answer: string, displayOrder?: number | null, pk?: string | null, faqId?: string | null }> } | null> | null };
+export type FaqsQuery = { __typename?: 'Query', faqs?: Array<{ __typename?: 'FaqObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, pk?: string | null, absoluteUrl?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, video?: string | null, image?: string | null, displayOrder: number, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, name: string, description?: string | null, logo?: string | null, businessManager?: string | null, images?: Array<any | null> | null, licenseNumber?: string | null, insuranceNumber?: string | null, businessEinNumber?: string | null, googleAnalytics?: string | null, googleTagManager?: string | null, motd?: string | null, primaryColor?: string | null, secondaryColor?: string | null, domains?: Array<string> | null, theme: string, gadsAccountId?: string | null, gadsCampaignId?: string | null, pk?: string | null, hashId?: string | null, defaultSubdomainName?: string | null, primaryColorContrast?: string | null, secondaryColorContrast?: string | null }, question?: Array<{ __typename?: 'QuestionObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, question: string, answer: string, pk?: string | null, absoluteUrl?: string | null } | null> | null } | null> | null };
+
+export type GeminiKeywordSuggestionsQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  websiteId?: InputMaybe<Scalars['String']['input']>;
+  prompt?: InputMaybe<Scalars['String']['input']>;
+  geminiApiKey?: InputMaybe<Scalars['String']['input']>;
+  adgroupId?: InputMaybe<Scalars['String']['input']>;
+  customerId?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type GeminiKeywordSuggestionsQuery = { __typename?: 'Query', geminiKeywordSuggestions?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null };
+
+export type GoogleAdsAccountsQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  websiteId?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type GoogleAdsAccountsQuery = { __typename?: 'Query', googleAdsAccounts?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null };
+
+export type GoogleAdsAdGroupMetricsQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  websiteId?: InputMaybe<Scalars['String']['input']>;
+  customerId?: InputMaybe<Scalars['String']['input']>;
+  adGroupId?: InputMaybe<Scalars['String']['input']>;
+  useLoginId?: InputMaybe<Scalars['Boolean']['input']>;
+}>;
+
+
+export type GoogleAdsAdGroupMetricsQuery = { __typename?: 'Query', googleAdsAdGroupMetrics?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null };
+
+export type GoogleAdsAdgroupsQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  websiteId?: InputMaybe<Scalars['String']['input']>;
+  campaignId?: InputMaybe<Scalars['String']['input']>;
+  accountId?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type GoogleAdsAdgroupsQuery = { __typename?: 'Query', googleAdsAdgroups?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null };
+
+export type GoogleAdsAdsQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  websiteId?: InputMaybe<Scalars['String']['input']>;
+  adgroupId?: InputMaybe<Scalars['String']['input']>;
+  accountId?: InputMaybe<Scalars['String']['input']>;
+  campaignId?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type GoogleAdsAdsQuery = { __typename?: 'Query', googleAdsAds?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null };
+
+export type GoogleAdsCampaignsQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  websiteId?: InputMaybe<Scalars['String']['input']>;
+  accountId?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type GoogleAdsCampaignsQuery = { __typename?: 'Query', googleAdsCampaigns?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null };
+
+export type GoogleAdsCampaignsMetricsQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  websiteId?: InputMaybe<Scalars['String']['input']>;
+  customerId?: InputMaybe<Scalars['String']['input']>;
+  useLoginId?: InputMaybe<Scalars['Boolean']['input']>;
+}>;
+
+
+export type GoogleAdsCampaignsMetricsQuery = { __typename?: 'Query', googleAdsCampaignsMetrics?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null };
+
+export type GoogleAdsKeywordsQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  websiteId?: InputMaybe<Scalars['String']['input']>;
+  accountId?: InputMaybe<Scalars['String']['input']>;
+  adgroupId?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type GoogleAdsKeywordsQuery = { __typename?: 'Query', googleAdsKeywords?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null };
 
 export type InvitationsReceivedQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -2200,12 +3053,32 @@ export type IpAddressQueryVariables = Exact<{
 
 export type IpAddressQuery = { __typename?: 'Query', ipAddress?: { __typename?: 'IPAddress', zipCode?: string | null, city?: string | null, stateName?: string | null, stateCode?: string | null, countryName?: string | null, countryCode?: string | null, location?: any | null } | null };
 
+export type ListNegativeKeywordsForCampaignQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  websiteId?: InputMaybe<Scalars['String']['input']>;
+  campaignId?: InputMaybe<Scalars['String']['input']>;
+  customerId?: InputMaybe<Scalars['String']['input']>;
+  uniqueIdentifier?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type ListNegativeKeywordsForCampaignQuery = { __typename?: 'Query', listNegativeKeywordsForCampaign?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null };
+
+export type ListReviewsQueryVariables = Exact<{
+  websiteId?: InputMaybe<Scalars['String']['input']>;
+  customerId?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type ListReviewsQuery = { __typename?: 'Query', listReviews?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null };
+
 export type PageQueryVariables = Exact<{
   id?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type PageQuery = { __typename?: 'Query', page?: { __typename?: 'PageObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description?: string | null, body: string, image?: string | null, keywordTargeting?: Array<string | null> | null, displayOrder: number, enableSchemaOrgArticleObject: boolean, showInsuranceCompanyWidget: boolean, pk?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, homepageVideo?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, customCss?: string | null, buttonColor?: string | null, buttonTextColor?: string | null, buttonBorderColor?: string | null, fontBody?: string | null, fontHeading?: string | null, carouselImages?: Array<any | null> | null, theme: AppWebsiteThemeChoices, pk?: string | null, defaultSubdomainName?: string | null } } | null };
+export type PageQuery = { __typename?: 'Query', page?: { __typename?: 'PageObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, body: string, pk?: string | null, absoluteUrl?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, video?: string | null, image?: string | null, displayOrder: number, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, name: string, description?: string | null, logo?: string | null, businessManager?: string | null, images?: Array<any | null> | null, licenseNumber?: string | null, insuranceNumber?: string | null, businessEinNumber?: string | null, googleAnalytics?: string | null, googleTagManager?: string | null, motd?: string | null, primaryColor?: string | null, secondaryColor?: string | null, domains?: Array<string> | null, theme: string, gadsAccountId?: string | null, gadsCampaignId?: string | null, pk?: string | null, hashId?: string | null, defaultSubdomainName?: string | null, primaryColorContrast?: string | null, secondaryColorContrast?: string | null } } | null };
 
 export type PagesQueryVariables = Exact<{
   websiteId?: InputMaybe<Scalars['ID']['input']>;
@@ -2214,14 +3087,52 @@ export type PagesQueryVariables = Exact<{
 }>;
 
 
-export type PagesQuery = { __typename?: 'Query', pages?: Array<{ __typename?: 'PageObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description?: string | null, body: string, image?: string | null, keywordTargeting?: Array<string | null> | null, displayOrder: number, enableSchemaOrgArticleObject: boolean, showInsuranceCompanyWidget: boolean, pk?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, homepageVideo?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, customCss?: string | null, buttonColor?: string | null, buttonTextColor?: string | null, buttonBorderColor?: string | null, fontBody?: string | null, fontHeading?: string | null, carouselImages?: Array<any | null> | null, theme: AppWebsiteThemeChoices, pk?: string | null, defaultSubdomainName?: string | null } } | null> | null };
+export type PagesQuery = { __typename?: 'Query', pages?: Array<{ __typename?: 'PageObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, body: string, pk?: string | null, absoluteUrl?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, video?: string | null, image?: string | null, displayOrder: number, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, name: string, description?: string | null, logo?: string | null, businessManager?: string | null, images?: Array<any | null> | null, licenseNumber?: string | null, insuranceNumber?: string | null, businessEinNumber?: string | null, googleAnalytics?: string | null, googleTagManager?: string | null, motd?: string | null, primaryColor?: string | null, secondaryColor?: string | null, domains?: Array<string> | null, theme: string, gadsAccountId?: string | null, gadsCampaignId?: string | null, pk?: string | null, hashId?: string | null, defaultSubdomainName?: string | null, primaryColorContrast?: string | null, secondaryColorContrast?: string | null } } | null> | null };
+
+export type PauseAdQueryVariables = Exact<{
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  adId: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+}>;
+
+
+export type PauseAdQuery = { __typename?: 'Query', pauseAd?: { __typename?: 'PauseAd', success?: boolean | null, message?: string | null, data?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null } | null };
+
+export type PauseCampaignQueryVariables = Exact<{
+  accountId: Scalars['String']['input'];
+  campaignId: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+}>;
+
+
+export type PauseCampaignQuery = { __typename?: 'Query', pauseCampaign?: { __typename?: 'PauseGADSCampaign', success?: boolean | null, message?: string | null, data?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null } | null };
+
+export type PauseGadsAdGroupQueryVariables = Exact<{
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+}>;
+
+
+export type PauseGadsAdGroupQuery = { __typename?: 'Query', pauseGadsAdGroup?: { __typename?: 'PauseGADSAdGroup', success?: boolean | null, message?: string | null, data?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null } | null };
+
+export type PauseKeywordQueryVariables = Exact<{
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  criterionId: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+}>;
+
+
+export type PauseKeywordQuery = { __typename?: 'Query', pauseKeyword?: { __typename?: 'PauseKeyword', success?: boolean | null, message?: string | null, data?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null } | null };
 
 export type PostdataQueryVariables = Exact<{
   id?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type PostdataQuery = { __typename?: 'Query', postdata?: { __typename?: 'DataObject', id: string, created: any, updated: any, metadata?: any | null, data?: any | null, ipAddress: string, pk?: string | null, website?: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, homepageVideo?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, customCss?: string | null, buttonColor?: string | null, buttonTextColor?: string | null, buttonBorderColor?: string | null, fontBody?: string | null, fontHeading?: string | null, carouselImages?: Array<any | null> | null, theme: AppWebsiteThemeChoices, pk?: string | null, defaultSubdomainName?: string | null } | null } | null };
+export type PostdataQuery = { __typename?: 'Query', postdata?: { __typename?: 'DataObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: any | null, displayOrder: number, data?: any | null, ipAddress: string, pk?: string | null, website?: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, video?: string | null, image?: string | null, displayOrder: number, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, name: string, description?: string | null, logo?: string | null, businessManager?: string | null, images?: Array<any | null> | null, licenseNumber?: string | null, insuranceNumber?: string | null, businessEinNumber?: string | null, googleAnalytics?: string | null, googleTagManager?: string | null, motd?: string | null, primaryColor?: string | null, secondaryColor?: string | null, domains?: Array<string> | null, theme: string, gadsAccountId?: string | null, gadsCampaignId?: string | null, pk?: string | null, hashId?: string | null, defaultSubdomainName?: string | null, primaryColorContrast?: string | null, secondaryColorContrast?: string | null } | null } | null };
 
 export type PostdatasQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -2230,19 +3141,19 @@ export type PostdatasQueryVariables = Exact<{
 }>;
 
 
-export type PostdatasQuery = { __typename?: 'Query', postdatas?: Array<{ __typename?: 'DataObject', id: string, created: any, updated: any, metadata?: any | null, data?: any | null, ipAddress: string, pk?: string | null, website?: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, homepageVideo?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, customCss?: string | null, buttonColor?: string | null, buttonTextColor?: string | null, buttonBorderColor?: string | null, fontBody?: string | null, fontHeading?: string | null, carouselImages?: Array<any | null> | null, theme: AppWebsiteThemeChoices, pk?: string | null, defaultSubdomainName?: string | null } | null } | null> | null };
+export type PostdatasQuery = { __typename?: 'Query', postdatas?: Array<{ __typename?: 'DataObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: any | null, displayOrder: number, data?: any | null, ipAddress: string, pk?: string | null, website?: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, video?: string | null, image?: string | null, displayOrder: number, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, name: string, description?: string | null, logo?: string | null, businessManager?: string | null, images?: Array<any | null> | null, licenseNumber?: string | null, insuranceNumber?: string | null, businessEinNumber?: string | null, googleAnalytics?: string | null, googleTagManager?: string | null, motd?: string | null, primaryColor?: string | null, secondaryColor?: string | null, domains?: Array<string> | null, theme: string, gadsAccountId?: string | null, gadsCampaignId?: string | null, pk?: string | null, hashId?: string | null, defaultSubdomainName?: string | null, primaryColorContrast?: string | null, secondaryColorContrast?: string | null } | null } | null> | null };
 
 export type ProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ProfileQuery = { __typename?: 'Query', profile?: { __typename?: 'ProfileObject', id: string, created: any, updated: any, metadata?: any | null, firstName?: string | null, lastName?: string | null, phoneNumber: string, dailySummary: boolean, weeklySummary: boolean, pk?: string | null, emailAddress?: string | null, subscription?: { __typename?: 'SubscriptionObject', id: string, created: any, updated: any, metadata?: any | null, startDate?: any | null, lengthDays?: number | null, programOptions?: any | null, stripeSubscriptionId?: string | null, stripeCustomerId?: string | null, stripeCheckoutSessionId?: string | null, status?: string | null, pk?: string | null, userId?: string | null } | null } | null };
+export type ProfileQuery = { __typename?: 'Query', profile?: { __typename?: 'ProfileObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: any | null, displayOrder: number, firstName?: string | null, lastName?: string | null, phoneNumber: string, dailySummary: boolean, weeklySummary: boolean, pk?: string | null, emailAddress?: string | null, subscription?: { __typename?: 'SubscriptionObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: any | null, displayOrder: number, startDate?: any | null, lengthDays?: number | null, programOptions?: any | null, stripeSubscriptionId?: string | null, stripeCustomerId?: string | null, stripeCheckoutSessionId?: string | null, status?: string | null, pk?: string | null, userId?: string | null } | null } | null };
 
 export type QuestionQueryVariables = Exact<{
   id?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type QuestionQuery = { __typename?: 'Query', question?: { __typename?: 'QuestionObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, question: string, answer: string, displayOrder?: number | null, pk?: string | null, faqId?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, homepageVideo?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, customCss?: string | null, buttonColor?: string | null, buttonTextColor?: string | null, buttonBorderColor?: string | null, fontBody?: string | null, fontHeading?: string | null, carouselImages?: Array<any | null> | null, theme: AppWebsiteThemeChoices, pk?: string | null, defaultSubdomainName?: string | null }, faq?: { __typename?: 'FaqObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name: string, pk?: string | null } | null } | null };
+export type QuestionQuery = { __typename?: 'Query', question?: { __typename?: 'QuestionObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, question: string, answer: string, pk?: string | null, absoluteUrl?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, video?: string | null, image?: string | null, displayOrder: number, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, name: string, description?: string | null, logo?: string | null, businessManager?: string | null, images?: Array<any | null> | null, licenseNumber?: string | null, insuranceNumber?: string | null, businessEinNumber?: string | null, googleAnalytics?: string | null, googleTagManager?: string | null, motd?: string | null, primaryColor?: string | null, secondaryColor?: string | null, domains?: Array<string> | null, theme: string, gadsAccountId?: string | null, gadsCampaignId?: string | null, pk?: string | null, hashId?: string | null, defaultSubdomainName?: string | null, primaryColorContrast?: string | null, secondaryColorContrast?: string | null }, faq?: { __typename?: 'FaqObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, pk?: string | null, absoluteUrl?: string | null } | null } | null };
 
 export type QuestionsQueryVariables = Exact<{
   websiteId?: InputMaybe<Scalars['ID']['input']>;
@@ -2251,14 +3162,24 @@ export type QuestionsQueryVariables = Exact<{
 }>;
 
 
-export type QuestionsQuery = { __typename?: 'Query', questions?: Array<{ __typename?: 'QuestionObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, question: string, answer: string, displayOrder?: number | null, pk?: string | null, faqId?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, homepageVideo?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, customCss?: string | null, buttonColor?: string | null, buttonTextColor?: string | null, buttonBorderColor?: string | null, fontBody?: string | null, fontHeading?: string | null, carouselImages?: Array<any | null> | null, theme: AppWebsiteThemeChoices, pk?: string | null, defaultSubdomainName?: string | null }, faq?: { __typename?: 'FaqObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name: string, pk?: string | null } | null } | null> | null };
+export type QuestionsQuery = { __typename?: 'Query', questions?: Array<{ __typename?: 'QuestionObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, question: string, answer: string, pk?: string | null, absoluteUrl?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, video?: string | null, image?: string | null, displayOrder: number, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, name: string, description?: string | null, logo?: string | null, businessManager?: string | null, images?: Array<any | null> | null, licenseNumber?: string | null, insuranceNumber?: string | null, businessEinNumber?: string | null, googleAnalytics?: string | null, googleTagManager?: string | null, motd?: string | null, primaryColor?: string | null, secondaryColor?: string | null, domains?: Array<string> | null, theme: string, gadsAccountId?: string | null, gadsCampaignId?: string | null, pk?: string | null, hashId?: string | null, defaultSubdomainName?: string | null, primaryColorContrast?: string | null, secondaryColorContrast?: string | null }, faq?: { __typename?: 'FaqObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, pk?: string | null, absoluteUrl?: string | null } | null } | null> | null };
+
+export type RemoveAdQueryVariables = Exact<{
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  adId: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+}>;
+
+
+export type RemoveAdQuery = { __typename?: 'Query', removeAd?: { __typename?: 'RemoveAd', success?: boolean | null, message?: string | null, data?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null } | null };
 
 export type ReviewQueryVariables = Exact<{
   id?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type ReviewQuery = { __typename?: 'Query', review?: { __typename?: 'ReviewObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, title: string, body?: string | null, personImage?: string | null, personName: string, personZipCode: string, rating: any, displayOrder: number, pk?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, homepageVideo?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, customCss?: string | null, buttonColor?: string | null, buttonTextColor?: string | null, buttonBorderColor?: string | null, fontBody?: string | null, fontHeading?: string | null, carouselImages?: Array<any | null> | null, theme: AppWebsiteThemeChoices, pk?: string | null, defaultSubdomainName?: string | null } } | null };
+export type ReviewQuery = { __typename?: 'Query', review?: { __typename?: 'ReviewObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, personName: string, zipCode: string, rating: any, pk?: string | null, absoluteUrl?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, video?: string | null, image?: string | null, displayOrder: number, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, name: string, description?: string | null, logo?: string | null, businessManager?: string | null, images?: Array<any | null> | null, licenseNumber?: string | null, insuranceNumber?: string | null, businessEinNumber?: string | null, googleAnalytics?: string | null, googleTagManager?: string | null, motd?: string | null, primaryColor?: string | null, secondaryColor?: string | null, domains?: Array<string> | null, theme: string, gadsAccountId?: string | null, gadsCampaignId?: string | null, pk?: string | null, hashId?: string | null, defaultSubdomainName?: string | null, primaryColorContrast?: string | null, secondaryColorContrast?: string | null } } | null };
 
 export type ReviewsQueryVariables = Exact<{
   websiteId?: InputMaybe<Scalars['ID']['input']>;
@@ -2267,14 +3188,28 @@ export type ReviewsQueryVariables = Exact<{
 }>;
 
 
-export type ReviewsQuery = { __typename?: 'Query', reviews?: Array<{ __typename?: 'ReviewObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, title: string, body?: string | null, personImage?: string | null, personName: string, personZipCode: string, rating: any, displayOrder: number, pk?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, homepageVideo?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, customCss?: string | null, buttonColor?: string | null, buttonTextColor?: string | null, buttonBorderColor?: string | null, fontBody?: string | null, fontHeading?: string | null, carouselImages?: Array<any | null> | null, theme: AppWebsiteThemeChoices, pk?: string | null, defaultSubdomainName?: string | null } } | null> | null };
+export type ReviewsQuery = { __typename?: 'Query', reviews?: Array<{ __typename?: 'ReviewObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, personName: string, zipCode: string, rating: any, pk?: string | null, absoluteUrl?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, video?: string | null, image?: string | null, displayOrder: number, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, name: string, description?: string | null, logo?: string | null, businessManager?: string | null, images?: Array<any | null> | null, licenseNumber?: string | null, insuranceNumber?: string | null, businessEinNumber?: string | null, googleAnalytics?: string | null, googleTagManager?: string | null, motd?: string | null, primaryColor?: string | null, secondaryColor?: string | null, domains?: Array<string> | null, theme: string, gadsAccountId?: string | null, gadsCampaignId?: string | null, pk?: string | null, hashId?: string | null, defaultSubdomainName?: string | null, primaryColorContrast?: string | null, secondaryColorContrast?: string | null } } | null> | null };
+
+export type SearchTermsReportQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  websiteId?: InputMaybe<Scalars['String']['input']>;
+  customerId?: InputMaybe<Scalars['String']['input']>;
+  campaignId?: InputMaybe<Scalars['String']['input']>;
+  adGroupId?: InputMaybe<Scalars['String']['input']>;
+  dateRange?: InputMaybe<Scalars['String']['input']>;
+  keywords?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
+}>;
+
+
+export type SearchTermsReportQuery = { __typename?: 'Query', searchTermsReport?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null };
 
 export type ServiceQueryVariables = Exact<{
   id?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type ServiceQuery = { __typename?: 'Query', service?: { __typename?: 'ServiceObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, image?: string | null, enableSchemaOrgServiceObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string | null> | null, displayOrder: number, carouselImages?: Array<any | null> | null, pk?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, homepageVideo?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, customCss?: string | null, buttonColor?: string | null, buttonTextColor?: string | null, buttonBorderColor?: string | null, fontBody?: string | null, fontHeading?: string | null, carouselImages?: Array<any | null> | null, theme: AppWebsiteThemeChoices, pk?: string | null, defaultSubdomainName?: string | null } } | null };
+export type ServiceQuery = { __typename?: 'Query', service?: { __typename?: 'ServiceObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, gadsAdGroupId?: string | null, pk?: string | null, absoluteUrl?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, video?: string | null, image?: string | null, displayOrder: number, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, name: string, description?: string | null, logo?: string | null, businessManager?: string | null, images?: Array<any | null> | null, licenseNumber?: string | null, insuranceNumber?: string | null, businessEinNumber?: string | null, googleAnalytics?: string | null, googleTagManager?: string | null, motd?: string | null, primaryColor?: string | null, secondaryColor?: string | null, domains?: Array<string> | null, theme: string, gadsAccountId?: string | null, gadsCampaignId?: string | null, pk?: string | null, hashId?: string | null, defaultSubdomainName?: string | null, primaryColorContrast?: string | null, secondaryColorContrast?: string | null } } | null };
 
 export type ServicesQueryVariables = Exact<{
   websiteId?: InputMaybe<Scalars['ID']['input']>;
@@ -2283,14 +3218,48 @@ export type ServicesQueryVariables = Exact<{
 }>;
 
 
-export type ServicesQuery = { __typename?: 'Query', services?: Array<{ __typename?: 'ServiceObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, image?: string | null, enableSchemaOrgServiceObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string | null> | null, displayOrder: number, carouselImages?: Array<any | null> | null, pk?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, homepageVideo?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, customCss?: string | null, buttonColor?: string | null, buttonTextColor?: string | null, buttonBorderColor?: string | null, fontBody?: string | null, fontHeading?: string | null, carouselImages?: Array<any | null> | null, theme: AppWebsiteThemeChoices, pk?: string | null, defaultSubdomainName?: string | null } } | null> | null };
+export type ServicesQuery = { __typename?: 'Query', services?: Array<{ __typename?: 'ServiceObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, gadsAdGroupId?: string | null, pk?: string | null, absoluteUrl?: string | null, website: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, video?: string | null, image?: string | null, displayOrder: number, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, name: string, description?: string | null, logo?: string | null, businessManager?: string | null, images?: Array<any | null> | null, licenseNumber?: string | null, insuranceNumber?: string | null, businessEinNumber?: string | null, googleAnalytics?: string | null, googleTagManager?: string | null, motd?: string | null, primaryColor?: string | null, secondaryColor?: string | null, domains?: Array<string> | null, theme: string, gadsAccountId?: string | null, gadsCampaignId?: string | null, pk?: string | null, hashId?: string | null, defaultSubdomainName?: string | null, primaryColorContrast?: string | null, secondaryColorContrast?: string | null } } | null> | null };
+
+export type SuggestedServicesQueryVariables = Exact<{
+  companyDescription?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type SuggestedServicesQuery = { __typename?: 'Query', suggestedServices?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null };
+
+export type UpdateCallAdQueryVariables = Exact<{
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  adId: Scalars['String']['input'];
+  description1: Scalars['String']['input'];
+  description2: Scalars['String']['input'];
+  headline1: Scalars['String']['input'];
+  headline2: Scalars['String']['input'];
+  phoneNumber: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+}>;
+
+
+export type UpdateCallAdQuery = { __typename?: 'Query', updateCallAd?: { __typename?: 'UpdateCallAd', success?: boolean | null, message?: string | null, data?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null } | null };
+
+export type UpdateResponseSearchAdQueryVariables = Exact<{
+  accountId: Scalars['String']['input'];
+  adGroupId: Scalars['String']['input'];
+  adId: Scalars['String']['input'];
+  descriptions: Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>;
+  headlines: Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>;
+  websiteId: Scalars['String']['input'];
+}>;
+
+
+export type UpdateResponseSearchAdQuery = { __typename?: 'Query', updateResponseSearchAd?: { __typename?: 'UpdateResponsiveSearchAd', success?: boolean | null, message?: string | null, data?: { __typename?: 'GadsResponseList', data?: Array<any | null> | null } | null } | null };
 
 export type WebsiteQueryVariables = Exact<{
   id?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type WebsiteQuery = { __typename?: 'Query', website?: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, homepageVideo?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, customCss?: string | null, buttonColor?: string | null, buttonTextColor?: string | null, buttonBorderColor?: string | null, fontBody?: string | null, fontHeading?: string | null, carouselImages?: Array<any | null> | null, theme: AppWebsiteThemeChoices, pk?: string | null, defaultSubdomainName?: string | null, pages: Array<{ __typename?: 'PageObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description?: string | null, body: string, image?: string | null, keywordTargeting?: Array<string | null> | null, displayOrder: number, enableSchemaOrgArticleObject: boolean, showInsuranceCompanyWidget: boolean, pk?: string | null }>, areas: Array<{ __typename?: 'AreaObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, name?: string | null, slug?: string | null, zipCode: string, description?: string | null, image?: string | null, enableSchemaOrgAreaServedObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string> | null, displayOrder: number, pk?: string | null }>, datas: Array<{ __typename?: 'DataObject', id: string, created: any, updated: any, metadata?: any | null, data?: any | null, ipAddress: string, pk?: string | null }>, faqs: Array<{ __typename?: 'FaqObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name: string, pk?: string | null }>, questions: Array<{ __typename?: 'QuestionObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, question: string, answer: string, displayOrder?: number | null, pk?: string | null, faqId?: string | null }>, services: Array<{ __typename?: 'ServiceObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, image?: string | null, enableSchemaOrgServiceObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string | null> | null, displayOrder: number, carouselImages?: Array<any | null> | null, pk?: string | null }>, reviews: Array<{ __typename?: 'ReviewObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, title: string, body?: string | null, personImage?: string | null, personName: string, personZipCode: string, rating: any, displayOrder: number, pk?: string | null }> } | null };
+export type WebsiteQuery = { __typename?: 'Query', website?: { __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, video?: string | null, image?: string | null, displayOrder: number, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, name: string, description?: string | null, logo?: string | null, businessManager?: string | null, images?: Array<any | null> | null, licenseNumber?: string | null, insuranceNumber?: string | null, businessEinNumber?: string | null, googleAnalytics?: string | null, googleTagManager?: string | null, motd?: string | null, primaryColor?: string | null, secondaryColor?: string | null, domains?: Array<string> | null, theme: string, gadsAccountId?: string | null, gadsCampaignId?: string | null, pk?: string | null, hashId?: string | null, defaultSubdomainName?: string | null, primaryColorContrast?: string | null, secondaryColorContrast?: string | null, services?: Array<{ __typename?: 'ServiceObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, gadsAdGroupId?: string | null, pk?: string | null, absoluteUrl?: string | null } | null> | null, reviews?: Array<{ __typename?: 'ReviewObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, personName: string, zipCode: string, rating: any, pk?: string | null, absoluteUrl?: string | null } | null> | null, faqs?: Array<{ __typename?: 'FaqObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, pk?: string | null, absoluteUrl?: string | null } | null> | null, pages?: Array<{ __typename?: 'PageObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, body: string, pk?: string | null, absoluteUrl?: string | null } | null> | null, areas?: Array<{ __typename?: 'AreaObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, includeInGads: boolean, city?: string | null, state?: string | null, zipCode: string, longitude?: number | null, latitude?: number | null, pk?: string | null, absoluteUrl?: string | null } | null> | null } | null };
 
 export type WebsitesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -2298,7 +3267,7 @@ export type WebsitesQueryVariables = Exact<{
 }>;
 
 
-export type WebsitesQuery = { __typename?: 'Query', websites?: Array<{ __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, tld?: Array<string> | null, businessName: string, slug?: string | null, businessDescription?: string | null, businessLogo?: string | null, licenseNumber?: string | null, insuranceNumber?: string | null, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, editor?: Array<string> | null, googleAnalytics?: string | null, googleVerificationFileName?: string | null, googleVerificationFileContent?: string | null, enableGoogleSitemaps: boolean, enableSchemaOrgWebpageObject: boolean, enableSchemaOrgOrganizationObject: boolean, enableSchemaOrgLocalbusinessObject: boolean, primaryColor?: string | null, secondaryColor?: string | null, homepageBackground?: string | null, homepageVideo?: string | null, businessManagerPersonName?: string | null, businessEinNumber?: string | null, customHeaderCode?: string | null, customFooterCode?: string | null, ctaHtml?: string | null, ctaButtonHtml?: string | null, navbarMessageHtml?: string | null, navbarLink1Html?: string | null, navbarLink2Html?: string | null, navbarShowServices: number, navbarShowAreas: number, navbarShowCtaButton: boolean, footerMessageHtml?: string | null, footerShowServices: number, footerShowAreas: number, footerShowReviews: number, footerShowLicenseNumber: boolean, footerShowInsuranceNumber: boolean, footerShowAddress: boolean, footerShowEmailAddress: boolean, footerLink1Html?: string | null, footerLink2Html?: string | null, footerLink3Html?: string | null, footerLink4Html?: string | null, footerLink5Html?: string | null, customCss?: string | null, buttonColor?: string | null, buttonTextColor?: string | null, buttonBorderColor?: string | null, fontBody?: string | null, fontHeading?: string | null, carouselImages?: Array<any | null> | null, theme: AppWebsiteThemeChoices, pk?: string | null, defaultSubdomainName?: string | null, pages: Array<{ __typename?: 'PageObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description?: string | null, body: string, image?: string | null, keywordTargeting?: Array<string | null> | null, displayOrder: number, enableSchemaOrgArticleObject: boolean, showInsuranceCompanyWidget: boolean, pk?: string | null }>, areas: Array<{ __typename?: 'AreaObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, name?: string | null, slug?: string | null, zipCode: string, description?: string | null, image?: string | null, enableSchemaOrgAreaServedObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string> | null, displayOrder: number, pk?: string | null }>, datas: Array<{ __typename?: 'DataObject', id: string, created: any, updated: any, metadata?: any | null, data?: any | null, ipAddress: string, pk?: string | null }>, faqs: Array<{ __typename?: 'FaqObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name: string, pk?: string | null }>, questions: Array<{ __typename?: 'QuestionObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, question: string, answer: string, displayOrder?: number | null, pk?: string | null, faqId?: string | null }>, services: Array<{ __typename?: 'ServiceObject', id: string, created: any, updated: any, metadata?: any | null, active: boolean, slug?: string | null, name: string, description: string, image?: string | null, enableSchemaOrgServiceObject: boolean, showInsuranceCompanyWidget: boolean, htmlBlock1?: string | null, htmlBlock2?: string | null, keywordTargeting?: Array<string | null> | null, displayOrder: number, carouselImages?: Array<any | null> | null, pk?: string | null }>, reviews: Array<{ __typename?: 'ReviewObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, title: string, body?: string | null, personImage?: string | null, personName: string, personZipCode: string, rating: any, displayOrder: number, pk?: string | null }> } | null> | null };
+export type WebsitesQuery = { __typename?: 'Query', websites?: Array<{ __typename?: 'WebsiteObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, video?: string | null, image?: string | null, displayOrder: number, address1?: string | null, address2?: string | null, city?: string | null, state?: string | null, zipCode?: string | null, phoneNumber?: string | null, emailAddress?: string | null, name: string, description?: string | null, logo?: string | null, businessManager?: string | null, images?: Array<any | null> | null, licenseNumber?: string | null, insuranceNumber?: string | null, businessEinNumber?: string | null, googleAnalytics?: string | null, googleTagManager?: string | null, motd?: string | null, primaryColor?: string | null, secondaryColor?: string | null, domains?: Array<string> | null, theme: string, gadsAccountId?: string | null, gadsCampaignId?: string | null, pk?: string | null, hashId?: string | null, defaultSubdomainName?: string | null, primaryColorContrast?: string | null, secondaryColorContrast?: string | null, services?: Array<{ __typename?: 'ServiceObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, gadsAdGroupId?: string | null, pk?: string | null, absoluteUrl?: string | null } | null> | null, reviews?: Array<{ __typename?: 'ReviewObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, personName: string, zipCode: string, rating: any, pk?: string | null, absoluteUrl?: string | null } | null> | null, faqs?: Array<{ __typename?: 'FaqObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, pk?: string | null, absoluteUrl?: string | null } | null> | null, pages?: Array<{ __typename?: 'PageObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, body: string, pk?: string | null, absoluteUrl?: string | null } | null> | null, areas?: Array<{ __typename?: 'AreaObject', id?: string | null, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: Array<string | null> | null, displayOrder: number, customHtmlBlock?: string | null, customHeaderCode?: string | null, customFooterJs?: string | null, includeInGads: boolean, city?: string | null, state?: string | null, zipCode: string, longitude?: number | null, latitude?: number | null, pk?: string | null, absoluteUrl?: string | null } | null> | null } | null> | null };
 
 export type ZipCodeQueryVariables = Exact<{
   zipCode?: InputMaybe<Scalars['String']['input']>;
@@ -2306,6 +3275,14 @@ export type ZipCodeQueryVariables = Exact<{
 
 
 export type ZipCodeQuery = { __typename?: 'Query', zipCode?: { __typename?: 'ZipCode', zipCode?: string | null, city?: string | null, state?: string | null, latitude?: string | null, longitude?: string | null, metadata?: any | null } | null };
+
+export type ZipCodesByRadiusQueryVariables = Exact<{
+  zipCode?: InputMaybe<Scalars['String']['input']>;
+  radius?: InputMaybe<Scalars['Decimal']['input']>;
+}>;
+
+
+export type ZipCodesByRadiusQuery = { __typename?: 'Query', zipCodesByRadius?: Array<{ __typename?: 'ZipCode', zipCode?: string | null, city?: string | null, state?: string | null, latitude?: string | null, longitude?: string | null, metadata?: any | null } | null> | null };
 
 
 
@@ -2379,31 +3356,55 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
+  String: ResolverTypeWrapper<Scalars['String']['output']>;
+  GenericScalar: ResolverTypeWrapper<Scalars['GenericScalar']['output']>;
+  AddNegativeKeywordsToCampaign: ResolverTypeWrapper<AddNegativeKeywordsToCampaign>;
+  GadsResponse: ResolverTypeWrapper<GadsResponse>;
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   AreaObject: ResolverTypeWrapper<AreaObject>;
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']['output']>;
-  String: ResolverTypeWrapper<Scalars['String']['output']>;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
+  Float: ResolverTypeWrapper<Scalars['Float']['output']>;
   JSONString: ResolverTypeWrapper<Scalars['JSONString']['output']>;
   WebsiteObject: ResolverTypeWrapper<WebsiteObject>;
-  DataObject: ResolverTypeWrapper<DataObject>;
   FaqObject: ResolverTypeWrapper<FaqObject>;
   QuestionObject: ResolverTypeWrapper<QuestionObject>;
   PageObject: ResolverTypeWrapper<PageObject>;
   ReviewObject: ResolverTypeWrapper<ReviewObject>;
   Decimal: ResolverTypeWrapper<Scalars['Decimal']['output']>;
   ServiceObject: ResolverTypeWrapper<ServiceObject>;
-  AppWebsiteThemeChoices: AppWebsiteThemeChoices;
+  CreateGADSAdGroup: ResolverTypeWrapper<CreateGadsAdGroup>;
+  CreateCallAd: ResolverTypeWrapper<CreateCallAd>;
+  GadsResponseList: ResolverTypeWrapper<GadsResponseList>;
+  BigInt: ResolverTypeWrapper<Scalars['BigInt']['output']>;
+  CreateGADSCampaign: ResolverTypeWrapper<CreateGadsCampaign>;
+  CreateGADSCustomer: ResolverTypeWrapper<CreateGadsCustomer>;
+  CreateResponsiveSearchAd: ResolverTypeWrapper<CreateResponsiveSearchAd>;
+  CreateKeyword: ResolverTypeWrapper<CreateKeyword>;
+  DeleteKeyword: ResolverTypeWrapper<DeleteKeyword>;
+  DeleteNegativeKeyword: ResolverTypeWrapper<DeleteNegativeKeyword>;
+  EnableAd: ResolverTypeWrapper<EnableAd>;
+  EnableGADSCampaign: ResolverTypeWrapper<EnableGadsCampaign>;
+  EnableGADSAdGroup: ResolverTypeWrapper<EnableGadsAdGroup>;
+  EnableKeyword: ResolverTypeWrapper<EnableKeyword>;
   CollaboratorObject: ResolverTypeWrapper<CollaboratorObject>;
   IPAddress: ResolverTypeWrapper<IpAddress>;
-  GenericScalar: ResolverTypeWrapper<Scalars['GenericScalar']['output']>;
+  PauseAd: ResolverTypeWrapper<PauseAd>;
+  PauseGADSCampaign: ResolverTypeWrapper<PauseGadsCampaign>;
+  PauseGADSAdGroup: ResolverTypeWrapper<PauseGadsAdGroup>;
+  PauseKeyword: ResolverTypeWrapper<PauseKeyword>;
+  DataObject: ResolverTypeWrapper<DataObject>;
   ProfileObject: ResolverTypeWrapper<ProfileObject>;
   SubscriptionObject: ResolverTypeWrapper<SubscriptionObject>;
+  RemoveAd: ResolverTypeWrapper<RemoveAd>;
+  UpdateCallAd: ResolverTypeWrapper<UpdateCallAd>;
+  UpdateResponsiveSearchAd: ResolverTypeWrapper<UpdateResponsiveSearchAd>;
   ZipCode: ResolverTypeWrapper<ZipCode>;
   Mutations: ResolverTypeWrapper<{}>;
   AcceptInvite: ResolverTypeWrapper<AcceptInvite>;
   ActivateAccount: ResolverTypeWrapper<ActivateAccount>;
+  AddTokenToWebsite: ResolverTypeWrapper<AddTokenToWebsite>;
   ChangeEmailAddress: ResolverTypeWrapper<ChangeEmailAddress>;
   ChangePassword: ResolverTypeWrapper<ChangePassword>;
   CompleteResetPassword: ResolverTypeWrapper<CompleteResetPassword>;
@@ -2416,7 +3417,6 @@ export type ResolversTypes = {
   FaqCreateObject: FaqCreateObject;
   CreateFaq: ResolverTypeWrapper<CreateFaq>;
   PageCreateObject: PageCreateObject;
-  FileUploadField: ResolverTypeWrapper<Scalars['FileUploadField']['output']>;
   CreatePage: ResolverTypeWrapper<CreatePage>;
   QuestionCreateObject: QuestionCreateObject;
   CreateQuestion: ResolverTypeWrapper<CreateQuestion>;
@@ -2426,6 +3426,9 @@ export type ResolversTypes = {
   CreateService: ResolverTypeWrapper<CreateService>;
   WebsiteCreateObject: WebsiteCreateObject;
   CreateWebsite: ResolverTypeWrapper<CreateWebsite>;
+  WebsiteWizardCreateObject: WebsiteWizardCreateObject;
+  ZipCodeCreateObject: ZipCodeCreateObject;
+  CreateWebsiteWizard: ResolverTypeWrapper<CreateWebsiteWizard>;
   DeleteArea: ResolverTypeWrapper<DeleteArea>;
   DeleteCollaborator: ResolverTypeWrapper<DeleteCollaborator>;
   DeleteFaq: ResolverTypeWrapper<DeleteFaq>;
@@ -2446,8 +3449,9 @@ export type ResolversTypes = {
   SigninOrRegisterWithCode: ResolverTypeWrapper<SigninOrRegisterWithCode>;
   Signup: ResolverTypeWrapper<Signup>;
   ObtainJSONWebToken: ResolverTypeWrapper<ObtainJsonWebToken>;
-  TokenOAuthLogin: ResolverTypeWrapper<TokenOAuthLogin>;
-  TokenOAuthSignup: ResolverTypeWrapper<TokenOAuthSignup>;
+  TokenOAuthGoogleAds: ResolverTypeWrapper<TokenOAuthGoogleAds>;
+  TokenOAuthGoogleMobileClientLogin: ResolverTypeWrapper<TokenOAuthGoogleMobileClientLogin>;
+  TokenOAuthGoogleMobileClienSignup: ResolverTypeWrapper<TokenOAuthGoogleMobileClienSignup>;
   AreaUpdateObject: AreaUpdateObject;
   UpdateArea: ResolverTypeWrapper<UpdateArea>;
   UpdateEmailSubscription: ResolverTypeWrapper<UpdateEmailSubscription>;
@@ -2472,30 +3476,55 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Query: {};
+  String: Scalars['String']['output'];
+  GenericScalar: Scalars['GenericScalar']['output'];
+  AddNegativeKeywordsToCampaign: AddNegativeKeywordsToCampaign;
+  GadsResponse: GadsResponse;
+  Boolean: Scalars['Boolean']['output'];
   Int: Scalars['Int']['output'];
   AreaObject: AreaObject;
-  Boolean: Scalars['Boolean']['output'];
   DateTime: Scalars['DateTime']['output'];
-  String: Scalars['String']['output'];
   ID: Scalars['ID']['output'];
+  Float: Scalars['Float']['output'];
   JSONString: Scalars['JSONString']['output'];
   WebsiteObject: WebsiteObject;
-  DataObject: DataObject;
   FaqObject: FaqObject;
   QuestionObject: QuestionObject;
   PageObject: PageObject;
   ReviewObject: ReviewObject;
   Decimal: Scalars['Decimal']['output'];
   ServiceObject: ServiceObject;
+  CreateGADSAdGroup: CreateGadsAdGroup;
+  CreateCallAd: CreateCallAd;
+  GadsResponseList: GadsResponseList;
+  BigInt: Scalars['BigInt']['output'];
+  CreateGADSCampaign: CreateGadsCampaign;
+  CreateGADSCustomer: CreateGadsCustomer;
+  CreateResponsiveSearchAd: CreateResponsiveSearchAd;
+  CreateKeyword: CreateKeyword;
+  DeleteKeyword: DeleteKeyword;
+  DeleteNegativeKeyword: DeleteNegativeKeyword;
+  EnableAd: EnableAd;
+  EnableGADSCampaign: EnableGadsCampaign;
+  EnableGADSAdGroup: EnableGadsAdGroup;
+  EnableKeyword: EnableKeyword;
   CollaboratorObject: CollaboratorObject;
   IPAddress: IpAddress;
-  GenericScalar: Scalars['GenericScalar']['output'];
+  PauseAd: PauseAd;
+  PauseGADSCampaign: PauseGadsCampaign;
+  PauseGADSAdGroup: PauseGadsAdGroup;
+  PauseKeyword: PauseKeyword;
+  DataObject: DataObject;
   ProfileObject: ProfileObject;
   SubscriptionObject: SubscriptionObject;
+  RemoveAd: RemoveAd;
+  UpdateCallAd: UpdateCallAd;
+  UpdateResponsiveSearchAd: UpdateResponsiveSearchAd;
   ZipCode: ZipCode;
   Mutations: {};
   AcceptInvite: AcceptInvite;
   ActivateAccount: ActivateAccount;
+  AddTokenToWebsite: AddTokenToWebsite;
   ChangeEmailAddress: ChangeEmailAddress;
   ChangePassword: ChangePassword;
   CompleteResetPassword: CompleteResetPassword;
@@ -2508,7 +3537,6 @@ export type ResolversParentTypes = {
   FaqCreateObject: FaqCreateObject;
   CreateFaq: CreateFaq;
   PageCreateObject: PageCreateObject;
-  FileUploadField: Scalars['FileUploadField']['output'];
   CreatePage: CreatePage;
   QuestionCreateObject: QuestionCreateObject;
   CreateQuestion: CreateQuestion;
@@ -2518,6 +3546,9 @@ export type ResolversParentTypes = {
   CreateService: CreateService;
   WebsiteCreateObject: WebsiteCreateObject;
   CreateWebsite: CreateWebsite;
+  WebsiteWizardCreateObject: WebsiteWizardCreateObject;
+  ZipCodeCreateObject: ZipCodeCreateObject;
+  CreateWebsiteWizard: CreateWebsiteWizard;
   DeleteArea: DeleteArea;
   DeleteCollaborator: DeleteCollaborator;
   DeleteFaq: DeleteFaq;
@@ -2538,8 +3569,9 @@ export type ResolversParentTypes = {
   SigninOrRegisterWithCode: SigninOrRegisterWithCode;
   Signup: Signup;
   ObtainJSONWebToken: ObtainJsonWebToken;
-  TokenOAuthLogin: TokenOAuthLogin;
-  TokenOAuthSignup: TokenOAuthSignup;
+  TokenOAuthGoogleAds: TokenOAuthGoogleAds;
+  TokenOAuthGoogleMobileClientLogin: TokenOAuthGoogleMobileClientLogin;
+  TokenOAuthGoogleMobileClienSignup: TokenOAuthGoogleMobileClienSignup;
   AreaUpdateObject: AreaUpdateObject;
   UpdateArea: UpdateArea;
   UpdateEmailSubscription: UpdateEmailSubscription;
@@ -2568,46 +3600,105 @@ export type SpecifiedByDirectiveArgs = {
 export type SpecifiedByDirectiveResolver<Result, Parent, ContextType = any, Args = SpecifiedByDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  addNegativeKeywordsToCampaign?: Resolver<Maybe<ResolversTypes['AddNegativeKeywordsToCampaign']>, ParentType, ContextType, RequireFields<QueryAddNegativeKeywordsToCampaignArgs, 'campaignId' | 'customerId' | 'keywords' | 'uniqueIdentifier' | 'websiteId'>>;
+  appVersion?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   area?: Resolver<Maybe<ResolversTypes['AreaObject']>, ParentType, ContextType, Partial<QueryAreaArgs>>;
   areas?: Resolver<Maybe<Array<Maybe<ResolversTypes['AreaObject']>>>, ParentType, ContextType, Partial<QueryAreasArgs>>;
+  createGadsAdGroup?: Resolver<Maybe<ResolversTypes['CreateGADSAdGroup']>, ParentType, ContextType, RequireFields<QueryCreateGadsAdGroupArgs, 'accountId' | 'campaignId' | 'name' | 'websiteId'>>;
+  createGadsCallAd?: Resolver<Maybe<ResolversTypes['CreateCallAd']>, ParentType, ContextType, RequireFields<QueryCreateGadsCallAdArgs, 'accountId' | 'adGroupId' | 'businessName' | 'callTracked' | 'description1' | 'description2' | 'disableCallConversion' | 'finalUrls' | 'headline1' | 'headline2' | 'path1' | 'path2' | 'phoneCountry' | 'phoneNumber' | 'websiteId'>>;
+  createGadsCampaign?: Resolver<Maybe<ResolversTypes['CreateGADSCampaign']>, ParentType, ContextType, RequireFields<QueryCreateGadsCampaignArgs, 'budget' | 'campaignName' | 'countryCode' | 'customerId' | 'languageCode' | 'websiteId'>>;
+  createGadsCustomer?: Resolver<Maybe<ResolversTypes['CreateGADSCustomer']>, ParentType, ContextType, RequireFields<QueryCreateGadsCustomerArgs, 'accountName' | 'currencyCode' | 'emailAddress' | 'timeZone' | 'websiteId'>>;
+  createGadsResponsiveSearchAd?: Resolver<Maybe<ResolversTypes['CreateResponsiveSearchAd']>, ParentType, ContextType, RequireFields<QueryCreateGadsResponsiveSearchAdArgs, 'accountId' | 'adGroupId' | 'descriptions' | 'finalUrls' | 'headlines' | 'path1' | 'path2' | 'trackingUrl' | 'websiteId'>>;
+  createKeyword?: Resolver<Maybe<ResolversTypes['CreateKeyword']>, ParentType, ContextType, RequireFields<QueryCreateKeywordArgs, 'accountId' | 'adGroupId' | 'keywordText' | 'matchType' | 'websiteId'>>;
+  deleteKeyword?: Resolver<Maybe<ResolversTypes['DeleteKeyword']>, ParentType, ContextType, RequireFields<QueryDeleteKeywordArgs, 'accountId' | 'adGroupId' | 'criterionId' | 'websiteId'>>;
+  deleteNegativeKeyword?: Resolver<Maybe<ResolversTypes['DeleteNegativeKeyword']>, ParentType, ContextType, RequireFields<QueryDeleteNegativeKeywordArgs, 'campaignId' | 'criterionId' | 'customerId' | 'uniqueIdentifier' | 'websiteId'>>;
+  enableAd?: Resolver<Maybe<ResolversTypes['EnableAd']>, ParentType, ContextType, RequireFields<QueryEnableAdArgs, 'accountId' | 'adGroupId' | 'adId' | 'websiteId'>>;
+  enableCampaign?: Resolver<Maybe<ResolversTypes['EnableGADSCampaign']>, ParentType, ContextType, RequireFields<QueryEnableCampaignArgs, 'accountId' | 'campaignId' | 'websiteId'>>;
+  enableGadsAdGroup?: Resolver<Maybe<ResolversTypes['EnableGADSAdGroup']>, ParentType, ContextType, RequireFields<QueryEnableGadsAdGroupArgs, 'accountId' | 'adGroupId' | 'websiteId'>>;
+  enableKeyword?: Resolver<Maybe<ResolversTypes['EnableKeyword']>, ParentType, ContextType, RequireFields<QueryEnableKeywordArgs, 'accountId' | 'adGroupId' | 'criterionId' | 'websiteId'>>;
   faq?: Resolver<Maybe<ResolversTypes['FaqObject']>, ParentType, ContextType, Partial<QueryFaqArgs>>;
   faqs?: Resolver<Maybe<Array<Maybe<ResolversTypes['FaqObject']>>>, ParentType, ContextType, Partial<QueryFaqsArgs>>;
+  geminiKeywordSuggestions?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType, Partial<QueryGeminiKeywordSuggestionsArgs>>;
+  googleAdsAccounts?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType, Partial<QueryGoogleAdsAccountsArgs>>;
+  googleAdsAdGroupMetrics?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType, Partial<QueryGoogleAdsAdGroupMetricsArgs>>;
+  googleAdsAdgroups?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType, Partial<QueryGoogleAdsAdgroupsArgs>>;
+  googleAdsAds?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType, Partial<QueryGoogleAdsAdsArgs>>;
+  googleAdsCampaigns?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType, Partial<QueryGoogleAdsCampaignsArgs>>;
+  googleAdsCampaignsMetrics?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType, Partial<QueryGoogleAdsCampaignsMetricsArgs>>;
+  googleAdsKeywords?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType, Partial<QueryGoogleAdsKeywordsArgs>>;
   invitationsReceived?: Resolver<Maybe<Array<Maybe<ResolversTypes['CollaboratorObject']>>>, ParentType, ContextType, Partial<QueryInvitationsReceivedArgs>>;
   invitationsSent?: Resolver<Maybe<Array<Maybe<ResolversTypes['CollaboratorObject']>>>, ParentType, ContextType, Partial<QueryInvitationsSentArgs>>;
   ipAddress?: Resolver<Maybe<ResolversTypes['IPAddress']>, ParentType, ContextType, Partial<QueryIpAddressArgs>>;
+  listNegativeKeywordsForCampaign?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType, Partial<QueryListNegativeKeywordsForCampaignArgs>>;
+  listReviews?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType, Partial<QueryListReviewsArgs>>;
   page?: Resolver<Maybe<ResolversTypes['PageObject']>, ParentType, ContextType, Partial<QueryPageArgs>>;
   pages?: Resolver<Maybe<Array<Maybe<ResolversTypes['PageObject']>>>, ParentType, ContextType, Partial<QueryPagesArgs>>;
+  pauseAd?: Resolver<Maybe<ResolversTypes['PauseAd']>, ParentType, ContextType, RequireFields<QueryPauseAdArgs, 'accountId' | 'adGroupId' | 'adId' | 'websiteId'>>;
+  pauseCampaign?: Resolver<Maybe<ResolversTypes['PauseGADSCampaign']>, ParentType, ContextType, RequireFields<QueryPauseCampaignArgs, 'accountId' | 'campaignId' | 'websiteId'>>;
+  pauseGadsAdGroup?: Resolver<Maybe<ResolversTypes['PauseGADSAdGroup']>, ParentType, ContextType, RequireFields<QueryPauseGadsAdGroupArgs, 'accountId' | 'adGroupId' | 'websiteId'>>;
+  pauseKeyword?: Resolver<Maybe<ResolversTypes['PauseKeyword']>, ParentType, ContextType, RequireFields<QueryPauseKeywordArgs, 'accountId' | 'adGroupId' | 'criterionId' | 'websiteId'>>;
   postdata?: Resolver<Maybe<ResolversTypes['DataObject']>, ParentType, ContextType, Partial<QueryPostdataArgs>>;
   postdatas?: Resolver<Maybe<Array<Maybe<ResolversTypes['DataObject']>>>, ParentType, ContextType, Partial<QueryPostdatasArgs>>;
   profile?: Resolver<Maybe<ResolversTypes['ProfileObject']>, ParentType, ContextType>;
   question?: Resolver<Maybe<ResolversTypes['QuestionObject']>, ParentType, ContextType, Partial<QueryQuestionArgs>>;
   questions?: Resolver<Maybe<Array<Maybe<ResolversTypes['QuestionObject']>>>, ParentType, ContextType, Partial<QueryQuestionsArgs>>;
+  removeAd?: Resolver<Maybe<ResolversTypes['RemoveAd']>, ParentType, ContextType, RequireFields<QueryRemoveAdArgs, 'accountId' | 'adGroupId' | 'adId' | 'websiteId'>>;
   review?: Resolver<Maybe<ResolversTypes['ReviewObject']>, ParentType, ContextType, Partial<QueryReviewArgs>>;
   reviews?: Resolver<Maybe<Array<Maybe<ResolversTypes['ReviewObject']>>>, ParentType, ContextType, Partial<QueryReviewsArgs>>;
+  searchTermsReport?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType, Partial<QuerySearchTermsReportArgs>>;
   service?: Resolver<Maybe<ResolversTypes['ServiceObject']>, ParentType, ContextType, Partial<QueryServiceArgs>>;
   services?: Resolver<Maybe<Array<Maybe<ResolversTypes['ServiceObject']>>>, ParentType, ContextType, Partial<QueryServicesArgs>>;
+  suggestedServices?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType, Partial<QuerySuggestedServicesArgs>>;
+  updateCallAd?: Resolver<Maybe<ResolversTypes['UpdateCallAd']>, ParentType, ContextType, RequireFields<QueryUpdateCallAdArgs, 'accountId' | 'adGroupId' | 'adId' | 'description1' | 'description2' | 'headline1' | 'headline2' | 'phoneNumber' | 'websiteId'>>;
+  updateResponseSearchAd?: Resolver<Maybe<ResolversTypes['UpdateResponsiveSearchAd']>, ParentType, ContextType, RequireFields<QueryUpdateResponseSearchAdArgs, 'accountId' | 'adGroupId' | 'adId' | 'descriptions' | 'headlines' | 'websiteId'>>;
   website?: Resolver<Maybe<ResolversTypes['WebsiteObject']>, ParentType, ContextType, Partial<QueryWebsiteArgs>>;
   websites?: Resolver<Maybe<Array<Maybe<ResolversTypes['WebsiteObject']>>>, ParentType, ContextType, Partial<QueryWebsitesArgs>>;
   zipCode?: Resolver<Maybe<ResolversTypes['ZipCode']>, ParentType, ContextType, Partial<QueryZipCodeArgs>>;
+  zipCodesByRadius?: Resolver<Maybe<Array<Maybe<ResolversTypes['ZipCode']>>>, ParentType, ContextType, Partial<QueryZipCodesByRadiusArgs>>;
+};
+
+export interface GenericScalarScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['GenericScalar'], any> {
+  name: 'GenericScalar';
+}
+
+export type AddNegativeKeywordsToCampaignResolvers<ContextType = any, ParentType extends ResolversParentTypes['AddNegativeKeywordsToCampaign'] = ResolversParentTypes['AddNegativeKeywordsToCampaign']> = {
+  data?: Resolver<Maybe<ResolversTypes['GadsResponse']>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type GadsResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['GadsResponse'] = ResolversParentTypes['GadsResponse']> = {
+  data?: Resolver<Maybe<ResolversTypes['GenericScalar']>, ParentType, ContextType>;
+  errors?: Resolver<Maybe<Array<Maybe<ResolversTypes['GenericScalar']>>>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type AreaObjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['AreaObject'] = ResolversParentTypes['AreaObject']> = {
+  absoluteUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   active?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  customFooterJs?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  customHeaderCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  customHtmlBlock?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   displayOrder?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  enableSchemaOrgAreaServedObject?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  htmlBlock1?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  htmlBlock2?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  keywordTargeting?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
+  images?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  includeInGads?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  latitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  longitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   metadata?: Resolver<Maybe<ResolversTypes['JSONString']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   pk?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  showInsuranceCompanyWidget?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   slug?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updated?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  video?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   website?: Resolver<ResolversTypes['WebsiteObject'], ParentType, ContextType>;
   zipCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -2625,157 +3716,142 @@ export type WebsiteObjectResolvers<ContextType = any, ParentType extends Resolve
   active?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   address1?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   address2?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  areas?: Resolver<Array<ResolversTypes['AreaObject']>, ParentType, ContextType>;
-  businessDescription?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  areas?: Resolver<Maybe<Array<Maybe<ResolversTypes['AreaObject']>>>, ParentType, ContextType>;
   businessEinNumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  businessLogo?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  businessManagerPersonName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  businessName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  buttonBorderColor?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  buttonColor?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  buttonTextColor?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  carouselImages?: Resolver<Maybe<Array<Maybe<ResolversTypes['JSONString']>>>, ParentType, ContextType>;
+  businessManager?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  ctaButtonHtml?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  ctaHtml?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  customCss?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  customFooterCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  customHeaderCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  datas?: Resolver<Array<ResolversTypes['DataObject']>, ParentType, ContextType>;
   defaultSubdomainName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  editor?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  displayOrder?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  domains?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
   emailAddress?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  enableGoogleSitemaps?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  enableSchemaOrgLocalbusinessObject?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  enableSchemaOrgOrganizationObject?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  enableSchemaOrgWebpageObject?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  faqs?: Resolver<Array<ResolversTypes['FaqObject']>, ParentType, ContextType>;
-  fontBody?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  fontHeading?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  footerLink1Html?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  footerLink2Html?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  footerLink3Html?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  footerLink4Html?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  footerLink5Html?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  footerMessageHtml?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  footerShowAddress?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  footerShowAreas?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  footerShowEmailAddress?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  footerShowInsuranceNumber?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  footerShowLicenseNumber?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  footerShowReviews?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  footerShowServices?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  faqs?: Resolver<Maybe<Array<Maybe<ResolversTypes['FaqObject']>>>, ParentType, ContextType>;
+  gadsAccountId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  gadsCampaignId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   googleAnalytics?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  googleVerificationFileContent?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  googleVerificationFileName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  homepageBackground?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  homepageVideo?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  googleTagManager?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  hashId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  images?: Resolver<Maybe<Array<Maybe<ResolversTypes['JSONString']>>>, ParentType, ContextType>;
   insuranceNumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   licenseNumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  logo?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   metadata?: Resolver<Maybe<ResolversTypes['JSONString']>, ParentType, ContextType>;
-  navbarLink1Html?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  navbarLink2Html?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  navbarMessageHtml?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  navbarShowAreas?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  navbarShowCtaButton?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  navbarShowServices?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  pages?: Resolver<Array<ResolversTypes['PageObject']>, ParentType, ContextType>;
+  motd?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  pages?: Resolver<Maybe<Array<Maybe<ResolversTypes['PageObject']>>>, ParentType, ContextType>;
   phoneNumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   pk?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   primaryColor?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  questions?: Resolver<Array<ResolversTypes['QuestionObject']>, ParentType, ContextType>;
-  reviews?: Resolver<Array<ResolversTypes['ReviewObject']>, ParentType, ContextType>;
+  primaryColorContrast?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  reviews?: Resolver<Maybe<Array<Maybe<ResolversTypes['ReviewObject']>>>, ParentType, ContextType>;
   secondaryColor?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  services?: Resolver<Array<ResolversTypes['ServiceObject']>, ParentType, ContextType>;
+  secondaryColorContrast?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  services?: Resolver<Maybe<Array<Maybe<ResolversTypes['ServiceObject']>>>, ParentType, ContextType>;
   slug?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  theme?: Resolver<ResolversTypes['AppWebsiteThemeChoices'], ParentType, ContextType>;
-  tld?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
+  theme?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   updated?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  video?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   zipCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type DataObjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['DataObject'] = ResolversParentTypes['DataObject']> = {
-  created?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  data?: Resolver<Maybe<ResolversTypes['JSONString']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  ipAddress?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  metadata?: Resolver<Maybe<ResolversTypes['JSONString']>, ParentType, ContextType>;
-  pk?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  updated?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  website?: Resolver<Maybe<ResolversTypes['WebsiteObject']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
 export type FaqObjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['FaqObject'] = ResolversParentTypes['FaqObject']> = {
+  absoluteUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   active?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   created?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  customFooterJs?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  customHeaderCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  customHtmlBlock?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  displayOrder?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  images?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   metadata?: Resolver<Maybe<ResolversTypes['JSONString']>, ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   pk?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  questions?: Resolver<Array<ResolversTypes['QuestionObject']>, ParentType, ContextType>;
+  question?: Resolver<Maybe<Array<Maybe<ResolversTypes['QuestionObject']>>>, ParentType, ContextType>;
   slug?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updated?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  video?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   website?: Resolver<ResolversTypes['WebsiteObject'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type QuestionObjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['QuestionObject'] = ResolversParentTypes['QuestionObject']> = {
+  absoluteUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   active?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   answer?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   created?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  displayOrder?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  customFooterJs?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  customHeaderCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  customHtmlBlock?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  displayOrder?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   faq?: Resolver<Maybe<ResolversTypes['FaqObject']>, ParentType, ContextType>;
-  faqId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  images?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   metadata?: Resolver<Maybe<ResolversTypes['JSONString']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   pk?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   question?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  slug?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updated?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  video?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   website?: Resolver<ResolversTypes['WebsiteObject'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type PageObjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['PageObject'] = ResolversParentTypes['PageObject']> = {
+  absoluteUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   active?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   body?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   created?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  customFooterJs?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  customHeaderCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  customHtmlBlock?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   displayOrder?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  enableSchemaOrgArticleObject?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  keywordTargeting?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  images?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   metadata?: Resolver<Maybe<ResolversTypes['JSONString']>, ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   pk?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  showInsuranceCompanyWidget?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   slug?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updated?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  video?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   website?: Resolver<ResolversTypes['WebsiteObject'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ReviewObjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['ReviewObject'] = ResolversParentTypes['ReviewObject']> = {
+  absoluteUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   active?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  body?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  customFooterJs?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  customHeaderCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  customHtmlBlock?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   displayOrder?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  images?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   metadata?: Resolver<Maybe<ResolversTypes['JSONString']>, ParentType, ContextType>;
-  personImage?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   personName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  personZipCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   pk?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   rating?: Resolver<ResolversTypes['Decimal'], ParentType, ContextType>;
   slug?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   updated?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  video?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   website?: Resolver<ResolversTypes['WebsiteObject'], ParentType, ContextType>;
+  zipCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -2784,28 +3860,120 @@ export interface DecimalScalarConfig extends GraphQLScalarTypeConfig<ResolversTy
 }
 
 export type ServiceObjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceObject'] = ResolversParentTypes['ServiceObject']> = {
+  absoluteUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   active?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  carouselImages?: Resolver<Maybe<Array<Maybe<ResolversTypes['JSONString']>>>, ParentType, ContextType>;
   created?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  customFooterJs?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  customHeaderCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  customHtmlBlock?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   displayOrder?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  enableSchemaOrgServiceObject?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  htmlBlock1?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  htmlBlock2?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  gadsAdGroupId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  keywordTargeting?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  images?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   metadata?: Resolver<Maybe<ResolversTypes['JSONString']>, ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   pk?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  showInsuranceCompanyWidget?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   slug?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updated?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  video?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   website?: Resolver<ResolversTypes['WebsiteObject'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type AppWebsiteThemeChoicesResolvers = { EMERGENCY: 'undefined', PORTFOLIO: 'undefined', SERVICES: 'undefined' };
+export type CreateGadsAdGroupResolvers<ContextType = any, ParentType extends ResolversParentTypes['CreateGADSAdGroup'] = ResolversParentTypes['CreateGADSAdGroup']> = {
+  data?: Resolver<Maybe<ResolversTypes['GadsResponse']>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CreateCallAdResolvers<ContextType = any, ParentType extends ResolversParentTypes['CreateCallAd'] = ResolversParentTypes['CreateCallAd']> = {
+  data?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type GadsResponseListResolvers<ContextType = any, ParentType extends ResolversParentTypes['GadsResponseList'] = ResolversParentTypes['GadsResponseList']> = {
+  data?: Resolver<Maybe<Array<Maybe<ResolversTypes['GenericScalar']>>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export interface BigIntScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['BigInt'], any> {
+  name: 'BigInt';
+}
+
+export type CreateGadsCampaignResolvers<ContextType = any, ParentType extends ResolversParentTypes['CreateGADSCampaign'] = ResolversParentTypes['CreateGADSCampaign']> = {
+  data?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CreateGadsCustomerResolvers<ContextType = any, ParentType extends ResolversParentTypes['CreateGADSCustomer'] = ResolversParentTypes['CreateGADSCustomer']> = {
+  data?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CreateResponsiveSearchAdResolvers<ContextType = any, ParentType extends ResolversParentTypes['CreateResponsiveSearchAd'] = ResolversParentTypes['CreateResponsiveSearchAd']> = {
+  data?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CreateKeywordResolvers<ContextType = any, ParentType extends ResolversParentTypes['CreateKeyword'] = ResolversParentTypes['CreateKeyword']> = {
+  data?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DeleteKeywordResolvers<ContextType = any, ParentType extends ResolversParentTypes['DeleteKeyword'] = ResolversParentTypes['DeleteKeyword']> = {
+  data?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DeleteNegativeKeywordResolvers<ContextType = any, ParentType extends ResolversParentTypes['DeleteNegativeKeyword'] = ResolversParentTypes['DeleteNegativeKeyword']> = {
+  data?: Resolver<Maybe<ResolversTypes['GadsResponse']>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type EnableAdResolvers<ContextType = any, ParentType extends ResolversParentTypes['EnableAd'] = ResolversParentTypes['EnableAd']> = {
+  data?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type EnableGadsCampaignResolvers<ContextType = any, ParentType extends ResolversParentTypes['EnableGADSCampaign'] = ResolversParentTypes['EnableGADSCampaign']> = {
+  data?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type EnableGadsAdGroupResolvers<ContextType = any, ParentType extends ResolversParentTypes['EnableGADSAdGroup'] = ResolversParentTypes['EnableGADSAdGroup']> = {
+  data?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type EnableKeywordResolvers<ContextType = any, ParentType extends ResolversParentTypes['EnableKeyword'] = ResolversParentTypes['EnableKeyword']> = {
+  data?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
 
 export type CollaboratorObjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['CollaboratorObject'] = ResolversParentTypes['CollaboratorObject']> = {
   collaboratorEmail?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2830,33 +3998,92 @@ export type IpAddressResolvers<ContextType = any, ParentType extends ResolversPa
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export interface GenericScalarScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['GenericScalar'], any> {
-  name: 'GenericScalar';
-}
+export type PauseAdResolvers<ContextType = any, ParentType extends ResolversParentTypes['PauseAd'] = ResolversParentTypes['PauseAd']> = {
+  data?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PauseGadsCampaignResolvers<ContextType = any, ParentType extends ResolversParentTypes['PauseGADSCampaign'] = ResolversParentTypes['PauseGADSCampaign']> = {
+  data?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PauseGadsAdGroupResolvers<ContextType = any, ParentType extends ResolversParentTypes['PauseGADSAdGroup'] = ResolversParentTypes['PauseGADSAdGroup']> = {
+  data?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PauseKeywordResolvers<ContextType = any, ParentType extends ResolversParentTypes['PauseKeyword'] = ResolversParentTypes['PauseKeyword']> = {
+  data?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DataObjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['DataObject'] = ResolversParentTypes['DataObject']> = {
+  active?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  created?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  data?: Resolver<Maybe<ResolversTypes['JSONString']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  displayOrder?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  images?: Resolver<Maybe<ResolversTypes['JSONString']>, ParentType, ContextType>;
+  ipAddress?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  metadata?: Resolver<Maybe<ResolversTypes['JSONString']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  pk?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  slug?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  updated?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  video?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  website?: Resolver<Maybe<ResolversTypes['WebsiteObject']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
 
 export type ProfileObjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProfileObject'] = ResolversParentTypes['ProfileObject']> = {
+  active?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   created?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   dailySummary?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  displayOrder?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   emailAddress?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   firstName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  images?: Resolver<Maybe<ResolversTypes['JSONString']>, ParentType, ContextType>;
   lastName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   metadata?: Resolver<Maybe<ResolversTypes['JSONString']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   phoneNumber?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   pk?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  slug?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   subscription?: Resolver<Maybe<ResolversTypes['SubscriptionObject']>, ParentType, ContextType>;
   updated?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  video?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   weeklySummary?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type SubscriptionObjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['SubscriptionObject'] = ResolversParentTypes['SubscriptionObject']> = {
+  active?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   created?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  displayOrder?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  images?: Resolver<Maybe<ResolversTypes['JSONString']>, ParentType, ContextType>;
   lengthDays?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   metadata?: Resolver<Maybe<ResolversTypes['JSONString']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   pk?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   programOptions?: Resolver<Maybe<ResolversTypes['GenericScalar']>, ParentType, ContextType>;
+  slug?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   startDate?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   stripeCheckoutSessionId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2864,6 +4091,28 @@ export type SubscriptionObjectResolvers<ContextType = any, ParentType extends Re
   stripeSubscriptionId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updated?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   userId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  video?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type RemoveAdResolvers<ContextType = any, ParentType extends ResolversParentTypes['RemoveAd'] = ResolversParentTypes['RemoveAd']> = {
+  data?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type UpdateCallAdResolvers<ContextType = any, ParentType extends ResolversParentTypes['UpdateCallAd'] = ResolversParentTypes['UpdateCallAd']> = {
+  data?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type UpdateResponsiveSearchAdResolvers<ContextType = any, ParentType extends ResolversParentTypes['UpdateResponsiveSearchAd'] = ResolversParentTypes['UpdateResponsiveSearchAd']> = {
+  data?: Resolver<Maybe<ResolversTypes['GadsResponseList']>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -2880,6 +4129,7 @@ export type ZipCodeResolvers<ContextType = any, ParentType extends ResolversPare
 export type MutationsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutations'] = ResolversParentTypes['Mutations']> = {
   acceptInvite?: Resolver<Maybe<ResolversTypes['AcceptInvite']>, ParentType, ContextType, RequireFields<MutationsAcceptInviteArgs, 'id'>>;
   activateAccount?: Resolver<Maybe<ResolversTypes['ActivateAccount']>, ParentType, ContextType, RequireFields<MutationsActivateAccountArgs, 'emailAddress' | 'verificationCode'>>;
+  addTokenToWebsite?: Resolver<Maybe<ResolversTypes['AddTokenToWebsite']>, ParentType, ContextType, RequireFields<MutationsAddTokenToWebsiteArgs, 'websiteId'>>;
   changeEmailAddress?: Resolver<Maybe<ResolversTypes['ChangeEmailAddress']>, ParentType, ContextType, RequireFields<MutationsChangeEmailAddressArgs, 'newEmailAddress'>>;
   changePassword?: Resolver<Maybe<ResolversTypes['ChangePassword']>, ParentType, ContextType, RequireFields<MutationsChangePasswordArgs, 'password'>>;
   completeResetPassword?: Resolver<Maybe<ResolversTypes['CompleteResetPassword']>, ParentType, ContextType, RequireFields<MutationsCompleteResetPasswordArgs, 'emailAddress' | 'verificationCode'>>;
@@ -2892,6 +4142,7 @@ export type MutationsResolvers<ContextType = any, ParentType extends ResolversPa
   createReview?: Resolver<Maybe<ResolversTypes['CreateReview']>, ParentType, ContextType, RequireFields<MutationsCreateReviewArgs, 'input'>>;
   createService?: Resolver<Maybe<ResolversTypes['CreateService']>, ParentType, ContextType, RequireFields<MutationsCreateServiceArgs, 'input'>>;
   createWebsite?: Resolver<Maybe<ResolversTypes['CreateWebsite']>, ParentType, ContextType, RequireFields<MutationsCreateWebsiteArgs, 'input'>>;
+  createWebsiteWizard?: Resolver<Maybe<ResolversTypes['CreateWebsiteWizard']>, ParentType, ContextType, RequireFields<MutationsCreateWebsiteWizardArgs, 'input'>>;
   deleteArea?: Resolver<Maybe<ResolversTypes['DeleteArea']>, ParentType, ContextType, RequireFields<MutationsDeleteAreaArgs, 'id'>>;
   deleteCollaborator?: Resolver<Maybe<ResolversTypes['DeleteCollaborator']>, ParentType, ContextType, RequireFields<MutationsDeleteCollaboratorArgs, 'id'>>;
   deleteFaq?: Resolver<Maybe<ResolversTypes['DeleteFaq']>, ParentType, ContextType, RequireFields<MutationsDeleteFaqArgs, 'id'>>;
@@ -2911,8 +4162,9 @@ export type MutationsResolvers<ContextType = any, ParentType extends ResolversPa
   signinOrRegisterWithCode?: Resolver<Maybe<ResolversTypes['SigninOrRegisterWithCode']>, ParentType, ContextType, RequireFields<MutationsSigninOrRegisterWithCodeArgs, 'code' | 'emailAddress'>>;
   signup?: Resolver<Maybe<ResolversTypes['Signup']>, ParentType, ContextType, RequireFields<MutationsSignupArgs, 'emailAddress' | 'password'>>;
   tokenAuth?: Resolver<Maybe<ResolversTypes['ObtainJSONWebToken']>, ParentType, ContextType, RequireFields<MutationsTokenAuthArgs, 'password' | 'username'>>;
-  tokenOauthLogin?: Resolver<Maybe<ResolversTypes['TokenOAuthLogin']>, ParentType, ContextType, Partial<MutationsTokenOauthLoginArgs>>;
-  tokenOauthSignup?: Resolver<Maybe<ResolversTypes['TokenOAuthSignup']>, ParentType, ContextType, Partial<MutationsTokenOauthSignupArgs>>;
+  tokenOauthGoogleAds?: Resolver<Maybe<ResolversTypes['TokenOAuthGoogleAds']>, ParentType, ContextType, RequireFields<MutationsTokenOauthGoogleAdsArgs, 'websiteId'>>;
+  tokenOauthGoogleMobileClientLogin?: Resolver<Maybe<ResolversTypes['TokenOAuthGoogleMobileClientLogin']>, ParentType, ContextType, Partial<MutationsTokenOauthGoogleMobileClientLoginArgs>>;
+  tokenOauthGoogleMobileClientSignup?: Resolver<Maybe<ResolversTypes['TokenOAuthGoogleMobileClienSignup']>, ParentType, ContextType, Partial<MutationsTokenOauthGoogleMobileClientSignupArgs>>;
   updateArea?: Resolver<Maybe<ResolversTypes['UpdateArea']>, ParentType, ContextType, RequireFields<MutationsUpdateAreaArgs, 'input'>>;
   updateEmailSubscription?: Resolver<Maybe<ResolversTypes['UpdateEmailSubscription']>, ParentType, ContextType, RequireFields<MutationsUpdateEmailSubscriptionArgs, 'dailySummary' | 'weeklySummary'>>;
   updateFaq?: Resolver<Maybe<ResolversTypes['UpdateFaq']>, ParentType, ContextType, RequireFields<MutationsUpdateFaqArgs, 'input'>>;
@@ -2935,6 +4187,12 @@ export type AcceptInviteResolvers<ContextType = any, ParentType extends Resolver
 export type ActivateAccountResolvers<ContextType = any, ParentType extends ResolversParentTypes['ActivateAccount'] = ResolversParentTypes['ActivateAccount']> = {
   data?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   errors?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type AddTokenToWebsiteResolvers<ContextType = any, ParentType extends ResolversParentTypes['AddTokenToWebsite'] = ResolversParentTypes['AddTokenToWebsite']> = {
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -2984,10 +4242,6 @@ export type CreateFaqResolvers<ContextType = any, ParentType extends ResolversPa
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export interface FileUploadFieldScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['FileUploadField'], any> {
-  name: 'FileUploadField';
-}
-
 export type CreatePageResolvers<ContextType = any, ParentType extends ResolversParentTypes['CreatePage'] = ResolversParentTypes['CreatePage']> = {
   data?: Resolver<Maybe<ResolversTypes['PageObject']>, ParentType, ContextType>;
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -3020,6 +4274,13 @@ export type CreateWebsiteResolvers<ContextType = any, ParentType extends Resolve
   data?: Resolver<Maybe<ResolversTypes['WebsiteObject']>, ParentType, ContextType>;
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CreateWebsiteWizardResolvers<ContextType = any, ParentType extends ResolversParentTypes['CreateWebsiteWizard'] = ResolversParentTypes['CreateWebsiteWizard']> = {
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  website?: Resolver<Maybe<ResolversTypes['WebsiteObject']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -3140,7 +4401,7 @@ export type ObtainJsonWebTokenResolvers<ContextType = any, ParentType extends Re
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type TokenOAuthLoginResolvers<ContextType = any, ParentType extends ResolversParentTypes['TokenOAuthLogin'] = ResolversParentTypes['TokenOAuthLogin']> = {
+export type TokenOAuthGoogleAdsResolvers<ContextType = any, ParentType extends ResolversParentTypes['TokenOAuthGoogleAds'] = ResolversParentTypes['TokenOAuthGoogleAds']> = {
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   payload?: Resolver<Maybe<ResolversTypes['GenericScalar']>, ParentType, ContextType>;
   success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
@@ -3148,7 +4409,15 @@ export type TokenOAuthLoginResolvers<ContextType = any, ParentType extends Resol
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type TokenOAuthSignupResolvers<ContextType = any, ParentType extends ResolversParentTypes['TokenOAuthSignup'] = ResolversParentTypes['TokenOAuthSignup']> = {
+export type TokenOAuthGoogleMobileClientLoginResolvers<ContextType = any, ParentType extends ResolversParentTypes['TokenOAuthGoogleMobileClientLogin'] = ResolversParentTypes['TokenOAuthGoogleMobileClientLogin']> = {
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  payload?: Resolver<Maybe<ResolversTypes['GenericScalar']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type TokenOAuthGoogleMobileClienSignupResolvers<ContextType = any, ParentType extends ResolversParentTypes['TokenOAuthGoogleMobileClienSignup'] = ResolversParentTypes['TokenOAuthGoogleMobileClienSignup']> = {
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   payload?: Resolver<Maybe<ResolversTypes['GenericScalar']>, ParentType, ContextType>;
   success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
@@ -3231,27 +4500,50 @@ export type VerifyResolvers<ContextType = any, ParentType extends ResolversParen
 
 export type Resolvers<ContextType = any> = {
   Query?: QueryResolvers<ContextType>;
+  GenericScalar?: GraphQLScalarType;
+  AddNegativeKeywordsToCampaign?: AddNegativeKeywordsToCampaignResolvers<ContextType>;
+  GadsResponse?: GadsResponseResolvers<ContextType>;
   AreaObject?: AreaObjectResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
   JSONString?: GraphQLScalarType;
   WebsiteObject?: WebsiteObjectResolvers<ContextType>;
-  DataObject?: DataObjectResolvers<ContextType>;
   FaqObject?: FaqObjectResolvers<ContextType>;
   QuestionObject?: QuestionObjectResolvers<ContextType>;
   PageObject?: PageObjectResolvers<ContextType>;
   ReviewObject?: ReviewObjectResolvers<ContextType>;
   Decimal?: GraphQLScalarType;
   ServiceObject?: ServiceObjectResolvers<ContextType>;
-  AppWebsiteThemeChoices?: AppWebsiteThemeChoicesResolvers;
+  CreateGADSAdGroup?: CreateGadsAdGroupResolvers<ContextType>;
+  CreateCallAd?: CreateCallAdResolvers<ContextType>;
+  GadsResponseList?: GadsResponseListResolvers<ContextType>;
+  BigInt?: GraphQLScalarType;
+  CreateGADSCampaign?: CreateGadsCampaignResolvers<ContextType>;
+  CreateGADSCustomer?: CreateGadsCustomerResolvers<ContextType>;
+  CreateResponsiveSearchAd?: CreateResponsiveSearchAdResolvers<ContextType>;
+  CreateKeyword?: CreateKeywordResolvers<ContextType>;
+  DeleteKeyword?: DeleteKeywordResolvers<ContextType>;
+  DeleteNegativeKeyword?: DeleteNegativeKeywordResolvers<ContextType>;
+  EnableAd?: EnableAdResolvers<ContextType>;
+  EnableGADSCampaign?: EnableGadsCampaignResolvers<ContextType>;
+  EnableGADSAdGroup?: EnableGadsAdGroupResolvers<ContextType>;
+  EnableKeyword?: EnableKeywordResolvers<ContextType>;
   CollaboratorObject?: CollaboratorObjectResolvers<ContextType>;
   IPAddress?: IpAddressResolvers<ContextType>;
-  GenericScalar?: GraphQLScalarType;
+  PauseAd?: PauseAdResolvers<ContextType>;
+  PauseGADSCampaign?: PauseGadsCampaignResolvers<ContextType>;
+  PauseGADSAdGroup?: PauseGadsAdGroupResolvers<ContextType>;
+  PauseKeyword?: PauseKeywordResolvers<ContextType>;
+  DataObject?: DataObjectResolvers<ContextType>;
   ProfileObject?: ProfileObjectResolvers<ContextType>;
   SubscriptionObject?: SubscriptionObjectResolvers<ContextType>;
+  RemoveAd?: RemoveAdResolvers<ContextType>;
+  UpdateCallAd?: UpdateCallAdResolvers<ContextType>;
+  UpdateResponsiveSearchAd?: UpdateResponsiveSearchAdResolvers<ContextType>;
   ZipCode?: ZipCodeResolvers<ContextType>;
   Mutations?: MutationsResolvers<ContextType>;
   AcceptInvite?: AcceptInviteResolvers<ContextType>;
   ActivateAccount?: ActivateAccountResolvers<ContextType>;
+  AddTokenToWebsite?: AddTokenToWebsiteResolvers<ContextType>;
   ChangeEmailAddress?: ChangeEmailAddressResolvers<ContextType>;
   ChangePassword?: ChangePasswordResolvers<ContextType>;
   CompleteResetPassword?: CompleteResetPasswordResolvers<ContextType>;
@@ -3259,12 +4551,12 @@ export type Resolvers<ContextType = any> = {
   CreateArea?: CreateAreaResolvers<ContextType>;
   CreateData?: CreateDataResolvers<ContextType>;
   CreateFaq?: CreateFaqResolvers<ContextType>;
-  FileUploadField?: GraphQLScalarType;
   CreatePage?: CreatePageResolvers<ContextType>;
   CreateQuestion?: CreateQuestionResolvers<ContextType>;
   CreateReview?: CreateReviewResolvers<ContextType>;
   CreateService?: CreateServiceResolvers<ContextType>;
   CreateWebsite?: CreateWebsiteResolvers<ContextType>;
+  CreateWebsiteWizard?: CreateWebsiteWizardResolvers<ContextType>;
   DeleteArea?: DeleteAreaResolvers<ContextType>;
   DeleteCollaborator?: DeleteCollaboratorResolvers<ContextType>;
   DeleteFaq?: DeleteFaqResolvers<ContextType>;
@@ -3284,8 +4576,9 @@ export type Resolvers<ContextType = any> = {
   SigninOrRegisterWithCode?: SigninOrRegisterWithCodeResolvers<ContextType>;
   Signup?: SignupResolvers<ContextType>;
   ObtainJSONWebToken?: ObtainJsonWebTokenResolvers<ContextType>;
-  TokenOAuthLogin?: TokenOAuthLoginResolvers<ContextType>;
-  TokenOAuthSignup?: TokenOAuthSignupResolvers<ContextType>;
+  TokenOAuthGoogleAds?: TokenOAuthGoogleAdsResolvers<ContextType>;
+  TokenOAuthGoogleMobileClientLogin?: TokenOAuthGoogleMobileClientLoginResolvers<ContextType>;
+  TokenOAuthGoogleMobileClienSignup?: TokenOAuthGoogleMobileClienSignupResolvers<ContextType>;
   UpdateArea?: UpdateAreaResolvers<ContextType>;
   UpdateEmailSubscription?: UpdateEmailSubscriptionResolvers<ContextType>;
   UpdateFaq?: UpdateFaqResolvers<ContextType>;
@@ -3317,6 +4610,14 @@ export const ActivateAccountDocument = gql`
   activateAccount(emailAddress: $emailAddress, verificationCode: $verificationCode) {
     data
     errors
+  }
+}
+    `;
+export const AddTokenToWebsiteDocument = gql`
+    mutation addTokenToWebsite($websiteId: Int!) {
+  addTokenToWebsite(websiteId: $websiteId) {
+    success
+    message
   }
 }
     `;
@@ -3361,19 +4662,25 @@ export const CreateAreaDocument = gql`
       created
       updated
       metadata
+      slug
       active
       name
-      slug
-      zipCode
       description
+      video
       image
-      enableSchemaOrgAreaServedObject
-      showInsuranceCompanyWidget
-      htmlBlock1
-      htmlBlock2
-      keywordTargeting
+      images
       displayOrder
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
+      includeInGads
+      city
+      state
+      zipCode
+      longitude
+      latitude
       pk
+      absoluteUrl
     }
     success
     message
@@ -3388,6 +4695,14 @@ export const CreateDataDocument = gql`
       created
       updated
       metadata
+      slug
+      active
+      name
+      description
+      video
+      image
+      images
+      displayOrder
       data
       ipAddress
       pk
@@ -3408,7 +4723,16 @@ export const CreateFaqDocument = gql`
       slug
       active
       name
+      description
+      video
+      image
+      images
+      displayOrder
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
       pk
+      absoluteUrl
     }
     success
     message
@@ -3423,17 +4747,20 @@ export const CreatePageDocument = gql`
       created
       updated
       metadata
-      active
       slug
+      active
       name
       description
-      body
+      video
       image
-      keywordTargeting
+      images
       displayOrder
-      enableSchemaOrgArticleObject
-      showInsuranceCompanyWidget
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
+      body
       pk
+      absoluteUrl
     }
     success
     message
@@ -3448,12 +4775,21 @@ export const CreateQuestionDocument = gql`
       created
       updated
       metadata
+      slug
       active
+      name
+      description
+      video
+      image
+      images
+      displayOrder
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
       question
       answer
-      displayOrder
       pk
-      faqId
+      absoluteUrl
     }
     success
     message
@@ -3470,14 +4806,20 @@ export const CreateReviewDocument = gql`
       metadata
       slug
       active
-      title
-      body
-      personImage
-      personName
-      personZipCode
-      rating
+      name
+      description
+      video
+      image
+      images
       displayOrder
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
+      personName
+      zipCode
+      rating
       pk
+      absoluteUrl
     }
     success
     message
@@ -3492,19 +4834,20 @@ export const CreateServiceDocument = gql`
       created
       updated
       metadata
-      active
       slug
+      active
       name
       description
+      video
       image
-      enableSchemaOrgServiceObject
-      showInsuranceCompanyWidget
-      htmlBlock1
-      htmlBlock2
-      keywordTargeting
+      images
       displayOrder
-      carouselImages
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
+      gadsAdGroupId
       pk
+      absoluteUrl
     }
     success
     message
@@ -3519,14 +4862,11 @@ export const CreateWebsiteDocument = gql`
       created
       updated
       metadata
-      active
-      tld
-      businessName
       slug
-      businessDescription
-      businessLogo
-      licenseNumber
-      insuranceNumber
+      active
+      video
+      image
+      displayOrder
       address1
       address2
       city
@@ -3534,53 +4874,76 @@ export const CreateWebsiteDocument = gql`
       zipCode
       phoneNumber
       emailAddress
-      editor
+      name
+      description
+      logo
+      businessManager
+      images
+      licenseNumber
+      insuranceNumber
+      businessEinNumber
       googleAnalytics
-      googleVerificationFileName
-      googleVerificationFileContent
-      enableGoogleSitemaps
-      enableSchemaOrgWebpageObject
-      enableSchemaOrgOrganizationObject
-      enableSchemaOrgLocalbusinessObject
+      googleTagManager
+      motd
       primaryColor
       secondaryColor
-      homepageBackground
-      homepageVideo
-      businessManagerPersonName
-      businessEinNumber
-      customHeaderCode
-      customFooterCode
-      ctaHtml
-      ctaButtonHtml
-      navbarMessageHtml
-      navbarLink1Html
-      navbarLink2Html
-      navbarShowServices
-      navbarShowAreas
-      navbarShowCtaButton
-      footerMessageHtml
-      footerShowServices
-      footerShowAreas
-      footerShowReviews
-      footerShowLicenseNumber
-      footerShowInsuranceNumber
-      footerShowAddress
-      footerShowEmailAddress
-      footerLink1Html
-      footerLink2Html
-      footerLink3Html
-      footerLink4Html
-      footerLink5Html
-      customCss
-      buttonColor
-      buttonTextColor
-      buttonBorderColor
-      fontBody
-      fontHeading
-      carouselImages
+      domains
       theme
+      gadsAccountId
+      gadsCampaignId
       pk
+      hashId
       defaultSubdomainName
+      primaryColorContrast
+      secondaryColorContrast
+    }
+    success
+    message
+  }
+}
+    `;
+export const CreateWebsiteWizardDocument = gql`
+    mutation createWebsiteWizard($input: WebsiteWizardCreateObject!) {
+  createWebsiteWizard(input: $input) {
+    website {
+      id
+      created
+      updated
+      metadata
+      slug
+      active
+      video
+      image
+      displayOrder
+      address1
+      address2
+      city
+      state
+      zipCode
+      phoneNumber
+      emailAddress
+      name
+      description
+      logo
+      businessManager
+      images
+      licenseNumber
+      insuranceNumber
+      businessEinNumber
+      googleAnalytics
+      googleTagManager
+      motd
+      primaryColor
+      secondaryColor
+      domains
+      theme
+      gadsAccountId
+      gadsCampaignId
+      pk
+      hashId
+      defaultSubdomainName
+      primaryColorContrast
+      secondaryColorContrast
     }
     success
     message
@@ -3659,14 +5022,11 @@ export const ImportWebsiteDocument = gql`
       created
       updated
       metadata
-      active
-      tld
-      businessName
       slug
-      businessDescription
-      businessLogo
-      licenseNumber
-      insuranceNumber
+      active
+      video
+      image
+      displayOrder
       address1
       address2
       city
@@ -3674,53 +5034,28 @@ export const ImportWebsiteDocument = gql`
       zipCode
       phoneNumber
       emailAddress
-      editor
+      name
+      description
+      logo
+      businessManager
+      images
+      licenseNumber
+      insuranceNumber
+      businessEinNumber
       googleAnalytics
-      googleVerificationFileName
-      googleVerificationFileContent
-      enableGoogleSitemaps
-      enableSchemaOrgWebpageObject
-      enableSchemaOrgOrganizationObject
-      enableSchemaOrgLocalbusinessObject
+      googleTagManager
+      motd
       primaryColor
       secondaryColor
-      homepageBackground
-      homepageVideo
-      businessManagerPersonName
-      businessEinNumber
-      customHeaderCode
-      customFooterCode
-      ctaHtml
-      ctaButtonHtml
-      navbarMessageHtml
-      navbarLink1Html
-      navbarLink2Html
-      navbarShowServices
-      navbarShowAreas
-      navbarShowCtaButton
-      footerMessageHtml
-      footerShowServices
-      footerShowAreas
-      footerShowReviews
-      footerShowLicenseNumber
-      footerShowInsuranceNumber
-      footerShowAddress
-      footerShowEmailAddress
-      footerLink1Html
-      footerLink2Html
-      footerLink3Html
-      footerLink4Html
-      footerLink5Html
-      customCss
-      buttonColor
-      buttonTextColor
-      buttonBorderColor
-      fontBody
-      fontHeading
-      carouselImages
+      domains
       theme
+      gadsAccountId
+      gadsCampaignId
       pk
+      hashId
       defaultSubdomainName
+      primaryColorContrast
+      secondaryColorContrast
     }
     success
     message
@@ -3809,9 +5144,9 @@ export const TokenAuthDocument = gql`
   }
 }
     `;
-export const TokenOauthLoginDocument = gql`
-    mutation tokenOauthLogin($oauthPayload: GenericScalar, $oauthToken: String, $provider: String) {
-  tokenOauthLogin(oauthPayload: $oauthPayload, oauthToken: $oauthToken, provider: $provider) {
+export const TokenOauthGoogleAdsDocument = gql`
+    mutation tokenOauthGoogleAds($oauthToken: String, $provider: String, $websiteId: Int!) {
+  tokenOauthGoogleAds(oauthToken: $oauthToken, provider: $provider, websiteId: $websiteId) {
     success
     message
     token
@@ -3819,9 +5154,19 @@ export const TokenOauthLoginDocument = gql`
   }
 }
     `;
-export const TokenOauthSignupDocument = gql`
-    mutation tokenOauthSignup($oauthToken: String, $provider: String) {
-  tokenOauthSignup(oauthToken: $oauthToken, provider: $provider) {
+export const TokenOauthGoogleMobileClientLoginDocument = gql`
+    mutation tokenOauthGoogleMobileClientLogin($accessToken: String, $email: String, $oauthPayload: GenericScalar, $oauthToken: String, $provider: String, $refreshToken: String) {
+  tokenOauthGoogleMobileClientLogin(accessToken: $accessToken, email: $email, oauthPayload: $oauthPayload, oauthToken: $oauthToken, provider: $provider, refreshToken: $refreshToken) {
+    success
+    message
+    token
+    payload
+  }
+}
+    `;
+export const TokenOauthGoogleMobileClientSignupDocument = gql`
+    mutation tokenOauthGoogleMobileClientSignup($oauthToken: String, $provider: String) {
+  tokenOauthGoogleMobileClientSignup(oauthToken: $oauthToken, provider: $provider) {
     success
     message
     token
@@ -3837,19 +5182,25 @@ export const UpdateAreaDocument = gql`
       created
       updated
       metadata
+      slug
       active
       name
-      slug
-      zipCode
       description
+      video
       image
-      enableSchemaOrgAreaServedObject
-      showInsuranceCompanyWidget
-      htmlBlock1
-      htmlBlock2
-      keywordTargeting
+      images
       displayOrder
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
+      includeInGads
+      city
+      state
+      zipCode
+      longitude
+      latitude
       pk
+      absoluteUrl
     }
     success
     message
@@ -3875,7 +5226,16 @@ export const UpdateFaqDocument = gql`
       slug
       active
       name
+      description
+      video
+      image
+      images
+      displayOrder
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
       pk
+      absoluteUrl
     }
     success
     message
@@ -3898,17 +5258,20 @@ export const UpdatePageDocument = gql`
       created
       updated
       metadata
-      active
       slug
+      active
       name
       description
-      body
+      video
       image
-      keywordTargeting
+      images
       displayOrder
-      enableSchemaOrgArticleObject
-      showInsuranceCompanyWidget
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
+      body
       pk
+      absoluteUrl
     }
     success
     message
@@ -3923,6 +5286,14 @@ export const UpdateProfileDocument = gql`
       created
       updated
       metadata
+      slug
+      active
+      name
+      description
+      video
+      image
+      images
+      displayOrder
       firstName
       lastName
       phoneNumber
@@ -3944,12 +5315,21 @@ export const UpdateQuestionDocument = gql`
       created
       updated
       metadata
+      slug
       active
+      name
+      description
+      video
+      image
+      images
+      displayOrder
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
       question
       answer
-      displayOrder
       pk
-      faqId
+      absoluteUrl
     }
     success
     message
@@ -3966,14 +5346,20 @@ export const UpdateReviewDocument = gql`
       metadata
       slug
       active
-      title
-      body
-      personImage
-      personName
-      personZipCode
-      rating
+      name
+      description
+      video
+      image
+      images
       displayOrder
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
+      personName
+      zipCode
+      rating
       pk
+      absoluteUrl
     }
     success
     message
@@ -3988,19 +5374,20 @@ export const UpdateServiceDocument = gql`
       created
       updated
       metadata
-      active
       slug
+      active
       name
       description
+      video
       image
-      enableSchemaOrgServiceObject
-      showInsuranceCompanyWidget
-      htmlBlock1
-      htmlBlock2
-      keywordTargeting
+      images
       displayOrder
-      carouselImages
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
+      gadsAdGroupId
       pk
+      absoluteUrl
     }
     success
     message
@@ -4015,14 +5402,11 @@ export const UpdateWebsiteDocument = gql`
       created
       updated
       metadata
-      active
-      tld
-      businessName
       slug
-      businessDescription
-      businessLogo
-      licenseNumber
-      insuranceNumber
+      active
+      video
+      image
+      displayOrder
       address1
       address2
       city
@@ -4030,53 +5414,28 @@ export const UpdateWebsiteDocument = gql`
       zipCode
       phoneNumber
       emailAddress
-      editor
+      name
+      description
+      logo
+      businessManager
+      images
+      licenseNumber
+      insuranceNumber
+      businessEinNumber
       googleAnalytics
-      googleVerificationFileName
-      googleVerificationFileContent
-      enableGoogleSitemaps
-      enableSchemaOrgWebpageObject
-      enableSchemaOrgOrganizationObject
-      enableSchemaOrgLocalbusinessObject
+      googleTagManager
+      motd
       primaryColor
       secondaryColor
-      homepageBackground
-      homepageVideo
-      businessManagerPersonName
-      businessEinNumber
-      customHeaderCode
-      customFooterCode
-      ctaHtml
-      ctaButtonHtml
-      navbarMessageHtml
-      navbarLink1Html
-      navbarLink2Html
-      navbarShowServices
-      navbarShowAreas
-      navbarShowCtaButton
-      footerMessageHtml
-      footerShowServices
-      footerShowAreas
-      footerShowReviews
-      footerShowLicenseNumber
-      footerShowInsuranceNumber
-      footerShowAddress
-      footerShowEmailAddress
-      footerLink1Html
-      footerLink2Html
-      footerLink3Html
-      footerLink4Html
-      footerLink5Html
-      customCss
-      buttonColor
-      buttonTextColor
-      buttonBorderColor
-      fontBody
-      fontHeading
-      carouselImages
+      domains
       theme
+      gadsAccountId
+      gadsCampaignId
       pk
+      hashId
       defaultSubdomainName
+      primaryColorContrast
+      secondaryColorContrast
     }
     success
     message
@@ -4090,6 +5449,25 @@ export const VerifyTokenDocument = gql`
   }
 }
     `;
+export const AddNegativeKeywordsToCampaignDocument = gql`
+    query addNegativeKeywordsToCampaign($campaignId: String!, $customerId: String!, $keywords: [GenericScalar]!, $uniqueIdentifier: String!, $websiteId: String!) {
+  addNegativeKeywordsToCampaign(campaignId: $campaignId, customerId: $customerId, keywords: $keywords, uniqueIdentifier: $uniqueIdentifier, websiteId: $websiteId) {
+    success
+    message
+    data {
+      success
+      errors
+      data
+      message
+    }
+  }
+}
+    `;
+export const AppVersionDocument = gql`
+    query appVersion {
+  appVersion
+}
+    `;
 export const AreaDocument = gql`
     query area($id: Int) {
   area(id: $id) {
@@ -4097,31 +5475,24 @@ export const AreaDocument = gql`
     created
     updated
     metadata
+    slug
     active
     name
-    slug
-    zipCode
     description
+    video
     image
-    enableSchemaOrgAreaServedObject
-    showInsuranceCompanyWidget
-    htmlBlock1
-    htmlBlock2
-    keywordTargeting
+    images
     displayOrder
     website {
       id
       created
       updated
       metadata
-      active
-      tld
-      businessName
       slug
-      businessDescription
-      businessLogo
-      licenseNumber
-      insuranceNumber
+      active
+      video
+      image
+      displayOrder
       address1
       address2
       city
@@ -4129,55 +5500,40 @@ export const AreaDocument = gql`
       zipCode
       phoneNumber
       emailAddress
-      editor
+      name
+      description
+      logo
+      businessManager
+      images
+      licenseNumber
+      insuranceNumber
+      businessEinNumber
       googleAnalytics
-      googleVerificationFileName
-      googleVerificationFileContent
-      enableGoogleSitemaps
-      enableSchemaOrgWebpageObject
-      enableSchemaOrgOrganizationObject
-      enableSchemaOrgLocalbusinessObject
+      googleTagManager
+      motd
       primaryColor
       secondaryColor
-      homepageBackground
-      homepageVideo
-      businessManagerPersonName
-      businessEinNumber
-      customHeaderCode
-      customFooterCode
-      ctaHtml
-      ctaButtonHtml
-      navbarMessageHtml
-      navbarLink1Html
-      navbarLink2Html
-      navbarShowServices
-      navbarShowAreas
-      navbarShowCtaButton
-      footerMessageHtml
-      footerShowServices
-      footerShowAreas
-      footerShowReviews
-      footerShowLicenseNumber
-      footerShowInsuranceNumber
-      footerShowAddress
-      footerShowEmailAddress
-      footerLink1Html
-      footerLink2Html
-      footerLink3Html
-      footerLink4Html
-      footerLink5Html
-      customCss
-      buttonColor
-      buttonTextColor
-      buttonBorderColor
-      fontBody
-      fontHeading
-      carouselImages
+      domains
       theme
+      gadsAccountId
+      gadsCampaignId
       pk
+      hashId
       defaultSubdomainName
+      primaryColorContrast
+      secondaryColorContrast
     }
+    customHtmlBlock
+    customHeaderCode
+    customFooterJs
+    includeInGads
+    city
+    state
+    zipCode
+    longitude
+    latitude
     pk
+    absoluteUrl
   }
 }
     `;
@@ -4188,31 +5544,24 @@ export const AreasDocument = gql`
     created
     updated
     metadata
+    slug
     active
     name
-    slug
-    zipCode
     description
+    video
     image
-    enableSchemaOrgAreaServedObject
-    showInsuranceCompanyWidget
-    htmlBlock1
-    htmlBlock2
-    keywordTargeting
+    images
     displayOrder
     website {
       id
       created
       updated
       metadata
-      active
-      tld
-      businessName
       slug
-      businessDescription
-      businessLogo
-      licenseNumber
-      insuranceNumber
+      active
+      video
+      image
+      displayOrder
       address1
       address2
       city
@@ -4220,55 +5569,178 @@ export const AreasDocument = gql`
       zipCode
       phoneNumber
       emailAddress
-      editor
+      name
+      description
+      logo
+      businessManager
+      images
+      licenseNumber
+      insuranceNumber
+      businessEinNumber
       googleAnalytics
-      googleVerificationFileName
-      googleVerificationFileContent
-      enableGoogleSitemaps
-      enableSchemaOrgWebpageObject
-      enableSchemaOrgOrganizationObject
-      enableSchemaOrgLocalbusinessObject
+      googleTagManager
+      motd
       primaryColor
       secondaryColor
-      homepageBackground
-      homepageVideo
-      businessManagerPersonName
-      businessEinNumber
-      customHeaderCode
-      customFooterCode
-      ctaHtml
-      ctaButtonHtml
-      navbarMessageHtml
-      navbarLink1Html
-      navbarLink2Html
-      navbarShowServices
-      navbarShowAreas
-      navbarShowCtaButton
-      footerMessageHtml
-      footerShowServices
-      footerShowAreas
-      footerShowReviews
-      footerShowLicenseNumber
-      footerShowInsuranceNumber
-      footerShowAddress
-      footerShowEmailAddress
-      footerLink1Html
-      footerLink2Html
-      footerLink3Html
-      footerLink4Html
-      footerLink5Html
-      customCss
-      buttonColor
-      buttonTextColor
-      buttonBorderColor
-      fontBody
-      fontHeading
-      carouselImages
+      domains
       theme
+      gadsAccountId
+      gadsCampaignId
       pk
+      hashId
       defaultSubdomainName
+      primaryColorContrast
+      secondaryColorContrast
     }
+    customHtmlBlock
+    customHeaderCode
+    customFooterJs
+    includeInGads
+    city
+    state
+    zipCode
+    longitude
+    latitude
     pk
+    absoluteUrl
+  }
+}
+    `;
+export const CreateGadsAdGroupDocument = gql`
+    query createGadsAdGroup($accountId: String!, $campaignId: String!, $name: String!, $websiteId: String!) {
+  createGadsAdGroup(accountId: $accountId, campaignId: $campaignId, name: $name, websiteId: $websiteId) {
+    success
+    message
+    data {
+      success
+      errors
+      data
+      message
+    }
+  }
+}
+    `;
+export const CreateGadsCallAdDocument = gql`
+    query createGadsCallAd($accountId: String!, $adGroupId: String!, $businessName: String!, $callTracked: Boolean!, $description1: String!, $description2: String!, $disableCallConversion: Boolean!, $finalUrls: [String]!, $headline1: String!, $headline2: String!, $path1: String!, $path2: String!, $phoneCountry: String!, $phoneNumber: String!, $phoneNumberVerificationUrl: String, $websiteId: String!) {
+  createGadsCallAd(accountId: $accountId, adGroupId: $adGroupId, businessName: $businessName, callTracked: $callTracked, description1: $description1, description2: $description2, disableCallConversion: $disableCallConversion, finalUrls: $finalUrls, headline1: $headline1, headline2: $headline2, path1: $path1, path2: $path2, phoneCountry: $phoneCountry, phoneNumber: $phoneNumber, phoneNumberVerificationUrl: $phoneNumberVerificationUrl, websiteId: $websiteId) {
+    success
+    message
+    data {
+      data
+    }
+  }
+}
+    `;
+export const CreateGadsCampaignDocument = gql`
+    query createGadsCampaign($budget: BigInt!, $campaignName: String!, $countryCode: String!, $customerId: String!, $durationDays: Int, $languageCode: String!, $websiteId: String!) {
+  createGadsCampaign(budget: $budget, campaignName: $campaignName, countryCode: $countryCode, customerId: $customerId, durationDays: $durationDays, languageCode: $languageCode, websiteId: $websiteId) {
+    success
+    message
+    data {
+      data
+    }
+  }
+}
+    `;
+export const CreateGadsCustomerDocument = gql`
+    query createGadsCustomer($accountId: String, $accountName: String!, $currencyCode: String!, $emailAddress: String!, $timeZone: String!, $websiteId: String!) {
+  createGadsCustomer(accountId: $accountId, accountName: $accountName, currencyCode: $currencyCode, emailAddress: $emailAddress, timeZone: $timeZone, websiteId: $websiteId) {
+    success
+    message
+    data {
+      data
+    }
+  }
+}
+    `;
+export const CreateGadsResponsiveSearchAdDocument = gql`
+    query createGadsResponsiveSearchAd($accountId: String!, $adGroupId: String!, $descriptions: [String]!, $finalUrls: [String]!, $headlines: [String]!, $path1: String!, $path2: String!, $trackingUrl: String!, $websiteId: String!) {
+  createGadsResponsiveSearchAd(accountId: $accountId, adGroupId: $adGroupId, descriptions: $descriptions, finalUrls: $finalUrls, headlines: $headlines, path1: $path1, path2: $path2, trackingUrl: $trackingUrl, websiteId: $websiteId) {
+    success
+    message
+    data {
+      data
+    }
+  }
+}
+    `;
+export const CreateKeywordDocument = gql`
+    query createKeyword($accountId: String!, $adGroupId: String!, $keywordText: String!, $matchType: String!, $status: String, $websiteId: String!) {
+  createKeyword(accountId: $accountId, adGroupId: $adGroupId, keywordText: $keywordText, matchType: $matchType, status: $status, websiteId: $websiteId) {
+    success
+    message
+    data {
+      data
+    }
+  }
+}
+    `;
+export const DeleteKeywordDocument = gql`
+    query deleteKeyword($accountId: String!, $adGroupId: String!, $criterionId: String!, $websiteId: String!) {
+  deleteKeyword(accountId: $accountId, adGroupId: $adGroupId, criterionId: $criterionId, websiteId: $websiteId) {
+    success
+    message
+    data {
+      data
+    }
+  }
+}
+    `;
+export const DeleteNegativeKeywordDocument = gql`
+    query deleteNegativeKeyword($campaignId: String!, $criterionId: String!, $customerId: String!, $uniqueIdentifier: String!, $websiteId: String!) {
+  deleteNegativeKeyword(campaignId: $campaignId, criterionId: $criterionId, customerId: $customerId, uniqueIdentifier: $uniqueIdentifier, websiteId: $websiteId) {
+    success
+    message
+    data {
+      success
+      errors
+      data
+      message
+    }
+  }
+}
+    `;
+export const EnableAdDocument = gql`
+    query enableAd($accountId: String!, $adGroupId: String!, $adId: String!, $websiteId: String!) {
+  enableAd(accountId: $accountId, adGroupId: $adGroupId, adId: $adId, websiteId: $websiteId) {
+    success
+    message
+    data {
+      data
+    }
+  }
+}
+    `;
+export const EnableCampaignDocument = gql`
+    query enableCampaign($accountId: String!, $campaignId: String!, $websiteId: String!) {
+  enableCampaign(accountId: $accountId, campaignId: $campaignId, websiteId: $websiteId) {
+    success
+    message
+    data {
+      data
+    }
+  }
+}
+    `;
+export const EnableGadsAdGroupDocument = gql`
+    query enableGadsAdGroup($accountId: String!, $adGroupId: String!, $websiteId: String!) {
+  enableGadsAdGroup(accountId: $accountId, adGroupId: $adGroupId, websiteId: $websiteId) {
+    success
+    message
+    data {
+      data
+    }
+  }
+}
+    `;
+export const EnableKeywordDocument = gql`
+    query enableKeyword($accountId: String!, $adGroupId: String!, $criterionId: String!, $websiteId: String!) {
+  enableKeyword(accountId: $accountId, adGroupId: $adGroupId, criterionId: $criterionId, websiteId: $websiteId) {
+    success
+    message
+    data {
+      data
+    }
   }
 }
     `;
@@ -4282,19 +5754,21 @@ export const FaqDocument = gql`
     slug
     active
     name
+    description
+    video
+    image
+    images
+    displayOrder
     website {
       id
       created
       updated
       metadata
-      active
-      tld
-      businessName
       slug
-      businessDescription
-      businessLogo
-      licenseNumber
-      insuranceNumber
+      active
+      video
+      image
+      displayOrder
       address1
       address2
       city
@@ -4302,67 +5776,55 @@ export const FaqDocument = gql`
       zipCode
       phoneNumber
       emailAddress
-      editor
+      name
+      description
+      logo
+      businessManager
+      images
+      licenseNumber
+      insuranceNumber
+      businessEinNumber
       googleAnalytics
-      googleVerificationFileName
-      googleVerificationFileContent
-      enableGoogleSitemaps
-      enableSchemaOrgWebpageObject
-      enableSchemaOrgOrganizationObject
-      enableSchemaOrgLocalbusinessObject
+      googleTagManager
+      motd
       primaryColor
       secondaryColor
-      homepageBackground
-      homepageVideo
-      businessManagerPersonName
-      businessEinNumber
-      customHeaderCode
-      customFooterCode
-      ctaHtml
-      ctaButtonHtml
-      navbarMessageHtml
-      navbarLink1Html
-      navbarLink2Html
-      navbarShowServices
-      navbarShowAreas
-      navbarShowCtaButton
-      footerMessageHtml
-      footerShowServices
-      footerShowAreas
-      footerShowReviews
-      footerShowLicenseNumber
-      footerShowInsuranceNumber
-      footerShowAddress
-      footerShowEmailAddress
-      footerLink1Html
-      footerLink2Html
-      footerLink3Html
-      footerLink4Html
-      footerLink5Html
-      customCss
-      buttonColor
-      buttonTextColor
-      buttonBorderColor
-      fontBody
-      fontHeading
-      carouselImages
+      domains
       theme
+      gadsAccountId
+      gadsCampaignId
       pk
+      hashId
       defaultSubdomainName
+      primaryColorContrast
+      secondaryColorContrast
     }
-    questions {
+    customHtmlBlock
+    customHeaderCode
+    customFooterJs
+    pk
+    absoluteUrl
+    question {
       id
       created
       updated
       metadata
+      slug
       active
+      name
+      description
+      video
+      image
+      images
+      displayOrder
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
       question
       answer
-      displayOrder
       pk
-      faqId
+      absoluteUrl
     }
-    pk
   }
 }
     `;
@@ -4376,19 +5838,21 @@ export const FaqsDocument = gql`
     slug
     active
     name
+    description
+    video
+    image
+    images
+    displayOrder
     website {
       id
       created
       updated
       metadata
-      active
-      tld
-      businessName
       slug
-      businessDescription
-      businessLogo
-      licenseNumber
-      insuranceNumber
+      active
+      video
+      image
+      displayOrder
       address1
       address2
       city
@@ -4396,67 +5860,111 @@ export const FaqsDocument = gql`
       zipCode
       phoneNumber
       emailAddress
-      editor
+      name
+      description
+      logo
+      businessManager
+      images
+      licenseNumber
+      insuranceNumber
+      businessEinNumber
       googleAnalytics
-      googleVerificationFileName
-      googleVerificationFileContent
-      enableGoogleSitemaps
-      enableSchemaOrgWebpageObject
-      enableSchemaOrgOrganizationObject
-      enableSchemaOrgLocalbusinessObject
+      googleTagManager
+      motd
       primaryColor
       secondaryColor
-      homepageBackground
-      homepageVideo
-      businessManagerPersonName
-      businessEinNumber
-      customHeaderCode
-      customFooterCode
-      ctaHtml
-      ctaButtonHtml
-      navbarMessageHtml
-      navbarLink1Html
-      navbarLink2Html
-      navbarShowServices
-      navbarShowAreas
-      navbarShowCtaButton
-      footerMessageHtml
-      footerShowServices
-      footerShowAreas
-      footerShowReviews
-      footerShowLicenseNumber
-      footerShowInsuranceNumber
-      footerShowAddress
-      footerShowEmailAddress
-      footerLink1Html
-      footerLink2Html
-      footerLink3Html
-      footerLink4Html
-      footerLink5Html
-      customCss
-      buttonColor
-      buttonTextColor
-      buttonBorderColor
-      fontBody
-      fontHeading
-      carouselImages
+      domains
       theme
+      gadsAccountId
+      gadsCampaignId
       pk
+      hashId
       defaultSubdomainName
+      primaryColorContrast
+      secondaryColorContrast
     }
-    questions {
+    customHtmlBlock
+    customHeaderCode
+    customFooterJs
+    pk
+    absoluteUrl
+    question {
       id
       created
       updated
       metadata
+      slug
       active
+      name
+      description
+      video
+      image
+      images
+      displayOrder
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
       question
       answer
-      displayOrder
       pk
-      faqId
+      absoluteUrl
     }
-    pk
+  }
+}
+    `;
+export const GeminiKeywordSuggestionsDocument = gql`
+    query geminiKeywordSuggestions($first: Int, $skip: Int, $websiteId: String, $prompt: String, $geminiApiKey: String, $adgroupId: String, $customerId: String) {
+  geminiKeywordSuggestions(first: $first, skip: $skip, websiteId: $websiteId, prompt: $prompt, geminiApiKey: $geminiApiKey, adgroupId: $adgroupId, customerId: $customerId) {
+    data
+  }
+}
+    `;
+export const GoogleAdsAccountsDocument = gql`
+    query googleAdsAccounts($first: Int, $skip: Int, $websiteId: String) {
+  googleAdsAccounts(first: $first, skip: $skip, websiteId: $websiteId) {
+    data
+  }
+}
+    `;
+export const GoogleAdsAdGroupMetricsDocument = gql`
+    query googleAdsAdGroupMetrics($first: Int, $skip: Int, $websiteId: String, $customerId: String, $adGroupId: String, $useLoginId: Boolean) {
+  googleAdsAdGroupMetrics(first: $first, skip: $skip, websiteId: $websiteId, customerId: $customerId, adGroupId: $adGroupId, useLoginId: $useLoginId) {
+    data
+  }
+}
+    `;
+export const GoogleAdsAdgroupsDocument = gql`
+    query googleAdsAdgroups($first: Int, $skip: Int, $websiteId: String, $campaignId: String, $accountId: String) {
+  googleAdsAdgroups(first: $first, skip: $skip, websiteId: $websiteId, campaignId: $campaignId, accountId: $accountId) {
+    data
+  }
+}
+    `;
+export const GoogleAdsAdsDocument = gql`
+    query googleAdsAds($first: Int, $skip: Int, $websiteId: String, $adgroupId: String, $accountId: String, $campaignId: String) {
+  googleAdsAds(first: $first, skip: $skip, websiteId: $websiteId, adgroupId: $adgroupId, accountId: $accountId, campaignId: $campaignId) {
+    data
+  }
+}
+    `;
+export const GoogleAdsCampaignsDocument = gql`
+    query googleAdsCampaigns($first: Int, $skip: Int, $websiteId: String, $accountId: String) {
+  googleAdsCampaigns(first: $first, skip: $skip, websiteId: $websiteId, accountId: $accountId) {
+    data
+  }
+}
+    `;
+export const GoogleAdsCampaignsMetricsDocument = gql`
+    query googleAdsCampaignsMetrics($first: Int, $skip: Int, $websiteId: String, $customerId: String, $useLoginId: Boolean) {
+  googleAdsCampaignsMetrics(first: $first, skip: $skip, websiteId: $websiteId, customerId: $customerId, useLoginId: $useLoginId) {
+    data
+  }
+}
+    `;
+export const GoogleAdsKeywordsDocument = gql`
+    query googleAdsKeywords($first: Int, $skip: Int, $websiteId: String, $accountId: String, $adgroupId: String) {
+  googleAdsKeywords(first: $first, skip: $skip, websiteId: $websiteId, accountId: $accountId, adgroupId: $adgroupId) {
+    data
   }
 }
     `;
@@ -4501,6 +6009,20 @@ export const IpAddressDocument = gql`
   }
 }
     `;
+export const ListNegativeKeywordsForCampaignDocument = gql`
+    query listNegativeKeywordsForCampaign($first: Int, $skip: Int, $websiteId: String, $campaignId: String, $customerId: String, $uniqueIdentifier: String) {
+  listNegativeKeywordsForCampaign(first: $first, skip: $skip, websiteId: $websiteId, campaignId: $campaignId, customerId: $customerId, uniqueIdentifier: $uniqueIdentifier) {
+    data
+  }
+}
+    `;
+export const ListReviewsDocument = gql`
+    query listReviews($websiteId: String, $customerId: String) {
+  listReviews(websiteId: $websiteId, customerId: $customerId) {
+    data
+  }
+}
+    `;
 export const PageDocument = gql`
     query page($id: Int) {
   page(id: $id) {
@@ -4508,29 +6030,24 @@ export const PageDocument = gql`
     created
     updated
     metadata
-    active
     slug
+    active
     name
     description
-    body
+    video
     image
-    keywordTargeting
+    images
     displayOrder
-    enableSchemaOrgArticleObject
-    showInsuranceCompanyWidget
     website {
       id
       created
       updated
       metadata
-      active
-      tld
-      businessName
       slug
-      businessDescription
-      businessLogo
-      licenseNumber
-      insuranceNumber
+      active
+      video
+      image
+      displayOrder
       address1
       address2
       city
@@ -4538,55 +6055,35 @@ export const PageDocument = gql`
       zipCode
       phoneNumber
       emailAddress
-      editor
+      name
+      description
+      logo
+      businessManager
+      images
+      licenseNumber
+      insuranceNumber
+      businessEinNumber
       googleAnalytics
-      googleVerificationFileName
-      googleVerificationFileContent
-      enableGoogleSitemaps
-      enableSchemaOrgWebpageObject
-      enableSchemaOrgOrganizationObject
-      enableSchemaOrgLocalbusinessObject
+      googleTagManager
+      motd
       primaryColor
       secondaryColor
-      homepageBackground
-      homepageVideo
-      businessManagerPersonName
-      businessEinNumber
-      customHeaderCode
-      customFooterCode
-      ctaHtml
-      ctaButtonHtml
-      navbarMessageHtml
-      navbarLink1Html
-      navbarLink2Html
-      navbarShowServices
-      navbarShowAreas
-      navbarShowCtaButton
-      footerMessageHtml
-      footerShowServices
-      footerShowAreas
-      footerShowReviews
-      footerShowLicenseNumber
-      footerShowInsuranceNumber
-      footerShowAddress
-      footerShowEmailAddress
-      footerLink1Html
-      footerLink2Html
-      footerLink3Html
-      footerLink4Html
-      footerLink5Html
-      customCss
-      buttonColor
-      buttonTextColor
-      buttonBorderColor
-      fontBody
-      fontHeading
-      carouselImages
+      domains
       theme
+      gadsAccountId
+      gadsCampaignId
       pk
+      hashId
       defaultSubdomainName
+      primaryColorContrast
+      secondaryColorContrast
     }
+    customHtmlBlock
+    customHeaderCode
+    customFooterJs
+    body
     pk
+    absoluteUrl
   }
 }
     `;
@@ -4597,29 +6094,24 @@ export const PagesDocument = gql`
     created
     updated
     metadata
-    active
     slug
+    active
     name
     description
-    body
+    video
     image
-    keywordTargeting
+    images
     displayOrder
-    enableSchemaOrgArticleObject
-    showInsuranceCompanyWidget
     website {
       id
       created
       updated
       metadata
-      active
-      tld
-      businessName
       slug
-      businessDescription
-      businessLogo
-      licenseNumber
-      insuranceNumber
+      active
+      video
+      image
+      displayOrder
       address1
       address2
       city
@@ -4627,55 +6119,79 @@ export const PagesDocument = gql`
       zipCode
       phoneNumber
       emailAddress
-      editor
+      name
+      description
+      logo
+      businessManager
+      images
+      licenseNumber
+      insuranceNumber
+      businessEinNumber
       googleAnalytics
-      googleVerificationFileName
-      googleVerificationFileContent
-      enableGoogleSitemaps
-      enableSchemaOrgWebpageObject
-      enableSchemaOrgOrganizationObject
-      enableSchemaOrgLocalbusinessObject
+      googleTagManager
+      motd
       primaryColor
       secondaryColor
-      homepageBackground
-      homepageVideo
-      businessManagerPersonName
-      businessEinNumber
-      customHeaderCode
-      customFooterCode
-      ctaHtml
-      ctaButtonHtml
-      navbarMessageHtml
-      navbarLink1Html
-      navbarLink2Html
-      navbarShowServices
-      navbarShowAreas
-      navbarShowCtaButton
-      footerMessageHtml
-      footerShowServices
-      footerShowAreas
-      footerShowReviews
-      footerShowLicenseNumber
-      footerShowInsuranceNumber
-      footerShowAddress
-      footerShowEmailAddress
-      footerLink1Html
-      footerLink2Html
-      footerLink3Html
-      footerLink4Html
-      footerLink5Html
-      customCss
-      buttonColor
-      buttonTextColor
-      buttonBorderColor
-      fontBody
-      fontHeading
-      carouselImages
+      domains
       theme
+      gadsAccountId
+      gadsCampaignId
       pk
+      hashId
       defaultSubdomainName
+      primaryColorContrast
+      secondaryColorContrast
     }
+    customHtmlBlock
+    customHeaderCode
+    customFooterJs
+    body
     pk
+    absoluteUrl
+  }
+}
+    `;
+export const PauseAdDocument = gql`
+    query pauseAd($accountId: String!, $adGroupId: String!, $adId: String!, $websiteId: String!) {
+  pauseAd(accountId: $accountId, adGroupId: $adGroupId, adId: $adId, websiteId: $websiteId) {
+    success
+    message
+    data {
+      data
+    }
+  }
+}
+    `;
+export const PauseCampaignDocument = gql`
+    query pauseCampaign($accountId: String!, $campaignId: String!, $websiteId: String!) {
+  pauseCampaign(accountId: $accountId, campaignId: $campaignId, websiteId: $websiteId) {
+    success
+    message
+    data {
+      data
+    }
+  }
+}
+    `;
+export const PauseGadsAdGroupDocument = gql`
+    query pauseGadsAdGroup($accountId: String!, $adGroupId: String!, $websiteId: String!) {
+  pauseGadsAdGroup(accountId: $accountId, adGroupId: $adGroupId, websiteId: $websiteId) {
+    success
+    message
+    data {
+      data
+    }
+  }
+}
+    `;
+export const PauseKeywordDocument = gql`
+    query pauseKeyword($accountId: String!, $adGroupId: String!, $criterionId: String!, $websiteId: String!) {
+  pauseKeyword(accountId: $accountId, adGroupId: $adGroupId, criterionId: $criterionId, websiteId: $websiteId) {
+    success
+    message
+    data {
+      data
+    }
   }
 }
     `;
@@ -4686,6 +6202,14 @@ export const PostdataDocument = gql`
     created
     updated
     metadata
+    slug
+    active
+    name
+    description
+    video
+    image
+    images
+    displayOrder
     data
     ipAddress
     website {
@@ -4693,14 +6217,11 @@ export const PostdataDocument = gql`
       created
       updated
       metadata
-      active
-      tld
-      businessName
       slug
-      businessDescription
-      businessLogo
-      licenseNumber
-      insuranceNumber
+      active
+      video
+      image
+      displayOrder
       address1
       address2
       city
@@ -4708,53 +6229,28 @@ export const PostdataDocument = gql`
       zipCode
       phoneNumber
       emailAddress
-      editor
+      name
+      description
+      logo
+      businessManager
+      images
+      licenseNumber
+      insuranceNumber
+      businessEinNumber
       googleAnalytics
-      googleVerificationFileName
-      googleVerificationFileContent
-      enableGoogleSitemaps
-      enableSchemaOrgWebpageObject
-      enableSchemaOrgOrganizationObject
-      enableSchemaOrgLocalbusinessObject
+      googleTagManager
+      motd
       primaryColor
       secondaryColor
-      homepageBackground
-      homepageVideo
-      businessManagerPersonName
-      businessEinNumber
-      customHeaderCode
-      customFooterCode
-      ctaHtml
-      ctaButtonHtml
-      navbarMessageHtml
-      navbarLink1Html
-      navbarLink2Html
-      navbarShowServices
-      navbarShowAreas
-      navbarShowCtaButton
-      footerMessageHtml
-      footerShowServices
-      footerShowAreas
-      footerShowReviews
-      footerShowLicenseNumber
-      footerShowInsuranceNumber
-      footerShowAddress
-      footerShowEmailAddress
-      footerLink1Html
-      footerLink2Html
-      footerLink3Html
-      footerLink4Html
-      footerLink5Html
-      customCss
-      buttonColor
-      buttonTextColor
-      buttonBorderColor
-      fontBody
-      fontHeading
-      carouselImages
+      domains
       theme
+      gadsAccountId
+      gadsCampaignId
       pk
+      hashId
       defaultSubdomainName
+      primaryColorContrast
+      secondaryColorContrast
     }
     pk
   }
@@ -4767,6 +6263,14 @@ export const PostdatasDocument = gql`
     created
     updated
     metadata
+    slug
+    active
+    name
+    description
+    video
+    image
+    images
+    displayOrder
     data
     ipAddress
     website {
@@ -4774,14 +6278,11 @@ export const PostdatasDocument = gql`
       created
       updated
       metadata
-      active
-      tld
-      businessName
       slug
-      businessDescription
-      businessLogo
-      licenseNumber
-      insuranceNumber
+      active
+      video
+      image
+      displayOrder
       address1
       address2
       city
@@ -4789,53 +6290,28 @@ export const PostdatasDocument = gql`
       zipCode
       phoneNumber
       emailAddress
-      editor
+      name
+      description
+      logo
+      businessManager
+      images
+      licenseNumber
+      insuranceNumber
+      businessEinNumber
       googleAnalytics
-      googleVerificationFileName
-      googleVerificationFileContent
-      enableGoogleSitemaps
-      enableSchemaOrgWebpageObject
-      enableSchemaOrgOrganizationObject
-      enableSchemaOrgLocalbusinessObject
+      googleTagManager
+      motd
       primaryColor
       secondaryColor
-      homepageBackground
-      homepageVideo
-      businessManagerPersonName
-      businessEinNumber
-      customHeaderCode
-      customFooterCode
-      ctaHtml
-      ctaButtonHtml
-      navbarMessageHtml
-      navbarLink1Html
-      navbarLink2Html
-      navbarShowServices
-      navbarShowAreas
-      navbarShowCtaButton
-      footerMessageHtml
-      footerShowServices
-      footerShowAreas
-      footerShowReviews
-      footerShowLicenseNumber
-      footerShowInsuranceNumber
-      footerShowAddress
-      footerShowEmailAddress
-      footerLink1Html
-      footerLink2Html
-      footerLink3Html
-      footerLink4Html
-      footerLink5Html
-      customCss
-      buttonColor
-      buttonTextColor
-      buttonBorderColor
-      fontBody
-      fontHeading
-      carouselImages
+      domains
       theme
+      gadsAccountId
+      gadsCampaignId
       pk
+      hashId
       defaultSubdomainName
+      primaryColorContrast
+      secondaryColorContrast
     }
     pk
   }
@@ -4848,6 +6324,14 @@ export const ProfileDocument = gql`
     created
     updated
     metadata
+    slug
+    active
+    name
+    description
+    video
+    image
+    images
+    displayOrder
     firstName
     lastName
     phoneNumber
@@ -4860,6 +6344,14 @@ export const ProfileDocument = gql`
       created
       updated
       metadata
+      slug
+      active
+      name
+      description
+      video
+      image
+      images
+      displayOrder
       startDate
       lengthDays
       programOptions
@@ -4880,23 +6372,24 @@ export const QuestionDocument = gql`
     created
     updated
     metadata
+    slug
     active
-    question
-    answer
+    name
+    description
+    video
+    image
+    images
     displayOrder
     website {
       id
       created
       updated
       metadata
-      active
-      tld
-      businessName
       slug
-      businessDescription
-      businessLogo
-      licenseNumber
-      insuranceNumber
+      active
+      video
+      image
+      displayOrder
       address1
       address2
       city
@@ -4904,54 +6397,34 @@ export const QuestionDocument = gql`
       zipCode
       phoneNumber
       emailAddress
-      editor
+      name
+      description
+      logo
+      businessManager
+      images
+      licenseNumber
+      insuranceNumber
+      businessEinNumber
       googleAnalytics
-      googleVerificationFileName
-      googleVerificationFileContent
-      enableGoogleSitemaps
-      enableSchemaOrgWebpageObject
-      enableSchemaOrgOrganizationObject
-      enableSchemaOrgLocalbusinessObject
+      googleTagManager
+      motd
       primaryColor
       secondaryColor
-      homepageBackground
-      homepageVideo
-      businessManagerPersonName
-      businessEinNumber
-      customHeaderCode
-      customFooterCode
-      ctaHtml
-      ctaButtonHtml
-      navbarMessageHtml
-      navbarLink1Html
-      navbarLink2Html
-      navbarShowServices
-      navbarShowAreas
-      navbarShowCtaButton
-      footerMessageHtml
-      footerShowServices
-      footerShowAreas
-      footerShowReviews
-      footerShowLicenseNumber
-      footerShowInsuranceNumber
-      footerShowAddress
-      footerShowEmailAddress
-      footerLink1Html
-      footerLink2Html
-      footerLink3Html
-      footerLink4Html
-      footerLink5Html
-      customCss
-      buttonColor
-      buttonTextColor
-      buttonBorderColor
-      fontBody
-      fontHeading
-      carouselImages
+      domains
       theme
+      gadsAccountId
+      gadsCampaignId
       pk
+      hashId
       defaultSubdomainName
+      primaryColorContrast
+      secondaryColorContrast
     }
+    customHtmlBlock
+    customHeaderCode
+    customFooterJs
+    question
+    answer
     faq {
       id
       created
@@ -4960,10 +6433,19 @@ export const QuestionDocument = gql`
       slug
       active
       name
+      description
+      video
+      image
+      images
+      displayOrder
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
       pk
+      absoluteUrl
     }
     pk
-    faqId
+    absoluteUrl
   }
 }
     `;
@@ -4974,23 +6456,24 @@ export const QuestionsDocument = gql`
     created
     updated
     metadata
+    slug
     active
-    question
-    answer
+    name
+    description
+    video
+    image
+    images
     displayOrder
     website {
       id
       created
       updated
       metadata
-      active
-      tld
-      businessName
       slug
-      businessDescription
-      businessLogo
-      licenseNumber
-      insuranceNumber
+      active
+      video
+      image
+      displayOrder
       address1
       address2
       city
@@ -4998,54 +6481,34 @@ export const QuestionsDocument = gql`
       zipCode
       phoneNumber
       emailAddress
-      editor
+      name
+      description
+      logo
+      businessManager
+      images
+      licenseNumber
+      insuranceNumber
+      businessEinNumber
       googleAnalytics
-      googleVerificationFileName
-      googleVerificationFileContent
-      enableGoogleSitemaps
-      enableSchemaOrgWebpageObject
-      enableSchemaOrgOrganizationObject
-      enableSchemaOrgLocalbusinessObject
+      googleTagManager
+      motd
       primaryColor
       secondaryColor
-      homepageBackground
-      homepageVideo
-      businessManagerPersonName
-      businessEinNumber
-      customHeaderCode
-      customFooterCode
-      ctaHtml
-      ctaButtonHtml
-      navbarMessageHtml
-      navbarLink1Html
-      navbarLink2Html
-      navbarShowServices
-      navbarShowAreas
-      navbarShowCtaButton
-      footerMessageHtml
-      footerShowServices
-      footerShowAreas
-      footerShowReviews
-      footerShowLicenseNumber
-      footerShowInsuranceNumber
-      footerShowAddress
-      footerShowEmailAddress
-      footerLink1Html
-      footerLink2Html
-      footerLink3Html
-      footerLink4Html
-      footerLink5Html
-      customCss
-      buttonColor
-      buttonTextColor
-      buttonBorderColor
-      fontBody
-      fontHeading
-      carouselImages
+      domains
       theme
+      gadsAccountId
+      gadsCampaignId
       pk
+      hashId
       defaultSubdomainName
+      primaryColorContrast
+      secondaryColorContrast
     }
+    customHtmlBlock
+    customHeaderCode
+    customFooterJs
+    question
+    answer
     faq {
       id
       created
@@ -5054,10 +6517,30 @@ export const QuestionsDocument = gql`
       slug
       active
       name
+      description
+      video
+      image
+      images
+      displayOrder
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
       pk
+      absoluteUrl
     }
     pk
-    faqId
+    absoluteUrl
+  }
+}
+    `;
+export const RemoveAdDocument = gql`
+    query removeAd($accountId: String!, $adGroupId: String!, $adId: String!, $websiteId: String!) {
+  removeAd(accountId: $accountId, adGroupId: $adGroupId, adId: $adId, websiteId: $websiteId) {
+    success
+    message
+    data {
+      data
+    }
   }
 }
     `;
@@ -5070,26 +6553,22 @@ export const ReviewDocument = gql`
     metadata
     slug
     active
-    title
-    body
-    personImage
-    personName
-    personZipCode
-    rating
+    name
+    description
+    video
+    image
+    images
     displayOrder
     website {
       id
       created
       updated
       metadata
-      active
-      tld
-      businessName
       slug
-      businessDescription
-      businessLogo
-      licenseNumber
-      insuranceNumber
+      active
+      video
+      image
+      displayOrder
       address1
       address2
       city
@@ -5097,55 +6576,37 @@ export const ReviewDocument = gql`
       zipCode
       phoneNumber
       emailAddress
-      editor
+      name
+      description
+      logo
+      businessManager
+      images
+      licenseNumber
+      insuranceNumber
+      businessEinNumber
       googleAnalytics
-      googleVerificationFileName
-      googleVerificationFileContent
-      enableGoogleSitemaps
-      enableSchemaOrgWebpageObject
-      enableSchemaOrgOrganizationObject
-      enableSchemaOrgLocalbusinessObject
+      googleTagManager
+      motd
       primaryColor
       secondaryColor
-      homepageBackground
-      homepageVideo
-      businessManagerPersonName
-      businessEinNumber
-      customHeaderCode
-      customFooterCode
-      ctaHtml
-      ctaButtonHtml
-      navbarMessageHtml
-      navbarLink1Html
-      navbarLink2Html
-      navbarShowServices
-      navbarShowAreas
-      navbarShowCtaButton
-      footerMessageHtml
-      footerShowServices
-      footerShowAreas
-      footerShowReviews
-      footerShowLicenseNumber
-      footerShowInsuranceNumber
-      footerShowAddress
-      footerShowEmailAddress
-      footerLink1Html
-      footerLink2Html
-      footerLink3Html
-      footerLink4Html
-      footerLink5Html
-      customCss
-      buttonColor
-      buttonTextColor
-      buttonBorderColor
-      fontBody
-      fontHeading
-      carouselImages
+      domains
       theme
+      gadsAccountId
+      gadsCampaignId
       pk
+      hashId
       defaultSubdomainName
+      primaryColorContrast
+      secondaryColorContrast
     }
+    customHtmlBlock
+    customHeaderCode
+    customFooterJs
+    personName
+    zipCode
+    rating
     pk
+    absoluteUrl
   }
 }
     `;
@@ -5158,26 +6619,22 @@ export const ReviewsDocument = gql`
     metadata
     slug
     active
-    title
-    body
-    personImage
-    personName
-    personZipCode
-    rating
+    name
+    description
+    video
+    image
+    images
     displayOrder
     website {
       id
       created
       updated
       metadata
-      active
-      tld
-      businessName
       slug
-      businessDescription
-      businessLogo
-      licenseNumber
-      insuranceNumber
+      active
+      video
+      image
+      displayOrder
       address1
       address2
       city
@@ -5185,55 +6642,44 @@ export const ReviewsDocument = gql`
       zipCode
       phoneNumber
       emailAddress
-      editor
+      name
+      description
+      logo
+      businessManager
+      images
+      licenseNumber
+      insuranceNumber
+      businessEinNumber
       googleAnalytics
-      googleVerificationFileName
-      googleVerificationFileContent
-      enableGoogleSitemaps
-      enableSchemaOrgWebpageObject
-      enableSchemaOrgOrganizationObject
-      enableSchemaOrgLocalbusinessObject
+      googleTagManager
+      motd
       primaryColor
       secondaryColor
-      homepageBackground
-      homepageVideo
-      businessManagerPersonName
-      businessEinNumber
-      customHeaderCode
-      customFooterCode
-      ctaHtml
-      ctaButtonHtml
-      navbarMessageHtml
-      navbarLink1Html
-      navbarLink2Html
-      navbarShowServices
-      navbarShowAreas
-      navbarShowCtaButton
-      footerMessageHtml
-      footerShowServices
-      footerShowAreas
-      footerShowReviews
-      footerShowLicenseNumber
-      footerShowInsuranceNumber
-      footerShowAddress
-      footerShowEmailAddress
-      footerLink1Html
-      footerLink2Html
-      footerLink3Html
-      footerLink4Html
-      footerLink5Html
-      customCss
-      buttonColor
-      buttonTextColor
-      buttonBorderColor
-      fontBody
-      fontHeading
-      carouselImages
+      domains
       theme
+      gadsAccountId
+      gadsCampaignId
       pk
+      hashId
       defaultSubdomainName
+      primaryColorContrast
+      secondaryColorContrast
     }
+    customHtmlBlock
+    customHeaderCode
+    customFooterJs
+    personName
+    zipCode
+    rating
     pk
+    absoluteUrl
+  }
+}
+    `;
+export const SearchTermsReportDocument = gql`
+    query searchTermsReport($first: Int, $skip: Int, $websiteId: String, $customerId: String, $campaignId: String, $adGroupId: String, $dateRange: String, $keywords: [String]) {
+  searchTermsReport(first: $first, skip: $skip, websiteId: $websiteId, customerId: $customerId, campaignId: $campaignId, adGroupId: $adGroupId, dateRange: $dateRange, keywords: $keywords) {
+    data
   }
 }
     `;
@@ -5244,31 +6690,24 @@ export const ServiceDocument = gql`
     created
     updated
     metadata
-    active
     slug
+    active
     name
     description
+    video
     image
-    enableSchemaOrgServiceObject
-    showInsuranceCompanyWidget
-    htmlBlock1
-    htmlBlock2
-    keywordTargeting
+    images
     displayOrder
-    carouselImages
     website {
       id
       created
       updated
       metadata
-      active
-      tld
-      businessName
       slug
-      businessDescription
-      businessLogo
-      licenseNumber
-      insuranceNumber
+      active
+      video
+      image
+      displayOrder
       address1
       address2
       city
@@ -5276,55 +6715,35 @@ export const ServiceDocument = gql`
       zipCode
       phoneNumber
       emailAddress
-      editor
+      name
+      description
+      logo
+      businessManager
+      images
+      licenseNumber
+      insuranceNumber
+      businessEinNumber
       googleAnalytics
-      googleVerificationFileName
-      googleVerificationFileContent
-      enableGoogleSitemaps
-      enableSchemaOrgWebpageObject
-      enableSchemaOrgOrganizationObject
-      enableSchemaOrgLocalbusinessObject
+      googleTagManager
+      motd
       primaryColor
       secondaryColor
-      homepageBackground
-      homepageVideo
-      businessManagerPersonName
-      businessEinNumber
-      customHeaderCode
-      customFooterCode
-      ctaHtml
-      ctaButtonHtml
-      navbarMessageHtml
-      navbarLink1Html
-      navbarLink2Html
-      navbarShowServices
-      navbarShowAreas
-      navbarShowCtaButton
-      footerMessageHtml
-      footerShowServices
-      footerShowAreas
-      footerShowReviews
-      footerShowLicenseNumber
-      footerShowInsuranceNumber
-      footerShowAddress
-      footerShowEmailAddress
-      footerLink1Html
-      footerLink2Html
-      footerLink3Html
-      footerLink4Html
-      footerLink5Html
-      customCss
-      buttonColor
-      buttonTextColor
-      buttonBorderColor
-      fontBody
-      fontHeading
-      carouselImages
+      domains
       theme
+      gadsAccountId
+      gadsCampaignId
       pk
+      hashId
       defaultSubdomainName
+      primaryColorContrast
+      secondaryColorContrast
     }
+    customHtmlBlock
+    customHeaderCode
+    customFooterJs
+    gadsAdGroupId
     pk
+    absoluteUrl
   }
 }
     `;
@@ -5335,31 +6754,24 @@ export const ServicesDocument = gql`
     created
     updated
     metadata
-    active
     slug
+    active
     name
     description
+    video
     image
-    enableSchemaOrgServiceObject
-    showInsuranceCompanyWidget
-    htmlBlock1
-    htmlBlock2
-    keywordTargeting
+    images
     displayOrder
-    carouselImages
     website {
       id
       created
       updated
       metadata
-      active
-      tld
-      businessName
       slug
-      businessDescription
-      businessLogo
-      licenseNumber
-      insuranceNumber
+      active
+      video
+      image
+      displayOrder
       address1
       address2
       city
@@ -5367,55 +6779,64 @@ export const ServicesDocument = gql`
       zipCode
       phoneNumber
       emailAddress
-      editor
+      name
+      description
+      logo
+      businessManager
+      images
+      licenseNumber
+      insuranceNumber
+      businessEinNumber
       googleAnalytics
-      googleVerificationFileName
-      googleVerificationFileContent
-      enableGoogleSitemaps
-      enableSchemaOrgWebpageObject
-      enableSchemaOrgOrganizationObject
-      enableSchemaOrgLocalbusinessObject
+      googleTagManager
+      motd
       primaryColor
       secondaryColor
-      homepageBackground
-      homepageVideo
-      businessManagerPersonName
-      businessEinNumber
-      customHeaderCode
-      customFooterCode
-      ctaHtml
-      ctaButtonHtml
-      navbarMessageHtml
-      navbarLink1Html
-      navbarLink2Html
-      navbarShowServices
-      navbarShowAreas
-      navbarShowCtaButton
-      footerMessageHtml
-      footerShowServices
-      footerShowAreas
-      footerShowReviews
-      footerShowLicenseNumber
-      footerShowInsuranceNumber
-      footerShowAddress
-      footerShowEmailAddress
-      footerLink1Html
-      footerLink2Html
-      footerLink3Html
-      footerLink4Html
-      footerLink5Html
-      customCss
-      buttonColor
-      buttonTextColor
-      buttonBorderColor
-      fontBody
-      fontHeading
-      carouselImages
+      domains
       theme
+      gadsAccountId
+      gadsCampaignId
       pk
+      hashId
       defaultSubdomainName
+      primaryColorContrast
+      secondaryColorContrast
     }
+    customHtmlBlock
+    customHeaderCode
+    customFooterJs
+    gadsAdGroupId
     pk
+    absoluteUrl
+  }
+}
+    `;
+export const SuggestedServicesDocument = gql`
+    query suggestedServices($companyDescription: String) {
+  suggestedServices(companyDescription: $companyDescription) {
+    data
+  }
+}
+    `;
+export const UpdateCallAdDocument = gql`
+    query updateCallAd($accountId: String!, $adGroupId: String!, $adId: String!, $description1: String!, $description2: String!, $headline1: String!, $headline2: String!, $phoneNumber: String!, $websiteId: String!) {
+  updateCallAd(accountId: $accountId, adGroupId: $adGroupId, adId: $adId, description1: $description1, description2: $description2, headline1: $headline1, headline2: $headline2, phoneNumber: $phoneNumber, websiteId: $websiteId) {
+    success
+    message
+    data {
+      data
+    }
+  }
+}
+    `;
+export const UpdateResponseSearchAdDocument = gql`
+    query updateResponseSearchAd($accountId: String!, $adGroupId: String!, $adId: String!, $descriptions: [String]!, $headlines: [String]!, $websiteId: String!) {
+  updateResponseSearchAd(accountId: $accountId, adGroupId: $adGroupId, adId: $adId, descriptions: $descriptions, headlines: $headlines, websiteId: $websiteId) {
+    success
+    message
+    data {
+      data
+    }
   }
 }
     `;
@@ -5426,14 +6847,11 @@ export const WebsiteDocument = gql`
     created
     updated
     metadata
-    active
-    tld
-    businessName
     slug
-    businessDescription
-    businessLogo
-    licenseNumber
-    insuranceNumber
+    active
+    video
+    image
+    displayOrder
     address1
     address2
     city
@@ -5441,95 +6859,69 @@ export const WebsiteDocument = gql`
     zipCode
     phoneNumber
     emailAddress
-    editor
+    name
+    description
+    logo
+    businessManager
+    images
+    licenseNumber
+    insuranceNumber
+    businessEinNumber
     googleAnalytics
-    googleVerificationFileName
-    googleVerificationFileContent
-    enableGoogleSitemaps
-    enableSchemaOrgWebpageObject
-    enableSchemaOrgOrganizationObject
-    enableSchemaOrgLocalbusinessObject
+    googleTagManager
+    motd
     primaryColor
     secondaryColor
-    homepageBackground
-    homepageVideo
-    businessManagerPersonName
-    businessEinNumber
-    customHeaderCode
-    customFooterCode
-    ctaHtml
-    ctaButtonHtml
-    navbarMessageHtml
-    navbarLink1Html
-    navbarLink2Html
-    navbarShowServices
-    navbarShowAreas
-    navbarShowCtaButton
-    footerMessageHtml
-    footerShowServices
-    footerShowAreas
-    footerShowReviews
-    footerShowLicenseNumber
-    footerShowInsuranceNumber
-    footerShowAddress
-    footerShowEmailAddress
-    footerLink1Html
-    footerLink2Html
-    footerLink3Html
-    footerLink4Html
-    footerLink5Html
-    customCss
-    buttonColor
-    buttonTextColor
-    buttonBorderColor
-    fontBody
-    fontHeading
-    carouselImages
+    domains
     theme
-    pages {
+    gadsAccountId
+    gadsCampaignId
+    pk
+    hashId
+    defaultSubdomainName
+    primaryColorContrast
+    secondaryColorContrast
+    services {
       id
       created
       updated
       metadata
-      active
       slug
+      active
       name
       description
-      body
+      video
       image
-      keywordTargeting
+      images
       displayOrder
-      enableSchemaOrgArticleObject
-      showInsuranceCompanyWidget
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
+      gadsAdGroupId
       pk
+      absoluteUrl
     }
-    areas {
+    reviews {
       id
       created
       updated
       metadata
+      slug
       active
       name
-      slug
+      description
+      video
+      image
+      images
+      displayOrder
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
+      personName
       zipCode
-      description
-      image
-      enableSchemaOrgAreaServedObject
-      showInsuranceCompanyWidget
-      htmlBlock1
-      htmlBlock2
-      keywordTargeting
-      displayOrder
+      rating
       pk
-    }
-    datas {
-      id
-      created
-      updated
-      metadata
-      data
-      ipAddress
-      pk
+      absoluteUrl
     }
     faqs {
       id
@@ -5539,57 +6931,62 @@ export const WebsiteDocument = gql`
       slug
       active
       name
-      pk
-    }
-    questions {
-      id
-      created
-      updated
-      metadata
-      active
-      question
-      answer
+      description
+      video
+      image
+      images
       displayOrder
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
       pk
-      faqId
+      absoluteUrl
     }
-    services {
+    pages {
       id
       created
       updated
       metadata
-      active
       slug
+      active
       name
       description
+      video
       image
-      enableSchemaOrgServiceObject
-      showInsuranceCompanyWidget
-      htmlBlock1
-      htmlBlock2
-      keywordTargeting
+      images
       displayOrder
-      carouselImages
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
+      body
       pk
+      absoluteUrl
     }
-    reviews {
+    areas {
       id
       created
       updated
       metadata
       slug
       active
-      title
-      body
-      personImage
-      personName
-      personZipCode
-      rating
+      name
+      description
+      video
+      image
+      images
       displayOrder
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
+      includeInGads
+      city
+      state
+      zipCode
+      longitude
+      latitude
       pk
+      absoluteUrl
     }
-    pk
-    defaultSubdomainName
   }
 }
     `;
@@ -5600,14 +6997,11 @@ export const WebsitesDocument = gql`
     created
     updated
     metadata
-    active
-    tld
-    businessName
     slug
-    businessDescription
-    businessLogo
-    licenseNumber
-    insuranceNumber
+    active
+    video
+    image
+    displayOrder
     address1
     address2
     city
@@ -5615,95 +7009,69 @@ export const WebsitesDocument = gql`
     zipCode
     phoneNumber
     emailAddress
-    editor
+    name
+    description
+    logo
+    businessManager
+    images
+    licenseNumber
+    insuranceNumber
+    businessEinNumber
     googleAnalytics
-    googleVerificationFileName
-    googleVerificationFileContent
-    enableGoogleSitemaps
-    enableSchemaOrgWebpageObject
-    enableSchemaOrgOrganizationObject
-    enableSchemaOrgLocalbusinessObject
+    googleTagManager
+    motd
     primaryColor
     secondaryColor
-    homepageBackground
-    homepageVideo
-    businessManagerPersonName
-    businessEinNumber
-    customHeaderCode
-    customFooterCode
-    ctaHtml
-    ctaButtonHtml
-    navbarMessageHtml
-    navbarLink1Html
-    navbarLink2Html
-    navbarShowServices
-    navbarShowAreas
-    navbarShowCtaButton
-    footerMessageHtml
-    footerShowServices
-    footerShowAreas
-    footerShowReviews
-    footerShowLicenseNumber
-    footerShowInsuranceNumber
-    footerShowAddress
-    footerShowEmailAddress
-    footerLink1Html
-    footerLink2Html
-    footerLink3Html
-    footerLink4Html
-    footerLink5Html
-    customCss
-    buttonColor
-    buttonTextColor
-    buttonBorderColor
-    fontBody
-    fontHeading
-    carouselImages
+    domains
     theme
-    pages {
+    gadsAccountId
+    gadsCampaignId
+    pk
+    hashId
+    defaultSubdomainName
+    primaryColorContrast
+    secondaryColorContrast
+    services {
       id
       created
       updated
       metadata
-      active
       slug
+      active
       name
       description
-      body
+      video
       image
-      keywordTargeting
+      images
       displayOrder
-      enableSchemaOrgArticleObject
-      showInsuranceCompanyWidget
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
+      gadsAdGroupId
       pk
+      absoluteUrl
     }
-    areas {
+    reviews {
       id
       created
       updated
       metadata
+      slug
       active
       name
-      slug
+      description
+      video
+      image
+      images
+      displayOrder
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
+      personName
       zipCode
-      description
-      image
-      enableSchemaOrgAreaServedObject
-      showInsuranceCompanyWidget
-      htmlBlock1
-      htmlBlock2
-      keywordTargeting
-      displayOrder
+      rating
       pk
-    }
-    datas {
-      id
-      created
-      updated
-      metadata
-      data
-      ipAddress
-      pk
+      absoluteUrl
     }
     faqs {
       id
@@ -5713,63 +7081,80 @@ export const WebsitesDocument = gql`
       slug
       active
       name
-      pk
-    }
-    questions {
-      id
-      created
-      updated
-      metadata
-      active
-      question
-      answer
+      description
+      video
+      image
+      images
       displayOrder
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
       pk
-      faqId
+      absoluteUrl
     }
-    services {
+    pages {
       id
       created
       updated
       metadata
-      active
       slug
+      active
       name
       description
+      video
       image
-      enableSchemaOrgServiceObject
-      showInsuranceCompanyWidget
-      htmlBlock1
-      htmlBlock2
-      keywordTargeting
+      images
       displayOrder
-      carouselImages
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
+      body
       pk
+      absoluteUrl
     }
-    reviews {
+    areas {
       id
       created
       updated
       metadata
       slug
       active
-      title
-      body
-      personImage
-      personName
-      personZipCode
-      rating
+      name
+      description
+      video
+      image
+      images
       displayOrder
+      customHtmlBlock
+      customHeaderCode
+      customFooterJs
+      includeInGads
+      city
+      state
+      zipCode
+      longitude
+      latitude
       pk
+      absoluteUrl
     }
-    pk
-    defaultSubdomainName
   }
 }
     `;
 export const ZipCodeDocument = gql`
     query zipCode($zipCode: String) {
   zipCode(zipCode: $zipCode) {
+    zipCode
+    city
+    state
+    latitude
+    longitude
+    metadata
+  }
+}
+    `;
+export const ZipCodesByRadiusDocument = gql`
+    query zipCodesByRadius($zipCode: String, $radius: Decimal) {
+  zipCodesByRadius(zipCode: $zipCode, radius: $radius) {
     zipCode
     city
     state
@@ -5792,6 +7177,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     activateAccount(variables: ActivateAccountMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ActivateAccountMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<ActivateAccountMutation>(ActivateAccountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'activateAccount', 'mutation');
+    },
+    addTokenToWebsite(variables: AddTokenToWebsiteMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<AddTokenToWebsiteMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AddTokenToWebsiteMutation>(AddTokenToWebsiteDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'addTokenToWebsite', 'mutation');
     },
     changeEmailAddress(variables: ChangeEmailAddressMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ChangeEmailAddressMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<ChangeEmailAddressMutation>(ChangeEmailAddressDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'changeEmailAddress', 'mutation');
@@ -5828,6 +7216,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     createWebsite(variables: CreateWebsiteMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateWebsiteMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<CreateWebsiteMutation>(CreateWebsiteDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createWebsite', 'mutation');
+    },
+    createWebsiteWizard(variables: CreateWebsiteWizardMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateWebsiteWizardMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateWebsiteWizardMutation>(CreateWebsiteWizardDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createWebsiteWizard', 'mutation');
     },
     deleteArea(variables: DeleteAreaMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteAreaMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<DeleteAreaMutation>(DeleteAreaDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteArea', 'mutation');
@@ -5886,11 +7277,14 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     tokenAuth(variables: TokenAuthMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<TokenAuthMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<TokenAuthMutation>(TokenAuthDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'tokenAuth', 'mutation');
     },
-    tokenOauthLogin(variables?: TokenOauthLoginMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<TokenOauthLoginMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<TokenOauthLoginMutation>(TokenOauthLoginDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'tokenOauthLogin', 'mutation');
+    tokenOauthGoogleAds(variables: TokenOauthGoogleAdsMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<TokenOauthGoogleAdsMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<TokenOauthGoogleAdsMutation>(TokenOauthGoogleAdsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'tokenOauthGoogleAds', 'mutation');
     },
-    tokenOauthSignup(variables?: TokenOauthSignupMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<TokenOauthSignupMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<TokenOauthSignupMutation>(TokenOauthSignupDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'tokenOauthSignup', 'mutation');
+    tokenOauthGoogleMobileClientLogin(variables?: TokenOauthGoogleMobileClientLoginMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<TokenOauthGoogleMobileClientLoginMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<TokenOauthGoogleMobileClientLoginMutation>(TokenOauthGoogleMobileClientLoginDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'tokenOauthGoogleMobileClientLogin', 'mutation');
+    },
+    tokenOauthGoogleMobileClientSignup(variables?: TokenOauthGoogleMobileClientSignupMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<TokenOauthGoogleMobileClientSignupMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<TokenOauthGoogleMobileClientSignupMutation>(TokenOauthGoogleMobileClientSignupDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'tokenOauthGoogleMobileClientSignup', 'mutation');
     },
     updateArea(variables: UpdateAreaMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateAreaMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<UpdateAreaMutation>(UpdateAreaDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateArea', 'mutation');
@@ -5925,17 +7319,83 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     verifyToken(variables?: VerifyTokenMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<VerifyTokenMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<VerifyTokenMutation>(VerifyTokenDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'verifyToken', 'mutation');
     },
+    addNegativeKeywordsToCampaign(variables: AddNegativeKeywordsToCampaignQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<AddNegativeKeywordsToCampaignQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AddNegativeKeywordsToCampaignQuery>(AddNegativeKeywordsToCampaignDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'addNegativeKeywordsToCampaign', 'query');
+    },
+    appVersion(variables?: AppVersionQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<AppVersionQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AppVersionQuery>(AppVersionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'appVersion', 'query');
+    },
     area(variables?: AreaQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<AreaQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<AreaQuery>(AreaDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'area', 'query');
     },
     areas(variables?: AreasQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<AreasQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<AreasQuery>(AreasDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'areas', 'query');
     },
+    createGadsAdGroup(variables: CreateGadsAdGroupQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateGadsAdGroupQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateGadsAdGroupQuery>(CreateGadsAdGroupDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createGadsAdGroup', 'query');
+    },
+    createGadsCallAd(variables: CreateGadsCallAdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateGadsCallAdQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateGadsCallAdQuery>(CreateGadsCallAdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createGadsCallAd', 'query');
+    },
+    createGadsCampaign(variables: CreateGadsCampaignQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateGadsCampaignQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateGadsCampaignQuery>(CreateGadsCampaignDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createGadsCampaign', 'query');
+    },
+    createGadsCustomer(variables: CreateGadsCustomerQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateGadsCustomerQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateGadsCustomerQuery>(CreateGadsCustomerDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createGadsCustomer', 'query');
+    },
+    createGadsResponsiveSearchAd(variables: CreateGadsResponsiveSearchAdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateGadsResponsiveSearchAdQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateGadsResponsiveSearchAdQuery>(CreateGadsResponsiveSearchAdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createGadsResponsiveSearchAd', 'query');
+    },
+    createKeyword(variables: CreateKeywordQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateKeywordQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateKeywordQuery>(CreateKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createKeyword', 'query');
+    },
+    deleteKeyword(variables: DeleteKeywordQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteKeywordQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteKeywordQuery>(DeleteKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteKeyword', 'query');
+    },
+    deleteNegativeKeyword(variables: DeleteNegativeKeywordQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteNegativeKeywordQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteNegativeKeywordQuery>(DeleteNegativeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteNegativeKeyword', 'query');
+    },
+    enableAd(variables: EnableAdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<EnableAdQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<EnableAdQuery>(EnableAdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'enableAd', 'query');
+    },
+    enableCampaign(variables: EnableCampaignQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<EnableCampaignQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<EnableCampaignQuery>(EnableCampaignDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'enableCampaign', 'query');
+    },
+    enableGadsAdGroup(variables: EnableGadsAdGroupQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<EnableGadsAdGroupQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<EnableGadsAdGroupQuery>(EnableGadsAdGroupDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'enableGadsAdGroup', 'query');
+    },
+    enableKeyword(variables: EnableKeywordQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<EnableKeywordQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<EnableKeywordQuery>(EnableKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'enableKeyword', 'query');
+    },
     faq(variables?: FaqQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<FaqQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<FaqQuery>(FaqDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'faq', 'query');
     },
     faqs(variables?: FaqsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<FaqsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<FaqsQuery>(FaqsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'faqs', 'query');
+    },
+    geminiKeywordSuggestions(variables?: GeminiKeywordSuggestionsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GeminiKeywordSuggestionsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GeminiKeywordSuggestionsQuery>(GeminiKeywordSuggestionsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'geminiKeywordSuggestions', 'query');
+    },
+    googleAdsAccounts(variables?: GoogleAdsAccountsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GoogleAdsAccountsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GoogleAdsAccountsQuery>(GoogleAdsAccountsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'googleAdsAccounts', 'query');
+    },
+    googleAdsAdGroupMetrics(variables?: GoogleAdsAdGroupMetricsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GoogleAdsAdGroupMetricsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GoogleAdsAdGroupMetricsQuery>(GoogleAdsAdGroupMetricsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'googleAdsAdGroupMetrics', 'query');
+    },
+    googleAdsAdgroups(variables?: GoogleAdsAdgroupsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GoogleAdsAdgroupsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GoogleAdsAdgroupsQuery>(GoogleAdsAdgroupsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'googleAdsAdgroups', 'query');
+    },
+    googleAdsAds(variables?: GoogleAdsAdsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GoogleAdsAdsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GoogleAdsAdsQuery>(GoogleAdsAdsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'googleAdsAds', 'query');
+    },
+    googleAdsCampaigns(variables?: GoogleAdsCampaignsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GoogleAdsCampaignsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GoogleAdsCampaignsQuery>(GoogleAdsCampaignsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'googleAdsCampaigns', 'query');
+    },
+    googleAdsCampaignsMetrics(variables?: GoogleAdsCampaignsMetricsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GoogleAdsCampaignsMetricsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GoogleAdsCampaignsMetricsQuery>(GoogleAdsCampaignsMetricsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'googleAdsCampaignsMetrics', 'query');
+    },
+    googleAdsKeywords(variables?: GoogleAdsKeywordsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GoogleAdsKeywordsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GoogleAdsKeywordsQuery>(GoogleAdsKeywordsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'googleAdsKeywords', 'query');
     },
     invitationsReceived(variables?: InvitationsReceivedQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<InvitationsReceivedQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<InvitationsReceivedQuery>(InvitationsReceivedDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'invitationsReceived', 'query');
@@ -5946,11 +7406,29 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     ipAddress(variables?: IpAddressQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<IpAddressQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<IpAddressQuery>(IpAddressDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ipAddress', 'query');
     },
+    listNegativeKeywordsForCampaign(variables?: ListNegativeKeywordsForCampaignQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ListNegativeKeywordsForCampaignQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ListNegativeKeywordsForCampaignQuery>(ListNegativeKeywordsForCampaignDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'listNegativeKeywordsForCampaign', 'query');
+    },
+    listReviews(variables?: ListReviewsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ListReviewsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ListReviewsQuery>(ListReviewsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'listReviews', 'query');
+    },
     page(variables?: PageQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PageQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<PageQuery>(PageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'page', 'query');
     },
     pages(variables?: PagesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PagesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<PagesQuery>(PagesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'pages', 'query');
+    },
+    pauseAd(variables: PauseAdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PauseAdQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<PauseAdQuery>(PauseAdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'pauseAd', 'query');
+    },
+    pauseCampaign(variables: PauseCampaignQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PauseCampaignQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<PauseCampaignQuery>(PauseCampaignDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'pauseCampaign', 'query');
+    },
+    pauseGadsAdGroup(variables: PauseGadsAdGroupQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PauseGadsAdGroupQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<PauseGadsAdGroupQuery>(PauseGadsAdGroupDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'pauseGadsAdGroup', 'query');
+    },
+    pauseKeyword(variables: PauseKeywordQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PauseKeywordQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<PauseKeywordQuery>(PauseKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'pauseKeyword', 'query');
     },
     postdata(variables?: PostdataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PostdataQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<PostdataQuery>(PostdataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'postdata', 'query');
@@ -5967,17 +7445,32 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     questions(variables?: QuestionsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<QuestionsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<QuestionsQuery>(QuestionsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'questions', 'query');
     },
+    removeAd(variables: RemoveAdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<RemoveAdQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RemoveAdQuery>(RemoveAdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'removeAd', 'query');
+    },
     review(variables?: ReviewQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ReviewQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ReviewQuery>(ReviewDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'review', 'query');
     },
     reviews(variables?: ReviewsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ReviewsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ReviewsQuery>(ReviewsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'reviews', 'query');
     },
+    searchTermsReport(variables?: SearchTermsReportQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<SearchTermsReportQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SearchTermsReportQuery>(SearchTermsReportDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'searchTermsReport', 'query');
+    },
     service(variables?: ServiceQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ServiceQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ServiceQuery>(ServiceDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'service', 'query');
     },
     services(variables?: ServicesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ServicesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ServicesQuery>(ServicesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'services', 'query');
+    },
+    suggestedServices(variables?: SuggestedServicesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<SuggestedServicesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SuggestedServicesQuery>(SuggestedServicesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'suggestedServices', 'query');
+    },
+    updateCallAd(variables: UpdateCallAdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateCallAdQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateCallAdQuery>(UpdateCallAdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateCallAd', 'query');
+    },
+    updateResponseSearchAd(variables: UpdateResponseSearchAdQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateResponseSearchAdQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateResponseSearchAdQuery>(UpdateResponseSearchAdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateResponseSearchAd', 'query');
     },
     website(variables?: WebsiteQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<WebsiteQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<WebsiteQuery>(WebsiteDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'website', 'query');
@@ -5987,6 +7480,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     zipCode(variables?: ZipCodeQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ZipCodeQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ZipCodeQuery>(ZipCodeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'zipCode', 'query');
+    },
+    zipCodesByRadius(variables?: ZipCodesByRadiusQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ZipCodesByRadiusQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ZipCodesByRadiusQuery>(ZipCodesByRadiusDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'zipCodesByRadius', 'query');
     }
   };
 }
