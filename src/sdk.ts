@@ -28,7 +28,7 @@ export type Query = {
   __typename?: 'Query';
   /** add_negative_keywords_to_shared_set(refresh_token, campaign_id, customer_id, unique_identifier, keywords, use_login_id): */
   addNegativeKeywordsToCampaign?: Maybe<AddNegativeKeywordsToCampaign>;
-  appVersion?: Maybe<Scalars['String']['output']>;
+  appVersion?: Maybe<AppVersion>;
   area?: Maybe<AreaObject>;
   areas?: Maybe<Array<Maybe<AreaObject>>>;
   createGadsAdGroup?: Maybe<CreateGadsAdGroup>;
@@ -592,6 +592,14 @@ export type GadsResponse = {
   errors?: Maybe<Array<Maybe<Scalars['GenericScalar']['output']>>>;
   message?: Maybe<Scalars['String']['output']>;
   success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type AppVersion = {
+  __typename?: 'AppVersion';
+  androidUrl?: Maybe<Scalars['String']['output']>;
+  iosUrl?: Maybe<Scalars['String']['output']>;
+  releaseNotes?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  version?: Maybe<Scalars['String']['output']>;
 };
 
 export type AreaObject = {
@@ -2763,7 +2771,7 @@ export type AddNegativeKeywordsToCampaignQuery = { __typename?: 'Query', addNega
 export type AppVersionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AppVersionQuery = { __typename?: 'Query', appVersion?: string | null };
+export type AppVersionQuery = { __typename?: 'Query', appVersion?: { __typename?: 'AppVersion', version?: string | null, iosUrl?: string | null, androidUrl?: string | null, releaseNotes?: Array<string | null> | null } | null };
 
 export type AreaQueryVariables = Exact<{
   id?: InputMaybe<Scalars['Int']['input']>;
@@ -3361,6 +3369,7 @@ export type ResolversTypes = {
   AddNegativeKeywordsToCampaign: ResolverTypeWrapper<AddNegativeKeywordsToCampaign>;
   GadsResponse: ResolverTypeWrapper<GadsResponse>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  AppVersion: ResolverTypeWrapper<AppVersion>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   AreaObject: ResolverTypeWrapper<AreaObject>;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']['output']>;
@@ -3481,6 +3490,7 @@ export type ResolversParentTypes = {
   AddNegativeKeywordsToCampaign: AddNegativeKeywordsToCampaign;
   GadsResponse: GadsResponse;
   Boolean: Scalars['Boolean']['output'];
+  AppVersion: AppVersion;
   Int: Scalars['Int']['output'];
   AreaObject: AreaObject;
   DateTime: Scalars['DateTime']['output'];
@@ -3601,7 +3611,7 @@ export type SpecifiedByDirectiveResolver<Result, Parent, ContextType = any, Args
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   addNegativeKeywordsToCampaign?: Resolver<Maybe<ResolversTypes['AddNegativeKeywordsToCampaign']>, ParentType, ContextType, RequireFields<QueryAddNegativeKeywordsToCampaignArgs, 'campaignId' | 'customerId' | 'keywords' | 'uniqueIdentifier' | 'websiteId'>>;
-  appVersion?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  appVersion?: Resolver<Maybe<ResolversTypes['AppVersion']>, ParentType, ContextType>;
   area?: Resolver<Maybe<ResolversTypes['AreaObject']>, ParentType, ContextType, Partial<QueryAreaArgs>>;
   areas?: Resolver<Maybe<Array<Maybe<ResolversTypes['AreaObject']>>>, ParentType, ContextType, Partial<QueryAreasArgs>>;
   createGadsAdGroup?: Resolver<Maybe<ResolversTypes['CreateGADSAdGroup']>, ParentType, ContextType, RequireFields<QueryCreateGadsAdGroupArgs, 'accountId' | 'campaignId' | 'name' | 'websiteId'>>;
@@ -3673,6 +3683,14 @@ export type GadsResponseResolvers<ContextType = any, ParentType extends Resolver
   errors?: Resolver<Maybe<Array<Maybe<ResolversTypes['GenericScalar']>>>, ParentType, ContextType>;
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type AppVersionResolvers<ContextType = any, ParentType extends ResolversParentTypes['AppVersion'] = ResolversParentTypes['AppVersion']> = {
+  androidUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  iosUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  releaseNotes?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  version?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -4503,6 +4521,7 @@ export type Resolvers<ContextType = any> = {
   GenericScalar?: GraphQLScalarType;
   AddNegativeKeywordsToCampaign?: AddNegativeKeywordsToCampaignResolvers<ContextType>;
   GadsResponse?: GadsResponseResolvers<ContextType>;
+  AppVersion?: AppVersionResolvers<ContextType>;
   AreaObject?: AreaObjectResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
   JSONString?: GraphQLScalarType;
@@ -5465,7 +5484,12 @@ export const AddNegativeKeywordsToCampaignDocument = gql`
     `;
 export const AppVersionDocument = gql`
     query appVersion {
-  appVersion
+  appVersion {
+    version
+    iosUrl
+    androidUrl
+    releaseNotes
+  }
 }
     `;
 export const AreaDocument = gql`
