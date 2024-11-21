@@ -26,6 +26,8 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
+  /** add_keywords_to_ad_group(refresh_token, ad_group_id, customer_id, keywords, use_login_id): */
+  addKeywordsToAdGroup?: Maybe<AddKeywordsToAdGroup>;
   /** add_negative_keywords_to_shared_set(refresh_token, campaign_id, customer_id, unique_identifier, keywords, use_login_id): */
   addNegativeKeywordsToCampaign?: Maybe<AddNegativeKeywordsToCampaign>;
   appVersion?: Maybe<AppVersion>;
@@ -157,6 +159,14 @@ export type Query = {
   websites?: Maybe<Array<Maybe<WebsiteObject>>>;
   zipCode?: Maybe<ZipCode>;
   zipCodesByRadius?: Maybe<Array<Maybe<ZipCode>>>;
+};
+
+
+export type QueryAddKeywordsToAdGroupArgs = {
+  adGroupId: Scalars['String']['input'];
+  customerId: Scalars['String']['input'];
+  keywords: Array<InputMaybe<Scalars['GenericScalar']['input']>>;
+  websiteId: Scalars['String']['input'];
 };
 
 
@@ -578,9 +588,9 @@ export type QueryZipCodesByRadiusArgs = {
   zipCode?: InputMaybe<Scalars['String']['input']>;
 };
 
-/** add_negative_keywords_to_shared_set(refresh_token, campaign_id, customer_id, unique_identifier, keywords, use_login_id): */
-export type AddNegativeKeywordsToCampaign = {
-  __typename?: 'AddNegativeKeywordsToCampaign';
+/** add_keywords_to_ad_group(refresh_token, ad_group_id, customer_id, keywords, use_login_id): */
+export type AddKeywordsToAdGroup = {
+  __typename?: 'AddKeywordsToAdGroup';
   data?: Maybe<GadsResponse>;
   message?: Maybe<Scalars['String']['output']>;
   success?: Maybe<Scalars['Boolean']['output']>;
@@ -590,6 +600,14 @@ export type GadsResponse = {
   __typename?: 'GadsResponse';
   data?: Maybe<Scalars['GenericScalar']['output']>;
   errors?: Maybe<Array<Maybe<Scalars['GenericScalar']['output']>>>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** add_negative_keywords_to_shared_set(refresh_token, campaign_id, customer_id, unique_identifier, keywords, use_login_id): */
+export type AddNegativeKeywordsToCampaign = {
+  __typename?: 'AddNegativeKeywordsToCampaign';
+  data?: Maybe<GadsResponse>;
   message?: Maybe<Scalars['String']['output']>;
   success?: Maybe<Scalars['Boolean']['output']>;
 };
@@ -2757,6 +2775,16 @@ export type VerifyTokenMutationVariables = Exact<{
 
 export type VerifyTokenMutation = { __typename?: 'Mutations', verifyToken?: { __typename?: 'Verify', payload: any } | null };
 
+export type AddKeywordsToAdGroupQueryVariables = Exact<{
+  adGroupId: Scalars['String']['input'];
+  customerId: Scalars['String']['input'];
+  keywords: Array<InputMaybe<Scalars['GenericScalar']['input']>> | InputMaybe<Scalars['GenericScalar']['input']>;
+  websiteId: Scalars['String']['input'];
+}>;
+
+
+export type AddKeywordsToAdGroupQuery = { __typename?: 'Query', addKeywordsToAdGroup?: { __typename?: 'AddKeywordsToAdGroup', success?: boolean | null, message?: string | null, data?: { __typename?: 'GadsResponse', success?: boolean | null, errors?: Array<any | null> | null, data?: any | null, message?: string | null } | null } | null };
+
 export type AddNegativeKeywordsToCampaignQueryVariables = Exact<{
   campaignId: Scalars['String']['input'];
   customerId: Scalars['String']['input'];
@@ -3366,9 +3394,10 @@ export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
   GenericScalar: ResolverTypeWrapper<Scalars['GenericScalar']['output']>;
-  AddNegativeKeywordsToCampaign: ResolverTypeWrapper<AddNegativeKeywordsToCampaign>;
+  AddKeywordsToAdGroup: ResolverTypeWrapper<AddKeywordsToAdGroup>;
   GadsResponse: ResolverTypeWrapper<GadsResponse>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  AddNegativeKeywordsToCampaign: ResolverTypeWrapper<AddNegativeKeywordsToCampaign>;
   AppVersion: ResolverTypeWrapper<AppVersion>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   AreaObject: ResolverTypeWrapper<AreaObject>;
@@ -3487,9 +3516,10 @@ export type ResolversParentTypes = {
   Query: {};
   String: Scalars['String']['output'];
   GenericScalar: Scalars['GenericScalar']['output'];
-  AddNegativeKeywordsToCampaign: AddNegativeKeywordsToCampaign;
+  AddKeywordsToAdGroup: AddKeywordsToAdGroup;
   GadsResponse: GadsResponse;
   Boolean: Scalars['Boolean']['output'];
+  AddNegativeKeywordsToCampaign: AddNegativeKeywordsToCampaign;
   AppVersion: AppVersion;
   Int: Scalars['Int']['output'];
   AreaObject: AreaObject;
@@ -3610,6 +3640,7 @@ export type SpecifiedByDirectiveArgs = {
 export type SpecifiedByDirectiveResolver<Result, Parent, ContextType = any, Args = SpecifiedByDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  addKeywordsToAdGroup?: Resolver<Maybe<ResolversTypes['AddKeywordsToAdGroup']>, ParentType, ContextType, RequireFields<QueryAddKeywordsToAdGroupArgs, 'adGroupId' | 'customerId' | 'keywords' | 'websiteId'>>;
   addNegativeKeywordsToCampaign?: Resolver<Maybe<ResolversTypes['AddNegativeKeywordsToCampaign']>, ParentType, ContextType, RequireFields<QueryAddNegativeKeywordsToCampaignArgs, 'campaignId' | 'customerId' | 'keywords' | 'uniqueIdentifier' | 'websiteId'>>;
   appVersion?: Resolver<Maybe<ResolversTypes['AppVersion']>, ParentType, ContextType>;
   area?: Resolver<Maybe<ResolversTypes['AreaObject']>, ParentType, ContextType, Partial<QueryAreaArgs>>;
@@ -3671,7 +3702,7 @@ export interface GenericScalarScalarConfig extends GraphQLScalarTypeConfig<Resol
   name: 'GenericScalar';
 }
 
-export type AddNegativeKeywordsToCampaignResolvers<ContextType = any, ParentType extends ResolversParentTypes['AddNegativeKeywordsToCampaign'] = ResolversParentTypes['AddNegativeKeywordsToCampaign']> = {
+export type AddKeywordsToAdGroupResolvers<ContextType = any, ParentType extends ResolversParentTypes['AddKeywordsToAdGroup'] = ResolversParentTypes['AddKeywordsToAdGroup']> = {
   data?: Resolver<Maybe<ResolversTypes['GadsResponse']>, ParentType, ContextType>;
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
@@ -3681,6 +3712,13 @@ export type AddNegativeKeywordsToCampaignResolvers<ContextType = any, ParentType
 export type GadsResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['GadsResponse'] = ResolversParentTypes['GadsResponse']> = {
   data?: Resolver<Maybe<ResolversTypes['GenericScalar']>, ParentType, ContextType>;
   errors?: Resolver<Maybe<Array<Maybe<ResolversTypes['GenericScalar']>>>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type AddNegativeKeywordsToCampaignResolvers<ContextType = any, ParentType extends ResolversParentTypes['AddNegativeKeywordsToCampaign'] = ResolversParentTypes['AddNegativeKeywordsToCampaign']> = {
+  data?: Resolver<Maybe<ResolversTypes['GadsResponse']>, ParentType, ContextType>;
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -4519,8 +4557,9 @@ export type VerifyResolvers<ContextType = any, ParentType extends ResolversParen
 export type Resolvers<ContextType = any> = {
   Query?: QueryResolvers<ContextType>;
   GenericScalar?: GraphQLScalarType;
-  AddNegativeKeywordsToCampaign?: AddNegativeKeywordsToCampaignResolvers<ContextType>;
+  AddKeywordsToAdGroup?: AddKeywordsToAdGroupResolvers<ContextType>;
   GadsResponse?: GadsResponseResolvers<ContextType>;
+  AddNegativeKeywordsToCampaign?: AddNegativeKeywordsToCampaignResolvers<ContextType>;
   AppVersion?: AppVersionResolvers<ContextType>;
   AreaObject?: AreaObjectResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
@@ -5465,6 +5504,20 @@ export const VerifyTokenDocument = gql`
     mutation verifyToken($token: String) {
   verifyToken(token: $token) {
     payload
+  }
+}
+    `;
+export const AddKeywordsToAdGroupDocument = gql`
+    query addKeywordsToAdGroup($adGroupId: String!, $customerId: String!, $keywords: [GenericScalar]!, $websiteId: String!) {
+  addKeywordsToAdGroup(adGroupId: $adGroupId, customerId: $customerId, keywords: $keywords, websiteId: $websiteId) {
+    success
+    message
+    data {
+      success
+      errors
+      data
+      message
+    }
   }
 }
     `;
@@ -7342,6 +7395,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     verifyToken(variables?: VerifyTokenMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<VerifyTokenMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<VerifyTokenMutation>(VerifyTokenDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'verifyToken', 'mutation');
+    },
+    addKeywordsToAdGroup(variables: AddKeywordsToAdGroupQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<AddKeywordsToAdGroupQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AddKeywordsToAdGroupQuery>(AddKeywordsToAdGroupDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'addKeywordsToAdGroup', 'query');
     },
     addNegativeKeywordsToCampaign(variables: AddNegativeKeywordsToCampaignQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<AddNegativeKeywordsToCampaignQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<AddNegativeKeywordsToCampaignQuery>(AddNegativeKeywordsToCampaignDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'addNegativeKeywordsToCampaign', 'query');
