@@ -29,6 +29,8 @@ export type Query = {
   /** add_keywords_to_ad_group(refresh_token, ad_group_id, customer_id, keywords, use_login_id): */
   addKeywordsToAdGroup?: Maybe<AddKeywordsToAdGroup>;
   /** add_negative_keywords_to_shared_set(refresh_token, campaign_id, customer_id, unique_identifier, keywords, use_login_id): */
+  addNegativeKeywordsSetToCampaign?: Maybe<AddNegativeKeywordsSetToCampaign>;
+  /** add_negative_keywords_to_shared_set(refresh_token, campaign_id, customer_id, unique_identifier, keywords, use_login_id): */
   addNegativeKeywordsToCampaign?: Maybe<AddNegativeKeywordsToCampaign>;
   appVersion?: Maybe<AppVersion>;
   area?: Maybe<AreaObject>;
@@ -166,6 +168,13 @@ export type QueryAddKeywordsToAdGroupArgs = {
   adGroupId: Scalars['String']['input'];
   customerId: Scalars['String']['input'];
   keywords: Array<InputMaybe<Scalars['GenericScalar']['input']>>;
+  websiteId: Scalars['String']['input'];
+};
+
+
+export type QueryAddNegativeKeywordsSetToCampaignArgs = {
+  campaignId: Scalars['String']['input'];
+  customerId: Scalars['String']['input'];
   websiteId: Scalars['String']['input'];
 };
 
@@ -600,6 +609,14 @@ export type GadsResponse = {
   __typename?: 'GadsResponse';
   data?: Maybe<Scalars['GenericScalar']['output']>;
   errors?: Maybe<Array<Maybe<Scalars['GenericScalar']['output']>>>;
+  message?: Maybe<Scalars['String']['output']>;
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** add_negative_keywords_to_shared_set(refresh_token, campaign_id, customer_id, unique_identifier, keywords, use_login_id): */
+export type AddNegativeKeywordsSetToCampaign = {
+  __typename?: 'AddNegativeKeywordsSetToCampaign';
+  data?: Maybe<GadsResponse>;
   message?: Maybe<Scalars['String']['output']>;
   success?: Maybe<Scalars['Boolean']['output']>;
 };
@@ -2785,6 +2802,15 @@ export type AddKeywordsToAdGroupQueryVariables = Exact<{
 
 export type AddKeywordsToAdGroupQuery = { __typename?: 'Query', addKeywordsToAdGroup?: { __typename?: 'AddKeywordsToAdGroup', success?: boolean | null, message?: string | null, data?: { __typename?: 'GadsResponse', success?: boolean | null, errors?: Array<any | null> | null, data?: any | null, message?: string | null } | null } | null };
 
+export type AddNegativeKeywordsSetToCampaignQueryVariables = Exact<{
+  campaignId: Scalars['String']['input'];
+  customerId: Scalars['String']['input'];
+  websiteId: Scalars['String']['input'];
+}>;
+
+
+export type AddNegativeKeywordsSetToCampaignQuery = { __typename?: 'Query', addNegativeKeywordsSetToCampaign?: { __typename?: 'AddNegativeKeywordsSetToCampaign', success?: boolean | null, message?: string | null, data?: { __typename?: 'GadsResponse', success?: boolean | null, errors?: Array<any | null> | null, data?: any | null, message?: string | null } | null } | null };
+
 export type AddNegativeKeywordsToCampaignQueryVariables = Exact<{
   campaignId: Scalars['String']['input'];
   customerId: Scalars['String']['input'];
@@ -3397,6 +3423,7 @@ export type ResolversTypes = {
   AddKeywordsToAdGroup: ResolverTypeWrapper<AddKeywordsToAdGroup>;
   GadsResponse: ResolverTypeWrapper<GadsResponse>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  AddNegativeKeywordsSetToCampaign: ResolverTypeWrapper<AddNegativeKeywordsSetToCampaign>;
   AddNegativeKeywordsToCampaign: ResolverTypeWrapper<AddNegativeKeywordsToCampaign>;
   AppVersion: ResolverTypeWrapper<AppVersion>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
@@ -3519,6 +3546,7 @@ export type ResolversParentTypes = {
   AddKeywordsToAdGroup: AddKeywordsToAdGroup;
   GadsResponse: GadsResponse;
   Boolean: Scalars['Boolean']['output'];
+  AddNegativeKeywordsSetToCampaign: AddNegativeKeywordsSetToCampaign;
   AddNegativeKeywordsToCampaign: AddNegativeKeywordsToCampaign;
   AppVersion: AppVersion;
   Int: Scalars['Int']['output'];
@@ -3641,6 +3669,7 @@ export type SpecifiedByDirectiveResolver<Result, Parent, ContextType = any, Args
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   addKeywordsToAdGroup?: Resolver<Maybe<ResolversTypes['AddKeywordsToAdGroup']>, ParentType, ContextType, RequireFields<QueryAddKeywordsToAdGroupArgs, 'adGroupId' | 'customerId' | 'keywords' | 'websiteId'>>;
+  addNegativeKeywordsSetToCampaign?: Resolver<Maybe<ResolversTypes['AddNegativeKeywordsSetToCampaign']>, ParentType, ContextType, RequireFields<QueryAddNegativeKeywordsSetToCampaignArgs, 'campaignId' | 'customerId' | 'websiteId'>>;
   addNegativeKeywordsToCampaign?: Resolver<Maybe<ResolversTypes['AddNegativeKeywordsToCampaign']>, ParentType, ContextType, RequireFields<QueryAddNegativeKeywordsToCampaignArgs, 'campaignId' | 'customerId' | 'keywords' | 'uniqueIdentifier' | 'websiteId'>>;
   appVersion?: Resolver<Maybe<ResolversTypes['AppVersion']>, ParentType, ContextType>;
   area?: Resolver<Maybe<ResolversTypes['AreaObject']>, ParentType, ContextType, Partial<QueryAreaArgs>>;
@@ -3712,6 +3741,13 @@ export type AddKeywordsToAdGroupResolvers<ContextType = any, ParentType extends 
 export type GadsResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['GadsResponse'] = ResolversParentTypes['GadsResponse']> = {
   data?: Resolver<Maybe<ResolversTypes['GenericScalar']>, ParentType, ContextType>;
   errors?: Resolver<Maybe<Array<Maybe<ResolversTypes['GenericScalar']>>>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type AddNegativeKeywordsSetToCampaignResolvers<ContextType = any, ParentType extends ResolversParentTypes['AddNegativeKeywordsSetToCampaign'] = ResolversParentTypes['AddNegativeKeywordsSetToCampaign']> = {
+  data?: Resolver<Maybe<ResolversTypes['GadsResponse']>, ParentType, ContextType>;
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -4559,6 +4595,7 @@ export type Resolvers<ContextType = any> = {
   GenericScalar?: GraphQLScalarType;
   AddKeywordsToAdGroup?: AddKeywordsToAdGroupResolvers<ContextType>;
   GadsResponse?: GadsResponseResolvers<ContextType>;
+  AddNegativeKeywordsSetToCampaign?: AddNegativeKeywordsSetToCampaignResolvers<ContextType>;
   AddNegativeKeywordsToCampaign?: AddNegativeKeywordsToCampaignResolvers<ContextType>;
   AppVersion?: AppVersionResolvers<ContextType>;
   AreaObject?: AreaObjectResolvers<ContextType>;
@@ -5510,6 +5547,20 @@ export const VerifyTokenDocument = gql`
 export const AddKeywordsToAdGroupDocument = gql`
     query addKeywordsToAdGroup($adGroupId: String!, $customerId: String!, $keywords: [GenericScalar]!, $websiteId: String!) {
   addKeywordsToAdGroup(adGroupId: $adGroupId, customerId: $customerId, keywords: $keywords, websiteId: $websiteId) {
+    success
+    message
+    data {
+      success
+      errors
+      data
+      message
+    }
+  }
+}
+    `;
+export const AddNegativeKeywordsSetToCampaignDocument = gql`
+    query addNegativeKeywordsSetToCampaign($campaignId: String!, $customerId: String!, $websiteId: String!) {
+  addNegativeKeywordsSetToCampaign(campaignId: $campaignId, customerId: $customerId, websiteId: $websiteId) {
     success
     message
     data {
@@ -7398,6 +7449,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     addKeywordsToAdGroup(variables: AddKeywordsToAdGroupQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<AddKeywordsToAdGroupQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<AddKeywordsToAdGroupQuery>(AddKeywordsToAdGroupDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'addKeywordsToAdGroup', 'query');
+    },
+    addNegativeKeywordsSetToCampaign(variables: AddNegativeKeywordsSetToCampaignQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<AddNegativeKeywordsSetToCampaignQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AddNegativeKeywordsSetToCampaignQuery>(AddNegativeKeywordsSetToCampaignDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'addNegativeKeywordsSetToCampaign', 'query');
     },
     addNegativeKeywordsToCampaign(variables: AddNegativeKeywordsToCampaignQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<AddNegativeKeywordsToCampaignQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<AddNegativeKeywordsToCampaignQuery>(AddNegativeKeywordsToCampaignDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'addNegativeKeywordsToCampaign', 'query');
