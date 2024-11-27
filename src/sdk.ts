@@ -1142,39 +1142,20 @@ export type DataObject = {
 
 export type ProfileObject = {
   __typename?: 'ProfileObject';
-  /** Is this item active? */
-  active: Scalars['Boolean']['output'];
-  created: Scalars['DateTime']['output'];
   /** Boolean: Indicates whether the user opts in for daily summary notifications. */
   dailySummary: Scalars['Boolean']['output'];
-  /** A description of the item. */
-  description?: Maybe<Scalars['String']['output']>;
-  /** The order in which this item should be displayed. */
-  displayOrder: Scalars['Int']['output'];
   /** String: The email address of the user. Maximum length of 500 characters. */
   emailAddress?: Maybe<Scalars['String']['output']>;
   /** String: The first name of the user. Maximum length of 500 characters. */
   firstName?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
-  /** An image URL for the item. */
-  image?: Maybe<Scalars['String']['output']>;
-  /** A list of image URLs for the item. */
-  images?: Maybe<Scalars['JSONString']['output']>;
   /** String: The last name of the user. Maximum length of 500 characters. */
   lastName?: Maybe<Scalars['String']['output']>;
-  metadata?: Maybe<Scalars['JSONString']['output']>;
-  /** The name of the item. */
-  name?: Maybe<Scalars['String']['output']>;
   /** String: Contact phone number of the user. Maximum length of 500 characters. */
   phoneNumber: Scalars['String']['output'];
   pk?: Maybe<Scalars['ID']['output']>;
-  /** The slug is the URL-friendly version of the name. */
-  slug?: Maybe<Scalars['String']['output']>;
   /** A reference to the associated Subscription object. This field links each profile to a specific subscription. */
   subscription?: Maybe<SubscriptionObject>;
-  updated: Scalars['DateTime']['output'];
-  /** A video URL for the item. */
-  video?: Maybe<Scalars['String']['output']>;
   /** Boolean: Indicates whether the user opts in for weekly summary notifications. */
   weeklySummary: Scalars['Boolean']['output'];
 };
@@ -2755,7 +2736,7 @@ export type UpdateProfileMutationVariables = Exact<{
 }>;
 
 
-export type UpdateProfileMutation = { __typename?: 'Mutations', updateProfile?: { __typename?: 'UpdateProfile', success?: boolean | null, message?: string | null, data?: { __typename?: 'ProfileObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: any | null, displayOrder: number, firstName?: string | null, lastName?: string | null, phoneNumber: string, dailySummary: boolean, weeklySummary: boolean, pk?: string | null, emailAddress?: string | null } | null } | null };
+export type UpdateProfileMutation = { __typename?: 'Mutations', updateProfile?: { __typename?: 'UpdateProfile', success?: boolean | null, message?: string | null, data?: { __typename?: 'ProfileObject', id: string, firstName?: string | null, lastName?: string | null, phoneNumber: string, dailySummary: boolean, weeklySummary: boolean, pk?: string | null, emailAddress?: string | null } | null } | null };
 
 export type UpdateQuestionMutationVariables = Exact<{
   input: QuestionUpdateObject;
@@ -3208,7 +3189,7 @@ export type PostdatasQuery = { __typename?: 'Query', postdatas?: Array<{ __typen
 export type ProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ProfileQuery = { __typename?: 'Query', profile?: { __typename?: 'ProfileObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: any | null, displayOrder: number, firstName?: string | null, lastName?: string | null, phoneNumber: string, dailySummary: boolean, weeklySummary: boolean, pk?: string | null, emailAddress?: string | null, subscription?: { __typename?: 'SubscriptionObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: any | null, displayOrder: number, startDate?: any | null, lengthDays?: number | null, programOptions?: any | null, stripeSubscriptionId?: string | null, stripeCustomerId?: string | null, stripeCheckoutSessionId?: string | null, status?: string | null, pk?: string | null, userId?: string | null } | null } | null };
+export type ProfileQuery = { __typename?: 'Query', profile?: { __typename?: 'ProfileObject', id: string, firstName?: string | null, lastName?: string | null, phoneNumber: string, dailySummary: boolean, weeklySummary: boolean, pk?: string | null, emailAddress?: string | null, subscription?: { __typename?: 'SubscriptionObject', id: string, created: any, updated: any, metadata?: any | null, slug?: string | null, active: boolean, name?: string | null, description?: string | null, video?: string | null, image?: string | null, images?: any | null, displayOrder: number, startDate?: any | null, lengthDays?: number | null, programOptions?: any | null, stripeSubscriptionId?: string | null, stripeCustomerId?: string | null, stripeCheckoutSessionId?: string | null, status?: string | null, pk?: string | null, userId?: string | null } | null } | null };
 
 export type QuestionQueryVariables = Exact<{
   id?: InputMaybe<Scalars['Int']['input']>;
@@ -4139,25 +4120,14 @@ export type DataObjectResolvers<ContextType = any, ParentType extends ResolversP
 };
 
 export type ProfileObjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProfileObject'] = ResolversParentTypes['ProfileObject']> = {
-  active?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  created?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   dailySummary?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  displayOrder?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   emailAddress?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   firstName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  images?: Resolver<Maybe<ResolversTypes['JSONString']>, ParentType, ContextType>;
   lastName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  metadata?: Resolver<Maybe<ResolversTypes['JSONString']>, ParentType, ContextType>;
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   phoneNumber?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   pk?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  slug?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   subscription?: Resolver<Maybe<ResolversTypes['SubscriptionObject']>, ParentType, ContextType>;
-  updated?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  video?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   weeklySummary?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -5378,17 +5348,6 @@ export const UpdateProfileDocument = gql`
   updateProfile(input: $input) {
     data {
       id
-      created
-      updated
-      metadata
-      slug
-      active
-      name
-      description
-      video
-      image
-      images
-      displayOrder
       firstName
       lastName
       phoneNumber
@@ -6449,17 +6408,6 @@ export const ProfileDocument = gql`
     query profile {
   profile {
     id
-    created
-    updated
-    metadata
-    slug
-    active
-    name
-    description
-    video
-    image
-    images
-    displayOrder
     firstName
     lastName
     phoneNumber
