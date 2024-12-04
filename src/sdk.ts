@@ -28,9 +28,9 @@ export type Query = {
   __typename?: 'Query';
   /** add_keywords_to_ad_group(refresh_token, ad_group_id, customer_id, keywords, use_login_id): */
   addKeywordsToAdGroup?: Maybe<AddKeywordsToAdGroup>;
-  /** add_negative_keywords_to_shared_set(refresh_token, campaign_id, customer_id, unique_identifier, keywords, use_login_id): */
+  /** add_negative_keywords_to_shared_set(refresh_token, campaign_id, customer_id, keywords, use_login_id): */
   addNegativeKeywordsSetToCampaign?: Maybe<AddNegativeKeywordsSetToCampaign>;
-  /** add_negative_keywords_to_shared_set(refresh_token, campaign_id, customer_id, unique_identifier, keywords, use_login_id): */
+  /** add_negative_keywords_to_shared_set(refresh_token, campaign_id, customer_id, keywords, use_login_id): */
   addNegativeKeywordsToCampaign?: Maybe<AddNegativeKeywordsToCampaign>;
   appVersion?: Maybe<AppVersion>;
   area?: Maybe<AreaObject>;
@@ -183,7 +183,6 @@ export type QueryAddNegativeKeywordsToCampaignArgs = {
   campaignId: Scalars['String']['input'];
   customerId: Scalars['String']['input'];
   keywords: Array<InputMaybe<Scalars['GenericScalar']['input']>>;
-  uniqueIdentifier: Scalars['String']['input'];
   websiteId: Scalars['String']['input'];
 };
 
@@ -284,7 +283,6 @@ export type QueryDeleteNegativeKeywordArgs = {
   campaignId: Scalars['String']['input'];
   criterionId: Scalars['String']['input'];
   customerId: Scalars['String']['input'];
-  uniqueIdentifier: Scalars['String']['input'];
   websiteId: Scalars['String']['input'];
 };
 
@@ -427,7 +425,6 @@ export type QueryListNegativeKeywordsForCampaignArgs = {
   customerId?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
-  uniqueIdentifier?: InputMaybe<Scalars['String']['input']>;
   websiteId?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -613,7 +610,7 @@ export type GadsResponse = {
   success?: Maybe<Scalars['Boolean']['output']>;
 };
 
-/** add_negative_keywords_to_shared_set(refresh_token, campaign_id, customer_id, unique_identifier, keywords, use_login_id): */
+/** add_negative_keywords_to_shared_set(refresh_token, campaign_id, customer_id, keywords, use_login_id): */
 export type AddNegativeKeywordsSetToCampaign = {
   __typename?: 'AddNegativeKeywordsSetToCampaign';
   data?: Maybe<GadsResponse>;
@@ -621,7 +618,7 @@ export type AddNegativeKeywordsSetToCampaign = {
   success?: Maybe<Scalars['Boolean']['output']>;
 };
 
-/** add_negative_keywords_to_shared_set(refresh_token, campaign_id, customer_id, unique_identifier, keywords, use_login_id): */
+/** add_negative_keywords_to_shared_set(refresh_token, campaign_id, customer_id, keywords, use_login_id): */
 export type AddNegativeKeywordsToCampaign = {
   __typename?: 'AddNegativeKeywordsToCampaign';
   data?: Maybe<GadsResponse>;
@@ -2796,7 +2793,6 @@ export type AddNegativeKeywordsToCampaignQueryVariables = Exact<{
   campaignId: Scalars['String']['input'];
   customerId: Scalars['String']['input'];
   keywords: Array<InputMaybe<Scalars['GenericScalar']['input']>> | InputMaybe<Scalars['GenericScalar']['input']>;
-  uniqueIdentifier: Scalars['String']['input'];
   websiteId: Scalars['String']['input'];
 }>;
 
@@ -2922,7 +2918,6 @@ export type DeleteNegativeKeywordQueryVariables = Exact<{
   campaignId: Scalars['String']['input'];
   criterionId: Scalars['String']['input'];
   customerId: Scalars['String']['input'];
-  uniqueIdentifier: Scalars['String']['input'];
   websiteId: Scalars['String']['input'];
 }>;
 
@@ -3102,7 +3097,6 @@ export type ListNegativeKeywordsForCampaignQueryVariables = Exact<{
   websiteId?: InputMaybe<Scalars['String']['input']>;
   campaignId?: InputMaybe<Scalars['String']['input']>;
   customerId?: InputMaybe<Scalars['String']['input']>;
-  uniqueIdentifier?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
@@ -3651,7 +3645,7 @@ export type SpecifiedByDirectiveResolver<Result, Parent, ContextType = any, Args
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   addKeywordsToAdGroup?: Resolver<Maybe<ResolversTypes['AddKeywordsToAdGroup']>, ParentType, ContextType, RequireFields<QueryAddKeywordsToAdGroupArgs, 'adGroupId' | 'customerId' | 'keywords' | 'websiteId'>>;
   addNegativeKeywordsSetToCampaign?: Resolver<Maybe<ResolversTypes['AddNegativeKeywordsSetToCampaign']>, ParentType, ContextType, RequireFields<QueryAddNegativeKeywordsSetToCampaignArgs, 'campaignId' | 'customerId' | 'websiteId'>>;
-  addNegativeKeywordsToCampaign?: Resolver<Maybe<ResolversTypes['AddNegativeKeywordsToCampaign']>, ParentType, ContextType, RequireFields<QueryAddNegativeKeywordsToCampaignArgs, 'campaignId' | 'customerId' | 'keywords' | 'uniqueIdentifier' | 'websiteId'>>;
+  addNegativeKeywordsToCampaign?: Resolver<Maybe<ResolversTypes['AddNegativeKeywordsToCampaign']>, ParentType, ContextType, RequireFields<QueryAddNegativeKeywordsToCampaignArgs, 'campaignId' | 'customerId' | 'keywords' | 'websiteId'>>;
   appVersion?: Resolver<Maybe<ResolversTypes['AppVersion']>, ParentType, ContextType>;
   area?: Resolver<Maybe<ResolversTypes['AreaObject']>, ParentType, ContextType, Partial<QueryAreaArgs>>;
   areas?: Resolver<Maybe<Array<Maybe<ResolversTypes['AreaObject']>>>, ParentType, ContextType, Partial<QueryAreasArgs>>;
@@ -3662,7 +3656,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   createGadsResponsiveSearchAd?: Resolver<Maybe<ResolversTypes['CreateResponsiveSearchAd']>, ParentType, ContextType, RequireFields<QueryCreateGadsResponsiveSearchAdArgs, 'accountId' | 'adGroupId' | 'descriptions' | 'finalUrls' | 'headlines' | 'path1' | 'path2' | 'trackingUrl' | 'websiteId'>>;
   createKeyword?: Resolver<Maybe<ResolversTypes['CreateKeyword']>, ParentType, ContextType, RequireFields<QueryCreateKeywordArgs, 'accountId' | 'adGroupId' | 'keywordText' | 'matchType' | 'websiteId'>>;
   deleteKeyword?: Resolver<Maybe<ResolversTypes['DeleteKeyword']>, ParentType, ContextType, RequireFields<QueryDeleteKeywordArgs, 'accountId' | 'adGroupId' | 'criterionId' | 'websiteId'>>;
-  deleteNegativeKeyword?: Resolver<Maybe<ResolversTypes['DeleteNegativeKeyword']>, ParentType, ContextType, RequireFields<QueryDeleteNegativeKeywordArgs, 'campaignId' | 'criterionId' | 'customerId' | 'uniqueIdentifier' | 'websiteId'>>;
+  deleteNegativeKeyword?: Resolver<Maybe<ResolversTypes['DeleteNegativeKeyword']>, ParentType, ContextType, RequireFields<QueryDeleteNegativeKeywordArgs, 'campaignId' | 'criterionId' | 'customerId' | 'websiteId'>>;
   enableAd?: Resolver<Maybe<ResolversTypes['EnableAd']>, ParentType, ContextType, RequireFields<QueryEnableAdArgs, 'accountId' | 'adGroupId' | 'adId' | 'websiteId'>>;
   enableCampaign?: Resolver<Maybe<ResolversTypes['EnableGADSCampaign']>, ParentType, ContextType, RequireFields<QueryEnableCampaignArgs, 'accountId' | 'campaignId' | 'websiteId'>>;
   enableGadsAdGroup?: Resolver<Maybe<ResolversTypes['EnableGADSAdGroup']>, ParentType, ContextType, RequireFields<QueryEnableGadsAdGroupArgs, 'accountId' | 'adGroupId' | 'websiteId'>>;
@@ -5532,8 +5526,8 @@ export const AddNegativeKeywordsSetToCampaignDocument = gql`
 }
     `;
 export const AddNegativeKeywordsToCampaignDocument = gql`
-    query addNegativeKeywordsToCampaign($campaignId: String!, $customerId: String!, $keywords: [GenericScalar]!, $uniqueIdentifier: String!, $websiteId: String!) {
-  addNegativeKeywordsToCampaign(campaignId: $campaignId, customerId: $customerId, keywords: $keywords, uniqueIdentifier: $uniqueIdentifier, websiteId: $websiteId) {
+    query addNegativeKeywordsToCampaign($campaignId: String!, $customerId: String!, $keywords: [GenericScalar]!, $websiteId: String!) {
+  addNegativeKeywordsToCampaign(campaignId: $campaignId, customerId: $customerId, keywords: $keywords, websiteId: $websiteId) {
     success
     message
     data {
@@ -5774,8 +5768,8 @@ export const DeleteKeywordDocument = gql`
 }
     `;
 export const DeleteNegativeKeywordDocument = gql`
-    query deleteNegativeKeyword($campaignId: String!, $criterionId: String!, $customerId: String!, $uniqueIdentifier: String!, $websiteId: String!) {
-  deleteNegativeKeyword(campaignId: $campaignId, criterionId: $criterionId, customerId: $customerId, uniqueIdentifier: $uniqueIdentifier, websiteId: $websiteId) {
+    query deleteNegativeKeyword($campaignId: String!, $criterionId: String!, $customerId: String!, $websiteId: String!) {
+  deleteNegativeKeyword(campaignId: $campaignId, criterionId: $criterionId, customerId: $customerId, websiteId: $websiteId) {
     success
     message
     data {
@@ -6097,8 +6091,8 @@ export const IpAddressDocument = gql`
 }
     `;
 export const ListNegativeKeywordsForCampaignDocument = gql`
-    query listNegativeKeywordsForCampaign($first: Int, $skip: Int, $websiteId: String, $campaignId: String, $customerId: String, $uniqueIdentifier: String) {
-  listNegativeKeywordsForCampaign(first: $first, skip: $skip, websiteId: $websiteId, campaignId: $campaignId, customerId: $customerId, uniqueIdentifier: $uniqueIdentifier) {
+    query listNegativeKeywordsForCampaign($first: Int, $skip: Int, $websiteId: String, $campaignId: String, $customerId: String) {
+  listNegativeKeywordsForCampaign(first: $first, skip: $skip, websiteId: $websiteId, campaignId: $campaignId, customerId: $customerId) {
     data
   }
 }
